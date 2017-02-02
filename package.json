@@ -1,0 +1,22 @@
+{
+  "name": "frontend.tech-mail.ru",
+  "version": "1.0.0",
+  "description": "Source of frontend.tech-mail.ru site",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "deploy": "echo \"Error: no script specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru.git"
+  },
+  "keywords": [],
+  "author": "Anatoliy Ostapenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru#readme"
+}
