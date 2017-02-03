@@ -1,8 +1,6 @@
 node_modules/
-public/
-.deploy*/
+.deploy.git/
+dist/
 .DS_Store
-Thumbs.db
-db.json
 *.log
 *.out
