@@ -1,0 +1,37 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Frontend-разработка
+subtitle: Технопарк, 2017 г.
+description:
+author:
+language: ru
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://frontend.tech-mail.ru
+root: /
+
+
+# Directory
+source_dir: site/source
+public_dir: public
+skip_render:
+
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: landscape
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/frontend-park-mail-ru/frontend-park-mail-ru.github.io.git
+  branch: master
+  extend_dirs:
+    - slides
