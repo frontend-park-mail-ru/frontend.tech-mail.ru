@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru/issues"
   },
-  "homepage": "https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru#readme"
+  "homepage": "https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "load-grunt-config": "^0.19.2",
+    "time-grunt": "^1.4.0"
+  }
 }
