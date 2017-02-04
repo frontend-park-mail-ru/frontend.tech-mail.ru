@@ -1,9 +1,16 @@
 {
 	"default": [
+		"build",
 		"connect:server",
 		"notify:server",
 		"watch:livereload"
 	],
-	"build": [],
-	"deploy": []
+	"build": [
+		"clean:build",
+		"copy"
+	],
+	"deploy": [
+		"clean:deploy",
+		"build"
+	]
 }
