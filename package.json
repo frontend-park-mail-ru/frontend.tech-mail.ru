@@ -4,7 +4,9 @@
   "description": "Source of frontend.tech-mail.ru site",
   "main": "index.js",
   "scripts": {
-    "deploy": "exit 1"
+    "deploy": "grunt deploy",
+    "build": "grunt build",
+    "show": "grunt"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,11 @@
   "homepage": "https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru#readme",
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-notify": "^0.4.5",
     "load-grunt-config": "^0.19.2",
     "time-grunt": "^1.4.0"
   }

@@ -1,3 +1,9 @@
 {
-	"default": []
+	"default": [
+		"connect:server",
+		"notify:server",
+		"watch:livereload"
+	],
+	"build": [],
+	"deploy": []
 }

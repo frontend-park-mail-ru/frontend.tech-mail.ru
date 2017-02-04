@@ -6,8 +6,12 @@ const path = require('path');
 
 
 module.exports = function (grunt) {
+	timeGrunt(grunt);
 	loadGruntConfig(grunt, {
-		configPath: path.resolve(__dirname, 'tasks')
+		configPath: path.resolve(__dirname, 'tasks'),
+		jitGrunt: true,
+		loadGruntTasks: false,
+		init: true
 	});
 
 };
