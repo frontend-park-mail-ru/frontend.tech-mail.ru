@@ -3,7 +3,7 @@
 		"build",
 		"connect:server",
 		"notify:server",
-		"watch:livereload"
+		"watch"
 	],
 	"build": [
 		"clean:build",
@@ -11,6 +11,7 @@
 	],
 	"deploy": [
 		"clean:deploy",
-		"build"
+		"build",
+		"upload"
 	]
 }

@@ -5,7 +5,7 @@ const timeGrunt = require('time-grunt');
 const path = require('path');
 
 require('./tasks/grunt-slides');
-require('./tasks/grunt-deploy');
+require('./tasks/grunt-upload');
 
 
 module.exports = function (grunt) {
