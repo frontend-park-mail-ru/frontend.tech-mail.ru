@@ -5,7 +5,6 @@ const path = require('path');
 module.exports = function (grunt, options) {
 	return {
 		options: {
-			spawn: false,
 			livereload: true
 		},
 		livereload: {
@@ -14,30 +13,30 @@ module.exports = function (grunt, options) {
 			},
 			files: [path.resolve(__dirname, '..', 'dist/**/*')]
 		},
-		lib: {
-			cwd: path.resolve(__dirname, '..', 'source'),
-			files: ['lib/**/*', '!**/*.md'],
-			tasks: ['copy:lib'],
-		},
-		examples: {
-			cwd: path.resolve(__dirname, '..', 'source'),
-			files: ['examples/**/*', '!**/*.md'],
-			tasks: ['copy:examples'],
-		},
-		slides: {
-			cwd: path.resolve(__dirname, '..', 'source'),
-			files: ['slides/**/*', '!**/*.md'],
-			tasks: ['copy:slides'],
-		},
-		root: {
-			cwd: path.resolve(__dirname, '..', 'source'),
-			files: ['*', '!**/*.md'],
-			filter: 'isFile',
-			tasks: ['copy:root'],
-		},
+		// lib: {
+		// 	cwd: path.resolve(__dirname, '..', 'source'),
+		// 	files: ['lib/**/*', '!**/*.md'],
+		// 	tasks: ['copy:lib'],
+		// },
+		// examples: {
+		// 	cwd: path.resolve(__dirname, '..', 'source'),
+		// 	files: ['examples/**/*', '!**/*.md'],
+		// 	tasks: ['copy:examples'],
+		// },
+		// slides: {
+		// 	cwd: path.resolve(__dirname, '..', 'source'),
+		// 	files: ['slides/**/*', '!**/*.md'],
+		// 	tasks: ['copy:slides'],
+		// },
+		// root: {
+		// 	cwd: path.resolve(__dirname, '..', 'source'),
+		// 	files: ['*', '!**/*.md'],
+		// 	filter: 'isFile',
+		// 	tasks: ['copy:root'],
+		// },
 		markdown: {
 			cwd: path.resolve(__dirname, '..', 'source', 'pages'),
-			files: ['**/*.md'],
+			files: ['**/*'],
 			tasks: ['copy:markdown'],
 		}
 	};
