@@ -4,13 +4,13 @@ const path = require('path');
 
 module.exports = function (grunt, options) {
 	return {
-		server: {
+		all: {
 			options: {
 				port: 8080,
-				base: path.resolve(__dirname, '..', 'dist'),
+				hostname: 'localhost',
+				bases: [path.resolve(__dirname, '..', 'dist')],
 				livereload: true,
 				open: true,
-				useAvailablePort: true
 			}
 		}
 	};

@@ -1,9 +1,7 @@
 {
 	"default": [
 		"build",
-		"connect:server",
-		"notify:server",
-		"watch"
+		"concurrent"
 	],
 	"build": [
 		"clean:build",

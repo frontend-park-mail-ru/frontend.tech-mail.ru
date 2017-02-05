@@ -4,15 +4,15 @@ const path = require('path');
 
 module.exports = function (grunt, options) {
 	return {
-		options: {
-			livereload: true
-		},
-		livereload: {
-			options: {
-				livereload: true
-			},
-			files: [path.resolve(__dirname, '..', 'dist/**/*')]
-		},
+		// options: {
+		// 	livereload: true
+		// },
+		// livereload: {
+		// 	options: {
+		// 		livereload: true
+		// 	},
+		// 	files: [path.resolve(__dirname, '..', 'dist/**/*')]
+		// },
 		// lib: {
 		// 	cwd: path.resolve(__dirname, '..', 'source'),
 		// 	files: ['lib/**/*', '!**/*.md'],
@@ -34,10 +34,21 @@ module.exports = function (grunt, options) {
 		// 	filter: 'isFile',
 		// 	tasks: ['copy:root'],
 		// },
-		markdown: {
-			cwd: path.resolve(__dirname, '..', 'source', 'pages'),
-			files: ['**/*'],
-			tasks: ['copy:markdown'],
+		// markdown: {
+		// 	cwd: path.resolve(__dirname, '..', 'source', 'pages'),
+		// 	files: ['**/*'],
+		// 	tasks: ['copy:markdown'],
+		// }
+		livereload: {
+			options: {
+				livereload: true
+			},
+			files: [path.resolve(__dirname, '..', 'dist/**')],
+			tasks: []
+		},
+		build: {
+			files: [path.resolve(__dirname, '..', 'source/**')],
+			tasks: ['copy']
 		}
 	};
 };

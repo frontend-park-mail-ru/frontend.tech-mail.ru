@@ -3,7 +3,7 @@
 }}}
 
 # Hello, World!
-## KEK
+## KEKe
 
 - Первый [урок](/slides/s1)
 
