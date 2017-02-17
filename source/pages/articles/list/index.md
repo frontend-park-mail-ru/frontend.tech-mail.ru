@@ -9,5 +9,6 @@
 - [Вступительный пост с ДЗ №0](/articles/intro)
 - [Подготовка к первому занятию](/articles/prepare)
 - [ДЗ №1](/module/1/lesson/1)
+- [ДЗ №2](/module/1/lesson/2)
 
 ... to be continued

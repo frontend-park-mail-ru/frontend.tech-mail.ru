@@ -2,16 +2,25 @@
 @import "modest.css";
 @import "hljs/styles/github.css";
 
+body {
+	padding: 1rem;
+}
+
 h1 {
 	font-weight: bold;
 }
 
 #main-content {
-	width: 100%;
+	display: block;
 	margin-top: 12vh;
 	min-height: 70vh;
+	/*overflow-y: hidden;*/
 }
 
 footer {
 	text-align: center;
+}
+
+code span.comment.rus {
+	font-family: Menlo, Monaco, "Courier New", monospace;
 }
