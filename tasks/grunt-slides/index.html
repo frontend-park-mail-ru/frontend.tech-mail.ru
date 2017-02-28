@@ -26,12 +26,16 @@
 		document.write(`<link rel="stylesheet" href="/lib/shower/themes/technopark/styles/screen-${aspect}.css">`);
 
 	</script>
+
+	<link rel="stylesheet" href="/lib/hljs/styles/github.css">
+
 </head>
 <body class="shower list">
-<header class="caption">
-	<h1>Заголовок презентации</h1>
-	<p>Технопарк, 2017 г.</p>
-</header>
+
+	<header class="caption">
+		<h1>Заголовок презентации</h1>
+		<p>Технопарк, 2017 г.</p>
+	</header>
 
 	<section class="slide">
 		<h2 class="shout">Заголовок первого слайда<br/>
@@ -46,7 +50,10 @@
 		<p class="note">JavaScript &mdash; основной инструмент frontend-разработчика.</p>
 	</section>
 
-<div class="progress"></div>
-<script src="/lib/shower/shower.min.js"></script>
+	<div class="progress"></div>
+	<script src="/lib/shower/shower.min.js"></script>
+	<script src="/lib/hljs/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
 </body>
 </html>
