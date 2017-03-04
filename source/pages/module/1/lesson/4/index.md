@@ -36,7 +36,7 @@ __[Презентация лекции](/slides/s4)__
 
 Для допуска к РК необходимо **обязательно получить аппрув от ментора**. Перед РК мы распределим команды по преподавателям, инфа об этом появится в [ведомости](https://goo.gl/Qh7N9T).
 
-Все материалы с занятия доступны в [нашем репозитории sample](https://github.com/frontend-park-mail-ru/sample/tree/lesson-4) в ветке lesson-4. Посмотреть работу приложения можно [здесь](https://sample-frontend-2k17.herokuapp.com/). Чтобы запустить тесты, необходимо перейти [вот сюда](https://sample-frontend-2k17.herokuapp.com/tests.html).
+Все материалы с занятия доступны в [нашем репозитории sample](https://github.com/frontend-park-mail-ru/sample/tree/lesson-4) в ветке lesson-4. Посмотреть работу приложения можно [здесь](https://sample-frontend.herokuapp.com/). Чтобы запустить тесты, необходимо перейти [вот сюда](https://sample-frontend.herokuapp.com/tests.html).
 
 По всем вопросам вы можете обращаться к своим менторам или к преподавателям. Желаю вам успехов и до встречи на рубежном контроле!
 
