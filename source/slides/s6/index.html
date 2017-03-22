@@ -236,19 +236,16 @@
 		<pre class="hljs js short">
 			<code>ctx.beginPath();</code>
 			<code>ctx.arc(100, 100, 50, -Math.PI, 0);</code>
-			<code>ctx.closePath();</code>
-			<code>ctx.fill();</code>
+			<code>ctx.closePath(); ctx.fill();</code>
 			<code> </code>
 			<code>ctx.beginPath();</code>
 			<code>ctx.arc(100, 110, 40, 0, Math.PI);</code>
-			<code>ctx.closePath();</code>
-			<code>ctx.fill();</code>
+			<code>ctx.closePath(); ctx.fill();</code>
 			<code> </code>
 			<code>ctx.beginPath();</code>
 			<code>ctx.arc(200, 200, 50, -Math.PI, 0);</code>
 			<code>ctx.arc(220, 200, 30, 0, Math.PI);</code>
-			<code>ctx.closePath();</code>
-			<code>ctx.stroke();</code>
+			<code>ctx.closePath(); ctx.stroke();</code>
 			<code> </code>
 		</pre>
 	</section>
@@ -279,6 +276,44 @@
 	</section>
 
 	<section class="slide">
+		<h2>Рисование примитивов:<br/>кривые-Безье</h2>
+		<canvas id="beziers" width="150" height="150" style="position:fixed;transform-origin: right top;transform:scale(2);right:0;margin-right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('beziers');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				ctx.moveTo(75, 25);
+				ctx.quadraticCurveTo(25, 25, 25, 62.5);
+				ctx.quadraticCurveTo(25, 100, 50, 100);
+				ctx.quadraticCurveTo(50, 120, 30, 125);
+				ctx.quadraticCurveTo(60, 120, 65, 100);
+				ctx.quadraticCurveTo(125, 100, 125, 62.5);
+				ctx.quadraticCurveTo(125, 25, 75, 25);
+				ctx.stroke();
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code>ctx.beginPath();</code>
+			<code>ctx.moveTo(75, 25);</code>
+			<code> </code>
+			<code>ctx.quadraticCurveTo(25, 25, 25, 62.5);</code>
+			<code>ctx.quadraticCurveTo(25, 100, 50, 100);</code>
+			<code>ctx.quadraticCurveTo(50, 120, 30, 125);</code>
+			<code>ctx.quadraticCurveTo(60, 120, 65, 100);</code>
+			<code>ctx.quadraticCurveTo(25, 25, 25, 62.5);</code>
+			<code>ctx.quadraticCurveTo(125, 100, 125, 62.5);</code>
+			<code>ctx.quadraticCurveTo(125, 25, 75, 25);</code>
+			<code> </code>
+			<code>ctx.stroke();</code>
+			<code> </code>
+		</pre>
+	</section>
+
+
+	<section class="slide">
 		<h2>Рисование примитивов:<br/>прямоугольные пути</h2>
 		<pre class="hljs js">
 			<code><span class="comment rus">// добавляет прямоугольный путь к текущему пути (не рисует)</span></code>
@@ -301,6 +336,8 @@
 		</pre>
 	</section>
 
+
+
 	<section class="slide question">
 		<h2><span style="font-size: 65%">Стилизация</span></h2>
 	</section>
@@ -318,6 +355,45 @@
 			<code> </code>
 		</pre>
 	</section>
+
+	<section class="slide">
+		<h2>Стилизация линий</h2>
+		<canvas id="styline" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('styline');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				ctx.lineWidth = 25;
+				ctx.moveTo(20, 100); ctx.lineTo(300, 50);
+				ctx.setLineDash([50, 5, 10, 5]);
+				ctx.stroke(); ctx.closePath();
+
+				ctx.beginPath();
+				ctx.lineWidth = 5;
+				ctx.moveTo(20, 200); ctx.lineTo(300, 150);
+				ctx.setLineDash([40, 5, 15]);
+				ctx.stroke(); ctx.closePath();
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code>ctx.beginPath();</code>
+			<code>ctx.lineWidth = 25;</code>
+			<code>ctx.moveTo(20, 100); ctx.lineTo(300, 50);</code>
+			<code>ctx.setLineDash([50, 5, 10, 5]);</code>
+			<code>ctx.stroke(); ctx.closePath();</code>
+			<code> </code>
+			<code>ctx.beginPath();</code>
+			<code>ctx.lineWidth = 5;</code>
+			<code>ctx.moveTo(20, 200); ctx.lineTo(300, 150);</code>
+			<code>ctx.setLineDash([50, 5, 10, 5]);</code>
+			<code>ctx.stroke(); ctx.closePath();</code>
+			<code> </code>
+		</pre>
+	</section>
+
 
 	<section class="slide">
 		<h2>Стилизация линий</h2>
