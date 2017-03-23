@@ -101,6 +101,39 @@
 	</section>
 
 	<section class="slide">
+		<h2>Рисование примитивов:<br/>прямоугольник</h2>
+		<canvas id="rect" width="300" height="300" style="position:fixed;right:30px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('rect');
+				const ctx = canvas.getContext('2d');
+
+				ctx.fillRect(25, 25, 250, 250);
+				ctx.clearRect(100, 100, 100, 100);
+
+				ctx.strokeRect(110, 110, 80, 80);
+				ctx.strokeRect(120, 120, 60, 60);
+				ctx.strokeRect(130, 130, 40, 40);
+				ctx.strokeRect(140, 140, 20, 20);
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code><span class="comment rus">// толстая рамка</span></code>
+			<code>ctx.fillRect(25, 25, 250, 250);</code>
+			<code>ctx.clearRect(100, 100, 100, 100);</code>
+			<code> </code>
+			<code><span class="comment rus">// квадраты в центре</span></code>
+			<code>ctx.strokeRect(110, 110, 80, 80);</code>
+			<code>ctx.strokeRect(120, 120, 60, 60);</code>
+			<code>ctx.strokeRect(130, 130, 40, 40);</code>
+			<code>ctx.strokeRect(140, 140, 20, 20);</code>
+			<code> </code>
+		</pre>
+	</section>
+
+
+	<section class="slide">
 		<h2>Рисование примитивов: линии</h2>
 		<pre class="hljs js">
 			<code>ctx.beginPath();     <span class="comment rus">// создаёт новую линию (новый путь)</span></code>
@@ -116,6 +149,51 @@
 	</section>
 
 	<section class="slide">
+		<h2>Рисование примитивов: линии</h2>
+		<canvas id="lines" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('lines');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				ctx.moveTo(50, 50);
+				ctx.lineTo(50, 200);
+				ctx.lineTo(200, 50);
+				ctx.lineTo(50, 50);
+				ctx.closePath();
+				ctx.fill();
+
+				ctx.beginPath();
+				ctx.moveTo(250, 250);
+				ctx.lineTo(250, 100);
+				ctx.lineTo(100, 250);
+				ctx.lineTo(250, 250);
+				ctx.closePath();
+				ctx.stroke();
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code><span class="comment rus">// верхний треугольник</span></code>
+			<code>ctx.beginPath();</code>
+			<code>ctx.moveTo(50, 50);</code>
+			<code>ctx.lineTo(50, 200); ctx.lineTo(200, 50); ctx.lineTo(50, 50);</code>
+			<code>ctx.closePath();</code>
+			<code>ctx.<mark>fill()</mark>;</code>
+			<code> </code>
+			<code><span class="comment rus">// нижний треугольник</span></code>
+			<code>ctx.beginPath();</code>
+			<code>ctx.moveTo(250, 250);</code>
+			<code>ctx.lineTo(250, 100); ctx.lineTo(100, 250); ctx.lineTo(250, 250);</code>
+			<code>ctx.closePath();</code>
+			<code>ctx.<mark>stroke()</mark>;</code>
+			<code> </code>
+		</pre>
+	</section>
+
+
+	<section class="slide">
 		<h2>Рисование примитивов: дуги</h2>
 		<pre class="hljs js">
 			<code><span class="comment rus">// создаёт путь-дугу</span></code>
@@ -128,6 +206,50 @@
 			<code> </code>
 		</pre>
 	</section>
+
+	<section class="slide">
+		<h2>Рисование примитивов: дуги</h2>
+		<canvas id="arcs" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('arcs');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				ctx.arc(100, 100, 50, -Math.PI, 0);
+				ctx.closePath();
+				ctx.fill();
+
+				ctx.beginPath();
+				ctx.arc(100, 110, 40, 0, Math.PI);
+				ctx.closePath();
+				ctx.fill();
+
+				ctx.beginPath();
+				ctx.arc(200, 200, 50, -Math.PI, 0);
+				ctx.arc(220, 200, 30, 0, Math.PI);
+				ctx.closePath();
+				ctx.stroke();
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code>ctx.beginPath();</code>
+			<code>ctx.arc(100, 100, 50, -Math.PI, 0);</code>
+			<code>ctx.closePath(); ctx.fill();</code>
+			<code> </code>
+			<code>ctx.beginPath();</code>
+			<code>ctx.arc(100, 110, 40, 0, Math.PI);</code>
+			<code>ctx.closePath(); ctx.fill();</code>
+			<code> </code>
+			<code>ctx.beginPath();</code>
+			<code>ctx.arc(200, 200, 50, -Math.PI, 0);</code>
+			<code>ctx.arc(220, 200, 30, 0, Math.PI);</code>
+			<code>ctx.closePath(); ctx.stroke();</code>
+			<code> </code>
+		</pre>
+	</section>
+
 
 	<section class="slide">
 		<h2>Рисование примитивов:<br/>кривые-Безье</h2>
@@ -154,6 +276,44 @@
 	</section>
 
 	<section class="slide">
+		<h2>Рисование примитивов:<br/>кривые-Безье</h2>
+		<canvas id="beziers" width="150" height="150" style="position:fixed;transform-origin: right top;transform:scale(2);right:0;margin-right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('beziers');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				ctx.moveTo(75, 25);
+				ctx.quadraticCurveTo(25, 25, 25, 62.5);
+				ctx.quadraticCurveTo(25, 100, 50, 100);
+				ctx.quadraticCurveTo(50, 120, 30, 125);
+				ctx.quadraticCurveTo(60, 120, 65, 100);
+				ctx.quadraticCurveTo(125, 100, 125, 62.5);
+				ctx.quadraticCurveTo(125, 25, 75, 25);
+				ctx.stroke();
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code>ctx.beginPath();</code>
+			<code>ctx.moveTo(75, 25);</code>
+			<code> </code>
+			<code>ctx.quadraticCurveTo(25, 25, 25, 62.5);</code>
+			<code>ctx.quadraticCurveTo(25, 100, 50, 100);</code>
+			<code>ctx.quadraticCurveTo(50, 120, 30, 125);</code>
+			<code>ctx.quadraticCurveTo(60, 120, 65, 100);</code>
+			<code>ctx.quadraticCurveTo(25, 25, 25, 62.5);</code>
+			<code>ctx.quadraticCurveTo(125, 100, 125, 62.5);</code>
+			<code>ctx.quadraticCurveTo(125, 25, 75, 25);</code>
+			<code> </code>
+			<code>ctx.stroke();</code>
+			<code> </code>
+		</pre>
+	</section>
+
+
+	<section class="slide">
 		<h2>Рисование примитивов:<br/>прямоугольные пути</h2>
 		<pre class="hljs js">
 			<code><span class="comment rus">// добавляет прямоугольный путь к текущему пути (не рисует)</span></code>
@@ -176,6 +336,8 @@
 		</pre>
 	</section>
 
+
+
 	<section class="slide question">
 		<h2><span style="font-size: 65%">Стилизация</span></h2>
 	</section>
@@ -193,6 +355,45 @@
 			<code> </code>
 		</pre>
 	</section>
+
+	<section class="slide">
+		<h2>Стилизация линий</h2>
+		<canvas id="styline" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('styline');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				ctx.lineWidth = 25;
+				ctx.moveTo(20, 100); ctx.lineTo(300, 50);
+				ctx.setLineDash([50, 5, 10, 5]);
+				ctx.stroke(); ctx.closePath();
+
+				ctx.beginPath();
+				ctx.lineWidth = 5;
+				ctx.moveTo(20, 200); ctx.lineTo(300, 150);
+				ctx.setLineDash([40, 5, 15]);
+				ctx.stroke(); ctx.closePath();
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code>ctx.beginPath();</code>
+			<code>ctx.lineWidth = 25;</code>
+			<code>ctx.moveTo(20, 100); ctx.lineTo(300, 50);</code>
+			<code>ctx.setLineDash([50, 5, 10, 5]);</code>
+			<code>ctx.stroke(); ctx.closePath();</code>
+			<code> </code>
+			<code>ctx.beginPath();</code>
+			<code>ctx.lineWidth = 5;</code>
+			<code>ctx.moveTo(20, 200); ctx.lineTo(300, 150);</code>
+			<code>ctx.setLineDash([50, 5, 10, 5]);</code>
+			<code>ctx.stroke(); ctx.closePath();</code>
+			<code> </code>
+		</pre>
+	</section>
+
 
 	<section class="slide">
 		<h2>Стилизация линий</h2>
@@ -389,6 +590,7 @@
 		<h2 class="shout">Разработка<br/>игры</h2>
 	</section>
 
+
 	<section class="slide">
 		<h2>Полезные ссылки</h2>
 		<ul lang="en">
@@ -396,10 +598,6 @@
 			<li><a href="https://developer.mozilla.org/en-US/docs/Web/Demos_of_open_web_technologies" target="_blank">Описание и ДЕМО</a> различных WEB-технологий, которые могут быть полезны при разработке</li>
 			<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">Туториал по</a> Canvas API</li>
 		</ul>
-	</section>
-
-	<section class="slide">
-		<h2 class="shout">3D Игры<br/>WebGl</h2>
 	</section>
 
 	<section class="slide">
