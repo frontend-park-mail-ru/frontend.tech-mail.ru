@@ -358,45 +358,6 @@
 
 	<section class="slide">
 		<h2>Стилизация линий</h2>
-		<canvas id="styline" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
-		<script>
-			(function () {
-				const canvas = document.getElementById('styline');
-				const ctx = canvas.getContext('2d');
-
-				ctx.beginPath();
-				ctx.lineWidth = 25;
-				ctx.moveTo(20, 100); ctx.lineTo(300, 50);
-				ctx.setLineDash([50, 5, 10, 5]);
-				ctx.stroke(); ctx.closePath();
-
-				ctx.beginPath();
-				ctx.lineWidth = 5;
-				ctx.moveTo(20, 200); ctx.lineTo(300, 150);
-				ctx.setLineDash([40, 5, 15]);
-				ctx.stroke(); ctx.closePath();
-
-			})();
-		</script>
-		<pre class="hljs js short">
-			<code>ctx.beginPath();</code>
-			<code>ctx.lineWidth = 25;</code>
-			<code>ctx.moveTo(20, 100); ctx.lineTo(300, 50);</code>
-			<code>ctx.setLineDash([50, 5, 10, 5]);</code>
-			<code>ctx.stroke(); ctx.closePath();</code>
-			<code> </code>
-			<code>ctx.beginPath();</code>
-			<code>ctx.lineWidth = 5;</code>
-			<code>ctx.moveTo(20, 200); ctx.lineTo(300, 150);</code>
-			<code>ctx.setLineDash([50, 5, 10, 5]);</code>
-			<code>ctx.stroke(); ctx.closePath();</code>
-			<code> </code>
-		</pre>
-	</section>
-
-
-	<section class="slide">
-		<h2>Стилизация линий</h2>
 		<pre class="hljs js">
 			<code><span class="comment rus">// окончание линий</span></code>
 			<code>ctx.lineCap = 'butt';    <span class="comment rus">// обрезанные концы</span></code>
@@ -412,6 +373,88 @@
 	</section>
 
 	<section class="slide">
+		<h2>Стилизация линий</h2>
+		<canvas id="styline" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('styline');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				[1, 5, 10, 20, 50].forEach((v, i) => {
+					ctx.beginPath();
+					ctx.lineWidth = v; ctx.setLineDash([5, 5, 50, 5, 5, v]);
+					ctx.moveTo(20, 30 + 55 * i); ctx.lineTo(280, 30 + 55 * i);
+					ctx.stroke();
+				});
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Стилизация линий</h2>
+		<canvas id="okon" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('okon');
+				const ctx = canvas.getContext('2d');
+
+				const lineJoin = ['round', 'bevel', 'miter'];
+				ctx.lineWidth = 30;
+				lineJoin.forEach((v, i) => {
+					ctx.lineJoin = v; ctx.beginPath();
+					ctx.moveTo(70, 110 + i * 80);
+					ctx.lineTo(150, 30 + i * 80);
+					ctx.lineTo(230, 110 + i * 80);
+					ctx.stroke();
+				});
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Стилизация линий</h2>
+		<canvas id="corn" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('corn');
+				const ctx = canvas.getContext('2d');
+
+				ctx.beginPath();
+				ctx.moveTo(20, 20);  ctx.lineTo(280, 20);
+				ctx.moveTo(20, 280); ctx.lineTo(280, 280);
+				ctx.stroke();
+
+				ctx.lineWidth = 20;
+				const lineCap = ['butt', 'round', 'square'];
+				// Draw lines
+				lineCap.forEach((v, i) => {
+					ctx.lineCap = v; ctx.beginPath();
+					ctx.moveTo(50 + i * 100, 20);
+					ctx.lineTo(50 + i * 100, 280);
+					ctx.stroke();
+				});
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
+
+	<section class="slide">
 		<h2>Использование цветов</h2>
 		<pre class="hljs js">
 			<code>ctx.fillStyle = color;   <span class="comment rus">// задаёт стиль заливки</span></code>
@@ -425,6 +468,37 @@
 			<code> </code>
 		</pre>
 	</section>
+
+	<section class="slide">
+		<h2>Использование цветов</h2>
+		<canvas id="colo" width="300" height="300" style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
+		<script>
+			(function () {
+				const canvas = document.getElementById('colo');
+				const ctx = canvas.getContext('2d');
+
+				ctx.fillStyle = 'yellow';        ctx.fillRect(0, 0, 150, 150);
+				ctx.fillStyle = '#6C0';          ctx.fillRect(150, 0, 150, 150);
+				ctx.fillStyle = '#0099FF';       ctx.fillRect(0, 150, 150, 150);
+				ctx.fillStyle = 'rgb(255,48,0)'; ctx.fillRect(150, 150, 150, 150);
+				ctx.fillStyle = 'white';
+
+				// Draw semi transparent circles
+				for (i = 0; i < 7; i++) {
+					ctx.beginPath();
+					ctx.fillStyle = 'rgba(255,255,255,' + (i + 1) / 12 + ')';
+					ctx.arc(150, 150, 10 + 20 * i, 0, Math.PI * 2, true);
+					ctx.fill();
+				}
+
+			})();
+		</script>
+		<pre class="hljs js short">
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
 
 	<section class="slide">
 		<h2>Использование градиентов</h2>
