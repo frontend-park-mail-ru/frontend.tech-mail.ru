@@ -664,19 +664,6 @@
 		<h2 class="shout">Разработка<br/>игры</h2>
 	</section>
 
-	<section class="slide question">
-		<h2><span style="font-size: 65%">Как писать </span></h2>
-	</section>
-
-
-
-
-
-
-
-
-
-
 
 	<section class="slide">
 		<h2>Полезные ссылки</h2>
@@ -686,6 +673,162 @@
 			<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">Туториал по</a> Canvas API</li>
 		</ul>
 	</section>
+
+	<section class="slide">
+		<h2>WebGl</h2>
+		<ul lang="ru">
+			<li>Производительность за счет GPU</li>
+			<li>Отсутствие компиляции</li>
+			<li>Кроссплатформенность</li>
+			<li>Автоматическое управление памятью</li>
+			<li>Открытый стандарт</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Шейдер</h2>
+		<blockquote>
+			<p class="small-content">Элемент <code>Шейдеры</code> являются программы, которые работают на GPU. Шейдеры написаны в OpenGL ES шейдерный язык (известный как ES SL). ES SL имеет переменные своих собственных, типов данных, классификаторов, встроенных входов и выходов. В свою очередь ES SL основан на C++. ES Sl также называют GLSL, что означает Graphics Library Shader Language (язык программирования шейдеров графической библиотеки)</p>
+		</blockquote>
+	</section>
+
+	<section class="slide">
+		<h2>Виды шейдеров</h2>
+		<ul lang="ru">
+			<li>Вершинные шейдеры</li>
+			<li>Фрагментные шейдеры</li>
+		</ul>
+		<img class="place" src="img/shader.png" style="margin-top: 80px;" width="800" height="230">
+	</section>
+
+	<section class="slide">
+		<h2>Растеризация</h2>
+		<div>
+			<img class="place" src="img/raster.png" style="margin-top: -80px;" width="472" height="183">
+			<img class="place" src="img/raster2.png" style="margin-top: 150px;" width="219" height="220">
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Вершинный шейдер</h2>
+		<pre class="hljs js">
+			<code>&lt;script type="x-shader/x-<mark>vertex</mark>" id="vshader"&gt;</code>
+			<code>  varying vec2 vUv;</code>
+			<code>  void main() {</code>
+			<code>    vUv = uv;</code>
+			<code>    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);</code>
+			<code>    <mark>gl_Position</mark> = projectionMatrix * mvPosition;</code>
+			<code>  }</code>
+			<code>&lt;/script&gt;</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Фрагментный шейдер. <br>Текстурирование</h2>
+		<pre class="hljs js">
+			<code>&lt;script type="x-shader/x-<mark>fragment</mark>" id="fshader"&gt;</code>
+			<code>  uniform sampler2D u_Sampler;</code>
+			<code>  varying vec2 vUv;</code>
+			<code>  void main() {</code>
+			<code>    <mark>gl_FragColor</mark> = texture2D(u_Sampler, vUv);</code>
+			<code>  }</code>
+			<code>&lt;/script&gt;</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Практическое применение WebGL</h2>
+		<ul lang="ru">
+			<li>Визуализации растровой графики</li>
+			<li>Редактирование и анализ изображений</li>
+			<li>Фильтрация видео</li>
+			<li>Игры</li>
+			<li>Интерактивая графика</li>
+			<li>Статистика в виде графиков</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Примеры использования<br>шейдеров</h2>
+		<ul lang="ru">
+			<li><a href="http://madebyevan.com/webgl-water/">madebyevan.com</a></li>
+			<li><a href="https://threejs.org/examples/webgl_shaders_ocean">webgl_shaders_ocean</a></li>
+			<li><a href="https://threejs.org/examples/webgl_shaders_ocean2">webgl_shaders_ocean2</a></li>
+			<li><a href="https://threejs.org/examples/webgl_shaders_sky">webgl_shaders_sky</a></li>
+			<li><a href="http://nucleal.com">nucleal.com</a></li>
+			<li><a href="http://www.bongiovi.tw/experiments/webgl/blossom/">bongiovi.tw</a></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Pointer Lock</h2>
+		<blockquote>
+			<p class="small-content"><code>Pointer Lock </code> – это браузерный API, позволяющий создавать интерфейсы для работы с мышкой на основе ее относительных перемещений, а не только абсолютной позиции курсора.</p>
+		</blockquote>
+	</section>
+
+	<section class="slide">
+		<h2>Pointer Lock (<a href="/examples/PointerLock/">пример</a>)</h2>
+		<pre class="hljs js">
+			<code>function lockStatusChange() {</code>
+			<code>	if (document.pointerLockElement === canv){</code>
+			<code>		document.addEventListener("mousemove", updateCirclePosition);</code>
+			<code>	} else {</code>
+			<code>		document.removeEventListener("mousemove", updateCirclePosition);</code>
+			<code>	}</code>
+			<code>}</code>
+			<code> </code>
+			<code>document.addEventListener('pointerlockchange', lockStatusChange);</code>
+			<code> </code>
+			<code>canv.onclick = canv.requestPointerLock;</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Request Full Screen (<a href="/examples/Fullscreen/">пример</a>)</h2>
+		<blockquote>
+			<p class="small-content"><mark>RFS</mark> - Отображает элемент в полноэкранном режиме. Метод применяется к любому элементу, даже  например к простому блоку.</p>
+		</blockquote>
+		<pre class="hljs js">
+			<code>element.requestFullscreen();</code>
+			<code>document.exitFullscreen();</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Используйте библиотеки!!!!!</h2>
+		<ul lang="ru">
+			<li><a href="https://threejs.org">three.js</a></li>
+			<li><a href="http://www.babylonjs.com">babylonjs</a></li>
+			<li><a href="http://lo-th.github.io/Oimo.js/">Oimo.js</a>   (Надстройка над three.js)</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Средства 3D моделирования</h2>
+		<ul lang="ru">
+			<li><a href="https://www.blender.org">blender</a></li>
+			<li><a href="https://threejs.org/editor/">three.js editor</a></li>
+			<li><a href="https://www.maxon.net/ru/produkty/cinema-4d/obzor/">Cinema-4D</a>   (Платный)</li>
+		</ul>
+		<h2>Модельки</h2>
+		<ul lang="ru">
+			<li><a href="https://clara.io">clara.io</a></li>
+		</ul>
+	</section>
+
+
+	<section class="slide">
+		<h2>Примеры 3D</h2>
+		<ul lang="ru">
+			<li><a href="http://gorescript.com">Shooter</a></li>
+			<li><a href="https://www.cubeslam.com/givvln">cubeslam</a></li>
+			<li><a href="http://media.tojicode.com/q3bsp/">Quake</a></li>
+			<li><a href="http://kiddisco.asmallgame.com">asmallgame</a></li>
+			<li><a href="http://www.babylonjs.com/Demos/TheCar/">TheCar</a></li>
+		</ul>
+	</section>
+
 
 	<section class="slide">
 		<h2 class="shout">Всем спасибо!</h2>
