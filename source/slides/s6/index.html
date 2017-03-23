@@ -83,6 +83,8 @@
 		</pre>
 	</section>
 
+
+
 	<section class="slide question">
 		<h2><span style="font-size: 65%">Рисование примитивов</span></h2>
 	</section>
@@ -531,6 +533,8 @@
 		</pre>
 	</section>
 
+
+
 	<section class="slide question">
 		<h2><span style="font-size: 65%">Трансформации</span></h2>
 	</section>
@@ -587,6 +591,8 @@
 			<li>...</li>
 		</ul>
 	</section>
+
+
 
 	<section class="slide question">
 		<h2><span style="font-size: 65%">Анимации</span></h2>
@@ -659,23 +665,33 @@
 
 
 
-
 	<section class="slide">
-		<h2 class="shout">Разработка<br/>игры</h2>
+		<h2 class="shout">Как делать игры?</h2>
 	</section>
 
 
+
+
+
+
+
+
+
 	<section class="slide">
-		<h2>Полезные ссылки</h2>
-		<ul lang="en">
-			<li>Про <a href="http://frontender.info/using-svg/" target="_blank">SVG-графику</a></li>
-			<li><a href="https://developer.mozilla.org/en-US/docs/Web/Demos_of_open_web_technologies" target="_blank">Описание и ДЕМО</a> различных WEB-технологий, которые могут быть полезны при разработке</li>
-			<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">Туториал по</a> Canvas API</li>
-		</ul>
+		<h2 class="shout">Дополнительные возможности<br/>
+			<small style="font-size:32px;">WebGL, FullScreen API, PointerLock API</small>
+		</h2>
 	</section>
 
 	<section class="slide">
 		<h2>WebGl</h2>
+		<blockquote>
+			<p class="small-content"><b>WebGL (Web Graphics Library)</b> &mdash; программная библиотека для языка JavaScript предназначенная для визуализации интерактивной трехмерной графики и двухмерной графики в пределах совместимости веб-браузера без использования плагинов. WebGL приносит в веб трехмерную графику, вводя API, который построен на основе <mark>OpenGL ES 2.0</mark>, что позволяет его использовать в элементах <code>canvas</code> HTML5</p>
+		</blockquote>
+	</section>
+
+	<section class="slide">
+		<h2>Преймущества WebGl</h2>
 		<ul lang="ru">
 			<li>Производительность за счет GPU</li>
 			<li>Отсутствие компиляции</li>
@@ -686,9 +702,9 @@
 	</section>
 
 	<section class="slide">
-		<h2>Шейдер</h2>
+		<h2>Шейдеры</h2>
 		<blockquote>
-			<p class="small-content">Элемент <code>Шейдеры</code> являются программы, которые работают на GPU. Шейдеры написаны в OpenGL ES шейдерный язык (известный как ES SL). ES SL имеет переменные своих собственных, типов данных, классификаторов, встроенных входов и выходов. В свою очередь ES SL основан на C++. ES Sl также называют GLSL, что означает Graphics Library Shader Language (язык программирования шейдеров графической библиотеки)</p>
+			<p class="small-content"><b>Шейдеры</b> &mdash; программы, которые работают на GPU. Шейдеры пишутся на специальном языке: OpenGL ES Shader Language (известный как ES SL). ES SL имеет переменные своих собственных типов данных и свои специфические встроенные функции. В свою очередь ES SL основан на C++. ES Sl также называют GLSL, что означает Graphics Library Shader Language (язык программирования шейдеров графической библиотеки)</p>
 		</blockquote>
 	</section>
 
@@ -711,7 +727,7 @@
 
 	<section class="slide">
 		<h2>Вершинный шейдер</h2>
-		<pre class="hljs js">
+		<pre class="hljs html">
 			<code>&lt;script type="x-shader/x-<mark>vertex</mark>" id="vshader"&gt;</code>
 			<code>  varying vec2 vUv;</code>
 			<code>  void main() {</code>
@@ -720,12 +736,13 @@
 			<code>    <mark>gl_Position</mark> = projectionMatrix * mvPosition;</code>
 			<code>  }</code>
 			<code>&lt;/script&gt;</code>
+			<code> </code>
 		</pre>
 	</section>
 
 	<section class="slide">
-		<h2>Фрагментный шейдер. <br>Текстурирование</h2>
-		<pre class="hljs js">
+		<h2>Фрагментный шейдер</h2>
+		<pre class="hljs html">
 			<code>&lt;script type="x-shader/x-<mark>fragment</mark>" id="fshader"&gt;</code>
 			<code>  uniform sampler2D u_Sampler;</code>
 			<code>  varying vec2 vUv;</code>
@@ -733,6 +750,7 @@
 			<code>    <mark>gl_FragColor</mark> = texture2D(u_Sampler, vUv);</code>
 			<code>  }</code>
 			<code>&lt;/script&gt;</code>
+			<code> </code>
 		</pre>
 	</section>
 
@@ -749,7 +767,7 @@
 	</section>
 
 	<section class="slide">
-		<h2>Примеры использования<br>шейдеров</h2>
+		<h2>Примеры использования шейдеров</h2>
 		<ul lang="ru">
 			<li><a href="http://madebyevan.com/webgl-water/">madebyevan.com</a></li>
 			<li><a href="https://threejs.org/examples/webgl_shaders_ocean">webgl_shaders_ocean</a></li>
@@ -761,9 +779,9 @@
 	</section>
 
 	<section class="slide">
-		<h2>Pointer Lock</h2>
+		<h2>Pointer Lock API</h2>
 		<blockquote>
-			<p class="small-content"><code>Pointer Lock </code> – это браузерный API, позволяющий создавать интерфейсы для работы с мышкой на основе ее относительных перемещений, а не только абсолютной позиции курсора.</p>
+			<p class="small-content"><b>Pointer Lock API</b> &mdash; это браузерный API, позволяющий создавать интерфейсы для работы с мышкой на основе ее относительных перемещений, а не только абсолютной позиции курсора</p>
 		</blockquote>
 	</section>
 
@@ -771,32 +789,32 @@
 		<h2>Pointer Lock (<a href="/examples/PointerLock/">пример</a>)</h2>
 		<pre class="hljs js">
 			<code>function lockStatusChange() {</code>
-			<code>	if (document.pointerLockElement === canv){</code>
-			<code>		document.addEventListener("mousemove", updateCirclePosition);</code>
-			<code>	} else {</code>
-			<code>		document.removeEventListener("mousemove", updateCirclePosition);</code>
-			<code>	}</code>
+			<code>    if (document.pointerLockElement === canv){</code>
+			<code>        document.addEventListener('mousemove', updateCirclePosition);</code>
+			<code>    } else {</code>
+			<code>        document.removeEventListener('mousemove', updateCirclePosition);</code>
+			<code>    }</code>
 			<code>}</code>
-			<code> </code>
 			<code>document.addEventListener('pointerlockchange', lockStatusChange);</code>
-			<code> </code>
 			<code>canv.onclick = canv.requestPointerLock;</code>
+			<code> </code>
 		</pre>
 	</section>
 
 	<section class="slide">
-		<h2>Request Full Screen (<a href="/examples/Fullscreen/">пример</a>)</h2>
+		<h2>Request Full Screen API (<a href="/examples/Fullscreen/">пример</a>)</h2>
 		<blockquote>
-			<p class="small-content"><mark>RFS</mark> - Отображает элемент в полноэкранном режиме. Метод применяется к любому элементу, даже  например к простому блоку.</p>
+			<p><b>Request Full Screen API</b> &mdash; позволяет отображать элемент в полноэкранном режиме. Метод может применяться к любому элементу, даже, например, к простому блоку</p>
 		</blockquote>
 		<pre class="hljs js">
 			<code>element.requestFullscreen();</code>
 			<code>document.exitFullscreen();</code>
+			<code> </code>
 		</pre>
 	</section>
 
 	<section class="slide">
-		<h2>Используйте библиотеки!!!!!</h2>
+		<h2>Используйте библиотеки!</h2>
 		<ul lang="ru">
 			<li><a href="https://threejs.org">three.js</a></li>
 			<li><a href="http://www.babylonjs.com">babylonjs</a></li>
@@ -811,12 +829,11 @@
 			<li><a href="https://threejs.org/editor/">three.js editor</a></li>
 			<li><a href="https://www.maxon.net/ru/produkty/cinema-4d/obzor/">Cinema-4D</a>   (Платный)</li>
 		</ul>
-		<h2>Модельки</h2>
+		<p>Модельки</>
 		<ul lang="ru">
 			<li><a href="https://clara.io">clara.io</a></li>
 		</ul>
 	</section>
-
 
 	<section class="slide">
 		<h2>Примеры 3D</h2>
@@ -829,6 +846,17 @@
 		</ul>
 	</section>
 
+
+
+
+	<section class="slide">
+		<h2>Полезные ссылки</h2>
+		<ul lang="en">
+			<li>Про <a href="http://frontender.info/using-svg/" target="_blank">SVG-графику</a></li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/Demos_of_open_web_technologies" target="_blank">Описание и ДЕМО</a> различных WEB-технологий, которые могут быть полезны при разработке</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">Туториал по</a> Canvas API</li>
+		</ul>
+	</section>
 
 	<section class="slide">
 		<h2 class="shout">Всем спасибо!</h2>
