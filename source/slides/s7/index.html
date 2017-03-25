@@ -354,6 +354,120 @@
 		<h2 class="shout">Перерыв</h2>
 	</section>
 
+	<section class="slide question">
+		<h2 style="text-align: center; padding: 0"><span style="font-size: 100%"><strong>Диалекты</strong> JavaScript</span></h2>
+	</section>
+
+	<section class="slide">
+		<h2>Транспилляция из ES.Next</h2>
+		<pre class="hljs js">
+			<code>class ReleaseReducer extends BaseReducer {</code>
+			<code>    constructor(...args) {</code>
+			<code>        super(args.length);</code>
+			<code>        this.initial = args;</code>
+			<code>    }</code>
+			<code>    set Fields (value = {}) {</code>
+			<code>        const {name, data:count = 0} = value;</code>
+			<code>        this.fields = Object.assign(this.fields, {name, count});</code>
+			<code>    }</code>
+			<code>}</code>
+			<code></code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Dart programming language</h2>
+		<pre class="hljs dart">
+			<code>import 'dart:async';</code>
+			<code>import 'dart:math' show Random;</code>
+			<code> </code>
+			<code>Stream&lt;double> computePi({int batch: 1000000}) async* { ... }</code>
+			<code> </code>
+			<code>main() async {</code>
+			<code>    print('Compute π using the Monte Carlo method.');</code>
+			<code>    await for (var estimate in computePi()) {</code>
+			<code>        print('π ≅ $estimate');</code>
+			<code>    }</code>
+			<code>}</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>CoffeeScript</h2>
+		<pre class="hljs coffeescript">
+			<code>class Human</code>
+			<code>    constructor : (@name) -></code>
+			<code> </code>
+			<code>class Baby extends Human</code>
+			<code>    say    : (msg) -> alert "#{@name} говорит '#{msg}'"</code>
+			<code>    saymsg = (msg) -> alert msg</code>
+			<code>    @echo  = (msg) -> console.log msg</code>
+			<code> </code>
+			<code>matt = new Baby("Матвей")</code>
+			<code>matt.sayHi()</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Больше кофечки богу<br/>кофечки!</h2>
+		<pre class="hljs coffeescript">
+			<code>if happy and knowsIt</code>
+			<code>    lyrics = while num -= 1</code>
+			<code>        "#{num} little monkeys, jumping on the bed"</code>
+			<code>else</code>
+			<code>    date = if friday then sue else jill</code>
+			<code> </code>
+			<code>for filename in list</code>
+			<code>    do (filename) -></code>
+			<code>        fs.readFile filename, (err, contents) -></code>
+			<code>            compile filename, contents.toString()</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>ClojureScript</h2>
+		<pre class="hljs clojure">
+			<code>(ns hello-world.core</code>
+			<code>  (:require [cljs.nodejs :as nodejs]))</code>
+			<code> </code>
+			<code>(nodejs/enable-util-print!)</code>
+			<code> </code>
+			<code>(defn -main [& args]</code>
+			<code>  (println "Hello world!"))</code>
+			<code> </code>
+			<code>(set! *main-cli-fn* -main)</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>TypeScript</h2>
+		<pre class="hljs typescript">
+			<code>interface Person {</code>
+			<code>    name: string;</code>
+			<code>    age: number;</code>
+			<code>}</code>
+			<code> </code>
+			<code>function meet(person: Person) {</code>
+			<code>    return `Привет, я ${person.name}, мне ${parson.age}`;</code>
+			<code>}</code>
+			<code> </code>
+			<code>const user = { name: "Jane", age: 21 };</code>
+			<code>console.log(meet(user));</code>
+			<code> </code>
+		</pre>
+	</section>
+
+
+
+
+	<section class="slide question">
+		<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">TypeScript</h2>
+	</section>
+
 
 
 
