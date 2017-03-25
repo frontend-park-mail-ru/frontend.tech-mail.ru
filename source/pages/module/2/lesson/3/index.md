@@ -5,4 +5,6 @@
 ## Современное состояние JavaScript
 __Лекция №1__
 
-История развития JavaScript, содержание современных стандартов ECMAScript: ES2015, ES2016 и ES2017. Процесс развития JavaScript. Разработка на JavaScript не только для WEB: NodeJS, NativeScript, Electron.
+История развития JavaScript, содержание современных стандартов ECMAScript: ES2015, ES2016, ES2017 и ESNext. Процесс развития JavaScript, TC39. TypeScript.
+
+__[Презентация лекции](/slides/s7)__
