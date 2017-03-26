@@ -13,5 +13,6 @@
 - [ДЗ №3](/module/1/lesson/3)
 - [ДЗ №4 и подготовка к РК1](/module/1/lesson/4)
 - [ДЗ №5](/module/2/lesson/1)
+- [ДЗ №6](/module/2/lesson/2)
 
 ... to be continued
