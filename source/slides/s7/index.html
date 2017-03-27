@@ -29,7 +29,7 @@
 
 	<style>
 		.slide pre {
-			font-size: 80%;
+			font-size: 77%;
 		}
 	</style>
 
@@ -116,12 +116,161 @@
 		<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">Определение переменных</span></h2>
 	</section>
 
+	<section class="slide">
+		<h2>Поднятие переменных</h2>
+		<pre class="hljs js">
+			<code>console.log(typeof foo);</code>
+			<code>console.log(typeof bar);</code>
+			<code> </code>
+			<code>var foo = 'bar';</code>
+			<code>if (false) {</code>
+			<code>    var bar = 42;</code>
+			<code>}</code>
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Поднятие переменных</h2>
+		<pre class="hljs js">
+			<code>console.log(typeof foo);  <span class="comment">// undefined</span></code>
+			<code>console.log(typeof bar);  <span class="comment">// undefined</span></code>
+			<code> </code>
+			<code>var foo = 'bar';</code>
+			<code>if (false) {</code>
+			<code>    var bar = 42;</code>
+			<code>}</code>
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2><code>let / const</code></h2>
+		<pre class="hljs js">
+			<code>if (true) {</code>
+			<code>    const bar = 42;</code>
+			<code>}</code>
+			<code>console.log(typeof foo);  <span class="comment">// ReferenceError</span></code>
+			<code>console.log(typeof bar);  <span class="comment">// ReferenceError</span></code>
+			<code> </code>
+			<code>let foo = 'bar';</code>
+			<code>foo = 'baz';  <span class="comment">// TypeError</span></code>
+			<code> </code>
+		</pre>
+	</section>
+
+
 	<section class="slide question">
 		<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">Строки</span></h2>
 	</section>
 
+	<section class="slide">
+		<h2>Шаблонные строки</h2>
+		<pre class="hljs js">
+			<code>const name = 'Jon Snow';</code>
+			<code>const answer = 40;</code>
+			<code> </code>
+			<code>const res = `Hello, ${name}! Answer is ${answer + 2}`</code>
+			<code>console.log(res);  <span class="comment">// Hello, Jon Snow! Answer is 42</span></code>
+			<code> </code>
+			<code>const multiline = `First line</code>
+			<code><span hidden>`</span>Second line</code>
+			<code><span hidden>`</span>Third line`;</code>
+			<code>multiline.split('\n').length === 3; <span class="comment">// true</span></code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Поддержка Юникода</h2>
+		<pre class="hljs js">
+			<code><span class="comment">// unicode support</span></code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Дополнительные методы строк</h2>
+		<pre class="hljs js">
+			<code><span class="comment">// additional</span></code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+		</pre>
+	</section>
+
+
 	<section class="slide question">
 		<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">Промисы</span></h2>
+	</section>
+
+	<section class="slide">
+		<h2>Промисы</h2>
+		<pre class="hljs js">
+			<code>function getJSON(url) {</code>
+			<code>    return new <mark>Promise</mark>(function (resolve, reject) {</code>
+			<code>        const xhr = new XMLHttpRequest();</code>
+			<code>        xhr.open('GET', url, true);</code>
+			<code>        xhr.onreadystatechange = function () {</code>
+			<code>            if (xhr.readyState === 4) {</code>
+			<code>                <mark>resolve(JSON.parse(xhr.responseText));</mark></code>
+			<code>            }</code>
+			<code>        }</code>
+			<code>    }</code>
+			<code>}</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Промисы</h2>
+		<pre class="hljs js">
+			<code>getJSON('/data/books.json')</code>
+			<code>    .then(function (books) {</code>
+			<code>        books.forEach(function (book) {</code>
+			<code>            console.log(book.title);</code>
+			<code>        });</code>
+			<code>    })</code>
+			<code>    .catch(function (error) {</code>
+			<code>         console.error(error);</code>
+			<code>    });</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Промисы</h2>
+		<pre class="hljs js">
+			<code><span class="comment rus">// Вернёт промис в состоянии <mark>fulfilled</mark> («выполнено успешно»)</span></code>
+			<code>Promise.resolve( ... );</code>
+			<code><span class="comment rus">// Вернёт промис в состоянии <mark>rejected</mark> («выполнено с ошибкой»)</span></code>
+			<code>Promise.reject( ... );</code>
+			<code><span class="comment rus">// Выполнит все промисы "параллельно"</span></code>
+			<code>Promise.all( [ ... ] );</code>
+			<code><span class="comment rus">// Вернёт промис, выполнившийся раньше всех</span></code>
+			<code>Promise.race( [ ... ] );</code>
+			<code> </code>
+		</pre>
 	</section>
 
 	<section class="slide question">
@@ -150,6 +299,28 @@
 
 	<section class="slide question">
 		<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">Дополнительные нововведения</span></h2>
+	</section>
+
+
+
+	<!--оно самое-->
+
+	<section class="slide">
+		<h2>Variable hoisting</h2>
+		<pre class="hljs js">
+			<code><span class="comment">// before</span></code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code> </code>
+			<code><span class="comment">// ReferenceError</span></code>
+			<code> </code>
+		</pre>
 	</section>
 
 
