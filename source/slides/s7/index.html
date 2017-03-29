@@ -579,18 +579,32 @@
 	<section class="slide">
 		<h2>Методы <code>Reflect</code></h2>
 		<pre class="hljs js">
-			<code><span class="comment">// before</span></code>
+			<code>Reflect.apply(target, thisArgument, argumentsList)</code>
+			<code>Reflect.construct(target, argumentsList)</code>
+			<code> </code>
+			<code>Reflect.get(target, propertyKey)</code>
+			<code>Reflect.has()</code>
+			<code> </code>
+			<code>Reflect.getPrototypeOf(target)</code>
+			<code>Reflect.setPrototypeOf(target, prototype)</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Работа со свойствами объектов</h2>
+		<pre class="hljs js">
+			<code>Reflect.defineProperty(target, propertyKey, attributes)</code>
+			<code>const object = {};</code>
+			<code>Reflect.defineProperty(object, 'foo', {</code>
 			<code> </code>
 			<code> </code>
 			<code> </code>
 			<code> </code>
 			<code> </code>
 			<code> </code>
-			<code> </code>
-			<code> </code>
-			<code> </code>
-			<code><span class="comment">// ReferenceError</span></code>
-			<code> </code>
+			<code>}</code>
+			<code></code>
 		</pre>
 	</section>
 
