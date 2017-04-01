@@ -5,3 +5,4 @@ dist/
 *.log
 *.out
 *.idea
+/source/examples/babel/lib/
