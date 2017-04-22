@@ -6,3 +6,5 @@
 __Лекция №2__
 
 Веб-компоненты с использованием Custom Elements, Shadow DOM и CSS Scoping. Virtual DOM.
+
+__[Презентация лекции](/slides/s10)__
