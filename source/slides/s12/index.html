@@ -251,6 +251,71 @@ Serving on http://localhost:4200/</code></pre>
 		</h2>
 	</section>
 
+
+
+	<section class="slide">
+		<h2>JSX</h2>
+		<div style="margin-top: 100px; margin-left: 100px;">
+			<pre class="hljs js jsx"><code class="javascript">ReactDOM.render(
+  &lt;h1&gt;Hello, world!&lt;/h1&gt;,
+  document.getElementById('root')
+);</code></pre>
+		</div>
+	</section>
+
+
+
+	<section class="slide">
+		<h2>React компоненты</h2>
+		<div style="margin-top: 25px; margin-left: 100px;">
+			<pre class="hljs js jsx"><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Welcome name=&quot;Sara&quot; /&gt;
+      &lt;Welcome name=&quot;Cahal&quot; /&gt;
+      &lt;Welcome name=&quot;Edite&quot; /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+		</div>
+	</section>
+
+
+
+	<section class="slide">
+		<h2>React компоненты</h2>
+		<div style="margin-top: 100px; margin-left: 100px;">
+			<pre class="hljs js jsx"><code>
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById('root')
+);</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>React друзья</h2>
+		<ul style="margin-left: 150px; margin-top: 100px; font-size: 48px;">
+			<li>Redux</li>
+			<li>React Router</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Почему React?</h2>
+	</section>
+
+	<section class="slide">
+		<h2>Почему React?</h2>
+		<img src="react-stars.png" width="900"/>
+	</section>
+
+	<!-- Заключение про фреймворки-->
+
 	<section class="slide">
 		<h2>Какой фреймворк изучать в 2017?</h2>
 	</section>
@@ -327,8 +392,8 @@ Serving on http://localhost:4200/</code></pre>
 
 	<div class="progress"></div>
 	<script src="/lib/shower/shower.min.js"></script>
-	<script src="/lib/hljs/hljs.pack.js"></script>
-	<script>hljs.inithljsingOnLoad();</script>
+	<script src="/lib/hljs/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 
 </body>
 </html>
