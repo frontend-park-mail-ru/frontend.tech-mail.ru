@@ -35,7 +35,7 @@
 
 	<style>
 		.slide pre {
-			font-size: 105%;
+			font-size: 100%;
 		}
 	</style>
 
@@ -428,19 +428,158 @@
 		<h2>Desktop</h2>
 	</section>
 
+	<section class="slide">
+		<h2>Chromium</h2>
+		<blockquote>
+			<p class="medium-content"><b>Chromium</b> &mdash; веб-браузер с открытым исходным кодом, разрабатываемый сообществом The Chromium Authors, компанией Google и некоторыми другими компаниями</p>
+		</blockquote>
+	</section>
+
+	<section class="slide">
+		<h2>Desktop applications</h2>
+		<div style="position:relative;width: 100%; height: 75%;">
+			<img class="place" src="nw-electron.png" style="transform-origin: center;transform: translate(-50%,-50%) scale(2.5);">
+		</div>
+	</section>
+
+	<section class="slide question">
+		<div style="position:relative;width: 100%; height: 75%;">
+			<img class="place" src="components-electron.png" style="transform-origin: center;transform: translate(-50%,-50%) scale(0.6);">
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Отличия</h2>
+		<p class="small-content"></p>
+		<ul>
+			<li>Различная точка входа</li>
+			<li>Разный принцип построения билдов (Asar Archive vs. V8 Snapshot)</li>
+			<li>Использование Chromium</li>
+			<li>Разный контекст</li>
+			<li>Различия в процессе сборки</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Популярность</h2>
+		<p class="small-content">Несмотря на то, что NW.js существует дольше Electron, на Electron разработано <em>гораздо больше популярных приложений</em></p>
+		<ul>
+			<li>Atom</li>
+			<li>Slack</li>
+			<li>Visual Studio Code</li>
+			<li>GitHub Desktop</li>
+			<li>Hyper</li>
+		</ul>
+	</section>
+
+	<section class="slide question">
+		<div style="position:relative;width: 100%; height: 65%;">
+			<img class="place" src="electron-arch.jpg" style="transform-origin: center;transform: translate(-50%,-50%) scale(1.8);">
+		</div>
+	</section>
+
+	<section class="slide question">
+		<h2>Пример</h2>
+	</section>
+
+	<section class="slide question">
+		<h2><a href="https://www.youtube.com/watch?veQ9mSH4je0U" target="_blank" style="color: darkblue;">Доклад про Electron by <em>Stefan Judis</em></a></h2>
+	</section>
+
 	<section class="slide question">
 		<h2>Mobile</h2>
 	</section>
 
+	<section class="slide">
+		<h2>Mobile</h2>
+		<p class="small-content"></p>
+		<ul>
+			<li>PWA</li>
+			<li>React Native</li>
+			<li>Native Script</li>
+			<li>ReactXP</li>
+			<li>PhoneGap (Apache Cordova)</li>
+			<li>more...</li>
+		</ul>
+	</section>
+
 	<section class="slide question">
-		<h2>SmartTV</h2>
+		<div style="position:relative;width: 100%; height: 100%;">
+			<img class="place" src="mobile-gen.png" style="transform-origin: center;transform: translate(-50%,-65%) scale(1);">
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Кто есть кто?</h2>
+		<blockquote>
+			<p><b>React Native</b> &mdash; фреймворк для построения нативных мобильных приложений с использованием React</p>
+		</blockquote>
+		<blockquote>
+			<p class="medium-content"><b>Native Script</b> &mdash; библиотека, позволяющая делать кросс-платформенные приложения, используя XML, CSS, JavaScript</p>
+		</blockquote>
+		<blockquote>
+			<p class="medium-content"><b>ReactXP</b> &mdash; новомодная поделка от Microsoft</p>
+		</blockquote>
+		<blockquote>
+			<p class="medium-content"><b>PhoneGap (Apache Cordova)</b> &mdash; платформа для разработки мобильных приложений, запускающихся в webview, и имеющих доступ к системным API устройства</p>
+		</blockquote>
+	</section>
+
+	<section class="slide">
+		<h2>Например:</h2>
+		<pre class="hljs jsx">
+			<code>import React, { Component } from 'react';</code>
+			<code>import { Text, View, ProgressBar } from 'react-native';</code>
+			<code>import { TheNativeComponent } from './your-native-code';</code>
+			<code>class SomeComponent extends Component {</code>
+			<code>    render() {</code>
+			<code>        return (&lt;View&gt;</code>
+			<code>            &lt;Text&gt;Loading&lt;/Text&gt;</code>
+			<code>            &lt;ProgressBar /&gt;</code>
+			<code>            &lt;TheNativeComponent /&gt;</code>
+			<code>        &lt;/View&gt;)</code>
+			<code>    }</code>
+			<code>}</code>
+			<code> </code>
+		</pre>
+	</section>
+
+	<section class="slide question">
+		<div style="position:relative;width: 100%; height: 100%;">
+			<img class="place" src="mobile-from-js.png" style="transform-origin: center;transform: translate(-50%,-65%) scale(1.5);">
+		</div>
+	</section>
+
+	<section class="slide question">
+		<div style="position:relative;width: 100%; height: 100%;">
+			<img class="place" src="native-script-works.png" style="transform-origin: center;transform: translate(-50%,-65%) scale(1.05);">
+		</div>
+	</section>
+
+	<section class="slide question">
+		<h2>OS & SmartTV</h2>
+	</section>
+
+	<section class="slide">
+		<h2>OS & SmartTV</h2>
+		<blockquote>
+			<p><strong>WebOS</strong> &mdash; веб-приложение, организующее платформу (операционную
+				среду с набором готовых функций API) для выполнения других веб-приложений</p>
+		</blockquote>
+		<blockquote>
+			<p class="medium-content"><strong>Tizen</strong> &mdash; открытая операционная система на базе ядра Linux,
+				предназначенная для широкого круга устройств, включая смартфоны, интернет-планшеты, компьютеры,
+				автомобильные информационно-развлекательные системы, «умные» телевизоры и цифровые камеры</p>
+		</blockquote>
+		<blockquote>
+			<p class="medium-content"><strong>Chrome OS</strong> &mdash; ОС от компании Google. Главной особенностью
+				является доминирование веб-приложений над обычными функциями ОС</p>
+		</blockquote>
 	</section>
 
 	<section class="slide question">
 		<h2>more...</h2>
 	</section>
-
-
 
 
 
