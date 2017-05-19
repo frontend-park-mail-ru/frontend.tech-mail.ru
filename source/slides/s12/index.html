@@ -143,7 +143,63 @@
 	</section>
 	<section class="slide">
 		<h2>История EmberJS: Mailroom App</h2>
-		<img src="mailroom.jpg"/>
+	</section>
+
+	<section class="slide">
+		<h2>Ember CLI</h2>
+		<blockquote>
+			<b>Интерфейс командной строки</b> (англ. Command line interface, CLI) — разновидность текстового интерфейса (TUI) между человеком и компьютером, в котором инструкции компьютеру даются в основном путём ввода с клавиатуры текстовых строк (команд)
+		</blockquote>
+		<br/>
+		<div>
+			<div>Должно быть:</div>
+			<ul  style="margin-left: 50px">
+				<li>nodejs</li>
+				<li>npm</li>
+			</ul>
+			<div>Далее:</div>
+			<code>npm install -g ember-cli</code>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Создание ember app</h2>
+		<div>
+			<p style="margin-top: 30px;">После установки Ember CLI у нас появился доступ к команде
+				<code>ember</code> в нашем терминале. Команда <code>ember new</code> создаст нам папку с приложением внутри</p>
+			<code>ember new ember-quickstart</code>
+			<p>В новой папке с названием<code>ember-quickstart</code> появляется полноценное Ember приложение, включая:</p>
+
+			<ul style="margin-left: 200px;">
+				<li>Сервер для разработки</li>
+				<li>Компилятор шаблонов</li>
+				<li>JavaScript и CSS минификатор.</li>
+				<li>ES2015+ прибамбасы с помощью Babel.</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Запуск ember app</h2>
+		<div>
+			<p style="margin-top: 30px;">
+				Чтобы запустить приложение достоаточно выполнить
+				одну команду внутри нашей новой папки:
+			</p>
+
+			<div><code>cd ember-quickstart</code></div>
+			<div><code>ember server</code></div>
+			<br/>
+			<div>Спустя несколько секунд мы увидим вывод подобный этому:</div>
+			<pre class="hljs sh"><code>Livereload server on http://localhost:49152
+Serving on http://localhost:4200/</code></pre>
+			<div>Нажав <code>Ctrl-C</code> мы прекратим работу сервера</div>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Запуск ember app</h2>
+		<img src="ember-s.png"/>
 	</section>
 
 	<!--Angular 2-->
@@ -178,19 +234,6 @@
 		</blockquote>
 	</section>
 
-	<section class="slide">
-		<h2 class="shout">Веб-компоненты</h2>
-	</section>
-
-	<section class="slide">
-		<h2>Современные веб-компоненты</h2>
-		<blockquote>
-			<p class="small-content"><b>Веб-компоненты</b> &mdash; технология, которая позволяет создавать многократно используемые компоненты в веб-приложениях. Веб-компоненты поддерживаются веб-браузерами напрямую и <mark>не требуют дополнительных библиотек для работы</mark>. Модель веб-компонентов подразумевает инкапсуляцию и совместимость отдельных элементов</p>
-			<p class="note">На данный момент частичная поддержка существует в браузерах Chrome, Firefox, Opera и Safari. Для браузеров не поддерживающих веб-компоненты реализованы полифиллы</p>
-		</blockquote>
-	</section>
-
-
 	<!--THE END-->
 
 	<section class="slide">
@@ -213,8 +256,8 @@
 
 	<div class="progress"></div>
 	<script src="/lib/shower/shower.min.js"></script>
-	<script src="/lib/hljs/highlight.pack.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+	<script src="/lib/hljs/hljs.pack.js"></script>
+	<script>hljs.inithljsingOnLoad();</script>
 
 </body>
 </html>
