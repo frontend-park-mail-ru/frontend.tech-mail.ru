@@ -31,7 +31,7 @@
     "grunt-notify": "^0.4.5",
     "load-grunt-config": "^0.19.2",
     "promisify-node": "^0.4.0",
-    "showdown": "^1.6.4",
+    "showdown": "^1.7.3",
     "time-grunt": "^1.4.0"
   }
 }
