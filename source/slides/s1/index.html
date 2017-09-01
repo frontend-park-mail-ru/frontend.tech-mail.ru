@@ -159,6 +159,24 @@
 		}
 	</style>
 
+	<style>
+		.helper {
+			position: absolute;
+			display: block;
+			margin-left: 20%;
+
+			font-size: 50%;
+			font-weight: 100;
+			will-change: opacity;
+			opacity: 1;
+			transition: opacity 3s ease;
+		}
+
+		.helper.helper_hidden {
+			opacity: 0;
+		}
+	</style>
+
 </head>
 <body class="shower list">
 
@@ -251,29 +269,55 @@
 	</div>
 </section>
 
-<section class="slide">
-	<h2>Что есть Frontend-разработка?</h2>
-	<blockquote>
-		<p class="small-content"><b>Frontend-разработка</b> &mdash; это работа по созданию публичной части
-			веб-приложения, с которой непосредственно контактирует пользователь и функционала который обычно выполняется
-			на стороне клиента</p>
-	</blockquote>
-	<p>Отсюда старое название <em>"client-side"</em></p>
+<section class="slide question" id="q42">
+	<h2>
+		<span style="font-size: 150%; font-weight: 200;">Что такое <strong>Frontend</strong>?</span>
+		<span id="helper" class="helper helper_hidden">это вёрстка, HTML и CSS?</span>
+	</h2>
+	<script>
+		(function () {
+			'use strict';
+			let interval = setInterval(() => {
+				if (location.hash === '#q42') {
+					setTimeout(() => {
+						const helper = document.getElementById('helper');
+						helper.classList.toggle('helper_hidden');
+					}, 5000);
+
+					clearInterval(interval);
+				}
+			}, 5000);
+		})();
+	</script>
 </section>
 
 <section class="slide">
-	<h2>Что есть Веб-приложение?</h2>
+	<h2>Что такое Frontend?</h2>
 	<blockquote>
-		<p class="small-content"><b>Веб-приложение </b> &mdash; клиент-серверное приложение, в котором клиентом
-			выступает браузер, а сервером — веб-сервер. Логика веб-приложения распределена между сервером и клиентом,
-			хранение данных осуществляется, преимущественно, на сервере, обмен информацией происходит по сети</p>
+		<p class="small-content"><b>Frontend</b> &mdash; публичная часть web-приложений, с которой непосредственно контактирует и взаимодействует пользователь. Во Frontend входят отображение пользовательского интерфейса, функционал, выполняющийся на стороне клиента, и обработка пользовательских запросов</p>
+	</blockquote>
+	<p class="note">Так же можно встретить название <em>"client-side"</em></p>
+</section>
+
+<section class="slide">
+	<h2>Что такое web-приложение?</h2>
+	<blockquote>
+		<p class="small-content"><b>Web-приложение </b> &mdash; клиент-серверное приложение, в котором клиентом выступает в основном браузер, а сервером &mdash; web-сервер. Логика веб-приложения распределена между сервером и клиентом, хранение данных осуществляется преимущественно на сервере, обмен информацией происходит по сети</p>
+	</blockquote>
+	<p class="note">Примеры web-приложений &mdash; <em>vk.com</em>, <em>google.com</em>, <em>facebook.com</em>...</p>
+</section>
+
+<section class="slide">
+	<h2>Что такое Frontend-разработка?</h2>
+	<blockquote>
+		<p class="small-content"><b>Frontend-разработка</b> &mdash; это работа по созданию публичной части веб-приложения, с которой непосредственно контактирует пользователь и функционала который обычно выполняется на стороне клиента</p>
 	</blockquote>
 </section>
 
 <section class="slide">
 	<h2>Семестровый проект</h2>
 	<p class="medium-content"><b>Веб-приложение &mdash; мультиплеерная игра в браузере</b></p>
-	<ul lang="en">
+	<ul lang="ru">
 		<li>Меню приложения</li>
 		<li>Формы входа и регистрации</li>
 		<li>Таблица лидеров</li>
@@ -283,62 +327,54 @@
 </section>
 
 <section class="slide">
-	<h2>Семестровый проект: меню</h2>
-	<img class="place" src="menu-ex.png" alt="Пример меню"
-		 style="transform-origin: center;transform: translate(-50%,-45%) scale(0.43)">
+	<h2>Семестровый проект</h2>
+	<img class="place" src="menu-ex.png"
+		 style="transform-origin: center;transform: translate(-50%,-48%) scale(0.43); box-shadow: 0 0 100px -10px rgba(0, 0, 0, 1);">
 </section>
 
 <section class="slide">
-	<h2>Семестровый проект: авторизация</h2>
-	<img class="place" src="signup-ex.png" alt="Пример авторизации"
-		 style="transform-origin: center;transform: translate(-50%,-45%) scale(0.43)">
+	<h2>Семестровый проект</h2>
+	<img class="place" src="auth.png"
+		 style="transform-origin: center;transform: translate(-50%,-48%) scale(0.75); box-shadow: 0 0 60px -20px rgba(0, 0, 0, 1);">
 </section>
 
 <section class="slide">
-	<h2>Семестровый проект: "about"</h2>
-	<img class="place" src="about-ex.png" alt="Пример окна 'about'"
-		 style="transform-origin: center;transform: translate(-50%,-45%) scale(0.43)">
+	<h2>Семестровый проект</h2>
+	<img class="place" src="about-ex.png"
+		 style="transform-origin: center;transform: translate(-50%,-48%) scale(0.43); box-shadow: 0 0 100px -10px rgba(0, 0, 0, 1);">
 </section>
 
 <section class="slide">
-	<h2>Семестровый проект: игра</h2>
-	<img class="place" src="game-ex.png" alt="Пример игры"
-		 style="transform-origin: center;transform: translate(-50%,-45%) scale(0.43)">
-</section>
-
-<section class="slide">
-	<h2>Наша Dream-team <em>Менторов</em></h2>
-	<ul lang="ru">
-		<li>Тюльдюков Алексей &mdash; разработчик Поиска@Mail.RU, ментор менторов &#x263A;</li>
-		<li>Махмутов Шамиль &mdash; разработчик Target.My.com</li>
-		<li>Паничкина Анна &mdash; выпускница Технопарка</li>
-		<li>Слимов Никита &mdash; студент 4-го семестра Технопарка</li>
-		<li>Цветков Александр &mdash; разработчик Почты@Mail.RU</li>
-		<li>Щадько Александр &mdash; разработчик Почты@Mail.RU</li>
-	</ul>
+	<h2>Семестровый проект</h2>
+	<img class="place" src="gameplay.jpg"
+		 style="transform-origin: center;transform: translate(-50%,-48%) scale(0.7); box-shadow: 0 0 100px -10px rgba(0, 0, 0, 1);">
 </section>
 
 <section class="slide">
 	<h2>Наша Dream-team <em>Менторов</em></h2>
 	<ul lang="ru">
-		<li>Булавинцев Илья &mdash; студент 3-го семестра Технопарка</li>
-		<li>Егорова Варвара &mdash; студентка 3-го семестра Технопарка</li>
-		<li>Козинченко Евгений &mdash; студент 4-го семестра Технопарка</li>
-		<li>Никитин Илья &mdash; студент 3-го семестра Технопарка</li>
-		<li>Сычугина Анна &mdash; студентка 3-го семестра Технопарка</li>
-		<li>Телышев Антон &mdash; разработчик Поиска@Mail.RU</li>
-		<li>Титова Марина &mdash; разработчица Почты@Mail.RU</li>
-		<li>Утробин Егор &mdash; разработчик Лаборатории Технопарка</li>
+		<li>Телышев Антон &mdash; разработчик в Техдепартаменте Mail.Ru</li>
+		<li>Махмутов Шамиль &mdash; разработчик в Сбертехе???</li>
+		<li>Козинченко Евгений &mdash; кто?)</li>
+		<li>Слимов Никита &mdash; кто?))</li>
+		<li>Никитин Илья &mdash; разработчик в AT Consulting</li>
+		<li>Утробин Егор &mdash; разработчик в Почте@Mail.Ru</li>
+		<li>Сычугина Анна &mdash; кто?</li>
+		<li>Пешков Сергей &mdash; разработчик в Почте@Mail.Ru</li>
+		<li>Володин Сергей &mdash; разработчик в Почте@Mail.Ru</li>
+		<li>Орёл Александр &mdash; разработчик в Поиске@Mail.Ru</li>
+		<li>Степанов Денис &mdash; разработчик в Yandex???</li>
+		<li>Перескоков Владислав &mdash; студент 4-го семестра Технопарка</li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2>Структура курса</h2>
-	<p class="medium-content">
-	<ul lang="en">
+	<p class="small-content">
+	<ul lang="ru">
 		<li><span class="accent">Модуль 1</span> &mdash; 4 занятия + РК1</li>
 		<li><span class="accent">Модуль 2</span> &mdash; 3 занятия + РК2</li>
-		<li><span class="accent">СОВМЕСТНАЯ ПРЕДЗАЩИТА</span></li>
+		<li><span class="accent">Совместная предзащита</span></li>
 		<li><span class="accent">Модуль 3</span> &mdash; 3 занятия + РК3</li>
 		<li><span class="accent">Модуль 4</span> &mdash; 2 занятия + РК4</li>
 		<li><span class="accent">Защита проекта</span></li>
@@ -348,11 +384,11 @@
 <section class="slide">
 	<h2>Первый модуль</h2>
 	<p class="small-content">
-	<ul lang="en">
-		<li>Введение во фронтенд</li>
-		<li>Работа с DOM, браузерные события, сеть</li>
+	<ul lang="ru">
+		<li>Введение во Frontend</li>
+		<li>Работа с DOM, браузерные события, работа с сетью</li>
 		<li>Модульность, разработка компонентов, шаблонизация</li>
-		<li>Работа с сетью, разработка API</li>
+		<li>Безопасность web-приложений, архитектура web-приложений и разработка API, тестирование компонент</li>
 	</ul>
 
 	<p>РК 1, оценивается в 30 баллов</p>
@@ -361,8 +397,8 @@
 <section class="slide">
 	<h2>Второй модуль</h2>
 	<p class="small-content">
-	<ul lang="en">
-		<li>Архитектура проекта и роутинг, сборка проекта</li>
+	<ul lang="ru">
+		<li>Архитектура проекта, роутинг, методологии вёрстки</li>
 		<li>Графика, разработка игр в браузере</li>
 		<li>ЛЕКЦИЯ: Современное состояние JavaScript</li>
 	</ul>
@@ -373,9 +409,9 @@
 <section class="slide">
 	<h2>Третий модуль</h2>
 	<p class="small-content">
-	<ul lang="en">
-		<li>Работа с данными в браузере</li>
-		<li>Использование препроцессоров CSS, разработка под мобильные устройства</li>
+	<ul lang="ru">
+		<li>Работа с данными в браузере и производительность web-приложений, HTTP/2</li>
+		<li>Современные возможности CSS, разработка под мобильные устройства</li>
 		<li>ЛЕКЦИЯ: Веб-компоненты и Virtual DOM</li>
 	</ul>
 
@@ -385,9 +421,9 @@
 <section class="slide">
 	<h2>Четвёртый модуль</h2>
 	<p class="small-content">
-	<ul lang="en">
-		<li>Производительность, использование инструментов разработчика</li>
-		<li>ЛЕКЦИЯ: Современное состояние WEB</li>
+	<ul lang="ru">
+		<li>Использование DevTools браузеров при разработке приложений, инфраструктура и деплой web-приложений</li>
+		<li>ЛЕКЦИЯ: Резюме Frontend-разработчика в 2018 году</li>
 	</ul>
 
 	<p>РК 4, оценивается в 10 баллов</p>
@@ -395,7 +431,8 @@
 
 <section class="slide">
 	<h2>Что по чём?</h2>
-	<ul lang="en">
+	<p class="medium-content"></p>
+	<ul lang="ru">
 		<li>Домашнее задание №0
 			<mark>5 баллов</mark>
 		</li>
@@ -422,34 +459,33 @@
 </section>
 
 <section class="slide">
-	<h2>Рубежный контроль</h2>
+	<h2>Как проходит рубежный контроль</h2>
 	<p class="small-content">
-	<ul lang="en">
+	<ul lang="ru">
 		<li>Выполнение всех ДЗ в модуле</li>
+		<li>Отправка мерж-реквеста <mark>не позднее, чем за <strong>сутки</strong></mark> до РК</li>
 		<li><strong>Code review</strong>, допуск от ментора</li>
 		<li>Проверка работы приложения, проверка ДЗ</li>
-		<li>Беседа с преподавателем</li>
+		<li>Беседа с преподавателем, решение задач, теоретические вопросы</li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2>Критерии оценивания</h2>
 	<p class="small-content">
-
-	<ul lang="en" style="font-weight: 300;">
-		<li>СООТВЕТСТВИЕ РЕЗУЛЬТАТА ПРЕДЪЯВЛЯЕМЫМ ТРЕБОВАНИЯМ</li>
-		<li>ОПТИМАЛЬНОСТЬ ПРЕДЛАГАЕМОГО РЕШЕНИЯ</li>
-		<li>ПРАКТИЧНОСТЬ РЕШЕНИЯ</li>
-		<li>КАЧЕСТВО ОФОРМЛЕНИЯ РЕЗУЛЬТАТОВ РАБОТЫ</li>
-		<li>ДОКАЗАТЕЛЬНОСТЬ АРГУМЕНТАЦИИ ПРИ ЗАЩИТЕ РАБОТЫ</li>
+	<ul lang="ru">
+		<li>Соответствие результата предъявляемым требованиям</li>
+		<li>Оптимальность предлагаемого решения</li>
+		<li>Практичность решения</li>
+		<li>Качество оформления результатов работы</li>
+		<li>Доказательность аргументации при защите работы</li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2>Итоговая оценка</h2>
-	<p class="medium-content">
-
-	<ul lang="en">
+	<p class="small-content">
+	<ul lang="ru">
 		<li>
 			<mark>0 <=</mark> &nbsp;"неудовлетворительно"
 			<mark> <= 69</mark>
@@ -469,57 +505,63 @@
 </section>
 
 <section class="slide">
-	<h2>Дополнительные критерии (sic!)</h2>
+	<h2>Дополнительные критерии <em>(sic!)</em></h2>
 	<p>Для получения оценки
 		<mark>удовлетворительно</mark>
 		, необходимо следующее
 	</p>
 
-	<ul lang="en">
+	<ul lang="ru">
+		<li>Корректно работающая авторизация и регистрация пользователей</li>
+		<li>Приложение представляет собой клиентское SPA</li>
+		<li>Современный подход к написанию кода приложения</li>
+		<li>В приложении присутствует и используется шаблонизация</li>
+		<li>В приложении присутствует роутинг</li>
+		<li>В приложении присутствует <strong>singleplayer-версия</strong> игры</li>
 		<li>Приложение должно быть доступно в Интернете</li>
-		<li>В приложении должна присутствовать правильно работающая регистрация и авторизация пользователей</li>
-		<li>Это должно быть SPA-приложение с правильно работающим роутингом</li>
-		<li>В приложении должен присутствовать работающий singleplayer</li>
-		<li>Приложение должно открываться и работать на мобильных устройствах</li>
+		<li>Используются современные инструменты и методологии вёрстки</li>
+		<li>Приложение должно корректно отображаться и работать на <strong>мобильных устройствах</strong> и устройствах с сенсорным экраном</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>Дополнительные критерии (sic!)</h2>
+	<h2>Дополнительные критерии <em>(sic!)</em></h2>
 	<p>Для получения оценки
 		<mark>хорошо</mark>
 		, необходимо также
 	</p>
 
-	<ul lang="en">
-		<li>В приложении должен присутствовать multiplayer</li>
-		<li>Приложение должно открываться и работать при отсутствии сети (те функции, которые не требуют Интернета,
-			например singleplayer)
-		</li>
+	<ul lang="ru">
+		<li>В приложении должен присутствовать <strong>multiplayer</strong></li>
+		<li>В приложении должен присутствовать обмен данными с сервером через WebSocket-соединение</li>
+		<li>Приложение должно уметь запускаться и работать <strong>offline</strong></li>
+		<li>Приложение должно быть оптимизировано, в приложении должен быть настроен автоматический CI</li>
+		<li>Приложение должно быть задеплоено на VPS</li>
 	</ul>
+	<p class="note"><a href="https://goo.gl/Wv1ner" target="_blank">Подробнее...</a></p>
 </section>
 
 <section class="slide">
-	<h2>Фронтенд &mdash; это не только вёрстка</h2>
-	<ul lang="en">
-		<li>Программирование пользовательского интерфейса</li>
+	<h2>За что отвечает Frontend</h2>
+	<p class="medium-content"></p>
+	<ul lang="ru">
+		<li>Создание пользовательского интерфейса</li>
 		<li>Программирование той логики приложения, которая исполняется на клиенте</li>
 		<li>Программирование игры</li>
 		<li>Тестирование приложения (от обычных юнит-тестов до интеграционных и нагрузочных тестов)</li>
 		<li>Настройка и программирование процесса сборки приложения</li>
-		<li>Программирование деплоя приложения</li>
+		<li>Деплой приложения</li>
 		<li>etc...</li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2>Командная работа</h2>
-	<p class="medium-content">
+	<p class="small-content">
 	<ul lang="en">
-		<li>3&ndash;4 человека в команде</li>
+		<li>2&ndash;4 человека в команде</li>
 		<li>Каждый вносит общий вклад в создание игры</li>
-		<li>Разработчик, отвечающий за приложение</li>
-		<li>Разработчик, отвечающий за игру</li>
+		<li>Работа ведётся в наших репозиториях под руководством ваших менторов</li>
 	</ul>
 </section>
 
@@ -529,7 +571,10 @@
 
 
 <section class="slide">
-	<h2 class="shout"><span style="font-size: 4rem;">Теория клиент-серверного взаимодействия<br/>Порядок работы</span>
+	<h2 class="shout">
+		<span style="font-size: 80%; display: inline-block;">Теория клиент-серверного взаимодействия</span>
+		<br/>
+		<span style="font-size: 55%; display: inline-block;">Порядок работы</span>
 	</h2>
 </section>
 
