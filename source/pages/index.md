@@ -9,6 +9,7 @@
 #### Дополнительные материалы:
 
 - __[Наш github](https://github.com/frontend-park-mail-ru)__
+- __[Ведомость с оценками](https://goo.gl/muptWT)__
 
 
 ##### Первый модуль
