@@ -134,9 +134,8 @@
 
 <section class="slide">
 	<h2>Архитектура наших приложений?</h2>
-	<div style="position:relative;width: 100%; height: 75%;"><img class="place" src="arch.png"
-																  alt="Архитектура наших приложений"
-																  style="transform-origin: center;transform: translate(-50.45%,-51%) scale(.893);">
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="arch.png" style="transform-origin: center;transform: translate(-50.45%,-51%) scale(.893);">
 	</div>
 </section>
 
@@ -257,7 +256,7 @@
 </section>
 
 
-<!--закончили с CORS-->
+<!--закончили с Безопасностью-->
 
 
 <section class="slide">
@@ -402,6 +401,127 @@
 
 
 <!--закончили с API-->
+
+
+<section class="slide">
+	<h2 class="shout">Promise и<br/>Fetch API</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 85%">Что такое <mark>Promise</mark>?</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Что такое Promises</h2>
+	<blockquote>
+		<p><b>Promises (промисы)</b> &mdash; это специальные объекты, которые могут находиться в одном из трёх состояний:
+			<ul>
+				<li>вначале <strong>pending</strong> («ожидание»)</li>
+				<li>затем либо <strong>fulfilled</strong> («выполнено успешно»)</li>
+				<li>либо <strong>rejected</strong> («выполнено с ошибкой»)</li>
+			</ul>
+		</p>
+	</blockquote>
+	<div style="position:relative;width: 100%; height: 40%;">
+		<img class="place" src="promiseInit.png" style="transform-origin: center;transform: translate(-50%,-50%) scale(1.6);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Что такое Promises</h2>
+	<pre class="hljs js">
+		<code>const promise = new Promise(function(resolve, reject) {</code>
+		<code>    <span class="comment rus">// Здесь можно выполнять любые действия</span></code>
+		<code> </code>
+		<code>    <span class="comment rus">// вызов resolve(result) переведёт промис в состояние <mark>fulfilled</mark></span></code>
+		<code>    <span class="comment rus">// вызов reject(error) переведёт промис в состояние <mark>rejected</mark></span></code>
+		<code>});</code>
+		<code> </code>
+		<code><span class="comment rus">// Можно создать сразу "готовый" промис</span></code>
+		<code>const fulfilled = Promise.resolve(result);</code>
+		<code>// const fulfilled = new Promise((resolve, _) => resolve(result));</code>
+		<code>const rejected = Promise.reject(error);</code>
+		<code>// const rejected = new Promise((_, reject) => reject(error));</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Зачем нужны Promises</h2>
+	<blockquote>
+		<p><b>Promises</b> &mdash; это инструмент для контроля и изменения <mark>execution flow</mark> JavaScript-приложений</p>
+	</blockquote>
+	<p>Это возможно за счёт того, что на промисы можно навесить два коллбека:</p>
+	<ul>
+		<li><code>onFulfilled</code> &mdash; срабатывают, когда promise находится в состоянии «выполнен успешно»</li>
+		<li><code>onRejected</code> &mdash; срабатывают, когда promise находится в состоянии «выполнен с ошибкой»</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Зачем нужны Promises</h2>
+	<pre class="hljs js">
+		<code>const promise = new Promise( ... );</code>
+		<code> </code>
+		<code><span class="comment rus">// Можно навесить их одновременно</span></code>
+		<code>promise.then(onFulfilled, onRejected);</code>
+		<code> </code>
+		<code><span class="comment rus">// Можно по отдельности</span></code>
+		<code><span class="comment rus">// Только обработчик onFulfilled</span></code>
+		<code>promise.then(onFulfilled);</code>
+		<code><span class="comment rus">// Только обработчик onRejected</span></code>
+		<code>promise.then(null, onRejected);</code>
+		<code>promise.catch(onRejected); <span class="comment rus">// Или так</span></code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Пример с <code>onFulfilled</code></h2>
+	<pre class="hljs js">
+		<code>// value 1, value 2, value 3, value 4</code>
+		<code>const promise = Promise.resolve('value 1');</code>
+		<code> </code>
+		<code>const p2 = promise</code>
+		<code>    .then(res => { console.log(res); return 'value 2'; })</code>
+		<code>    .then(res => { console.log(res); return 'value 3'; });</code>
+		<code> </code>
+		<code>p2</code>
+		<code>    .then(res => { console.log(res); return 'value 4'; })</code>
+		<code>    .then(res => { console.log(res); return 'value 5'; });</code>
+		<code> </code>
+		<code>p2 === promise // false</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Пример с <code>onRejected</code></h2>
+	<pre class="hljs js">
+		<code>// value 1, Error!</code>
+		<code>const promise = Promise.resolve('value 1');</code>
+		<code> </code>
+		<code>promise</code>
+		<code>    .then(res => { console.log(res); throw 'Error!'; })</code>
+		<code>    .then(res => { console.log('foo'); });</code>
+		<code>    .then(res => { console.log('bar'); })</code>
+		<code>    .then(res => { console.log('baz'); })</code>
+		<code>    .catch(err => { console.error(err); return 'Error catched!'; });</code>
+		<code> </code>
+	</pre>
+</section>
+
+<!--закончили с Promise и Fetch API-->
+
+
+<section class="slide">
+	<h2 class="shout">Тестирование?</h2>
+</section>
+
+
+<!--закончили с Тестированием?-->
 
 
 <section class="slide">
