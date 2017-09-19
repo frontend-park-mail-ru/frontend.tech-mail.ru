@@ -479,9 +479,25 @@
 </section>
 
 <section class="slide">
-	<h2>Пример с <code>onFulfilled</code></h2>
+	<h2>Работа промисов</h2>
 	<pre class="hljs js">
-		<code>// value 1, value 2, value 3, value 4</code>
+		<code>const promise = new Promise(function(resolve, reject) {</code>
+		<code>    // do smth</code>
+		<code>    resolve('success'); // or</code>
+		<code>    // reject(new Error('failure'));</code>
+		<code>});</code>
+		<code> </code>
+		<code>promise</code>
+		<code>    <mark>.then</mark>(res => console.log(res))</code>
+		<code>    <mark>.catch</mark>(err => console.error(err));</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Чейнинг промисов</h2>
+	<pre class="hljs js">
+		<code>// 'value 1', 'value 2', 'value 3', 'value 4'</code>
 		<code>const promise = Promise.resolve('value 1');</code>
 		<code> </code>
 		<code>const p2 = promise</code>
@@ -498,17 +514,32 @@
 </section>
 
 <section class="slide">
-	<h2>Пример с <code>onRejected</code></h2>
+	<h2>Чейнинг промисов</h2>
 	<pre class="hljs js">
-		<code>// value 1, Error!</code>
+		<code>// 'value 1', 'Error!', 'Error catched!'</code>
 		<code>const promise = Promise.resolve('value 1');</code>
 		<code> </code>
 		<code>promise</code>
 		<code>    .then(res => { console.log(res); throw 'Error!'; })</code>
-		<code>    .then(res => { console.log('foo'); });</code>
+		<code>    .then(res => { console.log('foo'); })</code>
 		<code>    .then(res => { console.log('bar'); })</code>
 		<code>    .then(res => { console.log('baz'); })</code>
-		<code>    .catch(err => { console.error(err); return 'Error catched!'; });</code>
+		<code>    .catch(err => { console.error(err); return 'Error catched!'; })</code>
+		<code>    .then(res => { console.log(res); });</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Из промиса можно возвращать<br/>промис!</h2>
+	<pre class="hljs js">
+		<code>// value 1, Error!</code>
+		<code>const promise1 = Promise.resolve('foo');</code>
+		<code> </code>
+		<code>const promise2 = Promise.resolve('bar')</code>
+		<code>    .then(res => { console.log(res); <mark>return promise1</mark>; })</code>
+		<code>    .then(res => { console.log(res); return 'baz'; })</code>
+		<code>    .then(res => { console.log(res); });</code>
 		<code> </code>
 	</pre>
 </section>
