@@ -533,13 +533,87 @@
 <section class="slide">
 	<h2>Из промиса можно возвращать<br/>промис!</h2>
 	<pre class="hljs js">
-		<code>// value 1, Error!</code>
-		<code>const promise1 = Promise.resolve('foo');</code>
+		<code>// 'foo', 'baz', 'bar', 'foobar'</code>
+		<code>const promise1 = Promise.resolve('foo')</code>
+		<code>    .then(res => { console.log(res); return 'bar'; });</code>
 		<code> </code>
-		<code>const promise2 = Promise.resolve('bar')</code>
+		<code>const promise2 = Promise.resolve('baz')</code>
 		<code>    .then(res => { console.log(res); <mark>return promise1</mark>; })</code>
-		<code>    .then(res => { console.log(res); return 'baz'; })</code>
+		<code>    .then(res => { console.log(res); return 'foobar'; })</code>
 		<code>    .then(res => { console.log(res); });</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%">В чём всё-таки<br/><mark><strong>крутота&nbsp;Промисов</strong></mark>?</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2><strong>Крутота</strong> промисов!</h2>
+	<blockquote>
+		<p>Функции <code>resolve</code> и <code>reject</code> можно вызывать <strong>асинхронно</strong>!</p>
+	</blockquote>
+	<pre class="hljs js">
+		<code>const promise = new Promise(function(resolve, reject) {</code>
+		<code>    http.Get('/path', <mark>function (err, response) {</mark></code>
+		<code>    <mark>    if (err) { reject(err); }</mark></code>
+		<code>    <mark>    resolve(response);</mark></code>
+		<code>    <mark>}</mark>);</code>
+		<code>});</code>
+		<code> </code>
+		<code>promise</code>
+		<code>    .then(response => console.log('Fetched data', response))</code>
+		<code>    .catch(error => console.error('Failed', error));</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Промисификация</h2>
+	<blockquote>
+		<p>Оборачивание <strong>асинхронного функционала</strong> в функцию, возвращающую промис</p>
+	</blockquote>
+	<pre class="hljs js">
+		<code>function PromiseGet(url) {</code>
+		<code>    return new Promise(function (resolve, reject) {</code>
+		<code>        http.Get(url, function (err, response) {</code>
+		<code>            if (err) { reject(err) }</code>
+		<code>            resolve(response);</code>
+		<code>        });</code>
+		<code>    });</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Удобно обрабатывать<br><strong>последовательные</strong> запросы</h2>
+	<pre class="hljs js">
+		<code>http.post('/singup', user, function (err, resp1) {</code>
+		<code>    if (err) { return console.error(err); }</code>
+		<code>    http.get(`/users/${resp1.id}`, function (err, resp2) {</code>
+		<code>        if (err) { return console.error(err); }</code>
+		<code>        http.get(`/photos/${resp2.avatarId}`, function (err, avatar) {</code>
+		<code>            if (err) { return console.error(err); }</code>
+		<code>            // ... callback hell!</code>
+		<code>        });</code>
+		<code>    });</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Удобно обрабатывать<br><strong>последовательные</strong> запросы</h2>
+	<pre class="hljs js">
+		<code>PromisePost('/singup', user)</code>
+		<code>    .then(resp1 => PromiseGet(`/users/${resp1.id}`))</code>
+		<code>    .then(resp2 => PromiseGet(`/photos/${resp2.avatarId}`))</code>
+		<code>    .then(avatar => { ... })</code>
+		<code>    .catch(err => console.error(err));</code>
 		<code> </code>
 	</pre>
 </section>
