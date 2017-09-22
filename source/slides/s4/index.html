@@ -846,22 +846,6 @@
 <section class="slide">
     <h2>Чейнинг промисов</h2>
     <pre class="hljs js">
-		<code>// 'value 1', undefined, undefined</code>
-		<code>const promise = Promise.resolve('value 1');</code>
-		<code> </code>
-		<code>const p2 = promise</code>
-		<code>    .then(res => { console.log(res); })</code>
-		<code>    .then(res => { console.log(res); })</code>
-		<code>    .then(res => { console.log(res); });</code>
-		<code> </code>
-		<code>p2 === promise // false</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
-    <h2>Чейнинг промисов</h2>
-    <pre class="hljs js">
 		<code>// 'value 1', 'value 2', 'value 3'</code>
 		<code>const promise = Promise.resolve('value 1');</code>
 		<code> </code>
