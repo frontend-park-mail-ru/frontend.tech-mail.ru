@@ -822,6 +822,25 @@ function promiseSomething(callback) {
 				<code>let promise = fetch(url[, options]);</code>
 			</pre>
 	</div>
+	<ul>
+		<li><code>url</code> – URL, на который сделать запрос,</li>
+		<li><code>options</code> – необязательный объект с настройками запроса.</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Fetch API options</h2>
+	<div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+		<ul>
+			<li><code>method</code> – метод запроса,</li>
+			<li><code>headers</code> – заголовки запроса (объект),</li>
+			<li><code>body</code> – тело запроса: <code>FormData</code>, <code>Blob</code>, строка и т.п.</li>
+			<li><code>mode</code> – одно из: «same-origin», «no-cors», «cors», указывает, в каком режиме кросс-доменности предполагается делать запрос.</li>
+			<li><code>credentials</code> – одно из: «omit», «same-origin», «include», указывает, пересылать ли куки и заголовки авторизации вместе с запросом.</li>
+			<li><code>cache</code> – одно из «default», «no-store», «reload», «no-cache», «force-cache», «only-if-cached», указывает, как кешировать запрос.</li>
+			<li><code>redirect</code> – можно поставить «follow» для обычного поведения при коде 30x (следовать редиректу) или «error» для интерпретации редиректа как ошибки.</li>
+		</ul>
+	</div>
 </section>
 
 <section class="slide">
@@ -843,6 +862,31 @@ function promiseSomething(callback) {
 					// Получаем наконец содержимое ответа
 					console.log(books);
 				  });
+				</code>
+			</pre>
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Fetch API</h2>
+	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
+			<pre class="hljs js">
+				<code>
+fetch('/books', {
+	mode: 'cors',
+	method: 'POST',
+	credentials: 'include',
+	data: JSON.stringify({
+		title: 'Как перестать писать на PHP и начать жить',
+		authors: [
+			'Анатолий Остапенко',
+			'Дмитрий Дорофеев',
+			'Марина Титова',
+			'Артур Удалов',
+			'Алексей Тюльдюков'
+		]
+	})
+});
 				</code>
 			</pre>
 	</div>
