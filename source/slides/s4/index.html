@@ -111,6 +111,7 @@
 
 <section class="slide">
 	<h2>Способы защиты от XSS</h2>
+	<p class="medium-content"></p>
 	<ul>
 		<li>Тщательная фильтрация и экранирование пользовательского контента, вставляемого через <code>innerHTML</code></li>
 		<li>Использование белых списков при фильтрации HTML</li>
@@ -122,7 +123,7 @@
 
 <section class="slide question">
 	<h2>
-		<span style="font-size: 85%">Атака Clickjacking (угон кликов)</span>
+		<span style="font-size: 85%">Clickjacking (угон&nbsp;кликов)</span>
 	</h2>
 </section>
 
@@ -137,9 +138,9 @@
 
 <section class="slide">
 	<h2>Элемент <code>&lt;iframe></code></h2>
-	<code>&lt;iframe src="https://www.w3.org/" width="900" height="300"></code>
+	<code>&lt;iframe src="https://www.w3.org/" width="900" height="500"></code>
 
-	<iframe src="https://www.w3.org/" frameborder="0" id="frameMy" width="900" height="310"></iframe>
+	<iframe src="https://www.w3.org/" frameborder="0" id="frameMy" width="900" height="510"></iframe>
 </section>
 
 <section class="slide">
@@ -151,9 +152,10 @@
 
 <section class="slide">
 	<h2>Атака Clickjacking (угон кликов)</h2>
+	<p class="medium-content"></p>
 	<ol>
 		<li>Заманиваем пользователя на нашу страницу</li>
-		<li>Открываем на нашей странице <mark>iframe с facebook'ом</mark>, делаем ему <code>opacity: 0</code> и позиционируем под курсором пользователя</li>
+		<li>Открываем на нашей странице <mark>iframe с facebook'ом</mark>, делаем ему <code>opacity:&nbsp;0;</code> и позиционируем под курсором пользователя</li>
 		<li>Смещаем содержимое iframe так, чтобы в окне оказалась кнопка подписки на сообщество</li>
 		<li>Пользователь делает клик</li>
 		<li>???????</li>
@@ -171,9 +173,70 @@
 	</ul>
 </section>
 
+<section class="slide">
+	<h2>Какая ещё есть угроза <br>связанная с <strong>iframe</strong>?</h2>
+	<p>У элемента <code>iframe</code> есть свойства, позволяющие получить доступ до содержимого страницы:</p>
+	<ul>
+		<li><code>iframe.contentWindow</code> &mdash; ссылка на <code>window</code> страницы,<br>загруженной в <code>iframe</code></li>
+		<li><code>iframe.contentWindow.document</code> &mdash; ссылка на <code>document</code> страницы, загруженной в <code>iframe</code></li>
+		<li><code>window.parent</code> &mdash; внутри <code>iframe</code> ссылается на родительский документ</li>
+		<li><code>window.top</code> &mdash; внутри <code>iframe</code> ссылается самый верхний родительский элемент (в случае iframe в iframe)</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Ограничения <strong>iframe</strong></h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li>На все <code>iframe</code> всегда накладываются ограничения, диктуемые <br> Same Origin Policy</li>
+		<li>В частности, если в <code>iframe</code> загружен ресурс с другим Origin, то эти две страницы не имеют доступа друг до друга через <code>iframe.contentWindow</code> и <code>window.parent</code></li>
+		<li>У элемента <code>iframe</code> есть атрибут <code>sandbox</code> с возможными значениями: <code>allow-same-origin</code>, <code>allow-top-navigation</code>, <code>allow-forms</code>, <code>allow-scripts</code></li>
+	</ul>
+</section>
+
 <section class="slide question">
-	<h2><span style="font-size: 65%">Как именно это помогает обеспечить <mark>безопасность</mark> web-приложений?</span>
+	<h2>
+		<span style="font-size: 75%">Cross-Site Request Forgery (CSRF-атака)</span>
 	</h2>
+</section>
+
+<section class="slide">
+	<h2>Атака CSRF</h2>
+	<ol>
+		<li>Пользователь заходит на сайт, на котором размещена вот такая форма:</li>
+		<pre class="hljs html">
+			<code>&lt;form action="https://e.mail.ru/messages/send" method="POST" hidden></code>
+			<code>    &lt;input name="message" value="Evil message"></code>
+			<code>    &lt;!-- ... --></code>
+			<code>&lt;/form></code>
+			<code> </code>
+		</pre>
+		<li>При заходе на сайт, скрипт вызывает <code>submit()</code> у формы</li>
+		<li>Отправляется POST-запрос на страницу <mark>https://e.mail.ru/messages/send</mark></li>
+		<li>Т.к. пользователь авторизован в Почте, то запрос отправляется с куками пользователя и от имени пользователя отправляется письмо</li>
+	</ol>
+</section>
+
+<section class="slide">
+	<h2>В атаке используется слабая<br>сторона авторизации через cookies</h2>
+	<blockquote>
+		<p class="medium-content"><b>Cookies</b> позволяют проверить, кто отправил определённый запрос, но они ничего не говорят о данных этого запроса</p>
+	</blockquote>
+	<p class="note">Браузеры не понимают, как различить, было ли действие явно совершено пользователем <em>(как, скажем, нажатие кнопки на форме или переход по ссылке)</em> или пользователь неумышленно выполнил это действие <em>(зайдя на "плохой" сайт)</em></p>
+</section>
+
+<section class="slide">
+	<h2>Защита от CSRF-атак с помощью CSRF-токенов</h2>
+	<ol>
+		<li>При первом запросе на сервер в теле ответа или в заголовке <code>X-CSRF-Token</code> сервер передаёт на клиент <mark>token</mark> &mdash; случайную строку, и клиент сохраняет её у себя в какой-то переменной, но не в cookies</li>
+		<li>При последующих запросах на сервер клиент добавляет этот токен в заголовки запросов или в специальное поле в теле запроса</li>
+		<li>Сервер на каждый запрос валидирует <mark>token</mark> и если он не был передан, либо он неверный, то сервер отклоняет этот запрос</li>
+		<li>Т.к. злоумышленнику токен не известен, то он не сможет подделать наш запрос</li>
+	</ol>
+</section>
+
+<section class="slide question">
+	<h2><span style="font-size: 65%">Как именно это помогает обеспечить <mark>безопасность</mark> web-приложений?</span></h2>
 </section>
 
 <section class="slide">
@@ -182,14 +245,14 @@
 		)
 	</h2>
 	<pre class="hljs js">
-			<code><span class="comment rus">// Находимся на https://evil.com/</span></code>
-			<code>const xhr = new XMLHttpRequest();</code>
-			<code>xhr.open('GET', <mark>'https://e.mail.ru/messages/inbox/'</mark>, false);</code>
-			<code>xhr.send();</code>
-			<code> </code>
-			<code>console.log(xhr.responseText)</code>
-			<code> </code>
-		</pre>
+		<code><span class="comment rus">// Находимся на https://evil.com/</span></code>
+		<code>const xhr = new XMLHttpRequest();</code>
+		<code>xhr.open('GET', <mark>'https://e.mail.ru/messages/inbox/'</mark>, false);</code>
+		<code>xhr.send();</code>
+		<code> </code>
+		<code>console.log(xhr.responseText)</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide question">
