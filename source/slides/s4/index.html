@@ -226,7 +226,7 @@
 </section>
 
 <section class="slide">
-    <h2>Защита от CSRF-атак с помощью CSRF-токенов</h2>
+    <h2>Защита от CSRF-атак с помощью<br>CSRF-токенов</h2>
     <ol>
         <li>При первом запросе на сервер в теле ответа или в заголовке <code>X-CSRF-Token</code> сервер передаёт на клиент <mark>token</mark> &mdash; случайную строку, и клиент сохраняет её у себя в какой-то переменной, но не в cookies</li>
         <li>При последующих запросах на сервер клиент добавляет этот токен в заголовки запросов или в специальное поле в теле запроса</li>
@@ -236,23 +236,7 @@
 </section>
 
 <section class="slide question">
-    <h2><span style="font-size: 65%">Как именно это помогает обеспечить <mark>безопасность</mark> web-приложений?</span></h2>
-</section>
-
-<section class="slide">
-    <h2>Cross Origin HTTP-запросы (
-        <mark>XHR</mark>
-        )
-    </h2>
-    <pre class="hljs js">
-		<code><span class="comment rus">// Находимся на https://evil.com/</span></code>
-		<code>const xhr = new XMLHttpRequest();</code>
-		<code>xhr.open('GET', <mark>'https://e.mail.ru/messages/inbox/'</mark>, false);</code>
-		<code>xhr.send();</code>
-		<code> </code>
-		<code>console.log(xhr.responseText)</code>
-		<code> </code>
-	</pre>
+    <h2><span style="font-size: 65%; display: inline-block;">Почему бы просто не запретить такие запросы?</span></h2>
 </section>
 
 <section class="slide question">
@@ -267,22 +251,28 @@
 </section>
 
 <section class="slide">
-    <h2>Когда отправляются запросы?</h2>
-    <p class="small-content"></p>
-    <ul>
-        <li>При загрузке ресурсов (элементы <code>&lt;img></code>, <code>&lt;script></code>)</li>
-        <li>При отправке форм (форму можно сабмитить с двумя методами: GET и POST)</li>
-        <li>С помощью JavaScript (XHR, fetch)</li>
-    </ul>
-</section>
-
-<section class="slide">
     <h2>HTTP access control (CORS)</h2>
     <blockquote>
         <p class="small-content"><b>Cross-Origin Resource Sharing (CORS) standard</b> &mdash; спецификация,
             накладывающая ограничения на запросы такого типа (работает по принципам Same Origin Policy). Появилась
             относительно недавно</p>
     </blockquote>
+</section>
+
+<section class="slide">
+	<h2>Cross Origin HTTP-запросы (
+		<mark>XHR</mark>
+		)
+	</h2>
+	<pre class="hljs js">
+		<code><span class="comment rus">// Находимся на https://evil.com/</span></code>
+		<code>const xhr = new XMLHttpRequest();</code>
+		<code>xhr.open('GET', <mark>'https://e.mail.ru/messages/inbox/'</mark>, false);</code>
+		<code>xhr.send();</code>
+		<code> </code>
+		<code>console.log(xhr.responseText)</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
@@ -544,6 +534,7 @@
     Не тот Doom который лучше чем DOM.
     -->
     <h2>План лекции</h2>
+	<p class="small-content"></p>
     <ol>
         <li>Асинхронность и проблемы</li>
         <li>Промисы</li>
