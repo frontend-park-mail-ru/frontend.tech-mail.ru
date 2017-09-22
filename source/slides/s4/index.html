@@ -974,33 +974,28 @@
     <h2>Fetch API</h2>
     <blockquote>
         <p>
-            Метод <mark>fetch</mark> – это <mark>XMLHttpRequest</mark> нового поколения.
+            Метод <mark>fetch</mark> &mdash; это <mark>XMLHttpRequest</mark> нового поколения.
             Он предоставляет улучшенный интерфейс для осуществления запросов к серверу:
             как по части возможностей и контроля над происходящим,
-            так и по синтаксису, так как построен на <b>промисах</b>.
+            так и по синтаксису, так как построен на <b>промисах</b>
         </p>
     </blockquote>
-    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-			<pre class="hljs js">
-				<code>// Синтаксис метода fetch:</code>
-				<code>let promise = fetch(url[, options]);</code>
-			</pre>
-    </div>
+	<pre class="hljs js">
+		<code><span class="comment rus">// Синтаксис метода fetch:</span></code>
+		<code>const fetchPromise = fetch(url[, options]);</code>
+	</pre>
 </section>
 
 <section class="slide">
     <h2>Fetch API options</h2>
-    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-        <ul>
-            <li><code>method</code> – метод запроса,</li>
-            <li><code>headers</code> – заголовки запроса (объект),</li>
-            <li><code>body</code> – тело запроса: <code>FormData</code>, <code>Blob</code>, строка и т.п.</li>
-            <li><code>mode</code> – одно из: «same-origin», «no-cors», «cors», указывает, в каком режиме кросс-доменности предполагается делать запрос.</li>
-            <li><code>credentials</code> – одно из: «omit», «same-origin», «include», указывает, пересылать ли куки и заголовки авторизации вместе с запросом.</li>
-            <li><code>cache</code> – одно из «default», «no-store», «reload», «no-cache», «force-cache», «only-if-cached», указывает, как кешировать запрос.</li>
-            <li><code>redirect</code> – можно поставить «follow» для обычного поведения при коде 30x (следовать редиректу) или «error» для интерпретации редиректа как ошибки.</li>
-        </ul>
-    </div>
+	<ul>
+		<li><code>method</code> &mdash; метод запроса</li>
+		<li><code>headers</code> &mdash; заголовки запроса (объект)</li>
+		<li><code>body</code> &mdash; тело запроса: <code>FormData</code>, <code>Blob</code>, строка и т.п.</li>
+		<li><code>mode</code> &mdash; одно из: «same-origin», «no-cors», «cors», указывает, в каком режиме кросс-доменности предполагается делать запрос</li>
+		<li><code>credentials</code> &mdash; одно из: «omit», «same-origin», «include», указывает, пересылать ли куки и заголовки авторизации вместе с запросом</li>
+		<li><code>cache</code> &mdash; одно из «default», «no-store», «reload», «no-cache», «force-cache», «only-if-cached», указывает, как кешировать запрос</li>
+	</ul>
 </section>
 
 <section class="slide">
@@ -1041,20 +1036,20 @@ fetch('/books', {
 
 <section class="slide">
     <h2>Юнит-тестирование</h2>
-    <br/>
-    <blockquote>
+    <p class="medium-content"></p>
+	<blockquote>
         <p>
-            Модульное тестирование</b>, или <b>юнит-тестирование</b> (англ. unit testing) —
+            <b>Модульное тестирование</b>, или <b>юнит-тестирование</b> (англ. unit testing) —
             процесс в программировании, позволяющий проверить на корректность отдельные
             модули исходного кода программы.
         </p>
-        <p>
+	</blockquote>
+	<p class="note">
             Идея состоит в том, чтобы писать тесты для каждой нетривиальной функции или метода.
             Это позволяет достаточно быстро проверить, не привело ли очередное
             изменение кода к регрессии, то есть к появлению ошибок в уже оттестированных
             местах программы, а также облегчает обнаружение и устранение таких ошибок.
         </p>
-    </blockquote>
 </section>
 
 <section class="slide">
