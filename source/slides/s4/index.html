@@ -55,11 +55,9 @@
 	<h2>Same Origin Policy</h2>
 	<blockquote>
 		<p class="medium-content"><b>Правило ограничения домена (Same Origin Policy &mdash; «Принцип одинакового
-			источника»)</b> &mdash; это важная концепция безопасности и работы web-приложений. Она призвана
-			<mark>ограничивать возможности</mark>
-			пользовательских сценариев из определённого источника по доступу к ресурсам и информации из других
-			источников
-		</p>
+			источника» a.k.a. «Политика единого источника»)</b> &mdash; это важная концепция безопасности и работы web-приложений. Она призвана
+			<mark>ограничивать возможности</mark> пользовательских сценариев из определённого источника по доступу к ресурсам и информации из других
+			источников</p>
 	</blockquote>
 </section>
 
@@ -92,7 +90,39 @@
 </section>
 
 <section class="slide question">
-	<h2><span style="font-size: 65%">Как именно это помогает обеспечить <mark>безопасность</mark> web-приложений?</span>
+	<h2>
+		<span style="font-size: 85%">Способы обхода Same Origin Policy</span>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 85%">Cross-Site Scripting (XSS)</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Cross-Site Scripting (XSS)</h2>
+	<blockquote>
+		<p class="medium-content"><b>Cross-Site Scripting</b> &mdash; атака, заключающаяся во <mark>внедрении на страницу вредоносного кода</mark>, который будет выполнен в контексте источника конкретного сайта с целью обхода политик единого источника, и взаимодействии этого кода с веб-сервером злоумышленника</p>
+	</blockquote>
+	<p class="note">С помощью XSS злоумышленник может <strong>украсть из браузера пользователя sensitive-данные</strong> (например, cookies с ID сессии пользователя, приватные данные пользователя или данные из форм), может <strong>выполнить от имени пользователя различные действия</strong> или, например, <strong>провести DOS-атаку</strong></p>
+</section>
+
+<section class="slide">
+	<h2>Способы защиты от XSS</h2>
+	<ul>
+		<li>Тщательная фильтрация и экранирование пользовательского контента, вставляемого через <code>innerHTML</code></li>
+		<li>Использование белых списков при фильтрации HTML</li>
+		<li>Правильная работа с куками, использование <code>httpOnly</code></li>
+		<li>Использование специального заголовка <code>X-XSS-Protection</code></li>
+		<li>Ещё больше про XSS <a href="https://habrahabr.ru/company/pt/blog/149152/" target="_blank">тут</a></li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 85%">Атака Clickjacking (угон кликов)</span>
 	</h2>
 </section>
 
@@ -110,6 +140,40 @@
 	<code>&lt;iframe src="https://www.w3.org/" width="900" height="300"></code>
 
 	<iframe src="https://www.w3.org/" frameborder="0" id="frameMy" width="900" height="310"></iframe>
+</section>
+
+<section class="slide">
+	<h2>Атака Clickjacking (угон кликов)</h2>
+	<blockquote>
+		<p class="medium-content"><b>Атака Clickjacking</b> &mdash; механизм обмана пользователей, при котором злоумышленник может получить доступ к конфиденциальной информации или даже заставить пользователя выполнить определённые действия, заманив его на внешне безобидную страницу или внедрив вредоносный код на безопасную страницу</p>
+	</blockquote>
+</section>
+
+<section class="slide">
+	<h2>Атака Clickjacking (угон кликов)</h2>
+	<ol>
+		<li>Заманиваем пользователя на нашу страницу</li>
+		<li>Открываем на нашей странице <mark>iframe с facebook'ом</mark>, делаем ему <code>opacity: 0</code> и позиционируем под курсором пользователя</li>
+		<li>Смещаем содержимое iframe так, чтобы в окне оказалась кнопка подписки на сообщество</li>
+		<li>Пользователь делает клик</li>
+		<li>???????</li>
+		<li>PROFIT!</li>
+	</ol>
+</section>
+
+<section class="slide">
+	<h2>Защита от Clickjacking</h2>
+	<p>Используем заголовок <code>X-Frame-Options</code>:</p>
+	<ul>
+		<li><code>X-Frame-Options: DENY</code> &mdash; запрещает открывать сайт внутри iframe</li>
+		<li><code>X-Frame-Options: SAMEORIGIN</code> &mdash; разрешает открывать сайт внутри iframe на страницах с тем же самым origin</li>
+		<li><code>X-Frame-Options: ALLOW-FROM https://example.com/</code> &mdash; разрешает открывать сайт внутри iframe на страницах с указанным origin</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2><span style="font-size: 65%">Как именно это помогает обеспечить <mark>безопасность</mark> web-приложений?</span>
+	</h2>
 </section>
 
 <section class="slide">
