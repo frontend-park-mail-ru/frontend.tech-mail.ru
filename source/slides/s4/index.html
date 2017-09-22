@@ -409,13 +409,6 @@
 
 
 <section class="slide">
-	<!--
-	прежде чем говорить о промисах и прочей ерунде
-	надо рассказать о том что такое callback hell
-	или более широкое понятие pyramid of doom.
-
-	Не тот Doom который лучше чем DOM.
-	-->
 	<h2>План лекции</h2>
 	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%; font-size: 150%;">
 		<ol>
@@ -429,6 +422,13 @@
 </section>
 
 <section class="slide question">
+	<!--
+	прежде чем говорить о промисах и прочей ерунде
+	надо рассказать о том что такое callback hell
+	или более широкое понятие pyramid of doom.
+
+	Не тот Doom который лучше чем DOM.
+	-->
 	<h2>
 		<span style="font-size: 85%"><mark>Callback Hell</mark> или <mark>Pyramid of Doom</mark>?</span>
 	</h2>
@@ -558,7 +558,14 @@ function step2() {
 	рассказ про то когда и зачем придумали Promise
 	-->
 	<h2>Futures или Promise</h2>
-	Слайд про 1976 год
+	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
+		<p>
+			Термин <mark>promise</mark> был предложен в 1976 году Дэниэлом Фридманом и Дэвидом Вайзом,
+			а Питер Хиббард назвал его <mark>eventual</mark>.
+			Похожая концепция под названием <mark>future</mark> была предложена в 1977 году
+			в статье Генри Бейкера и Карла Хьюитта.
+		</p>
+	</div>
 </section>
 
 <section class="slide">
@@ -584,6 +591,8 @@ function step2() {
 	Рассказываю определение своими словами
 
 	МММ?
+
+	Функция теперь возвращает результат естественным путем
 	-->
 	<h2>Что такое Promise?</h2>
 	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
@@ -706,6 +715,12 @@ promiseSomething().then(function() {
 </section>
 
 <section class="slide">
+	<!--
+		Так же промисы позволяют проще делать некоторые часто требуемые операции.
+		Например выполнить все запросы параллельно можно с помощью статичного метода Promise.all
+
+		Объясняю Promise.all
+	-->
 	<h2>Promise.all</h2>
 	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
 		<pre class="hljs js">
