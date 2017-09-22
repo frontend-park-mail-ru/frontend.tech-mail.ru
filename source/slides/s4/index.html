@@ -544,20 +544,17 @@
 	Не тот Doom который лучше чем DOM.
 	-->
 	<h2>План лекции</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%; font-size: 150%;">
-		<ol>
-			<li>Асинхронность и проблемы</li>
-			<li>Промисы</li>
-			<li>Fetch API</li>
-			<li>Обработка исключений</li>
-			<li>Тестирование</li>
-		</ol>
-	</div>
+	<ol>
+		<li>Асинхронность и проблемы</li>
+		<li>Промисы</li>
+		<li>Fetch API</li>
+		<li>Тестирование</li>
+	</ol>
 </section>
 
 <section class="slide question">
 	<h2>
-		<span style="font-size: 85%"><mark>Callback Hell</mark> или <mark>Pyramid of Doom</mark>?</span>
+		<span style="font-size: 85%">Асинхронность в JavaScript</span>
 	</h2>
 </section>
 
@@ -582,17 +579,15 @@
 	но какой код мы напишем если после первой операции
 	нам нужно будет сделать еще одну асинхронную и вывести результат?
 	-->
-	<h2>Callback Hell или Pyramid of Doom</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-			<code>// Делаем что-нибудь асинхронное </code>
-			<code>doSomethingAsync(function() { </code>
-			<code>	// callback </code>
-			<code>	console.log('Получилось!!!11'); </code>
-			<code>}); </code>
-			<code>console.log('Еще пока не получилось :-('); </code>
-		</pre>
-	</div>
+	<h2>Асинхронность в JavaScript</h2>
+	<pre class="hljs js">
+		<code>http.get('/user', function (err, resp1) {</code>
+		<code>    if (err) { return console.error(err); }</code>
+		<code>    console.log('User is', user);</code>
+		<code>});</code>
+		<code>console.log('Waiting...');</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
@@ -602,20 +597,20 @@
 
 	а что если нам нужен еще один вызов? или if вставить?
 	-->
-	<h2>Callback Hell или Pyramid of Doom</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-			<code>// Делаем что-нибудь асинхронное</code>
-			<code>doSomethingAsync(function() {</code>
-			<code>	// Делаем что-нибудь еще </code>
-			<code>	// очень важное и асинхронное</code>
-			<code>	doSomethingElse(function() {</code>
-			<code>		// callback</code>
-			<code>		console.log('Получилось!!!11');</code>
-			<code>	});</code>
-			<code>});</code>
-		</pre>
-	</div>
+	<h2>Удобно обрабатывать<br><strong>последовательные</strong> запросы</h2>
+	<pre class="hljs js">
+		<code>http.post('/singup', user, function (err, resp1) {</code>
+		<code>    if (err) { return console.error(err); }</code>
+		<code>    http.get(`/users/${resp1.id}`, function (err, resp2) {</code>
+		<code>        if (err) { return console.error(err); }</code>
+		<code>        http.get(`/photos/${resp2.avatarId}`, function (err, avatar) {</code>
+		<code>            if (err) { return console.error(err); }</code>
+		<code>            // ... callback hell!</code>
+		<code>        });</code>
+		<code>    });</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
@@ -674,11 +669,50 @@ function step2() {
 	</div>
 </section>
 
-<!--
+<section class="slide">
+	<h2>Try, catch</h2>
+	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
+		<pre class="hljs js">
+			<code>
+try {
+
+  // Выбрасываем исключение вручную
+  throw "Привет, я ошибка!";
+
+} catch (err) {
+
+  alert(err); // Привет, я ошибка!
+
+}
+			</code>
+		</pre>
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Асинхронные ошибки</h2>
+	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
+		<pre class="hljs js">
+			<code>
+try {
+
+		http.get('/user', function (err) {
+		    if (err) {
+			throw err;
+			}
+		    console.log('User is', user);
+		});
 
 
+} catch (err) {
 
--->
+	alert(err); // Не выполнится
+
+}
+			</code>
+		</pre>
+	</div>
+</section>
 
 <section class="slide">
 	<!--
@@ -705,90 +739,96 @@ function step2() {
 </section>
 
 <section class="slide">
-	<!--
-	Что же такое Promise в JS?
-
-	Рассказываю определение своими словами
-
-	МММ?
-	-->
-	<h2>Что такое Promise?</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<blockquote>
-			<p><b>
-				Интерфейс <mark>Promise</mark> (обещание) представляет собой обертку для значения, неизвестного на
-				момент создания обещания.
-			</b></p>
-			<p>
-				Он позволяет обрабатывать результаты асинхронных операций так,
-				как если бы они были синхронными: вместо конечного результата асинхронного метода
-				возвращается обещание получить результат в некоторый момент в будущем.
-			</p>
-		</blockquote>
-	</div>
-</section>
-
-<section class="slide">
-	<!--
-		Рассказываю по слайду своими словами
-	-->
-	<h2>Что такое Promise?</h2>
-	<p>
-		Основной способ взаимодействия с промисом это использование его метода <mark>then</mark>,
-		регистрирующего функции обратного вызова для получения конечного результата промиса
-		или сообщения о причине, по которой он не был выполнен.
-	</p>
-	<pre class="hljs js" style="margin-top: -50px;">
-		<code>
-			const promise = new Promise( ... );
-
-			promise.then(function(value) {
-				// Обработчик успешного выполнения обещания
-				// Принимает значение обещания
-			}, function(error) {
-				// Обработчик ошибки при выполнении обещания
-				// Принимает ошибку (исключение)
-			});
-		</code>
-	</pre>
-</section>
-
-<section class="slide">
-	<!--
-	Если вспомнить наш самый первый пример,
-	то с промисами он будет выглядеть так:
-	-->
-	<h2>Что такое Promise?</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-<code>
-// Делаем что-нибудь асинхронное
-const promise = promiseSomething(step1);
-
-// Навешиваем callback
-promise.then(function() {
-	console.log('Получилось!!!11');
-});
-</code>
-		</pre>
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Состояние Promise</h2>
+	<h2>Что такое Promises</h2>
 	<blockquote>
-		<p>
-			<b>Промисы могут находиться в одном из трёх состояний:</b>
-			<ul>
-				<li>вначале <strong>pending</strong> («ожидание»)</li>
-				<li>затем либо <strong>fulfilled</strong> («выполнено успешно»)</li>
-				<li>либо <strong>rejected</strong> («выполнено с ошибкой»)</li>
-			</ul>
+		<p><b>Интерфейс <mark>Promise</mark> (обещание) представляет собой обертку для значения, неизвестного на
+			момент создания обещания.
+		</b></p>
+
+	</blockquote>
+	<p class="note">
+		Он позволяет обрабатывать результаты асинхронных операций так,
+		как если бы они были синхронными: вместо конечного результата асинхронного метода
+		возвращается обещание получить результат в некоторый момент в будущем.
+	</p>
+</section>
+
+<section class="slide">
+	<h2>Что такое Promises</h2>
+	<blockquote>
+		<p><b>Promises (промисы)</b> &mdash; это специальные объекты, которые могут находиться в одном из трёх состояний:
+		<ul>
+			<li>вначале <strong>pending</strong> («ожидание»)</li>
+			<li>затем либо <strong>fulfilled</strong> («выполнено успешно»)</li>
+			<li>либо <strong>rejected</strong> («выполнено с ошибкой»)</li>
+		</ul>
 		</p>
 	</blockquote>
 	<div style="position:relative;width: 100%; height: 40%;">
 		<img class="place" src="promiseInit.png" style="transform-origin: center;transform: translate(-50%,-50%) scale(1.6);">
 	</div>
+</section>
+
+<section class="slide">
+	<h2>Что такое Promises</h2>
+	<pre class="hljs js">
+		<code>const promise = new Promise(function(resolve, reject) {</code>
+		<code>    <span class="comment rus">// Здесь можно выполнять любые действия</span></code>
+		<code> </code>
+		<code>    <span class="comment rus">// вызов resolve(result) переведёт промис в состояние <mark>fulfilled</mark></span></code>
+		<code>    <span class="comment rus">// вызов reject(error) переведёт промис в состояние <mark>rejected</mark></span></code>
+		<code>});</code>
+		<code> </code>
+		<code><span class="comment rus">// Можно создать сразу "готовый" промис</span></code>
+		<code>const fulfilled = Promise.resolve(result);</code>
+		<code>// const fulfilled = new Promise((resolve, _) => resolve(result));</code>
+		<code>const rejected = Promise.reject(error);</code>
+		<code>// const rejected = new Promise((_, reject) => reject(error));</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Зачем нужны Promises</h2>
+	<p>Основной способ взаимодействия с промисом это регистрация функций обратного вызова для получения конечного результата промиса или сообщения о причине, по которой он не был выполнен. Иными словами, на промисы можно навесить два коллбека:</p>
+	<ul>
+		<li><code>onFulfilled</code> &mdash; срабатывают, когда promise находится в состоянии «выполнен успешно»</li>
+		<li><code>onRejected</code> &mdash; срабатывают, когда promise находится в состоянии «выполнен с ошибкой»</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Зачем нужны Promises</h2>
+	<pre class="hljs js">
+		<code>const promise = new Promise( ... );</code>
+		<code> </code>
+		<code><span class="comment rus">// Можно навесить их одновременно</span></code>
+		<code>promise.then(onFulfilled, onRejected);</code>
+		<code> </code>
+		<code><span class="comment rus">// Можно по отдельности</span></code>
+		<code><span class="comment rus">// Только обработчик onFulfilled</span></code>
+		<code>promise.then(onFulfilled);</code>
+		<code><span class="comment rus">// Только обработчик onRejected</span></code>
+		<code>promise.then(null, onRejected);</code>
+		<code>promise.catch(onRejected); <span class="comment rus">// Или так</span></code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Работа промисов</h2>
+	<pre class="hljs js">
+		<code>const promise = new Promise(function(resolve, reject) {</code>
+		<code>    // do smth</code>
+		<code>    resolve('success'); // or</code>
+		<code>    // reject(new Error('failure'));</code>
+		<code>});</code>
+		<code> </code>
+		<code>promise</code>
+		<code>    <mark>.then</mark>(res => console.log(res))</code>
+		<code>    <mark>.catch</mark>(err => console.error(err));</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
@@ -799,37 +839,135 @@ promise.then(function() {
 	Перечисляю и рассказываю первые три пункта, на последнем скипаю к след слайду
 	-->
 	<h2>Какая польза от промисов?</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<ul>
-			<li>Можно навешивать несколько обработчиков событий</li>
-			<li>Можно делиться обещаниями с другими частями системы</li>
-			<li>Можно навесить обработчик события потом</li>
-			<li>Можно строить цепочки асинхронных вызовов без callback hell</li>
-		</ul>
-	</div>
+	<ul>
+		<li>Можно навешивать несколько обработчиков-колбэков</li>
+		<li>Можно навесить обработчик-колбэк потом</li>
+		<li>Можно передавать промисы в качестве аргументов в другие части системы</li>
+		<li>Можно строить цепочки асинхронных вызовов без callback hell</li>
+	</ul>
 </section>
 
-<!--
-	Еще раз подробно на примере рассказываю как работает then
-
-	В особенности возвращение другого промиса из колбека
-	-->
 <section class="slide">
-	<h2>Избавляемся от callback hell</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-<code>
-// Делаем что-нибудь асинхронное
-promiseSomething().then(function() {
-	// Затем делаем еще что-нибудь важное
-	return promiseSomethingElse();
-}).then(function() {
-	// Финальный callback
-	console.log('Получилось!!!11');
-});
-</code>
-		</pre>
-	</div>
+	<h2>Добавление нескольких коллбэков</h2>
+	<pre class="hljs js">
+		<code>// 'value 1', 'value 2', 'value 3', 'value 4'</code>
+		<code>const promise = Promise.resolve('success');</code>
+		<code> </code>
+		<code>promise.then(res => { console.log('cb1', res); });</code>
+		<code>promise.then(res => { console.log('cb2', res); });</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Чейнинг промисов</h2>
+	<pre class="hljs js">
+		<code>// 'value 1', undefined, undefined</code>
+		<code>const promise = Promise.resolve('value 1');</code>
+		<code> </code>
+		<code>const p2 = promise</code>
+		<code>    .then(res => { console.log(res); })</code>
+		<code>    .then(res => { console.log(res); })</code>
+		<code>    .then(res => { console.log(res); });</code>
+		<code> </code>
+		<code>p2 === promise // false</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Чейнинг промисов</h2>
+	<pre class="hljs js">
+		<code>// 'value 1', 'value 2', 'value 3'</code>
+		<code>const promise = Promise.resolve('value 1');</code>
+		<code> </code>
+		<code>const p2 = promise</code>
+		<code>    .then(res => { console.log(res); return 'value 2'; })</code>
+		<code>    .then(res => { console.log(res); return 'value 3'; })</code>
+		<code>    .then(res => { console.log(res); });</code>
+		<code> </code>
+		<code>p2 === promise // false</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Чейнинг промисов</h2>
+	<pre class="hljs js">
+		<code>// 'value 1', 'Error!', 'Error catched!'</code>
+		<code>const promise = Promise.resolve('value 1');</code>
+		<code> </code>
+		<code>promise</code>
+		<code>    .then(res => { console.log(res); throw 'Error!'; })</code>
+		<code>    .then(res => { console.log('foo'); })</code>
+		<code>    .then(res => { console.log('bar'); })</code>
+		<code>    .then(res => { console.log('baz'); })</code>
+		<code>    .catch(err => { console.error(err); return 'Error catched!'; })</code>
+		<code>    .then(res => { console.log(res); });</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Из промиса можно возвращать<br/>промис!</h2>
+	<pre class="hljs js">
+		<code>// 'foo', 'baz', 'bar', 'foobar'</code>
+		<code>const promise1 = Promise.resolve('foo')</code>
+		<code>    .then(res => { console.log(res); return 'bar'; });</code>
+		<code> </code>
+		<code>const promise2 = Promise.resolve('baz')</code>
+		<code>    .then(res => { console.log(res); <mark>return promise1</mark>; })</code>
+		<code>    .then(res => { console.log(res); return 'foobar'; })</code>
+		<code>    .then(res => { console.log(res); });</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Промисификация</h2>
+	<blockquote>
+		<p>Оборачивание <strong>асинхронного функционала</strong> в функцию, возвращающую промис</p>
+	</blockquote>
+	<pre class="hljs js">
+		<code>function PromiseGet(url) {</code>
+		<code>    return new Promise(function (resolve, reject) {</code>
+		<code>        http.Get(url, function (err, response) {</code>
+		<code>            if (err) { reject(err) }</code>
+		<code>            resolve(response);</code>
+		<code>        });</code>
+		<code>    });</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Удобно обрабатывать<br><strong>последовательные</strong> запросы</h2>
+	<pre class="hljs js">
+		<code>http.post('/singup', user, function (err, resp1) {</code>
+		<code>    if (err) { return console.error(err); }</code>
+		<code>    http.get(`/users/${resp1.id}`, function (err, resp2) {</code>
+		<code>        if (err) { return console.error(err); }</code>
+		<code>        http.get(`/photos/${resp2.avatarId}`, function (err, avatar) {</code>
+		<code>            if (err) { return console.error(err); }</code>
+		<code>            // ... callback hell!</code>
+		<code>        });</code>
+		<code>    });</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Удобно обрабатывать<br><strong>последовательные</strong> запросы</h2>
+	<pre class="hljs js">
+		<code>PromisePost('/singup', user)</code>
+		<code>    .then(resp1 => PromiseGet(`/users/${resp1.id}`))</code>
+		<code>    .then(resp2 => PromiseGet(`/photos/${resp2.avatarId}`))</code>
+		<code>    .then(avatar => { ... })</code>
+		<code>    .catch(err => console.error(err));</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
@@ -840,12 +978,12 @@ promiseSomething().then(function() {
 // Делаем что-нибудь асинхронное
 // и важное одновременно
 Promise.all([
-	promiseSomething(),
-	promiseSomethingElse()
-]).then(function(result) {
+	PromiseGet('/user/1'),
+	PromiseGet('/user/2'),
+]).then(function(users) {
 	// Результатом станет массив из значений всех обещаний
-	result.forEach(function(value, i) {
-		console.log(`Результат ${i}: ${value}`);
+	users.forEach(function(user, i) {
+		console.log(`Пользователь ${i}: ${value}`);
 	});
 });
 </code>
@@ -868,52 +1006,6 @@ Promise.race([
 	console.log(`Результат: ${value}`);
 });
 </code>
-		</pre>
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Как создать Promise?</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-			<code>const promise = new Promise(function(resolve, reject) {</code>
-			<code>    <span class="comment rus">// Здесь можно выполнять любые действия</span></code>
-			<code> </code>
-			<code>    <span class="comment rus">// вызов resolve(result) переведёт промис в состояние <mark>fulfilled</mark></span></code>
-			<code>    <span class="comment rus">// вызов reject(error) переведёт промис в состояние <mark>rejected</mark></span></code>
-			<code>});</code>
-			<code> </code>
-		</pre>
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Промисификация</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-<code>
-
-// Обещаем сделать что-нибудь асинхронное
-function promiseSomething(callback) {
-	return new Promise(function(resolve) {
-		// Делаем что-нибудь асинхронное
-		doSomething(resolve);
-	});
-}
-</code>
-		</pre>
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Как создать Promise?</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-			<code><span class="comment rus">// Можно создать сразу "готовый" промис</span></code>
-			<code>const fulfilled = Promise.resolve(result);</code>
-			<code>// const fulfilled = new Promise((resolve, _) => resolve(result));</code>
-			<code>const rejected = Promise.reject(error);</code>
-			<code>// const rejected = new Promise((_, reject) => reject(error));</code>
 		</pre>
 	</div>
 </section>
@@ -1012,47 +1104,6 @@ try {
 } catch (err) {
 
   // обработка ошибки
-
-}
-			</code>
-		</pre>
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Try, catch</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-			<code>
-try {
-
-  // Выбрасываем исключение вручную
-  throw "Привет, я ошибка!";
-
-} catch (err) {
-
-  alert(err); // Привет, я ошибка!
-
-}
-			</code>
-		</pre>
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Асинхронные ошибки</h2>
-	<div style="display: flex; justify-content: center; align-items: center; height: 600px; width: 100%;">
-		<pre class="hljs js">
-			<code>
-try {
-
-	setTimeout(function() {
-		throw "Я ошибка из будещего";
-	}, 1000);
-
-} catch (err) {
-
-	alert(err); // Не выполнится
 
 }
 			</code>
