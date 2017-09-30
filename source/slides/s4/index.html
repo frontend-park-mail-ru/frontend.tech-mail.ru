@@ -594,7 +594,7 @@
     -->
     <h2>Callback Hell</h2>
     <pre class="hljs js">
-		<code>http.post('/singup', user, function (err, resp1) {</code>
+		<code>http.post('/signup', user, function (err, resp1) {</code>
 		<code>    if (err) { return console.error(err); }</code>
 		<code>    http.get(`/users/${resp1.id}`, function (err, resp2) {</code>
 		<code>        if (err) { return console.error(err); }</code>
@@ -647,7 +647,7 @@
     пирамид больше нет но callback-и остались
     -->
     <pre class="hljs js">
-		<code>http.post('/singup', user, <mark>onSignup</mark>);</code>
+		<code>http.post('/signup', user, <mark>onSignup</mark>);</code>
 		<code> </code>
 		<code>function onSignup (err, resp1) {</code>
 		<code>    if (err) { return console.error(err); }</code>
@@ -922,7 +922,7 @@
 <section class="slide">
     <h2>Callback Hell!</h2>
     <pre class="hljs js">
-		<code>http.post('/singup', user, function (err, resp1) {</code>
+		<code>http.post('/signup', user, function (err, resp1) {</code>
 		<code>    if (err) { return console.error(err); }</code>
 		<code>    http.get(`/users/${resp1.id}`, function (err, resp2) {</code>
 		<code>        if (err) { return console.error(err); }</code>
@@ -939,7 +939,7 @@
 <section class="slide">
     <h2><s>Callback Hell!</s> Красота :)</h2>
     <pre class="hljs js">
-		<code>PromisePost('/singup', user)</code>
+		<code>PromisePost('/signup', user)</code>
 		<code>    .then(resp1 => PromiseGet(`/users/${resp1.id}`))</code>
 		<code>    .then(resp2 => PromiseGet(`/photos/${resp2.avatarId}`))</code>
 		<code>    .then(avatar => { ... })</code>
