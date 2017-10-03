@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script>
 		'use strict';
 
@@ -42,6 +42,8 @@
 	<p>Технопарк, осень, 2017 г.</p>
 </header>
 
+<!-- Краткое введение о модуле. Пара ремарок об использовании кода с занятий. -->
+
 <section class="slide first">
 	<h2 class="shout">Архитектура web-приложений<br/>
 		<small>Слайды доступны по ссылке<br/>
@@ -50,44 +52,217 @@
 	</h2>
 </section>
 
+<!-- О том, что такое архитектура и почему она важна в разработке приложений. Принципы хорошей архитектуры. Краткие сведения о таких вещах, как SOLID и пр. -->
+
 <section class="slide">
 	<h2>Архитектура</h2>
+	<p class="note">Какие-то определения с википедии...</p>
 	<blockquote>
-		<p class="medium-content"><b>Архитектура</b> идентифицирует главные компоненты системы и способы их
-			взаимодействия. Также это выбор таких решений, которые интерпретируются как основополагающие и не подлежащие
-			изменению в будущем</p>
+		<p><b>Архитектура</b> идентифицирует главные компоненты системы и способы их взаимодействия. Также это выбор таких решений, которые интерпретируются как основополагающие и не подлежащие изменению в будущем</p>
+	</blockquote>
+	<blockquote>
+		<p class="medium-content"><b>Архитектура</b> &mdash; это <mark>организация системы</mark>, воплощенная в её компонентах, их отношениях между собой и с окружением. <mark>Система</mark> &mdash; это набор компонентов, объединенных для выполнения определенной функции</p>
 	</blockquote>
 </section>
 
 <section class="slide">
-	<h2>Архитектура</h2>
+	<h2>Архитектурные решения</h2>
+	<p><strong>Как определить качество архитектурного решения?</strong> Задайте себе вопрос:</p>
 	<blockquote>
-		<p class="medium-content"><b>Архитектура</b> &mdash; это
-			<mark>организация системы</mark>
-			, воплощенная в её компонентах, их отношениях между собой и с окружением.
-			<mark>Система</mark> &mdash; это набор компонентов, объединенных для выполнения определенной функции
-		</p>
+		<p class="medium-content">А что если я ошибся и мне придется изменить это решение в будущем? Какие будут последствия?</p>
 	</blockquote>
+	<p class="note">Если некоторое решение размазано ровным слоем по всему приложению, то стоимость его изменения будет огромной, а значит это решение является архитектурным</p>
 </section>
 
 <section class="slide">
-	<h2>Критерии хорошей архитектуры</h2>
-	<ul lang="en">
+	<h2>Проектирование системы</h2>
+	<strong>Критерии хорошего дизайна системы</strong>
+	<p class="medium-content"></p>
+	<ul lang="ru">
 		<li>Эффективность системы</li>
-		<li>Гибкость системы</li>
-		<li>Расширяемость системы</li>
+		<li>Гибкость и расширяемость системы</li>
 		<li>Масштабируемость процесса разработки</li>
-		<li>Тестируемость</li>
+		<li>Тестируемость и сопровождаемость</li>
 		<li>Возможность повторного использования</li>
-		<li>Хорошо структурированный, читаемый и понятный код. Сопровождаемость</li>
 	</ul>
+</section>
+
+<section class="slide">
+	<h2>Проектирование системы</h2>
+	<strong>Критерии <em>плохого</em> дизайна системы</strong>
+	<p class="medium-content"></p>
+	<ul lang="ru">
+		<li>Его тяжело изменить, поскольку любое изменение влияет на слишком большое количество других частей системы</li>
+		<li>При внесении изменений неожиданно ломаются другие части системы</li>
+		<li>Код тяжело использовать повторно в другом приложении, поскольку его слишком тяжело «выпутать» из текущего приложения</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Методологии и принципы <br> проектирования ПО</h2>
+	<ul lang="en">
+		<li><mark>DRY</mark> &mdash; don’t repeat yourself (не повторяйте себя) &mdash; <em class="note">пфф, изи!!!</em></li>
+		<li><mark>KISS</mark> &mdash; keep it simple stupid (делайте вещи проще) &mdash; <em class="note">проще простого!</em></li>
+		<li><mark>YAGNI</mark> &mdash; you ain’t gonna need it (вам это не понадобится) &mdash; <em class="note">действительно</em></li>
+		<li><mark>GRASP</mark> &mdash; документированные и стандартизированные принципы объектно-ориентированного анализа &mdash; <em class="note">ну как скажешь...</em></li>
+		<li><mark>S.O.L.I.D.</mark> &mdash; пять основных принципов объектно-ориентированного программирования и проектирования &mdash; <em class="note">эээээ, океееей...</em></li>
+		<li><mark>PACKAGE PRINCIPLES</mark> &mdash; package cohesion (REP, CRP и CCP) и package coupling (ADP, SDP и SAP) &mdash; <em class="note">........</em></li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<div style="position: relative; width: 100%; height: 100%;">
+		<img class="place" src="image_principles.jpg" style="transform-origin: center; transform: translate(-50%,-55%) scale(1.7);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Методологии и принципы <br> проектирования ПО</h2>
+	<p class="medium-content">Где про всё это почитать?</p>
+	<ul lang="en">
+		<li>Про различные принципы <a href="https://web-creator.ru/articles/subjects/%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F/%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">здесь</a></li>
+		<li>Про GRASP <a href="https://ru.wikipedia.org/wiki/GRASP" target="_blank">на вики</a></li>
+		<li>Про S.O.L.I.D. &mdash; <a href="https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)" target="_blank">тоже на вики</a></li>
+		<li><a href="https://en.wikipedia.org/wiki/Package_principles" target="_blank">Package principles</a> &mdash; вообще высший пилотаж (<s>но будучи трезвым читать не советую</s>)</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 100%; color: #000055;"><a href="https://www.youtube.com/watch?v=wi3wPzReKZQ" target="_blank">S.O.L.I.D-ый JavaScript&nbsp;<i class="material-icons noitalic">open_in_new</i></a></span>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 80%;">Как же создать <em>хорошую</em> архитектуру?</span>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 80%;">Использовать <strong>проверенные</strong> подходы!</span>
+	</h2>
+</section>
+
+<!-- Дробим монолит. О паттерне Модуль. О разных его реализациях. -->
+
+<section class="slide">
+	<h2>Декомпозиция как основа<br>модульной архитектуры</h2>
+	<div style="position: relative; width: 100%; height: 100%;">
+		<img class="place" src="decomposition_start.png" style="transform-origin: center; transform: translate(-50%,-100%) scale(1.1);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Хорошая декомпозиция должна<br>быть иерархической</h2>
+	<div style="position: relative; width: 100%; height: 100%;">
+		<img class="place" src="decomposition.png" style="transform-origin: center;transform: translate(-50%,-70%) scale(1.3);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Хорошая декомпозиция должна<br>быть функциональной</h2>
+	<p>Во главе функциональной декомпозиции лежит <mark>паттерн Модуль</mark></p>
+	<blockquote>
+		<p class="medium-content"><b>Модуль</b> &mdash; это Функция + Данные, необходимые для её выполнения</p>
+	</blockquote>
+	<ul lang="ru">
+		<li>Инкапсуляция данных</li>
+		<li>Явное управление зависимостями (создание чёткой структуры подключаемых модулей)</li>
+		<li>Уход от засорения глобального контекста</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Простейший модуль на основе <br><em>самовызывающейся функции</em></h2>
+	<pre class="hljs js">
+		<code>(function () {</code>
+		<code>    <mark>const data1 = ... ; const data2 = ... ;</mark>  // локальные переменные</code>
+		<code>    <mark>const Base = window.Base;</mark> // импортируем модуль</code>
+		<code>    class Module extends Base {</code>
+		<code>        constructor () { ... }</code>
+		<code>        do () {</code>
+		<code>            console.log(data1, data2);</code>
+		<code>        }</code>
+		<code>    }</code>
+		<code> </code>
+		<code>    <mark>window.Module = Module;</mark> // экспортируем модуль</code>
+		<code>})();</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Простейший модуль на основе <br><em>самовызывающейся функции</em></h2>
+	<pre class="hljs js">
+		<code>// Использование</code>
+		<code>const Module = window.Module; // импортируем модуль</code>
+		<code>const m1 = new Module();</code>
+		<code>const m2 = new Module();</code>
+		<code>// ...</code>
+		<code> </code>
+		<code>m1.do();</code>
+		<code>// ...</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Используем всего лишь <strong>одну</strong><br>глобальную переменную!</h2>
+	<pre class="hljs js">
+		<code>(function (modules) {</code>
+		<code>    <mark>const Base = modules.Base;</mark> // импортируем модуль</code>
+		<code>    class Module extends Base {</code>
+		<code>        constructor () { ... }</code>
+		<code>        do () { ... }</code>
+		<code>    }</code>
+		<code> </code>
+		<code>    <mark>modules.Module = Module;</mark> // экспортируем модуль</code>
+		<code>})(<mark>window.___all_modules</mark>);</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Множество <strong>систем определения<br>модулей</strong></h2>
+	<p class="note"><s>Почти</s> все из них <a href="https://habrahabr.ru/company/yandex/blog/192874/" target="_blank">здесь</a></p>
+	<ul lang="ru">
+		<li>Простейшая через <mark>IIFE</mark></li>
+		<li><mark>CommonJS Modules</mark> &mdash; используется в Node.js</li>
+		<li><mark>AMD <em>Asynchronous Module Definition</em></mark> &mdash; используется в очень популярной библиотеке RequireJS, и встречается в большом количестве "взрослых" проектов</li>
+		<li><mark>UMD <em>Universal Module Definition</em></mark> &mdash; обёртка-хамелеон, используется для определения модулей как в CommonJS-, так и для AMD-форматов</li>
+		<li><mark>ES2015 Modules</mark> &mdash; часть стандарта языка JavaScript</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>PRO TIPs использования модулей</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li><mark><strong>ОДИН файл &mdash; ОДИН модуль</strong></mark> &mdash; самое главное правило, если появляется необходимость определить в одном файле несколько модулей, значит вы что-то делаете не так</li>
+		<li><mark>Не допускать <em>циклические</em> зависимости</mark> &mdash; есть специальные алгоритмы избавления от них</li>
+		<li><mark>Не создавайте <em>утилитарные</em> мега-модули с множеством экспортируемых функций</mark> &mdash; создавайте просто набор маленьких функций-модулей</li>
+	</ul>
+</section>
+
+<!-- О таких вещах, как коупелинг и кохежион. Как уменьшать связность приложения. О паттерне обзёрвабл. Как написать свой паблиш-сабскрайбер. -->
+
+
+
+
+
+
+
+<section class="slide question">
+	<h2><span style="font-size: 80%; color: darkblue"><a href="https://habrahabr.ru/post/276593/" target="_blank">Как проектировать хорошую архитектуру</a><br/><em
+			style="font-size: 70%; color: darkgrey">очень крутая статья</em></span></h2>
 </section>
 
 <section class="slide">
 	<h2>Декомпозиция системы</h2>
 	<div style="position:relative;width: 100%; height: 75%;">
-		<img class="place" src="decomposition.png"
-			 style="transform-origin: center;transform: translate(-50%,-45%) scale(0.85);">
+
 	</div>
 </section>
 
@@ -500,7 +675,6 @@
 <section class="slide">
 	<h2 class="shout">Практика</h2>
 </section>
-å
 
 <!--полезные ссылки-->
 
@@ -534,6 +708,8 @@
 <script src="/lib/shower/shower.min.js"></script>
 <script src="/lib/hljs/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/reload/reload.js"></script>
 
 </body>
 </html>

@@ -14,3 +14,11 @@ section.slide.first small a {
 	font-size: 42px;
 	font-weight: 500;
 }
+
+.note {
+	color: #9e9e9e;
+}
+
+.noitalic {
+	font-style: normal !important;
+}
