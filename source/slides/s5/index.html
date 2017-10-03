@@ -32,7 +32,6 @@
 
 	</script>
 
-	<link rel="stylesheet" href="/lib/hljs/styles/github.css">
 	<link rel="stylesheet" href="/lib/slides.css">
 
 </head>
@@ -87,14 +86,16 @@
 <section class="slide">
 	<h2>Декомпозиция системы</h2>
 	<div style="position:relative;width: 100%; height: 75%;">
-		<img class="place" src="decomposition.png" style="transform-origin: center;transform: translate(-50%,-45%) scale(0.85);">
+		<img class="place" src="decomposition.png"
+			 style="transform-origin: center;transform: translate(-50%,-45%) scale(0.85);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Замена прямых зависимостей на<br/>обмен сообщениями</h2>
 	<div style="position:relative;width: 100%; height: 75%;">
-		<img class="place" src="mediator.png" style="transform-origin: center;transform: translate(-50%,-55%) scale(1.2);">
+		<img class="place" src="mediator.png"
+			 style="transform-origin: center;transform: translate(-50%,-55%) scale(1.2);">
 	</div>
 </section>
 
@@ -141,7 +142,8 @@
 <section class="slide">
 	<h2>Получается вот такая система</h2>
 	<div style="position:relative;width: 100%; height: 75%;">
-		<img class="place" src="views-hall.png" style="transform-origin: center;transform: translate(-50%,-55%) scale(1);">
+		<img class="place" src="views-hall.png"
+			 style="transform-origin: center;transform: translate(-50%,-55%) scale(1);">
 	</div>
 </section>
 
@@ -195,8 +197,7 @@
 		<code>Router.register('/signup', SignupView);</code>
 		<code>Router.register('/scores/pages/{page}', ScoreboardView);</code>
 		<code><span class="comment">...</span></code>
-		<code>Router.go('/scores/page/3'); <span
-				class="comment rus">// переход на 3 страницу (пагинация)</span></code>
+		<code>Router.go('/scores/page/3'); // переход на 3 страницу (пагинация)</code>
 		<code> </code>
 	</pre>
 </section>
@@ -207,10 +208,10 @@
 		<code>class Router {</code>
 		<code>    constructor() { ... }</code>
 		<code>    register(path: string, view: View) { ... }</code>
-		<code>    start() { ... } <span class="comment rus">// запустить роутер</span></code>
+		<code>    start() { ... }      // запустить роутер</code>
 		<code>    go(path: string) { ... }</code>
-		<code>    back() { ... } <span class="comment rus">// переход назад по истории браузера</span></code>
-		<code>    forward() { ... } <span class="comment rus">// переход вперёд по истории браузера</span></code>
+		<code>    back() { ... }       // переход назад по истории браузера</code>
+		<code>    forward() { ... }    // переход вперёд по истории браузера</code>
 		<code>}</code>
 		<code> </code>
 	</pre>
