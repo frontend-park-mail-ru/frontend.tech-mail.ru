@@ -513,6 +513,129 @@
 
 <!-- Композиция vs наследование. О том, как не дублировать код. Выделение в миксины в js. -->
 
+<section class="slide question">
+	<h2>
+		<span style="font-size: 80%;">А если таких <mark><em>Observable-модулей</em></mark> очень много?</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Реализовывать паттерн Observable <br>в каждом модуле?</h2>
+	<pre class="hljs js">
+		<code>// плохо... дублирование кода</code>
+		<code>class UserService {</code>
+		<code>    on(event, callback) { ... }</code>
+		<code>    emit(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code>class GameService {</code>
+		<code>    on(event, callback) { ... }</code>
+		<code>    emit(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code>class ShopService {</code>
+		<code>    // ...</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Выделить Observable в отдельный<br>модуль и отнаследоваться от него?</h2>
+	<pre class="hljs js">
+		<code>class UserService extends Observable {</code>
+		<code>    // ...</code>
+		<code>}</code>
+		<code>class GameService extends Observable {</code>
+		<code>    // ...</code>
+		<code>}</code>
+		<code> </code>
+		<code>// а если таких <mark>модулей-интерфейсов</mark> будет несколько?</code>
+		<code>class ShopService extends Observable, Loggable, Serializable {</code>
+		<code>    // ...</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 80%;">Паттерн <mark>Примесь&nbsp;(Mixin)</mark></span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Паттерн <mark>Примесь (Mixin)</mark></h2>
+	<p class="medium-content"></p>
+	<blockquote>
+		<p><b>Примесь (англ. mixin)</b> &mdash; класс или объект, реализующий какое-либо чётко выделенное поведение. Используется для уточнения поведения других классов, не предназначен для самостоятельного использования. Решают проблему множественного наследования. Отличаются от <mark>интерфейсов</mark> тем, что содержат готовый функционал, а не всего лишь специфицирует поведение</p>
+	</blockquote>
+	<p class="note">Подробнее в статье <a href="https://habrahabr.ru/post/147901/" target="_blank">по ссылке</a> и на <a href="https://learn.javascript.ru/mixins" target="_blank">learn.javascript.ru</a></p>
+</section>
+
+<section class="slide">
+	<h2>Использование примеси</h2>
+	<pre class="hljs js">
+		<code>const ObservableMixin = {</code>
+		<code>    on(event, callback) { ... }</code>
+		<code>    emit(eventName, eventData) { ... }</code>
+		<code>    // ...</code>
+		<code>}</code>
+		<code>class UserService {</code>
+		<code>    constructor () {</code>
+		<code>        <mark>this.emit</mark>('event', { ... });</code>
+		<code>        // ...</code>
+		<code>    }</code>
+		<code>}</code>
+		<code>Object.assign(<mark>UserService.prototype</mark>, ObservableMixin);</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 80%;">А что <em>кроме</em> наследования?</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Как создать класс МФУ?</h2>
+	<pre class="hljs js">
+		<code>class ЧБПринтер {</code>
+		<code>    print (doc) { ... }</code>
+		<code>}</code>
+		<code> </code>
+		<code>class ЦветнойПринтер {</code>
+		<code>    print (doc) { ... }</code>
+		<code>}</code>
+		<code> </code>
+		<code>class Сканер {</code>
+		<code>    scan (doc) { ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2><s>Наследование</s> Композиция!</h2>
+	<pre class="hljs js">
+		<code>class МФУ {</code>
+		<code>    constructor () {</code>
+		<code>        this.чбПринтер = new ЧБПринтер();</code>
+		<code>        this.цветнойПринтер = new ЦветнойПринтер();</code>
+		<code>        this.сканер = new Сканер();</code>
+		<code>        // ...</code>
+		<code>    }</code>
+		<code> </code>
+		<code>    scan (doc) {</code>
+		<code>        return this.сканер.scan(doc);</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<!-- Концепции единых источников всего. Единый источник событий - паттерн медиатор. -->
+
+
 
 
 
