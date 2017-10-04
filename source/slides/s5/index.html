@@ -246,7 +246,272 @@
 	</ul>
 </section>
 
-<!-- О таких вещах, как коупелинг и кохежион. Как уменьшать связность приложения. О паттерне обзёрвабл. Как написать свой паблиш-сабскрайбер. -->
+<section class="slide question">
+	<h2>
+		<span style="font-size: 80%; color: #000055;"><a href="https://www.youtube.com/watch?v=wi3wPzReKZQ" target="_blank">Антон Немцев &mdash; Паттерны JavaScript&nbsp;<i class="material-icons noitalic">open_in_new</i></a></span>
+	</h2>
+</section>
+
+<!-- О таких вещах, как коупелинг и кохежион. Как уменьшать связность приложения. -->
+
+<section class="slide">
+	<h2>Парочка определений</h2>
+	<p class="medium-content"></p>
+	<blockquote>
+		<p><b>Internal Cohesion</b> &mdash; высокая сопряженность или «сплоченность» внутри модуля</p>
+	</blockquote>
+	<blockquote>
+		<p><b>External Coupling</b> &mdash; слабая связанность взаимодействующих друг с другом модулей. Модули, на которые разбивается система, должны быть, по возможности, независимы или слабо связанны друг с другом. Они должны иметь возможность взаимодействовать, но при этом как можно меньше знать друг о друге</p>
+	</blockquote>
+</section>
+
+<section class="slide">
+	<h2>Хорошая декомпозиция должна<br>создавать <strong>слабосвязанную</strong> систему</h2>
+	<p class="medium-content">Модули, полученные в результате декомпозиции, должны быть максимально сопряженны внутри (<mark>high internal cohesion</mark>) и минимально связанны друг с другом (<mark>low external coupling</mark>)</p>
+	<p class="note">Ослаблять связанность нужно на всех уровнях иерархии</p>
+	<ul lang="ru">
+		<li><em>Какую функцию выполняет каждый модуль?</em></li>
+		<li><em>Насколько модули легко тестировать?</em></li>
+		<li><em>Возможно ли использовать модули самостоятельно или в другом окружении?</em></li>
+		<li><em>Как сильно изменения в одном модуле отразятся на остальных?</em></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Способы снижения связанности<br>модулей</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li>Использование паттернов ООП, интерфейсы, фасад</li>
+		<li>Использование Dependency Inversion &mdash; корректное создание и получение зависимостей</li>
+		<li>Замена прямых зависимостей на обмен сообщениями</li>
+		<li>Замена прямых зависимостей на синхронизацию через общее ядро</li>
+		<li>Следование Закону Деметры (law of Demeter), запрет неявных и транзитивных зависимостей</li>
+		<li>Композиция вместо наследования</li>
+	</ul>
+</section>
+
+<!-- О паттерне обзёрвабл. Как написать свой паблиш-сабскрайбер. -->
+
+<section class="slide">
+	<h2>Паттерн <mark>Observable</mark></h2>
+	<p class="note">Интерфейс подписки на события</p>
+	<pre class="hljs js">
+		<code>class SomeService {</code>
+		<code>    constructor () { ... }</code>
+		<code>    do () { ... }</code>
+		<code> </code>
+		<code>    addEventListener(event, callback) { ... }</code>
+		<code>    removeEventListener(event, callback) { ... }</code>
+		<code>    emitEvent(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Паттерн <mark>Observable</mark></h2>
+	<p class="note">Интерфейс подписки на события</p>
+	<pre class="hljs js">
+		<code>class SomeService {</code>
+		<code>    constructor () { ... }</code>
+		<code>    do () { ... }</code>
+		<code> </code>
+		<code>    on(event, callback) { ... }</code>
+		<code>    off(event, callback) { ... }</code>
+		<code>    emit(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Паттерн <mark>Observable</mark></h2>
+	<p class="note">Интерфейс подписки на события</p>
+	<pre class="hljs js">
+		<code>class SomeService {</code>
+		<code>    constructor () { ... }</code>
+		<code>    do () { ... }</code>
+		<code> </code>
+		<code>    subscribe(event, callback) { ... }</code>
+		<code>    unsubscribe(event, callback) { ... }</code>
+		<code>    publish(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Паттерн <mark>Observable</mark></h2>
+	<p class="note">Интерфейс подписки на события</p>
+	<pre class="hljs js">
+		<code>class SomeService {</code>
+		<code>    constructor () { ... }</code>
+		<code>    do () { ... }</code>
+		<code> </code>
+		<code>    attachEvent(event, callback) { ... }</code>
+		<code>    detachEvent(event, callback) { ... }</code>
+		<code>    dispatchEvent(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Реализация паттерна <mark>Observable</mark></h2>
+	<pre class="hljs js">
+		<code>class SomeService {</code>
+		<code>    on(event, callback) {    // подписываемся на событие</code>
+		<code>        this.listeners[event].push(callback)</code>
+		<code>    }</code>
+		<code>    off(event, callback) {   // отписываемся от события</code>
+		<code>        this.listeners[event] = this.listeners[event]</code>
+		<code>            .filter(function (listener) { return listener !== callback; })</code>
+		<code>    }</code>
+		<code>    emit(event, data) {      // публикуем (диспатчим, эмитим) событие</code>
+		<code>        this.listeners[event].forEach(function (listener) {</code>
+		<code>            listener(data)</code>
+		<code>        })</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Реализация паттерна <mark>Observable</mark></h2>
+	<pre class="hljs js">
+		<code>const service = new SomeService();</code>
+		<code>// функция-обработчик события</code>
+		<code>const onload = function (data) { console.log(data); }</code>
+		<code> </code>
+		<code>// подписываемся на событие</code>
+		<code>service.on('loaded', onload);</code>
+		<code>service.emit('loaded', {data: 42});    // событие 1</code>
+		<code>service.emit('loaded', {foo: 'bar'});  // событие 2</code>
+		<code>// отписываемся от события</code>
+		<code>service.off('loaded', onload);</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Реализация паттерна <mark>Observable</mark></h2>
+	<pre class="hljs js">
+		<code>const service = new SomeService();</code>
+		<code>// функция-обработчик события</code>
+		<code>const onload = function (data) { console.log(data); }</code>
+		<code> </code>
+		<code>// подписываемся на событие</code>
+		<code>service.on('loaded', onload);</code>
+		<code>service.emit('loaded', {data: 42});    // событие 1</code>
+		<code>service.emit('loaded', {foo: 'bar'});  // событие 2</code>
+		<code>// отписываемся от события</code>
+		<code>service.off('loaded', onload);</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 70%;">Итак, как это помогает уменьшить <em>связность</em> приложения?</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Что было до?</h2>
+	<pre class="hljs js">
+		<code>// services/user-service.js</code>
+		<code>class UserService {</code>
+		<code>    auth (login, password) {</code>
+		<code>        return HTTP.POST('/api', {login, password})</code>
+		<code>            .then(function (user) {</code>
+		<code>                this.user = user;</code>
+		<code>                <mark>this.menuSection</mark>.reRender();</code>
+		<code>                <mark>this.signupSection</mark>.hide();</code>
+		<code>                <mark>this.profileSection</mark>.show(user);</code>
+		<code>                // ...</code>
+		<code>            });</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Что было до?</h2>
+	<pre class="hljs js">
+		<code>// blocks/scoreboard.js</code>
+		<code>const UserService = window.UserService;</code>
+		<code> </code>
+		<code>class ScoreBoardBlock {</code>
+		<code>    constructor () {</code>
+		<code>        <mark>this.userService</mark> = new UserService();</code>
+		<code>    }</code>
+		<code> </code>
+		<code>    render (login, password) {</code>
+		<code>        const users = <mark>this.userService</mark>.getUsers();</code>
+		<code>        this.el.innerHTML = tmpl({users: users});</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Как станет?</h2>
+	<pre class="hljs js">
+		<code>// services/user-service.js</code>
+		<code>class UserService {</code>
+		<code>    auth (login, password) {</code>
+		<code>        return HTTP.POST('/api', {login, password})</code>
+		<code>            .then(function (user) {</code>
+		<code>                this.user = user;</code>
+		<code>                <mark>this.emit</mark>('signed', user);</code>
+		<code>                // всё!</code>
+		<code>            });</code>
+		<code>    }</code>
+		<code>    on(event, callback) { ... }</code>
+		<code>    emit(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Как станет?</h2>
+	<pre class="hljs js">
+		<code>// blocks/scoreboard.js</code>
+		<code>class ScoreBoardBlock {</code>
+		<code>    onUsersLoaded (users) {</code>
+		<code>        this.el.innerHTML = tmpl({users: users});</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+	<pre class="hljs js">
+		<code>// main.js</code>
+		<code>UserService.on('signed', menuSection.reRender.bind(menuSection));</code>
+		<code>UserService.on('users-loaded', scoreboard.onUsersLoaded.bind(scoreboard));</code>
+		<code>// ...</code>
+		<code>UserService.auth('login', 'password');</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>В чём преимущество?</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li>Все Observable-модули реализуют один и тот же интерфейс методов</li>
+		<li>Модули, на которые мы подписываемся, <mark>сами знают, когда и какие события эмитить</mark></li>
+		<li>Модули, которые подписываются, <mark>сами знают, как обрабатывать эти события</mark></li>
+		<li>И те, и другие, <mark>ничего друг о друге не знают</mark>, модулям известны только названия и формат сообщений</li>
+		<li>Все необходимые подписки происходят в одном месте (<code>main.js</code>)</li>
+		<li>Удобно оповещать систему о новых событиях</li>
+	</ul>
+</section>
+
+<!-- Композиция vs наследование. О том, как не дублировать код. Выделение в миксины в js. -->
 
 
 
