@@ -296,6 +296,7 @@
 	<h2>Паттерн <mark>Observable</mark></h2>
 	<p class="note">Интерфейс подписки на события</p>
 	<pre class="hljs js">
+		<code>// event-emitter</code>
 		<code>class SomeService {</code>
 		<code>    constructor () { ... }</code>
 		<code>    do () { ... }</code>
@@ -312,6 +313,7 @@
 	<h2>Паттерн <mark>Observable</mark></h2>
 	<p class="note">Интерфейс подписки на события</p>
 	<pre class="hljs js">
+		<code>// on-off</code>
 		<code>class SomeService {</code>
 		<code>    constructor () { ... }</code>
 		<code>    do () { ... }</code>
@@ -328,6 +330,7 @@
 	<h2>Паттерн <mark>Observable</mark></h2>
 	<p class="note">Интерфейс подписки на события</p>
 	<pre class="hljs js">
+		<code>// pub-sub</code>
 		<code>class SomeService {</code>
 		<code>    constructor () { ... }</code>
 		<code>    do () { ... }</code>
@@ -344,6 +347,7 @@
 	<h2>Паттерн <mark>Observable</mark></h2>
 	<p class="note">Интерфейс подписки на события</p>
 	<pre class="hljs js">
+		<code>// event-dispatcher</code>
 		<code>class SomeService {</code>
 		<code>    constructor () { ... }</code>
 		<code>    do () { ... }</code>
@@ -430,7 +434,7 @@
 		<code>                <mark>this.signupSection</mark>.hide();</code>
 		<code>                <mark>this.profileSection</mark>.show(user);</code>
 		<code>                // ...</code>
-		<code>            });</code>
+		<code>            }.bind(this));</code>
 		<code>    }</code>
 		<code>}</code>
 		<code> </code>
@@ -468,7 +472,7 @@
 		<code>                this.user = user;</code>
 		<code>                <mark>this.emit</mark>('signed', user);</code>
 		<code>                // всё!</code>
-		<code>            });</code>
+		<code>            }.bind(this));</code>
 		<code>    }</code>
 		<code>    on(event, callback) { ... }</code>
 		<code>    emit(eventName, eventData) { ... }</code>
@@ -635,37 +639,178 @@
 
 <!-- Концепции единых источников всего. Единый источник событий - паттерн медиатор. -->
 
-
-
-
-
-
-
-
 <section class="slide question">
-	<h2><span style="font-size: 80%; color: darkblue"><a href="https://habrahabr.ru/post/276593/" target="_blank">Как проектировать хорошую архитектуру</a><br/><em
-			style="font-size: 70%; color: darkgrey">очень крутая статья</em></span></h2>
+	<h2>
+		<span style="font-size: 80%;">А если будет много <em>Observable</em>-модулей?</span>
+	</h2>
 </section>
 
 <section class="slide">
-	<h2>Декомпозиция системы</h2>
-	<div style="position:relative;width: 100%; height: 75%;">
-
+	<h2>Паттерн <mark>медиатор</mark></h2>
+	<blockquote>
+		<p>Когда в системе присутствует большое количество модулей, их прямое взаимодействие друг с другом <mark>(даже с учётом применения publish-subscriber подхода)</mark> становится слишком сложным. Поэтому имеет смысл взаимодействие «все со всеми» заменить на взаимодействие <b>«один со всеми»</b>. Для этого вводится некий обобщенный посредник &mdash; <strong>медиатор</strong></p>
+	</blockquote>
+	<div style="position: relative; width: 100%; height: 50%;">
+		<img class="place" src="mediator.png" style="transform-origin: center; transform: translate(-50%,-80%) scale(1.2);">
 	</div>
 </section>
 
 <section class="slide">
-	<h2>Замена прямых зависимостей на<br/>обмен сообщениями</h2>
-	<div style="position:relative;width: 100%; height: 75%;">
-		<img class="place" src="mediator.png"
-			 style="transform-origin: center;transform: translate(-50%,-55%) scale(1.2);">
-	</div>
+	<h2>Паттерн <mark>медиатор</mark></h2>
+	<pre class="hljs js">
+		<code>// modules/event-bus.js</code>
+		<code>export default class EventBus {</code>
+		<code>    on(event, callback) { ... }</code>
+		<code>    off(event, callback) { ... }</code>
+		<code>    emit(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code> </code>
+		<code>// main.js</code>
+		<code>import EventBus from './modules/event-bus.js';</code>
+		<code><mark>window.bus</mark> = new EventBus();</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Паттерн <mark>медиатор</mark></h2>
+	<pre class="hljs js">
+		<code>// services/user-service.js</code>
+		<code>export default class UserService {</code>
+		<code>    login () {</code>
+		<code>        HTTP.post({ ... })</code>
+		<code>            .then(function (user) {</code>
+		<code>                // do stuff</code>
+		<code>                </code>
+		<code>                <mark>window.bus.emit</mark>('user:logged-in', user);</code>
+		<code>            })</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Паттерн <mark>медиатор</mark></h2>
+	<pre class="hljs js">
+		<code>// blocks/user-profile.js</code>
+		<code>export default class UserProfile {</code>
+		<code>    constructor () {</code>
+		<code>        <mark>window.bus.on</mark>('user:logged-in', function (user) {</code>
+		<code>            // do stuff</code>
+		<code>            </code>
+		<code>            this.render();</code>
+		<code>        }.bind(this))</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide question">
-	<h2><span style="font-size: 80%; color: darkblue"><a href="https://habrahabr.ru/post/276593/" target="_blank">Как проектировать хорошую архитектуру</a><br/><em
-			style="font-size: 70%; color: darkgrey">очень крутая статья</em></span></h2>
+	<h2>
+		<span style="font-size: 80%;">Глобальные переменные &mdash; зло!</span>
+	</h2>
 </section>
+
+<section class="slide">
+	<h2>Паттерн <mark>синглтон</mark></h2>
+	<pre class="hljs js">
+		<code>// modules/event-bus.js</code>
+		<code>class EventBus {</code>
+		<code>    on(event, callback) { ... }</code>
+		<code>    off(event, callback) { ... }</code>
+		<code>    emit(eventName, eventData) { ... }</code>
+		<code>}</code>
+		<code> </code>
+		<code><mark>export default new EventBus();</mark></code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Паттерн <mark>синглтон</mark></h2>
+	<pre class="hljs js">
+		<code>// blocks/user-profile.js</code>
+		<code>import bus from '../modules/event-bus.js';</code>
+		<code> </code>
+		<code>export default class UserProfile {</code>
+		<code>    constructor () {</code>
+		<code>        <mark>bus.on</mark>('user:logged-in', function (user) {</code>
+		<code>            // do stuff</code>
+		<code>            </code>
+		<code>            this.render();</code>
+		<code>        }.bind(this))</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>А можно и вот так</h2>
+	<pre class="hljs js">
+		<code>// modules/event-bus.js</code>
+		<code>export default class EventBus {</code>
+		<code>    constructor () {</code>
+		<code>        if (EventBus.__instance) {</code>
+		<code>            return EventBus.__instance;</code>
+		<code>        }</code>
+		<code>        // initialization logic</code>
+		<code>        </code>
+		<code>        EventBus.__instance = this;</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>А можно и вот так</h2>
+	<pre class="hljs js">
+		<code>// main.js</code>
+		<code>import EventBus from './modules/event-bus.js';</code>
+		<code> </code>
+		<code>const bus1 = new EventBus();</code>
+		<code>const bus2 = new EventBus();</code>
+		<code> </code>
+		<code><mark>bus1 === bus2</mark>; // true</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>PRO TIPs хорошей декомпозиции</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li><mark>Минимизировать использование глобальных зависимостей</mark></li>
+		<li><mark>Не использовать неявные зависимости</mark> &mdash; все зависимости модуля должны быть обозначены явно</li>
+		<li><mark>Минимизировать связи между модулями</mark> &mdash; например, с помощью паттернов Observable и Mediator</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Какие ещё есть подходы?</h2>
+	<p class="small-content"></p>
+	<ul>
+		<li>Inversion of Control и Dependency Injection &mdash; найти хороший материал оказалось сложновато, но вот, <a href="https://habrahabr.ru/post/149912/" target="_blank">например</a>, или <a href="https://habrahabr.ru/post/232851/" target="_blank">здесь</a></li>
+		<li>Event Driven Development &mdash; <a href="https://habrahabr.ru/post/119304/" target="_blank">статейка на хабре</a></li>
+		<li>Ещё много всего, творите!</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055;"><a href="https://habrahabr.ru/post/276593/" target="_blank">Как проектировать хорошую архитектуру&nbsp;<i class="material-icons noitalic">open_in_new</i></a><em style="font-size: 70%; color: darkgrey">очень крутая статья</em></span>
+	</h2>
+</section>
+
+<!-- Как управлять приложением, его состоянием, представлением и логикой? Паттерны для создания веб-приложений. Набор паттернов MV* -->
+
+
+
+
+
 
 <section class="slide">
 	<h2>MV-паттерны для проектирования<br/>веб-приложений</h2>
@@ -858,8 +1003,7 @@
 <section class="slide">
 	<h2>Методология БЭМ</h2>
 	<blockquote>
-		<p class="medium-content"><b>БЭМ (Блок, Элемент, Модификатор)</b> &mdash; методология, описывающая компонентный
-			подход к веб-разработке. В его основе лежит принцип разделения интерфейса на независимые блоки</p>
+		<p class="medium-content"><b>БЭМ (Блок, Элемент, Модификатор)</b> &mdash; методология, описывающая компонентный подход к веб-разработке. В его основе лежит принцип разделения интерфейса на независимые блоки</p>
 	</blockquote>
 </section>
 
@@ -1058,6 +1202,8 @@
 		<code> </code>
 	</pre>
 </section>
+
+
 
 
 <section class="slide">
