@@ -495,78 +495,98 @@
 <section class="slide">
 	<h2>Объявление литералов</h2>
 	<pre class="hljs js">
-			<code>const login = 'Jon Snow', age = 42;</code>
-			<code>const User = {login, age}; // {login: 'Jon Snow', age: 42}</code>
-			<code> </code>
-			<code>const Obj = {</code>
-			<code>    <mark>func()</mark> { ... },                   // inline methods</code>
-			<code>    array: [1, 2, 3, 4, 5,],          // trailing commas</code>
-			<code>    <mark>get Arr()</mark> { return this.array; }, // object getters & setters</code>
-			<code>    prop: value,                      // trailing commas</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>// es6 features</code>
+		<code>const login = 'Jon Snow', age = 42;</code>
+		<code>const User = {login, age}; // {login: 'Jon Snow', age: 42}</code>
+		<code> </code>
+		<code>const Obj = {</code>
+		<code>    <mark>func()</mark> { ... },                   // inline methods</code>
+		<code>    array: [1, 2, 3, 4, 5,],          // trailing commas</code>
+		<code>    <mark>get Arr()</mark> { return this.array; }, // object getters & setters</code>
+		<code>    prop: value,                      // trailing commas</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Объявление функций</h2>
+	<pre class="hljs js">
+		<code>// es8 features</code>
+		<code>function UseFull (</code>
+		<code>    param1 ,</code>
+		<code>    param2 ,</code>
+		<code>    param3 ,   // trailing commas</code>
+		<code>) { return param1 + param2 + param3; }</code>
+		<code> </code>
+		<code>UseFull (</code>
+		<code>    42 ,</code>
+		<code>    100500 ,</code>
+		<code>    -200600 ,   // trailing commas</code>
+		<code>); // -100058</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Дополнительные методы</h2>
 	<pre class="hljs js">
-			<code>// проверка двух выражений на совпадение</code>
-			<code>Object.is(value1, value2);</code>
-			<code> </code>
-			<code>Object.is(1, 1);              // true</code>
-			<code>Object.is(1, '1');            // false</code>
-			<code>Object.is(false, false);      // true</code>
-			<code>Object.is({a: 42}, {a: 42});  // false</code>
-			<code> </code>
-			<code>Object.is(NaN, NaN);    // <mark>true</mark>   (NaN === NaN) === false</code>
-			<code>Object.is(0, -0);       // <mark>false</mark>  (-0 === 0) === true</code>
-			<code> </code>
-		</pre>
+		<code>// проверка двух выражений на совпадение</code>
+		<code>Object.is(value1, value2);</code>
+		<code> </code>
+		<code>Object.is(1, 1);              // true</code>
+		<code>Object.is(1, '1');            // false</code>
+		<code>Object.is(false, false);      // true</code>
+		<code>Object.is({a: 42}, {a: 42});  // false</code>
+		<code> </code>
+		<code>Object.is(NaN, NaN);    // <mark>true</mark>   (NaN === NaN) === false</code>
+		<code>Object.is(0, -0);       // <mark>false</mark>  (-0 === 0) === true</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Дополнительные методы</h2>
 	<pre class="hljs js">
-			<code> // копирование свойств</code>
-			<code>Object.assign(target, ...sources);</code>
-			<code> </code>
-			<code>const s1 = {a: 'Jhon'}, s2 = {b: 42};</code>
-			<code>const result = Object.assign({}, s1, s2);</code>
-			<code>// result: {</code>
-			<code>//     a: 'Jhon',</code>
-			<code>//     b: 42</code>
-			<code>// }</code>
-			<code> </code>
-		</pre>
+		<code> // копирование свойств</code>
+		<code>Object.assign(target, ...sources);</code>
+		<code> </code>
+		<code>const s1 = {a: 'Jhon'}, s2 = {b: 42};</code>
+		<code>const result = Object.assign({}, s1, s2);</code>
+		<code>// result: {</code>
+		<code>//     a: 'Jhon',</code>
+		<code>//     b: 42</code>
+		<code>// }</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Дополнительные методы</h2>
 	<pre class="hljs js">
-			<code>// Запаковывание объектов</code>
-			<code>Object.<mark>seal</mark>(target);    // можно изменить значение имеющихся свойств,</code>
-			<code>                        // но нельзя добавить или удалить их</code>
-			<code>// Заморозка объектов</code>
-			<code>Object.<mark>freeze</mark>(target);  // нельзя изменять значения имеющихся свойств,</code>
-			<code>                        // удалять их, добавлять новые</code>
-			<code> </code>
-			<code>Object.<mark>isFrozen</mark>(target);   Object.<mark>isSealed</mark>(target);</code>
-			<code> </code>
-		</pre>
+		<code>// Запаковывание объектов</code>
+		<code>Object.<mark>seal</mark>(target);    // можно изменить значение имеющихся свойств,</code>
+		<code>                        // но нельзя добавить или удалить их</code>
+		<code>// Заморозка объектов</code>
+		<code>Object.<mark>freeze</mark>(target);  // нельзя изменять значения имеющихся свойств,</code>
+		<code>                        // удалять их, добавлять новые</code>
+		<code> </code>
+		<code>Object.<mark>isFrozen</mark>(target);   Object.<mark>isSealed</mark>(target);</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Дополнительные методы</h2>
 	<pre class="hljs js">
-			<code>// Перебор ключей, значений и свойств</code>
-			<code>const user = {login: 'Jon Snow', age: 42};</code>
-			<code> </code>
-			<code>Object.<mark>keys</mark>(user);     // ['login', 'age']</code>
-			<code>Object.<mark>values</mark>(user);   // ['Jon Snow', 42]</code>
-			<code>Object.<mark>entries</mark>(user);  // [['login', 'Jon Snow'], ['age', 42]]</code>
-			<code> </code>
-		</pre>
+		<code>// Перебор ключей, значений и свойств</code>
+		<code>const user = {login: 'Jon Snow', age: 42};</code>
+		<code> </code>
+		<code>Object.<mark>keys</mark>(user);     // ['login', 'age']</code>
+		<code>Object.<mark>values</mark>(user);   // ['Jon Snow', 42]</code>
+		<code>Object.<mark>entries</mark>(user);  // [['login', 'Jon Snow'], ['age', 42]]</code>
+		<code> </code>
+	</pre>
 </section>
 
 
@@ -577,22 +597,23 @@
 <section class="slide">
 	<h2>Стрелочные функции</h2>
 	<pre class="hljs js">
-			<code>const hello = () => console.log('Hello, World!');</code>
-			<code>const sqr = num => num * 2;</code>
-			<code>[1, 2, 3, 4].map(sqr); // [1, 4, 9, 16]</code>
-			<code> </code>
-			<code>const compare = (left, right) => {</code>
-			<code>    if (left.length === right.length) {</code>
-			<code>        return left.localeCompare(right);</code>
-			<code>    }</code>
-			<code>    return left.length - right.length;</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>const hello = () => console.log('Hello, World!');</code>
+		<code>const sqr = num => num * 2;</code>
+		<code>[1, 2, 3, 4].map(sqr); // [1, 4, 9, 16]</code>
+		<code> </code>
+		<code>const compare = (left, right) => {</code>
+		<code>    if (left.length === right.length) {</code>
+		<code>        return left.localeCompare(right);</code>
+		<code>    }</code>
+		<code>    return left.length - right.length;</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Стрелочные функции</h2>
+	<p class="small-content"></p>
 	<ul lang="ru">
 		<li>Короткий синтаксис</li>
 		<li>Не являются <em>"настоящими"</em> функциями, не имеют своего <code>this</code> и своего
@@ -610,33 +631,35 @@
 
 <section class="slide">
 	<h2><code>Map</code> &mdash; хэш-таблица</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
-			<code>const map = new <mark>Map</mark>();</code>
-			<code>map.set(key, value);   // добавить значение</code>
-			<code>map.get(key);          // получить значение</code>
-			<code>map.has(key);          // проверить наличие ключа</code>
-			<code>map.delete(key);   map.clear();</code>
-			<code> </code>
-			<code>map.size;              // размер Map</code>
-			<code>map.forEach(callback); // перебор ключей, свойств, значений</code>
-			<code>map.values();      map.keys();   map.entries();</code>
-			<code> </code>
-		</pre>
+		<code>const map = new <mark>Map</mark>();</code>
+		<code>map.set(key, value);   // добавить значение</code>
+		<code>map.get(key);          // получить значение</code>
+		<code>map.has(key);          // проверить наличие ключа</code>
+		<code>map.delete(key);   map.clear();</code>
+		<code> </code>
+		<code>map.size;              // размер Map</code>
+		<code>map.forEach(callback); // перебор ключей, свойств, значений</code>
+		<code>map.values();      map.keys();   map.entries();</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2><code>Set</code> &mdash; набор значений<br/>без повторения</h2>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
-			<code>const set = new <mark>Set</mark>();</code>
-			<code>set.add(value);          // добавить значение</code>
-			<code>set.has(value);          // проверить наличие значения</code>
-			<code>set.delete(value);   set.clear();</code>
-			<code> </code>
-			<code>set.size;              // размер Set</code>
-			<code>set.forEach(callback); // перебор ключей, свойств, значений</code>
-			<code>set.values();      set.keys();   set.entries();</code>
-			<code> </code>
-		</pre>
+		<code>const set = new <mark>Set</mark>();</code>
+		<code>set.add(value);          // добавить значение</code>
+		<code>set.has(value);          // проверить наличие значения</code>
+		<code>set.delete(value);   set.clear();</code>
+		<code> </code>
+		<code>set.size;              // размер Set</code>
+		<code>set.forEach(callback); // перебор ключей, свойств, значений</code>
+		<code>set.values();      set.keys();   set.entries();</code>
+		<code> </code>
+	</pre>
 </section>
 
 
@@ -646,40 +669,48 @@
 
 <section class="slide">
 	<h2><code>Reflect</code></h2>
-	<p class="small-content">Встроенный JavaScript объект, предоставляющий методы для перехвата взаимодействий с
-		объектами и работы с рефлексией в JavaScript</p>
-</section>
-
-<section class="slide">
-	<h2>Методы <code>Reflect</code></h2>
+	<p class="medium-content">Встроенный JavaScript объект, предоставляющий методы для перехвата взаимодействий с объектами и работы с рефлексией в JavaScript</p>
 	<pre class="hljs js">
-			<code>Reflect.apply(target, thisArgument, argumentsList)</code>
-			<code>Reflect.construct(target, argumentsList)</code>
-			<code> </code>
-			<code>Reflect.get(target, propertyKey)</code>
-			<code>Reflect.has()</code>
-			<code> </code>
-			<code>Reflect.getPrototypeOf(target)</code>
-			<code>Reflect.setPrototypeOf(target, prototype)</code>
-			<code> </code>
-		</pre>
+		<code>Reflect.apply(target, thisArgument, argumentsList)</code>
+		<code>Reflect.construct(target, argumentsList)</code>
+		<code> </code>
+		<code>Reflect.get(target, propertyKey)</code>
+		<code>Reflect.has()</code>
+		<code> </code>
+		<code>Reflect.getPrototypeOf(target)</code>
+		<code>Reflect.setPrototypeOf(target, prototype)</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Работа с дескрипторами</h2>
 	<pre class="hljs js">
-			<code>// Reflect.<mark>defineProperty</mark>(target, propertyKey, attributes)</code>
-			<code>const object = {};</code>
-			<code>Reflect.defineProperty(object, 'foo', {</code>
-			<code>    enumerable: false,    // разрешает перечисление</code>
-			<code>    writable: false,      // разрешает перезапись</code>
-			<code>    configurable: false,  // разрешает изменение дескриптора</code>
-			<code>    value: undefined      // значение свойства</code>
-			<code>    get: undefined        // геттер</code>
-			<code>    set: undefined        // сеттер</code>
-			<code>}</code>
-			<code></code>
-		</pre>
+		<code>// Reflect.<mark>defineProperty</mark>(target, propertyKey, attributes)</code>
+		<code>const object = {};</code>
+		<code>Reflect.defineProperty(object, 'foo', {</code>
+		<code>    enumerable: false,    // разрешает перечисление</code>
+		<code>    writable: false,      // разрешает перезапись</code>
+		<code>    configurable: false,  // разрешает изменение дескриптора</code>
+		<code>    value: undefined      // значение свойства</code>
+		<code>    get: undefined        // геттер</code>
+		<code>    set: undefined        // сеттер</code>
+		<code>}</code>
+		<code></code>
+	</pre>
+</section>
+
+
+<section class="slide question">
+	<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">Proxy</span></h2>
+</section>
+
+<section class="slide">
+	<h2><code>Proxy</code></h2>
+	<p class="medium-content"><strong>Объест Proxy</strong> </p>
+	<pre class="hljs js">
+		<code> </code>
+	</pre>
 </section>
 
 
@@ -689,13 +720,14 @@
 
 <section class="slide">
 	<h2>Оператор возведения в степень</h2>
+	<p class="small-content"></p>
 	<pre class="hljs js">
-			<code>// hello python from es7</code>
-			<code>console.log(3 <mark>**</mark> 4);     // 81</code>
-			<code>console.log(49 <mark>**</mark> 0.5);  // 7</code>
-			<code> </code>
-			<code> </code>
-		</pre>
+		<code>// hello python from es7</code>
+		<code>console.log(3 <mark>**</mark> 4);     // 81</code>
+		<code>console.log(49 <mark>**</mark> 0.5);  // 7</code>
+		<code> </code>
+		<code> </code>
+	</pre>
 </section>
 
 
