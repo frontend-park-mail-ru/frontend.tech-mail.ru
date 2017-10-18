@@ -359,7 +359,7 @@
 	<pre class="hljs js">
 		<code>new Path2D('M10 10 h 80 v 80 h -80 Z');</code>
 		<code><span class="comment rus">// - создать из SVG</span></code>
-		
+
 		<code>Path2D.addPath(path [, transform])</code>
 		<code><span class="comment rus">// <b>path</b> - добавить путь</span></code>
 		<code> </code>
@@ -396,7 +396,7 @@
 			(function () {
 				const canvas = document.getElementById('styline');
 				const ctx = canvas.getContext('2d');
-	
+
 				ctx.beginPath();
 				[1, 5, 10, 20, 50].forEach((v, i) => {
 					ctx.beginPath();
@@ -406,7 +406,7 @@
 					ctx.lineTo(280, 30 + 55 * i);
 					ctx.stroke();
 				});
-	
+
 			})();
 		</script>
 		<pre class="hljs js short">
@@ -715,7 +715,7 @@
 <section class="slide">
 	<h2>А так же</h2>
 	<ul>
-		<li>Работа с изображениями: ctx.drawImage для img, svg, video, canvas</li>	
+		<li>Работа с изображениями: ctx.drawImage для img, svg, video, canvas</li>
 		<li>Режимы наложения и обрезка</li>
 		<li>Работа с пикселями: ctx.getImageData</li>
 		<li>...</li>
@@ -1080,7 +1080,7 @@
 			<a href="https://youtu.be/1_lX28QWCdg" target="_blank">
 				Web Workers, GPU computing and Web
 			</a>
-			и 
+			и
 			<a href="https://youtu.be/39MiUkGSEks" target="_blank">
 				WebVR
 			</a>
@@ -1097,6 +1097,8 @@
 <script src="/lib/shower/shower.min.js"></script>
 <script src="/lib/hljs/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/reload/reload.js"></script>
 
 </body>
 </html>
