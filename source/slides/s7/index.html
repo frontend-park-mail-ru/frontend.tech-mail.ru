@@ -1681,102 +1681,102 @@
 <section class="slide">
 	<h2>Транспилляция из ES.Next</h2>
 	<pre class="hljs js">
-			<code>class ReleaseReducer extends BaseReducer {</code>
-			<code>    constructor(...args) {</code>
-			<code>        super(args.length);</code>
-			<code>        this.initial = args;</code>
-			<code>    }</code>
-			<code>    set Fields (value = {}) {</code>
-			<code>        const {name, data:count = 0} = value;</code>
-			<code>        this.fields = Object.assign(this.fields, {name, count});</code>
-			<code>    }</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>class ReleaseReducer extends BaseReducer {</code>
+		<code>    constructor(...args) {</code>
+		<code>        super(args.length);</code>
+		<code>        this.initial = args;</code>
+		<code>    }</code>
+		<code>    set Fields (value = {}) {</code>
+		<code>        const {name, data:count = 0} = value;</code>
+		<code>        this.fields = Object.assign(this.fields, {name, count});</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Dart programming language</h2>
 	<pre class="hljs dart">
-			<code>import 'dart:async';</code>
-			<code>import 'dart:math' show Random;</code>
-			<code> </code>
-			<code>Stream&lt;double> computePi({int batch: 1000000}) async* { ... }</code>
-			<code> </code>
-			<code>main() async {</code>
-			<code>    print('Compute π using the Monte Carlo method.');</code>
-			<code>    await for (var estimate in computePi()) {</code>
-			<code>        print('π ≅ $estimate');</code>
-			<code>    }</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>import 'dart:async';</code>
+		<code>import 'dart:math' show Random;</code>
+		<code> </code>
+		<code>Stream&lt;double> computePi({int batch: 1000000}) async* { ... }</code>
+		<code> </code>
+		<code>main() async {</code>
+		<code>    print('Compute π using the Monte Carlo method.');</code>
+		<code>    await for (var estimate in computePi()) {</code>
+		<code>        print('π ≅ $estimate');</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>CoffeeScript</h2>
 	<pre class="hljs coffeescript">
-			<code>class Human</code>
-			<code>    constructor : (@name) -></code>
-			<code> </code>
-			<code>class Baby extends Human</code>
-			<code>    say    : (msg) -> alert "#{@name} говорит '#{msg}'"</code>
-			<code>    saymsg = (msg) -> alert msg</code>
-			<code>    @echo  = (msg) -> console.log msg</code>
-			<code> </code>
-			<code>matt = new Baby("Матвей")</code>
-			<code>matt.sayHi()</code>
-			<code> </code>
-		</pre>
+		<code>class Human</code>
+		<code>    constructor : (@name) -></code>
+		<code> </code>
+		<code>class Baby extends Human</code>
+		<code>    say    : (msg) -> alert "#{@name} говорит '#{msg}'"</code>
+		<code>    saymsg = (msg) -> alert msg</code>
+		<code>    @echo  = (msg) -> console.log msg</code>
+		<code> </code>
+		<code>matt = new Baby("Матвей")</code>
+		<code>matt.sayHi()</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Больше кофечки богу<br/>кофечки!</h2>
 	<pre class="hljs coffeescript">
-			<code>if happy and knowsIt</code>
-			<code>    lyrics = while num -= 1</code>
-			<code>        "#{num} little monkeys, jumping on the bed"</code>
-			<code>else</code>
-			<code>    date = if friday then sue else jill</code>
-			<code> </code>
-			<code>for filename in list</code>
-			<code>    do (filename) -></code>
-			<code>        fs.readFile filename, (err, contents) -></code>
-			<code>            compile filename, contents.toString()</code>
-			<code> </code>
-		</pre>
+		<code>if happy and knowsIt</code>
+		<code>    lyrics = while num -= 1</code>
+		<code>        "#{num} little monkeys, jumping on the bed"</code>
+		<code>else</code>
+		<code>    date = if friday then sue else jill</code>
+		<code> </code>
+		<code>for filename in list</code>
+		<code>    do (filename) -></code>
+		<code>        fs.readFile filename, (err, contents) -></code>
+		<code>            compile filename, contents.toString()</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>ClojureScript</h2>
 	<pre class="hljs clojure">
-			<code>(ns hello-world.core</code>
-			<code>  (:require [cljs.nodejs :as nodejs]))</code>
-			<code> </code>
-			<code>(nodejs/enable-util-print!)</code>
-			<code> </code>
-			<code>(defn -main [& args]</code>
-			<code>  (println "Hello world!"))</code>
-			<code> </code>
-			<code>(set! *main-cli-fn* -main)</code>
-			<code> </code>
-		</pre>
+		<code>(ns hello-world.core</code>
+		<code>  (:require [cljs.nodejs :as nodejs]))</code>
+		<code> </code>
+		<code>(nodejs/enable-util-print!)</code>
+		<code> </code>
+		<code>(defn -main [& args]</code>
+		<code>  (println "Hello world!"))</code>
+		<code> </code>
+		<code>(set! *main-cli-fn* -main)</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>TypeScript</h2>
 	<pre class="hljs typescript">
-			<code>interface Person {</code>
-			<code>    name: string;</code>
-			<code>    age: number;</code>
-			<code>}</code>
-			<code>function meet(person: Person) {</code>
-			<code>    return `Привет, я ${person.name}, мне ${parson.age}`;</code>
-			<code>}</code>
-			<code>const user = { name: "Jane", age: 21 };</code>
-			<code>console.log(meet(user));</code>
-			<code> </code>
-		</pre>
+		<code>interface Person {</code>
+		<code>    name: string;</code>
+		<code>    age: number;</code>
+		<code>}</code>
+		<code>function meet(person: Person) {</code>
+		<code>    return `Привет, я ${person.name}, мне ${parson.age}`;</code>
+		<code>}</code>
+		<code>const user = { name: "Jane", age: 21 };</code>
+		<code>console.log(meet(user));</code>
+		<code> </code>
+	</pre>
 </section>
 
 
@@ -1816,278 +1816,278 @@
 <section class="slide">
 	<h2>Установка и использование</h2>
 	<pre class="hljs bash">
-			<code># установка компилятора</code>
-			<code>$ npm install -g typescript</code>
-			<code> </code>
-			<code># компиляция файла</code>
-			<code>$ tsc helloworld.ts</code>
-			<code> </code>
-			<code># утилита позволяет компилировать и сразу запускать .ts файлы</code>
-			<code>$ npm install -g ts-node</code>
-			<code>$ ts-node script.ts</code>
-			<code> </code>
-		</pre>
+		<code># установка компилятора</code>
+		<code>$ npm install -g typescript</code>
+		<code> </code>
+		<code># компиляция файла</code>
+		<code>$ tsc helloworld.ts</code>
+		<code> </code>
+		<code># утилита позволяет компилировать и сразу запускать .ts файлы</code>
+		<code>$ npm install -g ts-node</code>
+		<code>$ ts-node script.ts</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Файл <code>tsconfig.json</code></h2>
 	<pre class="hljs json">
-			<code>{</code>
-			<code>    "compilerOptions": {</code>
-			<code>        "outDir": "cache/",</code>
-			<code>        <mark>"target"</mark>: "es2016",</code>
-			<code>        "declaration": false,</code>
-			<code>        "module": "commonjs",</code>
-			<code>        "strictNullChecks": true,</code>
-			<code>        "sourceMap": true</code>
-			<code>        ... }</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>{</code>
+		<code>    "compilerOptions": {</code>
+		<code>        "outDir": "cache/",</code>
+		<code>        <mark>"target"</mark>: "es2016",</code>
+		<code>        "declaration": false,</code>
+		<code>        "module": "commonjs",</code>
+		<code>        "strictNullChecks": true,</code>
+		<code>        "sourceMap": true</code>
+		<code>        ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 
 <section class="slide">
 	<h2>Аннотации типов</h2>
 	<pre class="hljs ts">
-			<code>const valid: boolean = true;</code>
-			<code>const count: number = 42;</code>
-			<code>const name: string = 'Jon Snow';</code>
-			<code> </code>
-			<code>const values: number[] = [1, 2, 3, 4, 5];</code>
-			<code>const tuple: [string, number] = ['Mean of life', 42];</code>
-			<code> </code>
-			<code>enum Color {Red, Green, Blue};</code>
-			<code>const c: Color = Color.Green;</code>
-			<code> </code>
-		</pre>
+		<code>const valid: boolean = true;</code>
+		<code>const count: number = 42;</code>
+		<code>const name: string = 'Jon Snow';</code>
+		<code> </code>
+		<code>const values: number[] = [1, 2, 3, 4, 5];</code>
+		<code>const tuple: [string, number] = ['Mean of life', 42];</code>
+		<code> </code>
+		<code>enum Color {Red, Green, Blue};</code>
+		<code>const c: Color = Color.Green;</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Аннотации типов</h2>
 	<pre class="hljs ts">
-			<code>let some: any = true; some = 42;</code>
-			<code>some = 'maybe a string instead'; // типы не проверяются</code>
-			<code>// приведение типов (“trust me, I know what I’m doing”)</code>
-			<code>let length: number = (&lt;string>some).length;</code>
-			<code>length = (some as string).length;</code>
-			<code> </code>
-			<code>let unusable: void = undefined;</code>
-			<code>let u: undefined = undefined;</code>
-			<code>let n: null = null;</code>
-			<code> </code>
-		</pre>
+		<code>let some: any = true; some = 42;</code>
+		<code>some = 'maybe a string instead'; // типы не проверяются</code>
+		<code>// приведение типов (“trust me, I know what I’m doing”)</code>
+		<code>let length: number = (&lt;string>some).length;</code>
+		<code>length = (some as string).length;</code>
+		<code> </code>
+		<code>let unusable: void = undefined;</code>
+		<code>let u: undefined = undefined;</code>
+		<code>let n: null = null;</code>
+		<code> </code>
+	</pre>
 </section>
 
 
 <section class="slide">
 	<h2>Функции в TypeScript</h2>
 	<pre class="hljs ts">
-			<code>function sum(x: number, y: number): number {</code>
-			<code>    return x + y;</code>
-			<code>}</code>
-			<code> </code>
-			<code>const many: number = sum(40, 2);</code>
-			<code> </code>
-			<code>const gcd = (a: number, b: number): number =></code>
-			<code>    (b === 0) ? a : gcd(b, a % b);</code>
-			<code>console.log(gcd(48, 30)); // 6</code>
-			<code> </code>
-		</pre>
+		<code>function sum(x: number, y: number): number {</code>
+		<code>    return x + y;</code>
+		<code>}</code>
+		<code> </code>
+		<code>const many: number = sum(40, 2);</code>
+		<code> </code>
+		<code>const gcd = (a: number, b: number): number =></code>
+		<code>    (b === 0) ? a : gcd(b, a % b);</code>
+		<code>console.log(gcd(48, 30)); // 6</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Функции в TypeScript</h2>
 	<pre class="hljs ts">
-			<code>function sum(x: number, <mark>y?: number</mark>): number {</code>
-			<code>    if (y) {</code>
-			<code>        return x + y;</code>
-			<code>    } else {</code>
-			<code>        return x;</code>
-			<code>    }</code>
-			<code>}</code>
-			<code> </code>
-			<code>console.log(sum(34, 8));  // 42</code>
-			<code>console.log(sum(42));     // OK! - 42</code>
-			<code> </code>
-		</pre>
+		<code>function sum(x: number, <mark>y?: number</mark>): number {</code>
+		<code>    if (y) {</code>
+		<code>        return x + y;</code>
+		<code>    } else {</code>
+		<code>        return x;</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+		<code>console.log(sum(34, 8));  // 42</code>
+		<code>console.log(sum(42));     // OK! - 42</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Функции в TypeScript</h2>
 	<pre class="hljs ts">
-			<code>function sum(x: number, <mark>y: number = 42</mark>): number {</code>
-			<code>    return x + y;</code>
-			<code>}</code>
-			<code> </code>
-			<code>console.log(sum(34, 8));  // 42</code>
-			<code>console.log(sum(42));     // OK! - 84</code>
-			<code> </code>
-		</pre>
+		<code>function sum(x: number, <mark>y: number = 42</mark>): number {</code>
+		<code>    return x + y;</code>
+		<code>}</code>
+		<code> </code>
+		<code>console.log(sum(34, 8));  // 42</code>
+		<code>console.log(sum(42));     // OK! - 84</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Функции в TypeScript</h2>
 	<pre class="hljs ts">
-			<code>function sum(...numbers: number[]): number {</code>
-			<code>    return numbers.reduce((sum: number, current: number): number => {</code>
-			<code>        sum += current; return sum;</code>
-			<code>    }, 0);</code>
-			<code>}</code>
-			<code> </code>
-			<code>console.log(sum(1, 2, 3, 4, 5));     // 15</code>
-			<code>console.log(sum(42, 0, -10, 5, 5));  // 42</code>
-			<code> </code>
-		</pre>
+		<code>function sum(...numbers: number[]): number {</code>
+		<code>    return numbers.reduce((sum: number, current: number): number => {</code>
+		<code>        sum += current; return sum;</code>
+		<code>    }, 0);</code>
+		<code>}</code>
+		<code> </code>
+		<code>console.log(sum(1, 2, 3, 4, 5));     // 15</code>
+		<code>console.log(sum(42, 0, -10, 5, 5));  // 42</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Функции в TypeScript</h2>
 	<pre class="hljs ts">
-			<code>function square(num: number): number;</code>
-			<code>function square(num: string): number;</code>
-			<code>function square(num: any): number {</code>
-			<code>    if (typeof num === 'string') {</code>
-			<code>        return parseInt(num, 10) * parseInt(num, 10);</code>
-			<code>    } else {</code>
-			<code>        return num * num;</code>
-			<code>    }</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>function square(num: number): number;</code>
+		<code>function square(num: string): number;</code>
+		<code>function square(num: any): number {</code>
+		<code>    if (typeof num === 'string') {</code>
+		<code>        return parseInt(num, 10) * parseInt(num, 10);</code>
+		<code>    } else {</code>
+		<code>        return num * num;</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 
 <section class="slide">
 	<h2>Интерфейсы</h2>
 	<pre class="hljs ts">
-			<code>interface Figure {</code>
-			<code>    width: number;</code>
-			<code>    readonly height: number;</code>
-			<code>}</code>
-			<code> </code>
-			<code>const square: Figure = {width: 42, height: 42};</code>
-			<code>square.width = 15;    // OK</code>
-			<code>square.height = 15;   // Cannot assign to read-only property</code>
-			<code> </code>
-		</pre>
+		<code>interface Figure {</code>
+		<code>    width: number;</code>
+		<code>    readonly height: number;</code>
+		<code>}</code>
+		<code> </code>
+		<code>const square: Figure = {width: 42, height: 42};</code>
+		<code>square.width = 15;    // OK</code>
+		<code>square.height = 15;   // Cannot assign to read-only property</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Интерфейсы</h2>
 	<pre class="hljs ts">
-			<code>interface Figure {</code>
-			<code>    width: number;</code>
-			<code>    height: number;</code>
-			<code>}</code>
-			<code>interface Square extends Figure {</code>
-			<code>    square: () => number;</code>
-			<code>}</code>
-			<code>const sq = {width: 15, height: 20, </code>
-			<code>    square() { return this.width * this.height; } };</code>
-			<code>sq.square();    // 300</code>
-			<code> </code>
-		</pre>
+		<code>interface Figure {</code>
+		<code>    width: number;</code>
+		<code>    height: number;</code>
+		<code>}</code>
+		<code>interface Square extends Figure {</code>
+		<code>    square: () => number;</code>
+		<code>}</code>
+		<code>const sq = {width: 15, height: 20, </code>
+		<code>    square() { return this.width * this.height; } };</code>
+		<code>sq.square();    // 300</code>
+		<code> </code>
+	</pre>
 </section>
 
 
 <section class="slide">
 	<h2>Классы в TypeScript</h2>
 	<pre class="hljs ts">
-			<code><mark>abstract</mark> class Class1 {</code>
-			<code>    abstract func1(): void;  <span
-					class="comment rus">// необходимо определить в наследниках</code>
-			<code>}</code>
-			<code>class Class2 extends Class1 {</code>
-			<code>    static <mark>readonly</mark> field3: string = 'hello';</code>
-			<code>    <mark>protected</mark> name: string;</code>
-			<code>    <mark>private</mark> field1: number;</code>
-			<code>    constructor() { super(); }</code>
-			<code>    public func1(): void { ... }</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code><mark>abstract</mark> class Class1 {</code>
+		<code>    abstract func1(): void;  <span
+				class="comment rus">// необходимо определить в наследниках</code>
+		<code>}</code>
+		<code>class Class2 extends Class1 {</code>
+		<code>    static <mark>readonly</mark> field3: string = 'hello';</code>
+		<code>    <mark>protected</mark> name: string;</code>
+		<code>    <mark>private</mark> field1: number;</code>
+		<code>    constructor() { super(); }</code>
+		<code>    public func1(): void { ... }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Классы в TypeScript</h2>
 	<pre class="hljs ts">
-			<code>class Point {</code>
-			<code>    x: number;</code>
-			<code>    y: number;</code>
-			<code>}</code>
-			<code>interface Point3d extends Point {</code>
-			<code>    z: number;</code>
-			<code>}</code>
-			<code> </code>
-			<code>let point3d: Point3d = {x: 1, y: 2, z: 3};</code>
-			<code> </code>
-		</pre>
+		<code>class Point {</code>
+		<code>    x: number;</code>
+		<code>    y: number;</code>
+		<code>}</code>
+		<code>interface Point3d extends Point {</code>
+		<code>    z: number;</code>
+		<code>}</code>
+		<code> </code>
+		<code>let point3d: Point3d = {x: 1, y: 2, z: 3};</code>
+		<code> </code>
+	</pre>
 </section>
 
 
 <section class="slide">
 	<h2>Generics</h2>
 	<pre class="hljs ts">
-			<code>class Queue&lt;T> {</code>
-			<code>    private data = [];</code>
-			<code>    push = (item: T) => this.data.push(item);</code>
-			<code>    pop = (): T => this.data.shift();</code>
-			<code>}</code>
-			<code> </code>
-			<code>const queue = new Queue&lt;number>();</code>
-			<code>queue.push(0);    // OK</code>
-			<code>queue.push('1');  // Error: cannot push a string</code>
-			<code> </code>
-		</pre>
+		<code>class Queue&lt;T> {</code>
+		<code>    private data = [];</code>
+		<code>    push = (item: T) => this.data.push(item);</code>
+		<code>    pop = (): T => this.data.shift();</code>
+		<code>}</code>
+		<code> </code>
+		<code>const queue = new Queue&lt;number>();</code>
+		<code>queue.push(0);    // OK</code>
+		<code>queue.push('1');  // Error: cannot push a string</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Generics</h2>
 	<pre class="hljs ts">
-			<code>function makeKeyValue&lt;K, V>(key: K, value: V): { key: K; value: V } {</code>
-			<code>    return {key, value};</code>
-			<code>}</code>
-			<code> </code>
-			<code>const pair = makeKeyValue('days', ['ПН', 'ВТ']);</code>
-			<code>pair.value.push('СР', 'ЧТ', 'ПТ', 'СБ', 'ВС');  // OK</code>
-			<code>pair.value.push(42);   // Error: cannot push a number</code>
-			<code> </code>
-		</pre>
+		<code>function makeKeyValue&lt;K, V>(key: K, value: V): { key: K; value: V } {</code>
+		<code>    return {key, value};</code>
+		<code>}</code>
+		<code> </code>
+		<code>const pair = makeKeyValue('days', ['ПН', 'ВТ']);</code>
+		<code>pair.value.push('СР', 'ЧТ', 'ПТ', 'СБ', 'ВС');  // OK</code>
+		<code>pair.value.push(42);   // Error: cannot push a number</code>
+		<code> </code>
+	</pre>
 </section>
 
 
 <section class="slide">
 	<h2>Декораторы свойств и методов</h2>
 	<pre class="hljs ts">
-			<code>class Utils {</code>
-			<code>    <mark>@memoize</mark></code>
-			<code>    static fibonacci (n: number): number {</code>
-			<code>        return n < 2 ? 1 : Utils.fibonacci(n - 1) + Utils.fibonacci(n - 2)</code>
-			<code>    }</code>
-			<code>}</code>
-			<code>console.time('count');</code>
-			<code>console.log(Utils.fibonacci(50));</code>
-			<code>console.timeEnd('count');     // оооочень долго</code>
-			<code> </code>
-		</pre>
+		<code>class Utils {</code>
+		<code>    <mark>@memoize</mark></code>
+		<code>    static fibonacci (n: number): number {</code>
+		<code>        return n < 2 ? 1 : Utils.fibonacci(n - 1) + Utils.fibonacci(n - 2)</code>
+		<code>    }</code>
+		<code>}</code>
+		<code>console.time('count');</code>
+		<code>console.log(Utils.fibonacci(50));</code>
+		<code>console.timeEnd('count');     // оооочень долго</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Декораторы свойств и методов</h2>
 	<pre class="hljs ts">
-			<code>function memoize (target, key, descriptor) {</code>
-			<code>    const originalMethod = descriptor.value;</code>
-			<code>    const cash = {};</code>
-			<code>    descriptor.value = function (n: number): number {</code>
-			<code>        return cash[n] ? cash[n] : cash[n] = originalMethod(n);</code>
-			<code>    }</code>
-			<code>}</code>
-			<code>console.log(Utils.fibonacci(1000));   <span
-					class="comment rus">// 7.0330367711422765e+208</code>
-			<code>console.timeEnd('count');             // count: 5.668ms</code>
-			<code> </code>
-		</pre>
+		<code>function memoize (target, key, descriptor) {</code>
+		<code>    const originalMethod = descriptor.value;</code>
+		<code>    const cash = {};</code>
+		<code>    descriptor.value = function (n: number): number {</code>
+		<code>        return cash[n] ? cash[n] : cash[n] = originalMethod(n);</code>
+		<code>    }</code>
+		<code>}</code>
+		<code>console.log(Utils.fibonacci(1000));   <span
+				class="comment rus">// 7.0330367711422765e+208</code>
+		<code>console.timeEnd('count');             // count: 5.668ms</code>
+		<code> </code>
+	</pre>
 </section>
 
 
@@ -2102,18 +2102,18 @@
 <section class="slide">
 	<h2><code>.d.ts</code> файлы</h2>
 	<pre class="hljs ts">
-			<code>interface JQueryStatic {</code>
-			<code>    ajax(settings: JQueryAjaxSettings): JQueryXHR;</code>
-			<code>    (element: Element): JQuery;</code>
-			<code>    (html: string, ownerDocument?: Document): JQuery;</code>
-			<code>    (): JQuery;</code>
-			<code>}</code>
-			<code>declare var $: JQueryStatic;</code>
-			<code>declare module 'jquery' {</code>
-			<code>    export = $;</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>interface JQueryStatic {</code>
+		<code>    ajax(settings: JQueryAjaxSettings): JQueryXHR;</code>
+		<code>    (element: Element): JQuery;</code>
+		<code>    (html: string, ownerDocument?: Document): JQuery;</code>
+		<code>    (): JQuery;</code>
+		<code>}</code>
+		<code>declare var $: JQueryStatic;</code>
+		<code>declare module 'jquery' {</code>
+		<code>    export = $;</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide question">
