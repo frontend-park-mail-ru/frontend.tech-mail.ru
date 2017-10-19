@@ -55,7 +55,7 @@
 </section>
 
 <section class="slide question">
-	<h2 style="text-align: center; padding: 0"><span style="font-size: 140%">180 минут...</span></h2>
+	<h2 style="text-align: center; padding: 0"><span style="font-size: 140%">180 минут 🤔</span></h2>
 </section>
 
 <section class="slide question">
@@ -251,6 +251,26 @@
 		<code>String.prototype.<mark>charAt</mark>(index);       '😀'.charAt(0) === �</code>
 		<code>String.prototype.<mark>charCodeAt</mark>(index);   '😀'.charCodeAt(0) === 55357</code>
 		<code>String.prototype.<mark>codePointAt</mark>(index);  '😀'.codePointAt(0) === 128512</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Поддержка Юникода</h2>
+	<pre class="hljs js">
+		<code>const переменная = 42;</code>
+		<code>const джонни = {</code>
+		<code>    имя: 'Jhon',</code>
+		<code>    фамилия: 'Snow',</code>
+		<code>    возраст: 20</code>
+		<code>};</code>
+		<code> </code>
+		<code>function распечатать (пользователь) {</code>
+		<code>    console.log(`${пользователь.имя} ${пользователь.фамилия}`);</code>
+		<code>    console.log(`Возраст ${пользователь.возраст} лет`);</code>
+		<code>}</code>
+		<code> </code>
+		<code>распечатать(джонни);</code>
 		<code> </code>
 	</pre>
 </section>
@@ -715,6 +735,51 @@
 		<code>console.log(3 <mark>**</mark> 4);     // 81</code>
 		<code>console.log(49 <mark>**</mark> 0.5);  // 7</code>
 		<code> </code>
+		<code> </code>
+	</pre>
+</section>
+
+
+<section class="slide question">
+	<h2 style="text-align: center; padding: 0">
+		<span style="font-size: 85%; line-height: 1.7; display: inline-block;"><code>SharedArrayBuffer</code> и <code>Atomics</code></span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Ликбез про <strong>Web Workers</strong></h2>
+	<pre class="hljs js">
+		<code>// main</code>
+		<code>const worker = new Worker(scriptUrl);           // создали воркер</code>
+		<code>// const sharedWorker = new SharedWorker(scriptUrl);</code>
+		<code> </code>
+		<code>worker.postMessage({hello: 'world'});           // отправили данные</code>
+		<code>worker.onmessage = function(e) { e.data ... };  // обработчик <mark>onmessage</mark></code>
+		<code> </code>
+	</pre>
+	<pre class="hljs js">
+		<code>// worker</code>
+		<code>self.onmessage = function(e) { e.data... };   // обработчик <mark>onmessage</mark></code>
+		<code>self.postMessage({hello: 'world'});           // отправили данные</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2><code>SharedArrayBuffer</code> и <code>Atomics</code></h2>
+	<pre class="hljs js">
+		<code>const buffer = new ArrayBuffer(15 * 1024 * 1024);  // 15 MB RAM</code>
+		<code>worker.postMessage(buffer);                        // клонирует данные</code>
+		<code> </code>
+		<code>const shared = new <mark>SharedArrayBuffer</mark>(length);      // разделяемая память</code>
+		<code>worker.postMessage(shared);                        // клонирует данные</code>
+		<code> </code>
+		<code><mark>Atomics</mark>.add(typedArray, pos, val);     // потокобезопасное сложение</code>
+		<code><mark>Atomics</mark>.sub(typedArray, pos, val);     // потокобезопасное вычитание</code>
+		<code><mark>Atomics</mark>.store(typedArray, pos, val);   // потокобезопасная запись</code>
+		<code><mark>Atomics</mark>.load(typedArray, pos);         // потокобезопасное чтение</code>
+		<code><mark>Atomics.wait</mark>(typedArray, pos, val[, timeout]);  // like as <mark>Linux futexes</mark></code>
+		<code>...</code>
 		<code> </code>
 	</pre>
 </section>
@@ -1459,23 +1524,99 @@
 
 <section class="slide">
 	<h2><code>Proxy</code></h2>
-	<p class="medium-content"><strong>Объест Proxy</strong> </p>
+	<p class="medium-content"><strong>Объест Proxy (Прокси)</strong> &mdash; особый объект, смысл которого &mdash; перехватывать обращения к другому объекту и, при необходимости, модифицировать их</p>
 	<pre class="hljs js">
-		<code>// TODO добавить про Proxy</code>
+		<code>// создание Proxy</code>
+		<code>const proxy = new Proxy(target, handler);</code>
+		<code> </code>
+		<code>// <mark>target</mark> - объект, обращения к которому надо перехватывать</code>
+		<code>// <mark>handler</mark> - объект с функциями-перехватчиками для операций к target</code>
+		<code> </code>
 	</pre>
 </section>
 
-
-<section class="slide question">
-	<h2 style="text-align: center; padding: 0">
-		<span style="font-size: 85%; line-height: 1.7; display: inline-block;"><code>SharedArrayBuffer</code> и <code>Atomics</code></span>
-	</h2>
+<section class="slide">
+	<h2>Создание <code>Proxy</code></h2>
+	<pre class="hljs js">
+		<code>const user = {};</code>
+		<code>const proxy = new Proxy(user, {</code>
+		<code>    get (target, property, receiver) {</code>
+		<code>        console.log(`Чтение ${property}`);</code>
+		<code>        return target[property];</code>
+		<code>    },</code>
+		<code>    set (target, property, value, receiver) {</code>
+		<code>        console.log(`Запись ${property} = ${value}`);</code>
+		<code>        target[property] = value;</code>
+		<code>        return true;</code>
+		<code>    },</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
-	<h2><code>SharedArrayBuffer</code> и <code>Atomics</code></h2>
+	<h2>Использование <code>Proxy</code></h2>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
-		<code>// TODO add about SharedArrayBuffer and Atomics</code>
+		<code>proxy.name = 'Jhon Snow';               // Запись name = Jhon Snow</code>
+		<code>proxy.age = 22;                         // Запись age = 22</code>
+		<code>proxy['long property'] = 'qux';         // Запись long property = qux</code>
+		<code> </code>
+		<code>const name = proxy.name;                // Чтение name</code>
+		<code>const age = proxy.age;                  // Чтение age</code>
+		<code>const long = proxy['long property'];    // Чтение long property</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Конфигурация <code>Proxy</code></h2>
+	<p class="medium-content"></p>
+	<pre class="hljs js">
+		<code>const handler = {</code>
+		<code>    get (target, name, receiver);       // получение свойств</code>
+		<code>    set (target, name, val, receiver);  // установка свойства</code>
+		<code>    apply (target, thisValue, args);    // вызовы функции</code>
+		<code>    construct (target, args);           // вызовы конструктора с <mark>new</mark></code>
+		<code>    has (target, name);                 // оператор <mark>in</mark></code>
+		<code>    defineProperty (target, property, descriptor);</code>
+		<code>                                        // метод <mark>Object.defineProperty()</mark></code>
+		<code>    deleteProperty (target, property);  // оператор <mark>delete</mark></code>
+		<code>    ...</code>
+		<code>};</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Применение <code>Proxy</code></h2>
+	<p class="medium-content"></p>
+	<pre class="hljs js">
+		<code>const original = {};</code>
+		<code>const magic = wrapWithProxy(original);</code>
+		<code> </code>
+		<code>magic.data.elements[0].attributes.color = 'black';</code>
+		<code>magic.country.map.shops = [ ... ];</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Применение <code>Proxy</code>: <a href="https://github.com/pedsmoreira/jewell" target="_blank">jewell</a></h2>
+	<pre class="hljs js">
+		<code>import { jewellPrototype } from 'jewell';</code>
+		<code>jewellPrototype(Array);</code>
+		<code>const diamonds = [...];</code>
+		<code> </code>
+		<code>// Get price: [2k, 100k, 300k]</code>
+		<code>diamonds.map(diamond => diamond.price); // Traditional</code>
+		<code>diamonds.map.price; // 💎</code>
+		<code> </code>
+		<code>// Buy all pink diamonds</code>
+		<code>diamonds</code>
+		<code>    .filter(diamond => diamond.pink)</code>
+		<code>    .forEach(diamond => diamond.buy()); // Traditional</code>
+		<code>diamonds.filter.pink.forEach.buy(); // 💎</code>
 		<code> </code>
 	</pre>
 </section>
@@ -2158,6 +2299,8 @@
 			книга по TypeScript
 		</li>
 		<li><a href="https://github.com/getify/You-Dont-Know-JS" target="_blank">Крутая серия книг</a> о JavaScript</li>
+		<li><a href="https://developer.mozilla.org/ru/docs/DOM/Using_web_workers" target="_blank">Использование Web Workers</a> &mdash; MDN</li>
+		<li><a href="https://www.html5rocks.com/ru/tutorials/workers/basics/" target="_blank">Туториал Web Workers</a> &mdash; MDN</li>
 	</ul>
 </section>
 
