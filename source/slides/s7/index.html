@@ -1910,19 +1910,19 @@
 <section class="slide">
 	<h2>Elm</h2>
 	<pre class="hljs elm">
-			<code>import Html exposing (text)</code>
-			<code> </code>
-			<code>four =</code>
-			<code>  sqrt 16</code>
-			<code> </code>
-			<code>eleven =</code>
-			<code>  max 2 11</code>
-			<code> </code>
-			<code>twenty =</code>
-			<code>  max (sqrt 100) (4 * 5)</code>
-			<code> </code>
-			<code>main =</code>
-			<code>  text (toString [four, eleven, twenty])</code>
+		<code>import Html exposing (text)</code>
+		<code> </code>
+		<code>main =</code>
+		<code>  text (toString (zip ["Tom", "Sue", "Bob"] [45, 31, 26]))</code>
+		<code> </code>
+		<code>zip : List a -> List b -> List (a,b)</code>
+		<code>zip xs ys =</code>
+		<code>  case (xs, ys) of</code>
+		<code>	( x :: xBack, y :: yBack ) -></code>
+		<code>		(x,y) :: zip xBack yBack</code>
+		<code> </code>
+		<code>	(_, _) -></code>
+		<code>		[]</code>
 		</pre>
 </section>
 
