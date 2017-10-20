@@ -2029,7 +2029,51 @@
 	<pre class="hljs ts">
 		<code>const valid: boolean = true;</code>
 		<code>const count: number = 42;</code>
-		<code>const name: string = 'Jon Snow';</code>
+		<code>const man: string = 'Jon Snow';</code>
+		<code> </code>
+		<code>console.log(man * 2);</code>
+		<code>// Error: The left-hand side of an arithmetic</code>
+		<code>// operation must be of type 'any', 'number' or an enum type.</code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Type Inference</h2>
+	<blockquote>
+		<p><b>Вывод типов</b> (англ. type inference) &mdash; в программировании возможность компилятора
+			самому логически вывести тип значения у выражения.
+		</p>
+	</blockquote>
+	<pre class="hljs ts">
+		<code>const valid = true;</code>
+		<code>const count = 42;</code>
+		<code>const man = 'Jon Snow';</code>
+		<code> </code>
+		<code>console.log(man * 2);</code>
+		<code>// Error: The left-hand side of an arithmetic</code>
+		<code>// operation must be of type 'any', 'number' or an enum type.</code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Аннотации типов</h2>
+	<pre class="hljs ts">
+		<code>const valid = true;</code>
+		<code>const count = 42;</code>
+		<code>const man: any = 'Jon Snow';</code>
+		<code> </code>
+		<code>console.log(man * 2); //NaN</code>
+		<code>// Зато нет TS ошибок!</code>
+		<code>// Profit!</code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Аннотации типов</h2>
+	<pre class="hljs ts">
+		<code>const valid = true;</code>
+		<code>const count = 42;</code>
+		<code>const name = 'Jon Snow';</code>
 		<code> </code>
 		<code>const values: number[] = [1, 2, 3, 4, 5];</code>
 		<code>const tuple: [string, number] = ['Mean of life', 42];</code>
@@ -2134,6 +2178,20 @@
 	</pre>
 </section>
 
+<section class="slide">
+	<h2>Функции в TypeScript</h2>
+	<pre class="hljs ts">
+		<code>function square(num: string | number): number {</code>
+		<code>    if (typeof num === 'string') {</code>
+		<code>        return parseInt(num, 10) * parseInt(num, 10);</code>
+		<code>    } else {</code>
+		<code>        return num * num;</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
 
 <section class="slide">
 	<h2>Интерфейсы</h2>
@@ -2189,16 +2247,18 @@
 <section class="slide">
 	<h2>Классы в TypeScript</h2>
 	<pre class="hljs ts">
-		<code>class Point {</code>
-		<code>    x: number;</code>
-		<code>    y: number;</code>
-		<code>}</code>
-		<code>interface Point3d extends Point {</code>
-		<code>    z: number;</code>
+		<code>interface Squarable {</code>
+		<code>	calcSomething(): number;</code>
 		<code>}</code>
 		<code> </code>
-		<code>let point3d: Point3d = {x: 1, y: 2, z: 3};</code>
+		<code>class Square implements Squarable {</code>
+		<code>	width: number;</code>
+		<code>	height: number;</code>
 		<code> </code>
+		<code>	// Error: Class 'Square' incorrectly implements interface 'Squarable'.</code>
+		<code>	// Property 'calcSomething' is missing in type 'Square'.</code>
+		<code>}</code>
+
 	</pre>
 </section>
 
