@@ -1822,17 +1822,20 @@
 <section class="slide">
 	<h2>Транспилляция из ES.Next</h2>
 	<pre class="hljs js">
-		<code>class ReleaseReducer extends BaseReducer {</code>
-		<code>    constructor(...args) {</code>
-		<code>        super(args.length);</code>
-		<code>        this.initial = args;</code>
-		<code>    }</code>
-		<code>    set Fields (value = {}) {</code>
-		<code>        const {name, data:count = 0} = value;</code>
-		<code>        this.fields = Object.assign(this.fields, {name, count});</code>
-		<code>    }</code>
+		<code>import { flying } from 'abilities';</code>
+		<code>class Creature {</code>
+		<code>	constructor({ name, ...rest}) {</code>
+		<code>		console.log(`Привет, ${name}, твои свойства:`, rest);</code>
+		<code>	}</code>
 		<code>}</code>
-		<code> </code>
+		<code>@flying</code>
+		<code>class Dragon extends Creature {</code>
+		<code>	static haveTail = true;</code>
+		<code>	legs = 4;</code>
+		<code>	async *eat(...staff) {</code>
+		<code>		// Eat something...</code>
+		<code>	}</code>
+		<code>}</code>
 	</pre>
 </section>
 
