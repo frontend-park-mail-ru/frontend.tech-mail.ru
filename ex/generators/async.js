@@ -32,7 +32,7 @@ const work = async function () {
 		filenames.map(filename => read('./files/' + filename))
 	);
 
-	const summ = nums.reduce((sum, num) => + num + + sum);
+	const summ = nums.reduce((sum, num) => +num + +sum);
 
 	await write('result-async.dat', `Result is ${summ}`);
 };

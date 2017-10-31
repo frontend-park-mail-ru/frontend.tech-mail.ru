@@ -1,8 +1,8 @@
 'use strict';
 
-import func from './function';
+import Super from './function';
 
-func(...'Hello, world!');
+Super.uniq(...'Hello, world!');
 
 
 // babel ./src --out-dir lib

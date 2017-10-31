@@ -7,7 +7,10 @@ fs.readFile('./files/list.dat', 'utf8', function (err, text) {
 	if (err) {
 		return console.error(err);
 	}
-	const [filename1, filename2, filename3, filename4] = text.split('\n').map(name => name.trim()).filter(name => !!name);
+	const [filename1, filename2, filename3, filename4] = text
+		.split('\n')
+		.map(name => name.trim())
+		.filter(name => !!name);
 	let summ = 0;
 
 	fs.readFile('./files/' + filename1, 'utf8', function (err, text) {
@@ -45,3 +48,4 @@ fs.readFile('./files/list.dat', 'utf8', function (err, text) {
 		});
 	});
 });
+

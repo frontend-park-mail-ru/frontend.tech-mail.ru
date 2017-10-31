@@ -1,5 +1,7 @@
 'use strict';
 
-export default function(...strings) {
-	console.log([...new Set(strings).values()]);
+export default class Super {
+	static uniq (...strings) {
+		console.log([...new Set(strings).values()]);
+	}
 }
