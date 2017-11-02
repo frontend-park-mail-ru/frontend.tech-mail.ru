@@ -80,22 +80,134 @@
 </section>
 
 <section class="slide">
-	<h2>Производительность WEB'а</h2>
-	<p class="note">В чём суть лекции: в том, что мы сначала рассказываем про то, как можно оптимизировать фронтенд под обычный http (gzip, кэш, хаки, storage, sw), а потом рассказываем про "новые протоколы" &mdash; websocket и HTTP/2</p>
-	<ul>
-		<li>Что происходит во время загрузки страницы, какие стадии проходит http-запрос и httpS запрос</li>
-		<li>Что влияет на продолжительность выполнения запроса, какие есть характеристики и метрики, PerformanceTiming, <code>performance.getEntries()</code>, События load, DOMContentLoaded</li>
+	<h2>HTTP-latency</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="images/latency.png"
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.95);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>HTTP-latency</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="images/latency-bandwidth.svg"
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.8);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>One request per connection</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="images/one-request-per-connection.png"
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(1.2);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Как оптимизировать?</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="html5_link_prefetch.png"
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.9);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>prefetch, preconnect, preload</h2>
+		<pre class="hljs html">
+			<code>&lt;!--  резолвит DNS заранее --&gt;</code>
+			<code>&lt;meta http-equiv="x-dns-prefetch-control" content="on"&gt;</code>
+			<code>&lt;link rel="dns-prefetch" href="//api.myawesomegame.io"&gt;</code>
+			<code>&lt;!-- dns-prefetch на стероидах, также инициирует коннект --&gt;</code>
+			<code>&lt;link rel="preconnect" href="//api.myawesomegame.io"&gt;</code>
+			<code> </code>
+			<code>&lt;!-- загружает ресурс с низким приоритетом и кладет в кеш --&gt;</code>
+			<code>&lt;link rel="prefetch" href="https://myawesomegame.io/img/sprite.jpg"&gt;</code>
+			<code>&lt;!-- загружает ресурс с высоким приоритетом и кладет в кеш --&gt;</code>
+			<code>&lt;link rel="subresource" href="https://myawesomegame.io/img/sprite.jpg"&gt;</code>
+			<code> </code>
+			<code>&lt;!-- загружает страницу со всем содержимым в фоне, строит DOM --&gt;</code>
+			<code>&lt;link rel="prerender" href="https://myawesomegame.io/about.html"&gt;</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+	<h2>Предзагрузка картинок через JS</h2>
+		<pre class="hljs js">
+			<code>const img = new Image();</code>
+			<code>img.src = 'https://myawesomegame.io/img/sprite.jpg';</code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>DOMContentLoaded и load</h2>
+	<div>
+		<div>DOMContentLoaded возникает на построение DOM-дерева</div>
+		<pre class="hljs js">
+			<code>document.addEventListener("DOMContentLoaded", () => {</code>
+			<code>  // DOM дерево построено, но загружены не все ресурсы</code>
+			<code>});</code>
+		</pre>
+		<div><small>DOMContentLoaded зависит от скриптов на странице</small></div>
+		<br/>
+		<div>load возникнет, когда все ресурсы (стили, шрифты, картинки) будут загружены</div>
+		<pre class="hljs js">
+			<code>document.addEventListener("load", () => {</code>
+			<code>  // Все ресурсы загружены</code>
+			<code>});</code>
+		</pre>
+	</div>
+</section>
+
+<section class="slide">
+	<h2>PerformanceTiming</h2>
+	<pre class="hljs js">
+		<code>window.performance.timing</code>
+		содержит все события, происходившие с загрузкой страницы
+		<code>window.performance.timing.fetchStart</code>
+		<code>window.performance.timing.domainLookupStart</code>
+		<code>window.performance.timing.domainLookupEnd</code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Performance Entries</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="entries.png"
+																				style="transform-origin: center;transform: translate(-50%,-47%) scale(0.4);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Уменьшаем время загрузки данных</h2>
+	<h3><b>Минификация статики (стили, скрипты, картинки)</b></h3>
+	<div>jquery.js<span style="padding-left: 53px;"></span>&rarr; 278KB</div>
+	<div>jquery.min.js &rarr; 101KB</div>
+</section>
+
+<section class="slide">
+	<h2>Уменьшаем время загрузки данных</h2>
+	<h3><b>Сжатие ответа</b></h3>
+	<pre class="hljs http">
+		<code>Content-Encoding: gzip</code>
+	</pre>
+
+	<ul style="font-size: 90%">
+		<li>Минификация и оптимизация статики, картинок, скриптов, стилей, шрифтов, html. Сжатие тела ответа (gzip), сравнение минификации/оптимизации/сжатия через gzip. Zopfli/Brotli - поддержка браузерами и сравнение производительности сжатия/разжатия. Сравнение на разных типах содержимого (Brotli для текста, Zopfli для бинарных данных). Фишка того, что в Brotli долго сжимается, зато хорошо и быстро распаковывается.</li>
+		<li>"Сжатие" данных за счёт новых форматов данных, WebP для картинок, WebM для мультимедиа, WOFF /WOFF2 для шрифтов, protobuf</li>
+		<li>Кэширование в HTTP, кэширование заголовков (например CORS), кэширование DNS, хаки кэширования (уникальные имена для бандлов, чтобы закешировать его навсегда и рандомные гет-параметры, чтобы "отключить" кэширование)</li>
+		<li>Как не выстрелить себе в голову с кэшированием</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>Производительность WEB'а</h2>
-	<ul style="font-size: 90%">
-		<li>Минификация и оптимизация статики, картинок, скриптов, стилей, шрифтов, html. Сжатие тела ответа (gzip), сравнение минификации/оптимизации/сжатия через gzip. Zopfli/Brotli - поддержка браузерами и сравнение производительности сжатия/разжатия. Сравнение на разных типах содержимого (Brotli для текста, Zopfli для бинарных данных). Фишка того, что в Brotli долго сжимается, зато хорошо и быстро распаковывается.</li>
-		<li>"Сжатие" данных за счёт новых форматов данных, WebP для картинок, WebM для мультимедиа, WOFF /WOFF2 для шрифтов, protobuf</li>
-		<li>Кэширование в HTTP, кэширование заголовков (например CORS), кэширование DNS, предзапросы (https://ymatuhin.ru/front-end/html5-link-prefetch/), "кэширование через js-предзапросы" (грузим картинку js-ом, чтобы потом она сразу отобразилась без мигания), хаки кэширования (уникальные имена для бандлов, чтобы закешировать его навсегда и рандомные гет-параметры, чтобы "отключить" кэширование)</li>
-		<li>Как не выстрелить себе в голову с кэшированием</li>
-	</ul>
+	<h2>Уменьшаем время загрузки данных</h2>
+	<h3><b>Форматы</b></h3>
+	WebP WebM Woff2
+</section>
+
+<section class="slide">
+	<h2>Уменьшаем время загрузки данных</h2>
+	<h3><b>Форматы</b></h3>
+	Protobuf
 </section>
 
 <section class="slide">
@@ -144,14 +256,6 @@
 		<li>Поддержка</li>
 		<li>Преймущества/недостатки</li>
 		<li>Как использовать?</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Протокол HTTP/2</h2>
-	<ul>
-		<li>По слайдам</li>
-		<li>Рассказать, что в http/2 были исправлены многие недостатки http/1.1</li>
 	</ul>
 </section>
 
@@ -629,37 +733,6 @@
 </section>
 
 <section class="slide">
-	<h2>HTTP-request stages</h2>
-	<div style="position:relative;width: 72%;height: 75%;overflow: hidden;margin: 0 auto;"><img class="place"
-																								src="http-request-stages.png"
-																								style="transform-origin: center;transform: translate(-50%,-48%) scale(0.85);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>HTTP-latency</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="images/latency.png"
-																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.95);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>HTTP-latency</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
-																				src="images/latency-bandwidth.svg"
-																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.8);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>One request per connection</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
-																				src="images/one-request-per-connection.png"
-																				style="transform-origin: center;transform: translate(-50%,-50%) scale(1.2);">
-	</div>
-</section>
-
-<section class="slide">
 	<h2>Many performance HTTP/1.1 hacks</h2>
 	<p class="medium-content"></p>
 	<ul>
@@ -713,6 +786,7 @@
 		<li>node.js 5.0</li>
 		<li>Apache 2.4.12</li>
 		<li>Jetty 9.3 and Netty 4.1 (Java)</li>
+		<li>❤️ Go 1.6</li>
 		<li>and more...</li>
 	</ul>
 </section>
