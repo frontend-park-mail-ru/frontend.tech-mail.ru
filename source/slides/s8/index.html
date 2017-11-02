@@ -95,14 +95,6 @@
 </section>
 
 <section class="slide">
-	<h2>One request per connection</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
-																				src="images/one-request-per-connection.png"
-																				style="transform-origin: center;transform: translate(-50%,-50%) scale(1.2);">
-	</div>
-</section>
-
-<section class="slide">
 	<h2>Как оптимизировать?</h2>
 	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
 																				src="html5_link_prefetch.png"
@@ -211,6 +203,25 @@
 </section>
 
 <section class="slide">
+	<h2>HTTP weakness. One request per connection</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="images/one-request-per-connection.png"
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(1.2);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Уменьшаем количество запросов</h2>
+	<img class="place" src="images/http:1-loading.png"
+		style="transform-origin: left top;top: 0;left: 0;transform: translate(0px, 0px) scale(1.25);">
+		Конкатенация скриптов, стилей
+</section>
+
+	<section class="slide">
+	<h2>Connection: keep-alive</h2>
+</section>
+
+<section class="slide">
 	<h2>Как побороть недостатки HTTP?</h2>
 	<ul>
 		<li>Долгая установка соединения и хак с конкатенацией статики (стили, спрайты, скрипты) чтобы уменьшить количество запросов</li>
@@ -219,43 +230,6 @@
 		<li>Max. 6 connections per domain и domain-шардинг</li>
 		<li>То, что с запросом отправляется 100500 мегабайт кук и всего такого и вынесение статики на отдельные домены, чтобы туда куки не отправлялись</li>
 		<li>Инлайн данных, base64 картинок/шрифтов, критикал css, критикал js и критикал html</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Про то, где хранить много данных (кэширование, которым мы управляем)</h2>
-	<ul>
-		<li>Разные типы хранилищ: localStorage/sessionStorage, WebSQL/IndexedDB, FileSystem</li>
-		<li>Работа с localStorage/sessionStorage: сходства/различия, общение между вкладками через событие storage, синхронный запрос, упомянуть про то, что setItem может кинуть эксепшен</li>
-		<li>Пример работы с WebSQL/IndexedDB (просто по паре строк кода), отличия от localStorage/sessionStorage (в том, что есть индексы, что запросы асинхронные), поддержка браузерами</li>
-		<li>Ссылки на примеры с FileSystem</li>
-		<li>Ограничения по памяти</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Ещё более умное кэширование (service-workers) [про обычные воркеры я уже упоминал на лекции, они чуть-чуть в курсе]</h2>
-	<ul>
-		<li>Поддержка, плюсы и минусы, зачем используется</li>
-		<li>Жизненный цикл, создание и установка воркера</li>
-		<li>Пример кода для оффлайн-работы с sw</li>
-		<li>Обязательно картинку https://mdn.mozillademos.org/files/12630/important-notes.png (из статьи https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API/Using_Service_Workers)</li>
-		<li>Как ещё можно использовать сервис-воркеры (пример из телеграма, где они в веб-версии перекодировали картинки из крутых форматов, чтобы показывать стикеры быстро)</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>перерыв</h2>
-	<p class="small-content">По примерным прикидам, это где-то 1:40 от лекции. Плюс 10 минут перерым и получается на вторую часть около 1:05 &mdash; в целом очень круто выходит</p>
-</section>
-
-<section class="slide">
-	<h2>Протокол WebSocket</h2>
-	<ul>
-		<li>Определение</li>
-		<li>Поддержка</li>
-		<li>Преймущества/недостатки</li>
-		<li>Как использовать?</li>
 	</ul>
 </section>
 
@@ -460,6 +434,104 @@
 	</ul>
 </section>
 
+<section class="slide">
+	<h2>Ещё более умное кэширование (service-workers) [про обычные воркеры я уже упоминал на лекции, они чуть-чуть в курсе]</h2>
+	<ul>
+		<li>Поддержка, плюсы и минусы, зачем используется</li>
+		<li>Жизненный цикл, создание и установка воркера</li>
+		<li>Пример кода для оффлайн-работы с sw</li>
+		<li>Обязательно картинку https://mdn.mozillademos.org/files/12630/important-notes.png (из статьи https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API/Using_Service_Workers)</li>
+		<li>Как ещё можно использовать сервис-воркеры (пример из телеграма, где они в веб-версии перекодировали картинки из крутых форматов, чтобы показывать стикеры быстро)</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2 class="shout">Service Workers</h2>
+</section>
+
+<section class="slide">
+	<h2>Service Workers</h2>
+	<blockquote>
+		<p class="small-content"><strong>Service Workers</strong> &mdash; ещё более продвинутая технология, которая
+			позволяет получить полный контроль над жизненным циклом приложения. Сервис воркер &mdash; это воркер,
+			который работает в выделенном контексте и имеет доступ к Cache Storage, имеет возможность перехватывать
+			запросы, отправляемые страницей, а так же может работать даже если само приложение не запущено</p>
+	</blockquote>
+</section>
+
+<section class="slide">
+	<h2>Service Workers</h2>
+	<ul>
+		<li>Кэширование данных (50MB+)</li>
+		<li>Оффлайн-работа приложения</li>
+		<li>Фоновая синхронизация данных</li>
+		<li>Ответ на запросы от других источников</li>
+		<li>Улучшение производительности</li>
+		<li>Push-нотификации</li>
+		<li>Распараллеливание вычислений</li>
+		<li>etc...</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Service Workers</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="swcaniuse.png"
+																				style="transform-origin: center;transform: translate(-50.4%,-50%) scale(0.8);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Service Workers</h2>
+	<p class="medium-content">Работает в специальном скоупе <code>ServiceWorkerGlobalScope</code><br>События</p>
+	<ul>
+		<li><code>install</code></li>
+		<li><code>activate</code></li>
+		<li><code>fetch</code></li>
+		<li><code>message</code></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Service Worker lifecycle</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="sw-lifecycle.png"
+																				style="transform-origin: center;transform: translate(-56%,-50%) scale(0.85);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Установка Service Worker'а</h2>
+	<pre class="hljs js">
+			<code>navigator.serviceWorker.register('/sw.js', { scope: '/' })</code>
+			<code>    .then(function(registration) {</code>
+			<code>        // Registration was successful</code>
+			<code>        console.log('SW registration OK:', registration);</code>
+			<code>    })</code>
+			<code>    .catch(function(err) {</code>
+			<code>        // registration failed :(</code>
+			<code>        console.log('SW registration FAIL:', err);</code>
+			<code>    });</code>
+			<code>});</code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>Service Worker &mdash; это просто файл</h2>
+	<pre class="hljs js">
+			<code>this.addEventListener('install', function (event) {</code>
+			<code>    console.log('Service worker установлен')</code>
+			<code>    event.waitUntil(</code>
+			<code>        // находим Cache-объект с нашим именем</code>
+			<code>        caches.open('MY_CACHE')</code>
+			<code>            .then(function (cache) {</code>
+			<code>                // загружаем в наш cache необходимые файлы</code>
+			<code>                return cache.addAll(['/index.html']);</code>
+			<code>            });</code>
+			<code>    );</code>
+			<code>});</code>
+			<code> </code>
+		</pre>
+</section>
 
 <section class="slide">
 	<h2 class="shout">Протокол WebSocket</h2>
@@ -593,94 +665,6 @@
 </section>
 
 
-<section class="slide">
-	<h2 class="shout">Service Workers</h2>
-</section>
-
-<section class="slide">
-	<h2>Service Workers</h2>
-	<blockquote>
-		<p class="small-content"><strong>Service Workers</strong> &mdash; ещё более продвинутая технология, которая
-			позволяет получить полный контроль над жизненным циклом приложения. Сервис воркер &mdash; это воркер,
-			который работает в выделенном контексте и имеет доступ к Cache Storage, имеет возможность перехватывать
-			запросы, отправляемые страницей, а так же может работать даже если само приложение не запущено</p>
-	</blockquote>
-</section>
-
-<section class="slide">
-	<h2>Service Workers</h2>
-	<ul>
-		<li>Кэширование данных (50MB+)</li>
-		<li>Оффлайн-работа приложения</li>
-		<li>Фоновая синхронизация данных</li>
-		<li>Ответ на запросы от других источников</li>
-		<li>Улучшение производительности</li>
-		<li>Push-нотификации</li>
-		<li>Распараллеливание вычислений</li>
-		<li>etc...</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Service Workers</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="swcaniuse.png"
-																				style="transform-origin: center;transform: translate(-50.4%,-50%) scale(0.8);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Service Workers</h2>
-	<p class="medium-content">Работает в специальном скоупе <code>ServiceWorkerGlobalScope</code><br>События</p>
-	<ul>
-		<li><code>install</code></li>
-		<li><code>activate</code></li>
-		<li><code>fetch</code></li>
-		<li><code>message</code></li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Service Worker lifecycle</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="sw-lifecycle.png"
-																				style="transform-origin: center;transform: translate(-56%,-50%) scale(0.85);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Установка Service Worker'а</h2>
-	<pre class="hljs js">
-			<code>navigator.serviceWorker.register('/sw.js', { scope: '/' })</code>
-			<code>    .then(function(registration) {</code>
-			<code>        // Registration was successful</code>
-			<code>        console.log('SW registration OK:', registration);</code>
-			<code>    })</code>
-			<code>    .catch(function(err) {</code>
-			<code>        // registration failed :(</code>
-			<code>        console.log('SW registration FAIL:', err);</code>
-			<code>    });</code>
-			<code>});</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Service Worker &mdash; это просто файл</h2>
-	<pre class="hljs js">
-			<code>this.addEventListener('install', function (event) {</code>
-			<code>    console.log('Service worker установлен')</code>
-			<code>    event.waitUntil(</code>
-			<code>        // находим Cache-объект с нашим именем</code>
-			<code>        caches.open('MY_CACHE')</code>
-			<code>            .then(function (cache) {</code>
-			<code>                // загружаем в наш cache необходимые файлы</code>
-			<code>                return cache.addAll(['/index.html']);</code>
-			<code>            });</code>
-			<code>    );</code>
-			<code>});</code>
-			<code> </code>
-		</pre>
-</section>
-
 
 <section class="slide">
 	<h2 class="shout">HTTP/2</h2>
@@ -729,19 +713,6 @@
 			, but HTTPS is
 			<mark>even slower</mark>
 		</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Many performance HTTP/1.1 hacks</h2>
-	<p class="medium-content"></p>
-	<ul>
-		<li>Concatenation of files</li>
-		<li>Image sprites</li>
-		<li>Domain sharding</li>
-		<li>Data inlining</li>
-		<li>Critical CSS</li>
-		<li>And more...</li>
 	</ul>
 </section>
 
