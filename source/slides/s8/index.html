@@ -335,11 +335,10 @@
 	<div style="position:relative;width: 100%;height: 45%;margin: 0 auto;"><img class="place"
 		src="protobuf-times.png"
 		style="transform-origin: center;transform: translate(-50%,-50%) scale(0.24);">
-	</div>
 </section>
 
 <section class="slide">
-	<h2>HTTP weakness. One request per<br/>connection</h2>
+	<h2>HTTP weakness.<br>One request per connection</h2>
 	<div style="position:relative;width: 100%;height: 50%;margin: 0 auto;"><img class="place"
 		src="images/one-request-per-connection.png"
 		style="transform-origin: center;transform: translate(-50%,-50%) scale(1);">
@@ -637,19 +636,37 @@
 </section>
 
 <section class="slide">
-	<h2>Ещё более умное кэширование (service-workers) [про обычные воркеры я уже упоминал на лекции, они чуть-чуть в
-		курсе]</h2>
-	<ul>
-		<li>Поддержка, плюсы и минусы, зачем используется</li>
-		<li>Жизненный цикл, создание и установка воркера</li>
-		<li>Пример кода для оффлайн-работы с sw</li>
-		<li>Обязательно картинку https://mdn.mozillademos.org/files/12630/important-notes.png (из статьи
-			https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API/Using_Service_Workers)
-		</li>
-		<li>Как ещё можно использовать сервис-воркеры (пример из телеграма, где они в веб-версии перекодировали картинки
-			из крутых форматов, чтобы показывать стикеры быстро)
-		</li>
-	</ul>
+	<h2>Must see</h2>
+	<div style="font-size:36px;margin-top:15%;">
+		<a href="https://www.youtube.com/watch?v=cmGr0RszHc8" target="_blank">
+			https://www.youtube.com/watch?v=cmGr0RszHc8
+		</a><br>
+		Building offline-first Progressive Web Apps
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Service Workers</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;">
+		<img class="place" src="sw-1.png"
+			style="transform-origin: center;transform: translate(-50.4%,-50%) scale(0.8);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Service Workers</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;">
+		<img class="place" src="sw-2.png"
+			style="transform-origin: center;transform: translate(-50.4%,-50%) scale(0.8);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Service Workers</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;">
+		<img class="place" src="sw-3.png"
+			style="transform-origin: center;transform: translate(-50.4%,-50%) scale(0.8);">
+	</div>
 </section>
 
 <section class="slide">
@@ -695,7 +712,8 @@
 		<code>this.addEventListener('install', listener);  // SW зарегистрировали</code>
 		<code>this.addEventListener('activate', listener); // SW запустили</code>
 		<code>this.addEventListener('fetch', listener);    // SW перехватил запрос</code>
-		<code>this.addEventListener('message', listener);  // SW получил push</code>
+		<code>this.addEventListener('message', listener);  // SW получил сообщение</code>
+		<code>this.addEventListener('push', listener);  // SW получил push</code>
 		<code> </code>
 	</pre>
 </section>
@@ -755,6 +773,10 @@
 
 <section class="slide question">
 	<h2>Ещё примеры использования Service Workers</h2>
+</section>
+
+<section class="slide">
+	<h2 class="shout">Больше протоколов!</h2>
 </section>
 
 <section class="slide">
