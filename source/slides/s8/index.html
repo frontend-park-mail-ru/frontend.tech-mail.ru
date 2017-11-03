@@ -369,85 +369,141 @@
 </section>
 
 <section class="slide question">
-	<h2>Хранение данных</h2>
+	<h2>Хранение данных на клиенте</h2>
 </section>
 
 <section class="slide">
-	<h2>Хранение данных</h2>
-	<p class="small-content"></p>
+	<h2>Как сохранить что-то в браузере <br>пользователя?</h2>
+	<p>Все данные, которые используются web-приложением, существуют <strong>только пока открыта вкладка браузера</strong>. Однако, существуют способы сохранить какие-то данные в браузере и воспользоваться ими потом:</p>
 	<ul lang="ru">
-		<li><code>localStorage</code></li>
-		<li><code>sessionStorage</code></li>
-		<li>WebSQL</li>
-		<li>IndexedDB</li>
-		<li>FileSystem</li>
+		<li><mark>Кэш браузера</mark> &mdash; сохраняет только ответы на запросы, сложно управлять</li>
+		<li><mark>cookies</mark> &mdash; исторически первый способ сохранения информации между сессиями работы с сайтом, но имеют слишком маленький размер</li>
+		<li><mark>Web Storage API</mark> &mdash; механизм для сохранения key/value значений с возможностью программного управления данными</li>
+		<li>WebSQL/IndexedDB &mdash; <strong>базы данных</strong> в браузере</li>
+		<li>FileSystem API &mdash; интерфейс для работы <strong>с файловой системой</strong></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Web Storage API</h2>
+	<blockquote>
+		<p><strong>Web Storage API</strong> &mdash; механизм для сохранения key/value значений с возможностью программного управления данными. Предоставляет два host объекта в браузере пользователя <strong>с возможностью персистентного сохранения данных (до 10 MB на origin)</strong></p>
+	</blockquote>
+	<ul>
+		<li><code>window.sessionStorage</code> &mdash; сохраняет данные пока открыт браузер</li>
+		<li><code>window.localStorage</code> &mdash; сохраняет данные навсегда, пока пользователь вручную не очистит хранилище данных в настройках браузера</li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2><code>window.localStorage</code></h2>
-	<p class="small-content"></p>
 	<pre class="hljs js">
-			<code>localStorage[key];         /* String */</code>
-			<code>localStorage[key] = value; /* String */</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2><code>window.localStorage</code></h2>
-	<pre class="hljs js">
-			<code>localStorage.length</code>
-			<code>localStorage.key(i)          /* String */</code>
-			<code>localStorage.getItem(key)    /* String */</code>
-			<code>localStorage.setItem(key, value)</code>
-			<code>localStorage.removeItem(key)</code>
-			<code>localStorage.clear()</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Событие <code>storage</code></h2>
-	<pre class="hljs js">
-			<code>window.addEventListener('storage', function (e) {</code>
-			<code>    /* e.key, e.newValue */</code>
-			<code>    ...</code>
-			<code>});</code>
-			<code> </code>
-		</pre>
+		<code>// элементами Storage являются <mark>строки</mark></code>
+		<code>localStorage[key];           /* String */</code>
+		<code>localStorage[key] = value;   /* String */</code>
+		<code> </code>
+		<code>// работа с объектами Storage <mark>синхронная</mark></code>
+		<code>localStorage.length</code>
+		<code>localStorage.key(i)          /* String */</code>
+		<code>localStorage.getItem(key)    /* String */</code>
+		<code>localStorage.setItem(key, value)  // может сгенерировать exception,</code>
+		<code>                                  // если нет места</code>
+		<code>localStorage.removeItem(key)</code>
+		<code>localStorage.clear()</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>JSON</h2>
+	<p class="medium-content">Можно написать обёртку, которая позволит сохранять в Storage простые объекты:</p>
 	<pre class="hljs js">
-			<code>function setJSON(key, value) {</code>
-			<code>    localStorage[key] = JSON.stringify(value);</code>
-			<code>}</code>
-			<code>function getJSON(key) {</code>
-			<code>    const value = localStorage[key];</code>
-			<code>    return value ? JSON.parse(value) : null;</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
+		<code>function setJSON(key, value) {</code>
+		<code>    localStorage[key] = JSON.stringify(value);</code>
+		<code>}</code>
+		<code>function getJSON(key) {</code>
+		<code>    const value = localStorage[key];</code>
+		<code>    return value ? JSON.parse(value) : null;</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
-	<h2>Хранение данных</h2>
-	<p class="small-content"></p>
-	<ul lang="ru">
-		<li>WebSQL &mdash; 5 MB</li>
-		<li>IndexedDB &mdash; 50 MB</li>
-		<li>FileSystem &mdash; <a href="https://www.w3.org/TR/FileAPI/" target="_blank">File API</a>
-			<ul>
-				<li><a href="https://habrahabr.ru/post/112286/" target="_blank">Статья на Хабре</a></li>
-				<li><a href="https://developer.mozilla.org/ru/docs/Web/API/FileSystem" target="_blank">FileSystem API |
-					MDN</a></li>
-				<li><a href="http://www.htmlfivewow.com/demos/terminal/terminal.html" target="_blank">Терминал в
-					браузере, работающий с файловой системой</a></li>
-			</ul>
-		</li>
-	</ul>
+	<h2>Событие <code>storage</code></h2>
+	<p>Событие <code>storage</code> происходит при любых изменениях в Storage <strong>в других вкладках с того же origin</strong>. То есть это событие позволяет общаться между вкладками</p>
+	<pre class="hljs js">
+		<code>// обработчик добавляется на объект window</code>
+		<code>window.addEventListener('storage', function (e) {</code>
+		<code>    /* e.key, e.newValue */</code>
+		<code>    ...</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>WebSQL &mdash; <a href="https://habrahabr.ru/post/84654/" target="_blank">подробнее</a></h2>
+	<p>WebSQL &mdash; <strong>полноценная SQL база данных</strong>, которая позволяет персистентно <strong>хранить данные в браузере пользователя</strong> и работать с ними посредством SQL-запросов. Максимальный размер сохраняемых данных &mdash; 5 MB. <a href="https://caniuse.com/#feat=sql-storage" target="_blank">Поддержка на caniuse</a>.</p>
+	<div style="position: relative; width: 100%; height: 75%; margin: 0 auto;">
+		<img class="place" src="websql-caniuse.png" style="transform-origin: center; transform: translate(-50%,-71%) scale(0.8);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>WebSQL пример</h2>
+	<pre class="hljs js">
+		<code>// создаём объект базы данных <mark>(доступно и в воркерах!)</mark></code>
+		<code>const db = openDatabase('forum', 'v1.0.0', 'Forum', 100000);</code>
+		<code> </code>
+		<code>// создаём транзакцию</code>
+		<code>db.transaction(function(tx) {</code>
+		<code>    tx.executeSql(</code>
+		<code>        'SELECT COUNT(*) FROM `forum`',</code>
+		<code>        [],</code>
+		<code>        function (result) { console.log(result) },</code>
+		<code>        function (tx, error) { /* some error logic */ }</code>
+		<code>    );</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>IndexedDB &mdash; <a href="https://habrahabr.ru/post/213515/" target="_blank">подробнее</a></h2>
+	<p>IndexedDB &mdash; низкоуровневое API для клиентского хранилища большого объема структурированных данных, включая файлы/blobs. Эти API используют индексы для обеспечения высоко-производительного поиска данных. Максимальный размер сохраняемых данных &mdash; 50 MB!!! <a href="https://caniuse.com/#feat=indexeddb" target="_blank">Поддержка на caniuse</a>.</p>
+	<div style="position: relative; width: 100%; height: 75%; margin: 0 auto;">
+		<img class="place" src="indexeddb-caniuse.png" style="transform-origin: center; transform: translate(-50%,-71%) scale(0.8);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>IndexedDB пример</h2>
+	<pre class="hljs js">
+		<code>// открываем базу данных Forum <mark>(доступно и в воркерах!)</mark></code>
+		<code>const request = window.indexedDB.open('Forum', 3);  // 3 - версия бд</code>
+		<code> </code>
+		<code>// обработчик успешного открытия базы данных</code>
+		<code>request.onsuccess = function(event) {</code>
+		<code>    const db = event.target.result;</code>
+		<code>    const store = db.createObjectStore('users', { keyPath: 'userId' });</code>
+		<code> </code>
+		<code>    store.createIndex('age', 'age', { unique: false });</code>
+		<code>    store.createIndex('email', 'email', { unique: true });</code>
+		<code> </code>
+		<code>    store.add({ age: 21, email: 'a.ostapenko@corp.mail.ru' });</code>
+		<code>};</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>FileSystem API &mdash; <a href="https://habrahabr.ru/post/112286/" target="_blank">подробнее</a></h2>
+	<em>deprecated =(((</em>
+	<p>С помощью FileSystem API и File API веб приложение может создавать, читать, просматривать и записывать файлы находящиеся в области пользовательской «песочницы». <a href="https://www.html5rocks.com/en/tutorials/file/filesystem/" target="_blank">Крутой туториал</a>. <a href="https://caniuse.com/#feat=filesystem" target="_blank">Поддержка на caniuse</a>.</p>
+	<div style="position: relative; width: 100%; height: 75%; margin: 0 auto;">
+		<img class="place" src="filesystem-caniuse.png" style="transform-origin: center; transform: translate(-50%,-71%) scale(0.8);">
+	</div>
 </section>
 
 <section class="slide">
