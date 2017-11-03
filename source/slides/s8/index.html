@@ -132,6 +132,32 @@
 </section>
 
 <section class="slide">
+	<h2>PerformanceTiming</h2>
+	<pre class="hljs js">
+		<code>window.performance.timing</code>
+	</pre>
+	<div>содержит все события, происходившие с загрузкой страницы</div>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="resource-timing-api.png"
+																				style="transform-origin: center;transform: translate(-50%,-58%) scale(1);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Performance Entries</h2>
+	<pre class="hljs js">
+		<code>  // Покажет всю сетевую активность</code>
+		<code>window.performance.getEntries()</code>
+		<code>  // Отобразит все загружаемые ресурсы</code>
+		<code>performance.getEntriesByType('resource')</code>
+	</pre>
+		<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="entries.png"
+																				style="transform-origin: center;transform: translate(-50%,-66%) scale(0.5);">
+	</div>
+</section>
+
+<section class="slide">
 	<h2>DOMContentLoaded и load</h2>
 	<div>
 		<div>DOMContentLoaded возникает на построение DOM-дерева</div>
@@ -154,100 +180,200 @@
 </section>
 
 <section class="slide">
-	<h2>PerformanceTiming</h2>
-	<pre class="hljs js">
-		<code>window.performance.timing</code>
-		содержит все события, происходившие с загрузкой страницы
-		<code>window.performance.timing.fetchStart</code>
-		<code>window.performance.timing.domainLookupStart</code>
-		<code>window.performance.timing.domainLookupEnd</code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2>Performance Entries</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
-																				src="entries.png"
-																				style="transform-origin: center;transform: translate(-50%,-47%) scale(0.4);">
-	</div>
-</section>
-
-<section class="slide">
 	<h2>Уменьшаем время загрузки данных</h2>
 	<h3><b>Минификация статики (стили, скрипты, картинки)</b></h3>
 	<div>jquery.js<span style="padding-left: 53px;"></span>&rarr; 278KB</div>
 	<div>jquery.min.js &rarr; 101KB</div>
+	<br/>
+	<div>
+		Подробнее про минификаторы JavaScript <br/>
+		<a href="https://learn.javascript.ru/minification">
+			https://learn.javascript.ru/minification
+		</a>
+	</div>
+	<div>
+		Видео про css минификатор <br/>
+		<a href="https://www.youtube.com/watch?v=8o3gKKD_J4A">
+			https://www.youtube.com/watch?v=8o3gKKD_J4A
+		</a>
+	</div>
 </section>
 
 <section class="slide">
 	<h2>Уменьшаем время загрузки данных</h2>
 	<h3><b>Сжатие ответа</b></h3>
 	<pre class="hljs http">
+		<code> // В запросе</code>
+		<code>Accept-Encoding: gzip, deflate, br</code>
+		<code> // В ответе</code>
 		<code>Content-Encoding: gzip</code>
 	</pre>
 
+	Плюсы:
 	<ul style="font-size: 90%">
-		<li>Минификация и оптимизация статики, картинок, скриптов, стилей, шрифтов, html. Сжатие тела ответа (gzip),
-			сравнение минификации/оптимизации/сжатия через gzip. Zopfli/Brotli - поддержка браузерами и сравнение
-			производительности сжатия/разжатия. Сравнение на разных типах содержимого (Brotli для текста, Zopfli для
-			бинарных данных). Фишка того, что в Brotli долго сжимается, зато хорошо и быстро распаковывается.
-		</li>
-		<li>"Сжатие" данных за счёт новых форматов данных, WebP для картинок, WebM для мультимедиа, WOFF /WOFF2 для
-			шрифтов, protobuf
-		</li>
-		<li>Кэширование в HTTP, кэширование заголовков (например CORS), кэширование DNS, хаки кэширования (уникальные
-			имена для бандлов, чтобы закешировать его навсегда и рандомные гет-параметры, чтобы "отключить" кэширование)
-		</li>
-		<li>Как не выстрелить себе в голову с кэшированием</li>
+		<li>Поддерживается всеми браузерами</li>
+		<li>Работает</li>
+	</ul>
+
+	Минусы:
+	<ul style="font-size: 90%">
+		<li>Можно и получше сжимать</li>
+		<li>Можно и побыстрее сжимать</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>Уменьшаем время загрузки данных</h2>
-	<h3><b>Форматы</b></h3>
-	WebP WebM Woff2
+	<h2>Zopfli и Brotli</h2>
+	<div><b>Zopfli</b></div>
+	Медленно сжимает, дает хороший результат, совместим с gzip
+	<pre class="hljs bash">
+		<code> # Заранее сжимаем статику</code>
+		<code>./zopfli -c app.js > app.js.gz</code>
+	</pre>
+
+	Необходимо включать отдачу сжатой статики на сервере
+	<pre class="hljs nginx">
+		<code> # пример для nginx</code>
+		<code>gzip_static on;</code>
+	</pre>
+
+	<div><b>Brotli</b></div>
+	<ul>
+		<li>14% smaller than gzip for JavaScript</li>
+		<li>21% smaller than gzip for HTML</li>
+		<li>17% smaller than gzip for CSS</li>
+	</ul>
 </section>
 
 <section class="slide">
-	<h2>Уменьшаем время загрузки данных</h2>
-	<h3><b>Форматы</b></h3>
-	Protobuf
-</section>
+	<h2>Zopfli и Brotli</h2>
+	<div><b>Brotli</b></div>
 
-<section class="slide">
-	<h2>HTTP weakness. One request per connection</h2>
+	Необходимо включать на сервере
+	<pre class="hljs nginx">
+		<code> # пример для nginx</code>
+		<code>brotli on;</code>
+	</pre>
+
+	<div><b>zopfli vs brotli</b></div>
 	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
-																				src="images/one-request-per-connection.png"
-																				style="transform-origin: center;transform: translate(-50%,-50%) scale(1.2);">
+																				src="versus.png"
+																				style="transform-origin: center;transform: translate(-50%,-68%) scale(0.55);">
 	</div>
 </section>
 
 <section class="slide">
-	<h2>Уменьшаем количество запросов</h2>
+	<h2>Поддержка Brotli</h2>
+	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place"
+																				src="brotli.png"
+																				style="transform-origin: center;transform: translate(-50%,-47%) scale(0.39);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Уменьшаем время загрузки данных</h2>
+	<h3><b>Форматы</b></h3>
+	<table style="text-align: center;" border="0">
+		<tr>
+			<td>
+				WebP (4,9 KB)
+			</td>
+			<td>
+				GIF (85,2 KB)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<img width="150" height="200" src="dancing_banana2.webp" alt=""/>
+			</td>
+			<td>
+				<img width="150" height="200" src="dancing-banana.gif" alt=""/>
+			</td>
+		</tr>
+	</table>
+
+	<div>Для видео существует WebM</div>
+	<div>Наилучшее сжатие для шрифтов осуществляет Woff2</div>
+</section>
+
+<section class="slide">
+	<h2>So sad...</h2>
+	<div style="position:relative;width: 100%;height: 45%;margin: 0 auto;"><img class="place"
+																				src="webp.png"
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.25);">
+	</div>
+	<div style="position:relative;width: 100%;height: 45%;margin: 0 auto;"><img class="place"
+		src="webm.png"
+		style="transform-origin: center;transform: translate(-50%,-50%) scale(0.25);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Protobuf</h2>
+	user.proto
+	<pre class="hljs proto">
+		<code>syntax = "proto3";</code>
+		<code>message User {</code>
+		<code>  string name = 1;</code>
+		<code>  int32 age = 2;</code>
+		<code>}</code>
+	</pre>
+	Компилируем в js
+	<pre class="hljs shell">
+		<code>npm install -g protobufjs</code>
+		<code>pbjs -t static-module -w commonjs -o user.js user.proto</code>
+	</pre>
+	Можно использовать webpack-loader 😏
+</section>
+
+<section class="slide">
+	<h2>Protobuf VS. JSON</h2>
+	<div style="position:relative;width: 100%;height: 45%;margin: 0 auto;"><img class="place"
+																				src="protobuf-times-c.png"
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.24);">
+	</div>
+	<div style="position:relative;width: 100%;height: 45%;margin: 0 auto;"><img class="place"
+		src="protobuf-times.png"
+		style="transform-origin: center;transform: translate(-50%,-50%) scale(0.24);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>HTTP weakness. One request per<br/>connection</h2>
+	<div style="position:relative;width: 100%;height: 50%;margin: 0 auto;"><img class="place"
+		src="images/one-request-per-connection.png"
+		style="transform-origin: center;transform: translate(-50%,-50%) scale(1);">
+	</div>
+	HTTP1.1 заголовок <b>Connection: keep-alive</b>
+	<br/>позволит переиспользовать соединение после запроса
+</section>
+
+<section class="slide">
+	<h2>Особенности HTTP (1.1)</h2>
 	<img class="place" src="images/http:1-loading.png"
-		 style="transform-origin: left top;top: 0;left: 0;transform: translate(0px, 0px) scale(1.25);">
-	Конкатенация скриптов, стилей
+		 style="top: 0;left: 0;transform: translate(0px, 130px) scale(1);">
+			<div style="position: absolute; right: 50px; top:20%;">
+				<ul>
+					<li>Долгая установка соединения</li>
+					<li>Max. 6 connections per domain</li>
+					<li>Всегда отсылаем куки</li>
+				</ul>
+			</div>
 </section>
 
 <section class="slide">
-	<h2>Connection: keep-alive</h2>
-</section>
-
-<section class="slide">
-	<h2>Как побороть недостатки HTTP?</h2>
+	<h2>Боремся с недостатками</h2>
 	<ul>
-		<li>Долгая установка соединения и хак с конкатенацией статики (стили, спрайты, скрипты) чтобы уменьшить
-			количество запросов
-		</li>
-		<li>Один запрос на соединение и connection: keep-alive/close</li>
-		<li>предкэширование https-конекшенов *</li>
-		<li>Max. 6 connections per domain и domain-шардинг</li>
-		<li>То, что с запросом отправляется 100500 мегабайт кук и всего такого и вынесение статики на отдельные домены,
-			чтобы туда куки не отправлялись
-		</li>
-		<li>Инлайн данных, base64 картинок/шрифтов, критикал css, критикал js и критикал html</li>
+		<li>Конкатенация скриптов, стилей</li>
+		<li>Спрайты</li>
+		<li>Connection: keep-alive</li>
+		<li>Preconnect</li>
+		<li>Domain-шардинг (static.myawesomegame.io)</li>
+		<li>Инлайн данных, base64 картинок/шрифтов, критикал css, критикал js</li>
 	</ul>
 </section>
+
+
 
 <section class="slide">
 	<h2>Кэширование</h2>
