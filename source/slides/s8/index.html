@@ -68,14 +68,16 @@
 <section class="slide">
 	<h2>Что происходит во время <br> HTTP-запроса?</h2>
 	<div style="position: relative; width: 100%; height: 80%;">
-		<img class="place" src="http-request-stages.png" style="transform-origin: center; transform: translate(-50%,-50%) scale(0.9);">
+		<img class="place" src="http-request-stages.png"
+			 style="transform-origin: center; transform: translate(-50%,-50%) scale(0.9);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Что происходит во время <br> HTTP-запроса?</h2>
 	<div style="position: relative; width: 100%; height: 80%;">
-		<img class="place" src="timing.png" style="transform-origin: center; transform: translate(-50%,-50%) scale(1.1);">
+		<img class="place" src="timing.png"
+			 style="transform-origin: center; transform: translate(-50%,-50%) scale(1.1);">
 	</div>
 </section>
 
@@ -104,26 +106,26 @@
 
 <section class="slide">
 	<h2>prefetch, preconnect, preload</h2>
-		<pre class="hljs html">
-			<code>&lt;!--  резолвит DNS заранее --&gt;</code>
-			<code>&lt;meta http-equiv="x-dns-prefetch-control" content="on"&gt;</code>
-			<code>&lt;link rel="dns-prefetch" href="//api.myawesomegame.io"&gt;</code>
-			<code>&lt;!-- dns-prefetch на стероидах, также инициирует коннект --&gt;</code>
-			<code>&lt;link rel="preconnect" href="//api.myawesomegame.io"&gt;</code>
-			<code> </code>
-			<code>&lt;!-- загружает ресурс с низким приоритетом и кладет в кеш --&gt;</code>
-			<code>&lt;link rel="prefetch" href="https://myawesomegame.io/img/sprite.jpg"&gt;</code>
-			<code>&lt;!-- загружает ресурс с высоким приоритетом и кладет в кеш --&gt;</code>
-			<code>&lt;link rel="subresource" href="https://myawesomegame.io/img/sprite.jpg"&gt;</code>
-			<code> </code>
-			<code>&lt;!-- загружает страницу со всем содержимым в фоне, строит DOM --&gt;</code>
-			<code>&lt;link rel="prerender" href="https://myawesomegame.io/about.html"&gt;</code>
-		</pre>
-	</section>
+	<pre class="hljs html">
+		<code>&lt;!--  резолвит DNS заранее --&gt;</code>
+		<code>&lt;meta http-equiv="x-dns-prefetch-control" content="on"&gt;</code>
+		<code>&lt;link rel="dns-prefetch" href="//api.myawesomegame.io"&gt;</code>
+		<code>&lt;!-- dns-prefetch на стероидах, также инициирует коннект --&gt;</code>
+		<code>&lt;link rel="preconnect" href="//api.myawesomegame.io"&gt;</code>
+		<code> </code>
+		<code>&lt;!-- загружает ресурс с низким приоритетом и кладет в кеш --&gt;</code>
+		<code>&lt;link rel="prefetch" href="https://myawesomegame.io/img/sprite.jpg"&gt;</code>
+		<code>&lt;!-- загружает ресурс с высоким приоритетом и кладет в кеш --&gt;</code>
+		<code>&lt;link rel="subresource" href="https://myawesomegame.io/img/sprite.jpg"&gt;</code>
+		<code> </code>
+		<code>&lt;!-- загружает страницу со всем содержимым в фоне, строит DOM --&gt;</code>
+		<code>&lt;link rel="prerender" href="https://myawesomegame.io/about.html"&gt;</code>
+	</pre>
+</section>
 
-	<section class="slide">
+<section class="slide">
 	<h2>Предзагрузка картинок через JS</h2>
-		<pre class="hljs js">
+	<pre class="hljs js">
 			<code>const img = new Image();</code>
 			<code>img.src = 'https://myawesomegame.io/img/sprite.jpg';</code>
 		</pre>
@@ -138,7 +140,9 @@
 			<code>  // DOM дерево построено, но загружены не все ресурсы</code>
 			<code>});</code>
 		</pre>
-		<div><small>DOMContentLoaded зависит от скриптов на странице</small></div>
+		<div>
+			<small>DOMContentLoaded зависит от скриптов на странице</small>
+		</div>
 		<br/>
 		<div>load возникнет, когда все ресурсы (стили, шрифты, картинки) будут загружены</div>
 		<pre class="hljs js">
@@ -183,9 +187,17 @@
 	</pre>
 
 	<ul style="font-size: 90%">
-		<li>Минификация и оптимизация статики, картинок, скриптов, стилей, шрифтов, html. Сжатие тела ответа (gzip), сравнение минификации/оптимизации/сжатия через gzip. Zopfli/Brotli - поддержка браузерами и сравнение производительности сжатия/разжатия. Сравнение на разных типах содержимого (Brotli для текста, Zopfli для бинарных данных). Фишка того, что в Brotli долго сжимается, зато хорошо и быстро распаковывается.</li>
-		<li>"Сжатие" данных за счёт новых форматов данных, WebP для картинок, WebM для мультимедиа, WOFF /WOFF2 для шрифтов, protobuf</li>
-		<li>Кэширование в HTTP, кэширование заголовков (например CORS), кэширование DNS, хаки кэширования (уникальные имена для бандлов, чтобы закешировать его навсегда и рандомные гет-параметры, чтобы "отключить" кэширование)</li>
+		<li>Минификация и оптимизация статики, картинок, скриптов, стилей, шрифтов, html. Сжатие тела ответа (gzip),
+			сравнение минификации/оптимизации/сжатия через gzip. Zopfli/Brotli - поддержка браузерами и сравнение
+			производительности сжатия/разжатия. Сравнение на разных типах содержимого (Brotli для текста, Zopfli для
+			бинарных данных). Фишка того, что в Brotli долго сжимается, зато хорошо и быстро распаковывается.
+		</li>
+		<li>"Сжатие" данных за счёт новых форматов данных, WebP для картинок, WebM для мультимедиа, WOFF /WOFF2 для
+			шрифтов, protobuf
+		</li>
+		<li>Кэширование в HTTP, кэширование заголовков (например CORS), кэширование DNS, хаки кэширования (уникальные
+			имена для бандлов, чтобы закешировать его навсегда и рандомные гет-параметры, чтобы "отключить" кэширование)
+		</li>
 		<li>Как не выстрелить себе в голову с кэшированием</li>
 	</ul>
 </section>
@@ -213,22 +225,26 @@
 <section class="slide">
 	<h2>Уменьшаем количество запросов</h2>
 	<img class="place" src="images/http:1-loading.png"
-		style="transform-origin: left top;top: 0;left: 0;transform: translate(0px, 0px) scale(1.25);">
-		Конкатенация скриптов, стилей
+		 style="transform-origin: left top;top: 0;left: 0;transform: translate(0px, 0px) scale(1.25);">
+	Конкатенация скриптов, стилей
 </section>
 
-	<section class="slide">
+<section class="slide">
 	<h2>Connection: keep-alive</h2>
 </section>
 
 <section class="slide">
 	<h2>Как побороть недостатки HTTP?</h2>
 	<ul>
-		<li>Долгая установка соединения и хак с конкатенацией статики (стили, спрайты, скрипты) чтобы уменьшить количество запросов</li>
+		<li>Долгая установка соединения и хак с конкатенацией статики (стили, спрайты, скрипты) чтобы уменьшить
+			количество запросов
+		</li>
 		<li>Один запрос на соединение и connection: keep-alive/close</li>
 		<li>предкэширование https-конекшенов *</li>
 		<li>Max. 6 connections per domain и domain-шардинг</li>
-		<li>То, что с запросом отправляется 100500 мегабайт кук и всего такого и вынесение статики на отдельные домены, чтобы туда куки не отправлялись</li>
+		<li>То, что с запросом отправляется 100500 мегабайт кук и всего такого и вынесение статики на отдельные домены,
+			чтобы туда куки не отправлялись
+		</li>
 		<li>Инлайн данных, base64 картинок/шрифтов, критикал css, критикал js и критикал html</li>
 	</ul>
 </section>
@@ -435,13 +451,18 @@
 </section>
 
 <section class="slide">
-	<h2>Ещё более умное кэширование (service-workers) [про обычные воркеры я уже упоминал на лекции, они чуть-чуть в курсе]</h2>
+	<h2>Ещё более умное кэширование (service-workers) [про обычные воркеры я уже упоминал на лекции, они чуть-чуть в
+		курсе]</h2>
 	<ul>
 		<li>Поддержка, плюсы и минусы, зачем используется</li>
 		<li>Жизненный цикл, создание и установка воркера</li>
 		<li>Пример кода для оффлайн-работы с sw</li>
-		<li>Обязательно картинку https://mdn.mozillademos.org/files/12630/important-notes.png (из статьи https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API/Using_Service_Workers)</li>
-		<li>Как ещё можно использовать сервис-воркеры (пример из телеграма, где они в веб-версии перекодировали картинки из крутых форматов, чтобы показывать стикеры быстро)</li>
+		<li>Обязательно картинку https://mdn.mozillademos.org/files/12630/important-notes.png (из статьи
+			https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+		</li>
+		<li>Как ещё можно использовать сервис-воркеры (пример из телеграма, где они в веб-версии перекодировали картинки
+			из крутых форматов, чтобы показывать стикеры быстро)
+		</li>
 	</ul>
 </section>
 
@@ -540,131 +561,143 @@
 <section class="slide">
 	<h2>WebSocket</h2>
 	<blockquote>
-		<p class="small-content"><strong>WebSockets</strong> &mdash; продвинутая технология, позволяющая открыть
-			постоянное двунаправленное сетевое соединение между браузером пользователя и сервером. С помощью его API вы
-			можете отправить сообщение на сервер и получить ответ без выполнения http запроса, причем этот процесс будет
-			событийно-управляемым</p>
+		<p class="medium-content"><strong>Протокол WebSocket</strong> &mdash; протокол полнодуплексной связи (может передавать и принимать одновременно) <mark>поверх TCP-соединения</mark>, предназначенный для обмена сообщениями <mark>между браузером и веб-сервером в режиме реального времени</mark>. С помощью его API вы можете отправить сообщение на сервер и получить ответ без выполнения отдельного HTTP-запроса, причем этот процесс будет событийно-управляемым</p>
 	</blockquote>
+	<p class="note">Были созданы, чтобы обойти ограничение HTTP на формат запрос/ответ и дать возможность отправлять сообщения <mark>с сервера на клиент</mark></p>
+	<p>Подробнее &mdash; по <a href="https://learn.javascript.ru/websockets" target="_blank">ссылке на learn.javascript.ru</a></p>
+</section>
+
+<section class="slide">
+	<h2>Поддержка браузерами &mdash; <a href="https://caniuse.com/#feat=websockets" target="_blank">caniuse</a></h2>
+	<div style="position: relative; width: 100%; height: 80%;">
+		<img class="place" src="ws-caniuse.png"
+			 style="transform-origin: center; transform: translate(-50%,-65%) scale(0.75);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Преимущества WebSocket</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li>Поддерживает возможность отправки сообщений с сервера на клиент</li>
+		<li>Все сообщения проходят через одно TCP-соединение, поэтому отсутствует overhead на открытие соединения</li>
+		<li>Очень хорошая поддержка браузерами и очень простой API использования</li>
+	</ul>
+	<p><em>Именно поэтому WebSocket'ы очень удобно использовать для написания:</em></p>
+	<ul>
+		<li>Реалтаймовых игр (для обмена сообщениями между клиентом и сервером)</li>
+		<li>Чатов и веб-мессенджеров</li>
+		<li>PUSH-уведомления и прочие нотификации от сервера</li>
+	</ul>
 </section>
 
 <section class="slide">
 	<h2>Создание <code>WebSocket</code></h2>
-	<p class="small-content"></p>
+	<p class="medium-content"></p>
 	<pre class="hljs js">
-			<code>const ws = new WebSocket('ws://example.com/ws');</code>
-			<code> </code>
-			<code>// если страница загружена по https://</code>
-			<code>const ws = new WebSocket('wss://example.com/ws');</code>
-			<code> </code>
-		</pre>
+		<code>const ws = new WebSocket('ws://example.com/ws');</code>
+		<code> </code>
+		<code>// если страница загружена по https://</code>
+		<code>const ws = new WebSocket('<mark>wss</mark>://example.com/ws');</code>
+		<code> </code>
+		<code>// События WebSocket</code>
+		<code>ws.addEventListener('open', listener);     // соединение установлено</code>
+		<code>ws.addEventListener('message', listener);  // пришло новое сообщение</code>
+		<code>ws.addEventListener('error', listener);    // ошибка</code>
+		<code>ws.addEventListener('close', listener);    // сокет закрылся</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
-	<h2>События <code>WebSocket</code></h2>
-	<p class="small-content"></p>
-	<ul>
-		<li><code>open</code></li>
-		<li><code>close</code></li>
-		<li><code>message</code></li>
-		<li><code>error</code></li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Событие <code>open</code></h2>
-	<p class="small-content"></p>
+	<h2>Работа с WebSocket</h2>
+	<p>После создания объекта WebSocket <strong>необходимо дождаться</strong>, пока соединение не откроется и не установится:</p>
 	<pre class="hljs js">
-			<code>ws.onopen = function() {</code>
-			<code>      console.log('Соединение установлено');</code>
-			<code>};</code>
-			<code> </code>
-		</pre>
+		<code>ws.onopen = function() {</code>
+		<code>    console.log('Соединение установлено, можно отправлять сообщения!');</code>
+		<code> </code>
+		<code>    // Отправка текста</code>
+		<code>    ws.send('Hello!');</code>
+		<code>    ws.send(JSON.stringify({ x: 100, y: 150 }));</code>
+		<code> </code>
+		<code>    // Отправка бинарных данных (например файлы из формы)</code>
+		<code>    ws.send(form.elements[0].file);</code>
+		<code>};</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
-	<h2>Событие <code>error</code></h2>
-	<p class="small-content"></p>
+	<h2>Событие <code>error</code> и <code>close</code></h2>
 	<pre class="hljs js">
-			<code>ws.onerror = function(error) {</code>
-			<code>      console.log('Ошибка ' + error.message);</code>
-			<code>};</code>
-			<code> </code>
-		</pre>
+		<code>ws.onerror = function(error) {</code>
+		<code>    // произошла ошибка в отправке/приёме данных или сетевая ошибка</code>
+		<code>    console.log('Ошибка ' + error.message);</code>
+		<code>};</code>
+		<code> </code>
+		<code>ws.onclose = function(event) {</code>
+		<code>    // 1000 - штатное закрытие сокета <mark>(коды WebSocket из 4х цифр)</mark></code>
+		<code>    // 1001 - удалённая сторона исчезла</code>
+		<code>    // 1002 - ошибка протокола</code>
+		<code>    // 1003 - неверный запрос</code>
+		<code>    console.log('Код: ' + event.code);</code>
+		<code>    console.log('Причина: ' + event.reason);</code>
+		<code>};</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
-	<h2>Событие <code>close</code></h2>
+	<h2>Событие <code>message</code> &mdash; обработка <br>сообщений с сервера</h2>
 	<pre class="hljs js">
-			<code>ws.onclose = function(event) {</code>
-			<code>      // 1000 - штатное закрытие сокета</code>
-			<code>      // 1001 - удалённая сторона исчезла</code>
-			<code>      // 1002 - ошибка протокола</code>
-			<code>      // 1003 - неверный запрос</code>
-			<code>      console.log('Код: ' + event.code);</code>
-			<code>      console.log('Причина: ' + event.reason);</code>
-			<code>};</code>
-			<code> </code>
-		</pre>
+		<code>ws.onmessage = function(event) {</code>
+		<code>    const data = event.data;</code>
+		<code>    const message = JSON.parse(data);</code>
+		<code> </code>
+		<code>    console.log('Прислали сообщение: ' + message.text);</code>
+		<code> </code>
+		<code>    // или, если есть глобальная шина событий</code>
+		<code>    <mark>bus.emit</mark>(message.event, message.payload);</code>
+		<code>};</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
-	<h2>Событие <code>message</code></h2>
+	<h2>Как использовать WebSocket</h2>
+	<ol>
+		<li>Договориться о своём "надпротоколе" обмена сообщениями между клиентом и сервером &mdash; зафиксировать форматы всех сообщений в приложении. Например:</li>
+	</ol>
+	<pre class="hljs json">
+		<code>{</code>
+		<code>    "action": "FIRE",</code>
+		<code>    "payload": { "cell": "b4" }</code>
+		<code>}</code>
+		<code> </code>
+		<code>{</code>
+		<code>    "action": "FIRE_RESULT",</code>
+		<code>    "payload": { "state": "Убил" }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Как использовать WebSocket</h2>
+	<ol>
+		<li value="2">Написать обёртку вокруг WebSocket, которая будет внутри себя заниматься отправкой и приёмом сообщений, а наружу будет предоставлять удобный интерфейс:</li>
+	</ol>
 	<pre class="hljs js">
-			<code>ws.onmessage = function(event) {</code>
-			<code>      const data = event.data;</code>
-			<code>      const message = JSON.parse(data);</code>
-			<code> </code>
-			<code>      console.log('Прислали сообщение: ' + message.text);</code>
-			<code>};</code>
-			<code> </code>
-		</pre>
+		<code>const webSocketService = new WebSocketService('/ws');</code>
+		<code> </code>
+		<code>webSocketService.send('FIRE', { "cell": "b4" });</code>
+		<code>webSocketService.subscribe('FIRE_RESULT', function (payload) {</code>
+		<code>    const state = payload.state;</code>
+		<code>    game.reRender(state);</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
 </section>
-
-<section class="slide">
-	<h2>Отправка сообщений</h2>
-	<p class="small-content"></p>
-	<pre class="hljs js">
-			<code>// Отправка текста</code>
-			<code>ws.send('Hello!');</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Отправка сообщений</h2>
-	<pre class="hljs js">
-			<code>// Отправка JSON</code>
-			<code>const message = JSON.stringify({</code>
-			<code>      text = 'Hello, world!';</code>
-			<code>});</code>
-			<code> </code>
-			<code>ws.send(message);</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Отправка сообщений</h2>
-	<p class="small-content"></p>
-	<pre class="hljs js">
-			<code>// Отправка файла</code>
-			<code>ws.send(form.elements[0].file);</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Преимущества использования</h2>
-	<p class="small-content"></p>
-	<ul>
-		<li>Низкий overhead</li>
-		<li>Полнодуплексный протокол</li>
-		<li>Событийно ориентированный протокол</li>
-		<li>Хорошая поддержка</li>
-	</ul>
-</section>
-
-
 
 <section class="slide">
 	<h2 class="shout">HTTP/2</h2>
@@ -672,86 +705,49 @@
 
 <section class="slide">
 	<h2>Original HTTP/0.9 implementation</h2>
-	<iframe src="https://www.w3.org/Protocols/HTTP/AsImplemented.html" frameborder="0" width="100%"
+	<iframe
+			src="https://www.w3.org/Protocols/HTTP/AsImplemented.html"
+			frameborder="0" width="100%"
 			height="80%"></iframe>
 </section>
 
 <section class="slide">
 	<h2>Hypertext Transfer Protocol: HTTP/1.1</h2>
-	<div style="position:relative;width: 100%;height: 100%;overflow: hidden;margin: 0 auto;">
-		<iframe src="https://rfc2.ru/2068.rfc/original" frameborder="0" width="100%" height="80%"
-				style="transform-origin: center;transform: translate(10%,-10%) scale(1.2)"></iframe>
+	<div style="position: relative; width: 100%; height: 100%; overflow: hidden; margin: 0 auto;">
+		<iframe src="https://rfc2.ru/2068.rfc/original"
+				frameborder="0" width="100%" height="80%"
+				style="transform-origin: center; transform: translate(10%, -10%) scale(1.2)"></iframe>
 	</div>
 </section>
 
 <section class="slide">
-	<h2>HTTP/1.1</h2>
-	<p style="line-height: 1.3em">HTTP/1.1 was designed for connections and bandwidth that are significantly different
-		today</p>
+	<h2>Основные недостатки HTTP/1.1</h2>
+	<p>HTTP/1.1 был спроектирован для сетей с более низкими пропускными способностями (bandwidth) и более высокими задержками (latency), чем сейчас. Поэтому у него есть недостатки:</p>
 	<ul lang="ru">
-		<li>
-			<mark>Single parallel</mark>
-			request per connection
-		</li>
-		<li>Max. 10 connections
-			<mark>per domain</mark>
-		</li>
-		<li>Exclusively
-			<mark>client-imitated</mark>
-			requests
-		</li>
-		<li>
-			<mark>Uncompressed and redundant</mark>
-			request and response headers
-		</li>
-		<li>
-			<mark>Optional</mark>
-			data compression
-		</li>
-		<li>HTTP is
-			<mark>slow</mark>
-			, but HTTPS is
-			<mark>even slower</mark>
-		</li>
+		<li><mark>Ровно один параллельный</mark> запрос на соединение</li>
+		<li>Ограничение в <mark>6 параллельных запросов на домен</mark></li>
+		<li>Запросы инициируются <mark>исключительно клиентом</mark></li>
+		<li><mark>Излишние и несжимаемые</mark> заголовки запроса и ответа</li>
+		<li><mark>Опциональное</mark> сжатие данных</li>
+		<li>HTTP очень <mark>медленный</mark>, но HTTPS <mark>ещё медленнее</mark></li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2>HTTP/2</h2>
-	<p style="line-height: 1.3em">HTTP/2 promises speed improvement, decreased network latency and better management of
-		assets</p>
+	<p>HTTP/2 создавался с целью улучшить скорость работы web-приложений, за счёт уменьшения сетевых задержек и более удобного управления ресурсами в web. Основные особенности:</p>
 	<ul lang="ru">
-		<li>
-			<mark>64% reduction</mark>
-			in page load times (23% on mobile)
-		</li>
-		<li>
-			<mark>Unlimited number of parallel</mark>
-			requests per connection
-		</li>
-		<li>
-			<mark>Quicker slow-start</mark>
-			and better compression
-		</li>
-		<li>
-			<mark>One connection per host</mark>
-			, which handles all requests
-		</li>
-		<li>Developers can
-			<mark>prioritize and push</mark>
-			the resources
-		</li>
-		<li><em>Requires HTTPS for run</em></li>
-		<li>
-			<mark>Fall back</mark>
-			to HTTP/1.1
-		</li>
+		<li><mark>Более быстрый старт соединения</mark> и улучшенное сжатие данных</li>
+		<li><mark>Неограниченное количество</mark> запросов на соединение: на домен открывается единственное соединение, через которое <mark>отправляются все запросы</mark></li>
+		<li>Возможность <mark>приоритезации и форсированной загрузки</mark> ресурсов</li>
+		<li>Как следствие, <mark>64% уменьшение</mark> времени загрузки на <mark>неоптимизированных</mark> страницах (на мобильных устройствах доходит до 23%)</li>
+		<li><mark>Обратно-совместим</mark> с HTTP/1.1, требует для работы <mark>HTTPS</mark></li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>HTTP/2 requires server-side and<br/>client-side implementations</h2>
-	<p>Servers:</p>
+	<h2>HTTP/2 требует наличие <br>поддержки на сервере и на клиенте</h2>
+	<p class="medium-content">Сервера, которые поддерживают HTTP/2:</p>
 	<ul lang="ru">
 		<li>nginx 1.9.5</li>
 		<li>node.js 5.0</li>
@@ -763,67 +759,38 @@
 </section>
 
 <section class="slide">
-	<h2>HTTP/2 requires server-side and<br/>client-side implementations</h2>
+	<h2>HTTP/2 требует наличие <br>поддержки на сервере и на клиенте</h2>
+	<p>Поддержка браузерами &mdash; <a href="https://caniuse.com/#feat=http2" target="_blank">caniuse</a></p>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="images/caniuse-http2.png"
-			 style="transform-origin: center;transform: translate(-50.3%, -50%) scale(0.85);">
+		<img class="place" src="http2-caniuse.png"
+			 style="transform-origin: center; transform: translate(-50%, -70%) scale(0.75);">
 	</div>
 </section>
 
 <section class="slide">
-	<h2>HTTP/2 requires server-side and<br/>client-side implementations</h2>
-	<p>CDNs:</p>
+	<h2>Главные фичи HTTP/2</h2>
+	<p class="medium-content"></p>
 	<ul lang="ru">
-		<li>Akamai is the first major CDN to support HTTP/2 and HTTP/2 Server Push</li>
-		<li>Cloudflare supports HTTP/2 using nginx</li>
-		<li>AWS CloudFront supports HTTP/2</li>
-		<li>KeyCDN supports HTTP/2</li>
-		<li>and more...</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>HTTP/2 requires server-side and<br/>client-side implementations</h2>
-	<p>Web services (
-		<mark>HTTP/2 is used by 12.6%</mark>
-		of all the websites):
-	</p>
-	<ul lang="ru">
-		<li>google.com</li>
-		<li>youtube.com</li>
-		<li>facebook.com</li>
-		<li>wikipedia.org</li>
-		<li>vk.com</li>
-		<li>e.mail.ru (partial support ;] )</li>
-		<li>and more...</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>HTTP/2 core features</h2>
-	<ul lang="ru">
-		<li>Multiplexing (via streams, frames and messages)</li>
-		<li>Binary data format</li>
-		<li>Prioritization</li>
-		<li>Flow control</li>
-		<li>Header compression</li>
+		<li>Мультиплексирование запросов (через стримы (потоки), фреймы (кадры) и сообщения)</li>
+		<li>Бинарный формат сообщений</li>
+		<li>Приоритезация загрузки ресурсов</li>
+		<li>Управление загрузкой ресурсов</li>
+		<li>Сжимание заголовков запросов и ответов</li>
 		<li>Server push</li>
-		<li>Something else?</li>
+		<li>Что-то ещё?</li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2>Streams, Messages, and Frames</h2>
 	<blockquote>
-		<p><b>Stream</b> &mdash; a bidirectional flow of bytes within an established connection, which may carry one or
-			more messages</p>
+		<p><b>Stream</b> &mdash; двунаправленный поток байтов через установленное соединение, который может состоять из одного или более сообщений</p>
 	</blockquote>
 	<blockquote>
-		<p><b>Message</b> &mdash; a complete sequence of frames that map to a logical request or response message</p>
+		<p><b>Message</b> &mdash; целостная последовательность фреймов, которая составляет полное логическое сообщение: запрос или ответ</p>
 	</blockquote>
 	<blockquote>
-		<p><b>Frame</b> &mdash; the smallest unit of communication in HTTP/2, each containing a frame header, which at a
-			minimum identifies the stream to which the frame belongs</p>
+		<p><b>Frame</b> &mdash; минимальная единица коммуникации в HTTP/2. Каждый фрейм содержит заголовок фрейма, который идентифицирует, к какому сообщению внутри стрима относится это фрейм</p>
 	</blockquote>
 </section>
 
@@ -838,26 +805,15 @@
 <section class="slide">
 	<h2>Streams, Messages, and Frames</h2>
 	<ul>
-		<li>SINGLE
-			<mark>TCP connection</mark>
-		</li>
+		<li>ОДНО ЕДИНСТВЕННОЕ <mark>TCP соединение</mark></li>
 		<ul>
-			<li>ANY number of
-				<mark>bidirectional streams</mark>
-			</li>
+			<li>ЛЮБОЕ количество <mark>двунаправленных стримов</mark></li>
 			<ul>
-				<li>EACH stream has a unique identifier and optional priority information that is used to carry
-					<mark>bidirectional messages</mark>
-				</li>
+				<li>КАЖДЫЙ стрим имеет уникальный идентификатор и некоторые флаги приоритета, которые позволяют <mark>управлять потоком двунаправленных сообщений</mark></li>
 				<ul>
-					<li>EACH message is a logical HTTP message, such as a request, or response, which consists of
-						<mark>one or more frames</mark>
-					</li>
+					<li>КАЖДОЕ сообщение представляет собой HTTP-сообщение, например запрос или ответ, каждое из которых состоит из <mark>одного или более фреймов</mark></li>
 					<ul>
-						<li>THE frame is the
-							<mark>smallest unit of communication</mark>
-							that carries a specific type of data
-						</li>
+						<li>ФРЕЙМ &mdash; <mark>минимальная единица коммуникации</mark> содержит в себе часть данных запроса или ответа</li>
 					</ul>
 				</ul>
 			</ul>
@@ -866,7 +822,7 @@
 </section>
 
 <section class="slide">
-	<h2>Binary Framing Layer</h2>
+	<h2>Бинарный формат сообщений</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
 		<img class="place" src="images/binary-layer.svg"
 			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
@@ -874,7 +830,7 @@
 </section>
 
 <section class="slide">
-	<h2>Binary Framing Layer</h2>
+	<h2>Бинарный формат сообщений</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
 		<img class="place" src="images/binary-http2.svg"
 			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
@@ -882,7 +838,7 @@
 </section>
 
 <section class="slide">
-	<h2>Request and Response Multiplexing</h2>
+	<h2>Мультиплексирование запросов <br>и ответов</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
 		<img class="place" src="images/http2-connection.svg"
 			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
@@ -890,7 +846,7 @@
 </section>
 
 <section class="slide">
-	<h2>Request and Response Multiplexing</h2>
+	<h2>Мультиплексирование запросов <br>и ответов</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
 		<img class="place" src="images/many-wires.png"
 			 style="transform-origin: center;transform: translate(-50%, -65%) scale(0.27);">
@@ -911,7 +867,7 @@
 </section>
 
 <section class="slide">
-	<h2>Stream Prioritization</h2>
+	<h2>Приоретизация стримов</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
 		<img class="place" src="images/prioretizations-of-http2.svg"
 			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
@@ -919,25 +875,19 @@
 </section>
 
 <section class="slide">
-	<h2>One Connection Per Origin</h2>
+	<h2>Один коннекшн на домен</h2>
+	<p class="medium-content"></p>
 	<ul>
-		<li>All HTTP/2 connections are persistent, and
-			<mark>only one connection per origin is required</mark>
-		</li>
-		<li>Most HTTP transfers are short and bursty, whereas
-			<mark>TCP is optimized for long-lived, bulk data transfers</mark>
-			. By reusing the same connection HTTP/2 is able to both make
-			<mark>more efficient use of each TCP connection</mark>
-		</li>
-		<li>Reduced number of connections is a particularly
-			<mark>important feature for improving performance of HTTPS deployments</mark>
-		</li>
+		<li>В HTTP/2 все соединения постоянные, поэтому <mark>на домен требуется всего одно TCP соединение</mark></li>
+		<li>Чаще всего HTTP-запросы маленькие и быстрые, но <mark>TCP спроектирован, чтобы лучше хорошо работать с долго-живущими соединениями</mark> и для постоянной пакетной передачи данных. Переиспользование соединений в HTTP/2 позволяет <mark>более оптимально использовать возможности TCP-соединений</mark></li>
+		<li>Уменьшение количества TCP-соединений <mark>положительно сказывается на производительность HTTPS-приложений</mark> (требуется меньше вычислений для установления защищённого соединения)</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>Flow Control</h2>
+	<h2>Управление потоком данных</h2>
 	<code>404 Slide Not Found</code>
+	<p class="medium-content note">История, больше касающаяся серверсайда/реверс-прокси и прочих сисадминских штучек. Используется для более тщательного контроля над пересылкой данных, буферизацией и всяким таким добром</p>
 </section>
 
 <section class="slide">
@@ -949,7 +899,7 @@
 </section>
 
 <section class="slide">
-	<h2>Header Compression</h2>
+	<h2>Сжатие заголовков</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
 		<img class="place" src="images/http2-hpack.svg"
 			 style="transform-origin: center;transform: translate(-50%, -48%) scale(0.63);">
@@ -957,7 +907,7 @@
 </section>
 
 <section class="slide question">
-	<h2>So... The HTTP/2 is much good!</h2>
+	<h2>Итак... HTTP/2 очень хорош!</h2>
 </section>
 
 
