@@ -451,6 +451,10 @@
 </section>
 
 <section class="slide">
+	<h2 class="shout">Service Workers</h2>
+</section>
+
+<section class="slide">
 	<h2>Ещё более умное кэширование (service-workers) [про обычные воркеры я уже упоминал на лекции, они чуть-чуть в
 		курсе]</h2>
 	<ul>
@@ -467,26 +471,27 @@
 </section>
 
 <section class="slide">
-	<h2 class="shout">Service Workers</h2>
-</section>
-
-<section class="slide">
 	<h2>Service Workers</h2>
 	<blockquote>
-		<p class="small-content"><strong>Service Workers</strong> &mdash; ещё более продвинутая технология, которая
-			позволяет получить полный контроль над жизненным циклом приложения. Сервис воркер &mdash; это воркер,
-			который работает в выделенном контексте и имеет доступ к Cache Storage, имеет возможность перехватывать
-			запросы, отправляемые страницей, а так же может работать даже если само приложение не запущено</p>
+		<p class="medium-content"><strong>Service Workers</strong> &mdash; продвинутая технология, которая позволяет получить полный контроль над жизненным циклом приложения. Сервис воркер &mdash; это воркер, который:
+		<ul>
+			<li>работает в выделенном контексте и отдельном потоке</li>
+			<li>имеет доступ к Cache Storage (расширенное хранилище данных)</li>
+			<li>имеет возможность перехватывать HTTP-запросы, отправляемые страницей</li>
+			<li>а так же <strong>может работать даже если само web-приложение или даже браузер не запущены</strong></li>
+		</ul>
 	</blockquote>
+	<p class="note">Подробнее &mdash; по <a href="https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API/Using_Service_Workers" target="_blank">ссылке на MDN</a></p>
 </section>
 
 <section class="slide">
-	<h2>Service Workers</h2>
+	<h2>Service Workers используются</h2>
+	<p class="medium-content"></p>
 	<ul>
 		<li>Кэширование данных (50MB+)</li>
-		<li>Оффлайн-работа приложения</li>
+		<li><strong>Оффлайн-работа приложения</strong> (прям вообще без Интернета чтобы было!)</li>
 		<li>Фоновая синхронизация данных</li>
-		<li>Ответ на запросы от других источников</li>
+		<li>Ответ на запросы от других источников ("проксирование" запросов)</li>
 		<li>Улучшение производительности</li>
 		<li>Push-нотификации</li>
 		<li>Распараллеливание вычислений</li>
@@ -495,45 +500,53 @@
 </section>
 
 <section class="slide">
-	<h2>Service Workers</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="swcaniuse.png"
-																				style="transform-origin: center;transform: translate(-50.4%,-50%) scale(0.8);">
+	<h2>Service Workers &mdash; <a href="https://caniuse.com/#feat=serviceworkers" target="_blank">caniuse</a></h2>
+	<div style="position: relative; width: 100%; height: 75%; margin: 0 auto;">
+		<img class="place" src="sw-caniuse.png" style="transform-origin: center; transform: translate(-50.4%,-50%) scale(0.8);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Service Workers</h2>
-	<p class="medium-content">Работает в специальном скоупе <code>ServiceWorkerGlobalScope</code><br>События</p>
-	<ul>
-		<li><code>install</code></li>
-		<li><code>activate</code></li>
-		<li><code>fetch</code></li>
-		<li><code>message</code></li>
-	</ul>
+	<p class="medium-content">Работает в специальном скоупе <code>ServiceWorkerGlobalScope</code>, который не имеет доступа к обычному скоупу с <code>window</code><br>Имеет несколько событий, на которые можно навешивать обработчики:</p>
+	<pre class="hljs js">
+		<code>this.addEventListener('install', listener);  // SW зарегистрировали</code>
+		<code>this.addEventListener('activate', listener); // SW запустили</code>
+		<code>this.addEventListener('fetch', listener);    // SW перехватил запрос</code>
+		<code>this.addEventListener('message', listener);  // SW получил push</code>
+		<code> </code>
+	</pre>
 </section>
 
 <section class="slide">
 	<h2>Service Worker lifecycle</h2>
-	<div style="position:relative;width: 100%;height: 75%;margin: 0 auto;"><img class="place" src="sw-lifecycle.png"
-																				style="transform-origin: center;transform: translate(-56%,-50%) scale(0.85);">
+	<div style="position: relative; width: 100%; height: 75%; margin: 0 auto;">
+		<img class="place" src="sw-lifecycle.png" style="transform-origin: center; transform: translate(-56%,-50%) scale(0.85);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Установка Service Worker'а</h2>
 	<pre class="hljs js">
-			<code>navigator.serviceWorker.register('/sw.js', { scope: '/' })</code>
-			<code>    .then(function(registration) {</code>
-			<code>        // Registration was successful</code>
-			<code>        console.log('SW registration OK:', registration);</code>
-			<code>    })</code>
-			<code>    .catch(function(err) {</code>
-			<code>        // registration failed :(</code>
-			<code>        console.log('SW registration FAIL:', err);</code>
-			<code>    });</code>
-			<code>});</code>
-			<code> </code>
-		</pre>
+		<code>navigator.serviceWorker.register('/sw.js', { scope: '/' })</code>
+		<code>    .then(function(registration) {</code>
+		<code>        // Registration was successful</code>
+		<code>        console.log('SW registration OK:', registration);</code>
+		<code>    })</code>
+		<code>    .catch(function(err) {</code>
+		<code>        // registration failed :(</code>
+		<code>        console.log('SW registration FAIL:', err);</code>
+		<code>    });</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Service Worker notes</h2>
+	<div style="position: relative; width: 100%; height: 75%; margin: 0 auto;">
+		<img class="place" src="sw-notes.png" style="transform-origin: center; transform: translate(-50%,-50%) scale(1.7);">
+	</div>
 </section>
 
 <section class="slide">
@@ -552,6 +565,14 @@
 			<code>});</code>
 			<code> </code>
 		</pre>
+</section>
+
+<section class="slide question">
+	<h2>Практика с Service Workers</h2>
+</section>
+
+<section class="slide question">
+	<h2>Ещё примеры использования Service Workers</h2>
 </section>
 
 <section class="slide">
@@ -797,8 +818,7 @@
 <section class="slide">
 	<h2>Streams, Messages, and Frames</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="images/streams-messages-frames.svg"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(0.65);">
+		<img class="place" src="images/streams-messages-frames.svg" style="transform-origin: center;transform: translate(-50%, -50%) scale(0.65);">
 	</div>
 </section>
 
@@ -824,53 +844,45 @@
 <section class="slide">
 	<h2>Бинарный формат сообщений</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="images/binary-layer.svg"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
+		<img class="place" src="images/binary-layer.svg" style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Бинарный формат сообщений</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="images/binary-http2.svg"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
+		<img class="place" src="images/binary-http2.svg" style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Мультиплексирование запросов <br>и ответов</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="images/http2-connection.svg"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
+		<img class="place" src="images/http2-connection.svg" style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Мультиплексирование запросов <br>и ответов</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="images/many-wires.png"
-			 style="transform-origin: center;transform: translate(-50%, -65%) scale(0.27);">
-		<div style="overflow:hidden;height:10%;position:relative;transform:translate(0%, 250px)"><img class="place"
-																									  src="images/one-wire.jpg"
-																									  style="transform-origin: center;transform: translate(-46%, -50%) rotate(45deg) scale(0.65);">
+		<img class="place" src="images/many-wires.png" style="transform-origin: center;transform: translate(-50%, -65%) scale(0.27);">
+		<div style="overflow:hidden;height:10%;position:relative;transform:translate(0%, 250px)">
+			<img class="place" src="images/one-wire.jpg" style="transform-origin: center;transform: translate(-46%, -50%) rotate(45deg) scale(0.65);">
 		</div>
 	</div>
 </section>
 
 <section class="slide">
 	<div style="position:fixed;width: 100%;height: 100%; top: 0; left: 0;">
-		<img class="place" src="images/http:1-loading.png"
-			 style="transform-origin: left top;top: 0;left: 0;transform: translate(0px, 0px) scale(1.25);">
-		<img class="place" src="images/http:2-loading.png"
-			 style="transform-origin: left top;top: 0;transform: translate(40%, 0px) scale(1.25);">
+		<img class="place" src="images/http:1-loading.png" style="transform-origin: left top;top: 0;left: 0;transform: translate(0px, 0px) scale(1.25);">
+		<img class="place" src="images/http:2-loading.png" style="transform-origin: left top;top: 0;transform: translate(40%, 0px) scale(1.25);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Приоретизация стримов</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="images/prioretizations-of-http2.svg"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
+		<img class="place" src="images/prioretizations-of-http2.svg" style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
 	</div>
 </section>
 
