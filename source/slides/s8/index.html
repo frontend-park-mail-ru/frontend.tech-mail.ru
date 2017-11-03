@@ -66,6 +66,20 @@
 </section>
 
 <section class="slide">
+	<h2>Vocabulary</h2>
+	<p class="small-content"></p>
+	<img style="position: absolute; opacity: 0.2; width: 100%; height: auto; top:0; left:0" src="vocabluary.jpg" alt="">
+	<b>
+	<ul>
+		<li>RTT - round trip time - время от начала отправки пакета до его возвращения</li>
+		<li>Bandwith - количество информации, которую возможно передать в еденицу времени</li>
+		<li>Latency - время передачи запроса от клиента к серверу</li>
+		<li>TTFB - time to first byte - время от отправки запроса до получения первого байта ответа</li>
+	</ul>
+	</b>
+</section>
+
+<section class="slide">
 	<h2>Что происходит во время <br> HTTP-запроса?</h2>
 	<div style="position: relative; width: 100%; height: 80%;">
 		<img class="place" src="http-request-stages.png"
@@ -298,13 +312,13 @@
 
 <section class="slide">
 	<h2>So sad...</h2>
-	<div style="position:relative;width: 100%;height: 45%;margin: 0 auto;"><img class="place"
+	<div style="position:relative;width: 100%;height: 40%;margin: 0 auto;"><img class="place"
 																				src="webp.png"
-																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.25);">
+																				style="transform-origin: center;transform: translate(-50%,-50%) scale(0.28);">
 	</div>
-	<div style="position:relative;width: 100%;height: 45%;margin: 0 auto;"><img class="place"
+	<div style="position:relative;width: 100%;height: 40%;margin: 0 auto;"><img class="place"
 		src="webm.png"
-		style="transform-origin: center;transform: translate(-50%,-50%) scale(0.25);">
+		style="transform-origin: center;transform: translate(-50%,-50%) scale(0.28);">
 	</div>
 </section>
 
@@ -345,34 +359,23 @@
 	</div>
 	HTTP1.1 заголовок <b>Connection: keep-alive</b>
 	<br/>позволит переиспользовать соединение после запроса
+	<br/>При получении <b>Connection: close</b> браузер закроет соединение
 </section>
 
 <section class="slide">
-	<h2>Особенности HTTP (1.1)</h2>
+	<h2>HTTP weakness.<br>Max. 6 connections per domain</h2>
 	<img class="place" src="images/http:1-loading.png"
-		 style="top: 0;left: 0;transform: translate(0px, 130px) scale(1);">
-			<div style="position: absolute; right: 50px; top:20%;">
+		 style="top: 0;left: 0;transform: translate(0px, 130px) scale(0.9);">
+			<div style="position: absolute; right: 50px; top:25%;">
+				<b>Как с этим жить:</b>
 				<ul>
-					<li>Долгая установка соединения</li>
-					<li>Max. 6 connections per domain</li>
-					<li>Всегда отсылаем куки</li>
+					<li>Domain-шардинг<br/>(static.myawesomegame.io)</li>
+					<li>Конкатенация скриптов, стилей</li>
+					<li>Спрайты</li>
+					<li>Инлайн данных, <br/>base64 картинок/шрифтов,<br/>critical css, critical js</li>
 				</ul>
 			</div>
 </section>
-
-<section class="slide">
-	<h2>Боремся с недостатками</h2>
-	<ul>
-		<li>Конкатенация скриптов, стилей</li>
-		<li>Спрайты</li>
-		<li>Connection: keep-alive</li>
-		<li>Preconnect</li>
-		<li>Domain-шардинг (static.myawesomegame.io)</li>
-		<li>Инлайн данных, base64 картинок/шрифтов, критикал css, критикал js</li>
-	</ul>
-</section>
-
-
 
 <section class="slide">
 	<h2>Кэширование</h2>
