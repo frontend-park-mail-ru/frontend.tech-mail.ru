@@ -636,28 +636,6 @@
 </section>
 
 <section class="slide">
-	<h2>Ещё более умное кэширование (service-workers) [про обычные воркеры я уже упоминал на лекции, они чуть-чуть в
-		курсе]</h2>
-	<ul>
-		<li>Поддержка, плюсы и минусы, зачем используется</li>
-		<li>Жизненный цикл, создание и установка воркера</li>
-		<li>Пример кода для оффлайн-работы с sw</li>
-		<li>Обязательно картинку https://mdn.mozillademos.org/files/12630/important-notes.png (из статьи
-			https://developer.mozilla.org/ru/docs/Web/API/Service_Worker_API/Using_Service_Workers)
-		</li>
-		<li>Как ещё можно использовать сервис-воркеры (пример из телеграма, где они в веб-версии перекодировали картинки
-			из крутых форматов, чтобы показывать стикеры быстро)
-		</li>
-	</ul>
-</section>
-
-<section class="slide">
-<<<<<<< HEAD
-=======
-	<h2 class="shout">Service Workers</h2>
-</section>
-
-<section class="slide">
 	<h2>Must see</h2>
 	<div style="font-size:36px;margin-top:15%;">
 		<a href="https://www.youtube.com/watch?v=cmGr0RszHc8" target="_blank">
@@ -692,7 +670,6 @@
 </section>
 
 <section class="slide">
->>>>>>> first
 	<h2>Service Workers</h2>
 	<blockquote>
 		<p class="medium-content"><strong>Service Workers</strong> &mdash; продвинутая технология, которая позволяет получить полный контроль над жизненным циклом приложения. Сервис воркер &mdash; это воркер, который:
@@ -730,25 +707,15 @@
 
 <section class="slide">
 	<h2>Service Workers</h2>
-<<<<<<< HEAD
 	<p class="medium-content">Работает в специальном скоупе <code>ServiceWorkerGlobalScope</code>, который не имеет доступа к обычному скоупу с <code>window</code><br>Имеет несколько событий, на которые можно навешивать обработчики:</p>
 	<pre class="hljs js">
 		<code>this.addEventListener('install', listener);  // SW зарегистрировали</code>
 		<code>this.addEventListener('activate', listener); // SW запустили</code>
 		<code>this.addEventListener('fetch', listener);    // SW перехватил запрос</code>
-		<code>this.addEventListener('message', listener);  // SW получил push</code>
+		<code>this.addEventListener('message', listener);  // SW получил сообщение</code>
+		<code>this.addEventListener('push', listener);  // SW получил push</code>
 		<code> </code>
 	</pre>
-=======
-	<p class="medium-content"><br>Работает в специальном скоупе <code>ServiceWorkerGlobalScope</code><br><br>События</p>
-	<ul>
-		<li><code>install</code></li>
-		<li><code>activate</code></li>
-		<li><code>fetch</code></li>
-		<li><code>message</code></li>
-		<li><code>push</code></li>
-	</ul>
->>>>>>> first
 </section>
 
 <section class="slide">
@@ -809,7 +776,7 @@
 </section>
 
 <section class="slide">
-	<h2 class="shout">HTTP Evolution</h2>
+	<h2 class="shout">Больше протоколов!</h2>
 </section>
 
 <section class="slide">
