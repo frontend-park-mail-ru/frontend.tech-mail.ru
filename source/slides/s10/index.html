@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<title>Веб-компоненты и Virtual DOM</title>
+	<title>Продвинутые подходы разработки SPA</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -38,16 +38,148 @@
 <body class="shower list">
 
 <header class="caption">
-	<h1>Веб-компоненты и Virtual DOM</h1>
+	<h1>Продвинутые подходы разработки SPA</h1>
 	<p>Технопарк, осень, 2017 г.</p>
 </header>
 
 <section class="slide first">
-	<h2 class="shout"><small style="font-size:80%">Веб-компоненты и Virtual DOM</small><br/>
+	<h2 class="shout">
+		<small style="font-size:75%">Продвинутые подходы разработки SPA</small>
+		<br/>
 		<small>Слайды доступны по ссылке<br/>
 			<a href="https://frontend-park-mailru.firebaseapp.com/">frontend-park-mailru.firebaseapp.com</a>
 		</small>
 	</h2>
+</section>
+
+<section class="slide">
+	<h2 class="shout">
+		<span style="font-size: 98%; line-height: 1">Немного истории</span>
+		<br>
+		<span style="font-size: 70%; line-height: 1; display: inline-block;">Как разрабатывали web <strong>раньше</strong>?</span>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div><code>jQuery</code>-style &mdash;</div>
+		<div style="font-size: 70%;">весь код приложения в одном файле</div>
+		<div style="font-size: 40%;">Zepto, KnokoutJS, etc...</div>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 70%;">Такой способ удобен для украшения <em>сайта</em>, но не для разработки крупных
+			<strong>web-приложений</strong></div>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div>MVC &mdash;</div>
+		<div style="font-size: 70%;">разделение логики от представления</div>
+		<div style="font-size: 40%;">Backbone.js, Ember.js, etc...</div>
+	</h2>
+</section>
+
+<section class="slide question">
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="mvc.png" style="transform-origin: center;transform: translate(-50%,-40%) scale(1.3);">
+	</div>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 70%;">Каждый понимал его по-своему. Не было чёткого подхода к <strong
+				style="font-size: 120%;">декомпозиции</strong></div>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 85%;">Как много вопросов, как мало ответов...</div>
+		<ul style="font-size: 40%; line-height: 1.2; margin-top: 24px;">
+			<li>Как поступать со сложными моделями?</li>
+			<li>Как разбивать большие view на части?</li>
+			<li>Кто должен отвечать за функциональность?</li>
+		</ul>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div>Компонентный подход &mdash;</div>
+		<div style="font-size: 50%;">смысл в разделении кода приложения на <strong>независимые, слабосвязанные и
+			переиспользуемые</strong> компоненты
+		</div>
+		<div style="font-size: 30%;">слабые связи и декомпозиция</div>
+	</h2>
+</section>
+
+<section class="slide question">
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="simle1.jpg"
+			 style="transform-origin: center;transform: translate(-50%,-40%) scale(1.2);">
+	</div>
+</section>
+
+<section class="slide question">
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="component1.jpg"
+			 style="transform-origin: center;transform: translate(-50%,-40%) scale(1.1);">
+	</div>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 60%;">
+			Компоненты могут быть <strong>достаточно сложны внутри</strong>, но они должны быть просты для использования
+			<strong>снаружи</strong>
+		</div>
+	</h2>
+</section>
+
+<section class="slide question">
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="simple2.jpg"
+			 style="transform-origin: center;transform: translate(-50%,-40%) scale(1.1);">
+	</div>
+</section>
+
+<section class="slide question">
+	<div style="position:relative;width: 100%; height: 82%; overflow: hidden;">
+		<img class="place" src="components2.jpg"
+			 style="transform-origin: center;transform: translate(-50%,-50%) scale(0.9);">
+	</div>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 65%;">
+			Компонентом может быть <strong>вообще всё что угодно</strong>, что выполняет какую-то функцию в вашем
+			приложении
+		</div>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Компоненты делят на два типа</h2>
+	<blockquote>
+		<p class="content">
+			<strong>Dummy-компоненты</strong> &mdash; компоненты, которые либо вообще не содержат никакой логики (чисто
+			визуальные компоненты), либо содержат логику, которая глубоко инкапсулирована внутри компонента
+		</p>
+	</blockquote>
+	<p class="note">Например, компонент "Текст", компонент "Ссылка", компонент "Чекбокс"... Посложнее: компонент
+		"Выезжающее меню"</p>
+	<blockquote>
+		<p class="content">
+			<strong>Smart-компоненты</strong> &mdash; компоненты, которые управляют множеством других компонентов,
+			содержат в себе бизнес-логику и хранят какое-то состояние
+		</p>
+	</blockquote>
+	<p class="note">Компонент "Роутер". Компонент "Всё приложение"</p>
 </section>
 
 <!--ВЕБ-КОМПОНЕНТЫ-->

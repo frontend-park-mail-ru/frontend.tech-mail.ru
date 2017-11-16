@@ -1,8 +1,10 @@
 {{{
-	"title": "Веб-компоненты и Virtual DOM"
+	"title": "Продвинутые подходы разработки SPA"
 }}}
 
-## Веб-компоненты и Virtual DOM
+## Продвинутые подходы разработки SPA
 __Лекция №2__
 
 Веб-компоненты с использованием Custom Elements, Shadow DOM и CSS Scoping. Virtual DOM.
+
+__[Презентация лекции](/slides/s10)__
