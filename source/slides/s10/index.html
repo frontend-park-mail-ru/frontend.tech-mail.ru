@@ -172,14 +172,108 @@
 		</p>
 	</blockquote>
 	<p class="note">Например, компонент "Текст", компонент "Ссылка", компонент "Чекбокс"... Посложнее: компонент
-		"Выезжающее меню"</p>
+		"Выезжающее меню", Компонент "Роутер".</p>
 	<blockquote>
 		<p class="content">
 			<strong>Smart-компоненты</strong> &mdash; компоненты, которые управляют множеством других компонентов,
 			содержат в себе бизнес-логику и хранят какое-то состояние
 		</p>
 	</blockquote>
-	<p class="note">Компонент "Роутер". Компонент "Всё приложение"</p>
+	<p class="note">Компонент "Форма входа". Компонент "Всё приложение"</p>
+</section>
+
+<section class="slide">
+	<h2>Пример dummy-компонента</h2>
+	<pre class="hljs js">
+		<code>class TextComponent {</code>
+		<code>    constructor(el) { this.el = el || document.createElement('div') }</code>
+		<code>    setText(text) {</code>
+		<code>        this.text = text;</code>
+		<code>        this.el.innerHTML = this.tmpl();</code>
+		<code>    }</code>
+		<code>    tmpl() {</code>
+		<code>        return `</code>
+		<code class="hljs html">            &lt;span&gt;${this.text}&lt;/span&gt;</code>
+		<code>        `;</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Пример smart-компонента</h2>
+	<pre class="hljs js">
+		<code>class CounterComponent {</code>
+		<code>    constructor(el) {</code>
+		<code>        this.el = el || document.createElement('div');</code>
+		<code>        this.count = 0; this.text = new TextComponent();</code>
+		<code>        setInterval(() => {</code>
+		<code>            this.count++;</code>
+		<code>            this.text.setText(this.count);</code>
+		<code>            this.el.innerHTML = this.tmpl();</code>
+		<code>        }, 1000);</code>
+		<code>    }</code>
+		<code>    ...</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Пример smart-компонента</h2>
+	<pre class="hljs js">
+		<code> </code>
+		<code>    ...</code>
+		<code>    tmpl() {</code>
+		<code>        return `</code>
+		<code class="hljs html">            &lt;h1&gt;Счётчик:&lt;/h1&gt;</code>
+		<code>            ${this.text.tmpl()}</code>
+		<code>        `;</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Структура приложения</h2>
+	<pre class="hljs html">
+		<code><mark>App</mark> &mdash; smart</code>
+		<code>    <mark>Router</mark> &mdash; dummy</code>
+		<code>        <mark>Authorization</mark> &mdash; smart</code>
+		<code>            <mark>Form</mark> &mdash; dummy</code>
+		<code>                <mark>TextInput</mark> &mdash; dummy</code>
+		<code>                <mark>Button</mark> &mdash; dummy</code>
+		<code>        <mark>About</mark> &mdash; smart</code>
+		<code>            <mark>SimpleText</mark> &mdash; dummy</code>
+		<code>            <mark>Link</mark> &mdash; dummy</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Работа компонента</h2>
+	<ul lang="en">
+		<li>Компонент &mdash; модуль, который содержит в себе стили этого компонента, файл-функцию с шаблоном и класс,
+			который всем этим управляет
+		</li>
+		<li>Экземпляр компонента инициализируется с некоторыми данными (состоянием &mdash;
+			<mark>state</mark>
+			), которые используются при функционировании компонента
+		</li>
+		<li>Во время рендера, вызывается функция-шаблонизатор, она создаёт строку с HTML-кодом компонента, которая через
+			<code>innerHTML</code> вставляется в DOM документа
+		</li>
+		<li>При изменении состояния компонента, выполняется его ререндер и он обновляет своё отображение</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 70%;">
+			Посмотрим, как это выглядит на практике
+		</div>
+	</h2>
 </section>
 
 <!--ВЕБ-КОМПОНЕНТЫ-->
