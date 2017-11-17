@@ -52,6 +52,8 @@
 	</h2>
 </section>
 
+<!-- Рассказ об идее использования компонентного подхода -->
+
 <section class="slide">
 	<h2 class="shout">
 		<span style="font-size: 98%; line-height: 1">Немного истории</span>
@@ -252,7 +254,7 @@
 </section>
 
 <section class="slide">
-	<h2>Работа компонента</h2>
+	<h2>Наивная реализация компонентов</h2>
 	<ul lang="en">
 		<li>Компонент &mdash; модуль, который содержит в себе стили этого компонента, файл-функцию с шаблоном и класс,
 			который всем этим управляет
@@ -276,7 +278,129 @@
 	</h2>
 </section>
 
-<!--ВЕБ-КОМПОНЕНТЫ-->
+<!-- Недостатки наивной реализации, дата-биндинг и реактивное программирование -->
+
+<section class="slide">
+	<h2>Недостатки наивной реализации</h2>
+	<p class="medium-content"></p>
+	<ul lang="en">
+		<li>Много шаблонного кода</li>
+		<li>При изменении одного единственного свойства происходит полная перерисовка компонентов</li>
+		<li>Много лишних операций с рендером DOM</li>
+		<li>
+			Как следствие, низкая производительность web-приложений (вспоминаем, что всё приложение &mdash; это
+			один большой компонент и учитываем два предыдущих пункта вместе)
+		</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 70%;">
+			Как можно этого избежать?
+		</div>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 70%;">
+			Самая простая идея &mdash;
+			<div style="font-size: 80%;">при изменениях state перерисовывать <strong>только то, что действительно
+				необходимо</strong></div>
+		</div>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Связывание данных (Data Binding)</h2>
+	<blockquote>
+		<p class="small-content">
+			<b>Связывание данных</b> &mdash; это процесс, который устанавливает соединение между UI приложения и
+			бизнес-логикой</p>
+	</blockquote>
+	<p class="note">Различают
+		<mark>одностороннее</mark>
+		и
+		<mark>двустороннее</mark>
+		связывание данных &mdash; <a href="/examples/data-binding/" target="_blank">пример</a></p>
+</section>
+
+<section class="slide">
+	<h2>Наивное связывание данных</h2>
+	<pre class="hljs js">
+		<code>class TextComponent {</code>
+		<code>    constructor(el) {</code>
+		<code>        this.el = el || document.createElement('div');</code>
+		<code>        this.el.innerHTML = this.tmpl();</code>
+		<code>        this.text = '';</code>
+		<code>        <mark>this._textEl = this.el.querySelector('.js-text')</mark>;</code>
+		<code>    }</code>
+		<code>    setText(text) {</code>
+		<code>        this.text = text;</code>
+		<code>        <mark>this._textEl.textContent = this.text</mark>;</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Наивное связывание данных</h2>
+	<pre class="hljs js">
+		<code>class TextInputComponent {</code>
+		<code>    constructor(el) {</code>
+		<code>        this.el = el || document.createElement('div');</code>
+		<code>        this.el.innerHTML = this.tmpl();</code>
+		<code>        this.value = '';</code>
+		<code>        <mark>this._inputEl = this.el.querySelector('input[type=text]')</mark>;</code>
+		<code>        <mark>this._inputEl.onchange</mark> = () => {</code>
+		<code>            this.value = this._inputEl.value.trim();</code>
+		<code>            this.emit('change', {value: this.value});</code>
+		<code>        };</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 70%;">
+			Не самый хороший подход:
+			<div style="font-size: 70%;">&mdash; много шаблонного кода, если необходимо связывать много элементов</div>
+			<div style="font-size: 70%;">&mdash; недекларативное описание связей</div>
+		</div>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Другой подход к биндингу</h2>
+	<pre class="hljs html">
+		<code>class TextInputComponent {</code>
+		<code>    constructor(el) {</code>
+		<code>        this.el = el || document.createElement('div');</code>
+		<code>        this.el.innerHTML = this.tmpl();</code>
+		<code>        this.value = '';</code>
+		<code>        <mark>this._inputEl = this.el.querySelector('input[type=text]')</mark>;</code>
+		<code>        <mark>this._inputEl.onchange</mark> = () => {</code>
+		<code>            this.value = this._inputEl.value.trim();</code>
+		<code>            this.emit('change', {value: this.value});</code>
+		<code>        };</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<!-- Идея виртуального DOM -->
+
+
+<section class="slide">
+	<h2 class="shout">Перерыв</h2>
+</section>
+
+<!-- ВЕБ-КОМПОНЕНТЫ -->
 
 <section class="slide">
 	<h2 class="shout">Веб-компоненты</h2>
@@ -755,14 +879,11 @@
 		</pre>
 </section>
 
-
-<!--modern web-components-->
-
 <section class="slide">
 	<h2>Современные веб-компоненты</h2>
-	<div style="position:relative;width: 100%; height: 75%;">
+	<div style="position: relative; width: 100%; height: 75%;">
 		<img class="place" src="web-components.png"
-			 style="transform-origin: center;transform: translate(-50%,-50%) scale(0.9);">
+			 style="transform-origin: center; transform: translate(-50%,-50%) scale(0.9);">
 	</div>
 </section>
 
@@ -775,21 +896,6 @@
 
 <section class="slide">
 	<h2 class="shout">Data Binding</h2>
-</section>
-
-<section class="slide">
-	<h2>Связывание данных (Data Binding)</h2>
-	<blockquote>
-		<p class="small-content"><b>Связывание данных</b> &mdash; это процесс, который устанавливает соединение между UI
-			приложения и бизнес-логикой</p>
-		<p class="note">Различают
-			<mark>одностороннее</mark>
-			и
-			<mark>двустороннее</mark>
-			связывание данных &mdash; <a href="/examples/data-binding/" target="_blank">пример</a></p>
-		<p class="note"><a href="http://www.lucaongaro.eu/blog/2012/12/02/easy-two-way-data-binding-in-javascript/"
-						   target="_blank">Easy Two-Way Data Binding in JavaScript</a></p>
-	</blockquote>
 </section>
 
 <section class="slide question">
@@ -817,9 +923,11 @@
 <section class="slide">
 	<h2>Virtual DOM</h2>
 	<blockquote>
-		<p class="small-content"><b>Virtual DOM</b> &mdash; это
+		<p class="small-content">
+			<b>Virtual DOM</b> &mdash; это
 			<mark>техника и набор библиотек / алгоритмов</mark>
-			, которые позволяют нам улучшить производительность на клиентской стороне, избегая прямой работы с DOM путем
+			, которые
+			позволяют нам улучшить производительность на клиентской стороне, избегая прямой работы с DOM путем
 			создания и работы c
 			<mark>абстракцией</mark>
 			, имитирующей DOM-дерево
@@ -883,137 +991,6 @@
 	</div>
 </section>
 
-<section class="slide">
-	<h2>Функция <code>el</code> и <code>setProps</code></h2>
-	<pre class="hljs js">
-			<code>function el(type, props, ...children) {</code>
-			<code>    return {type, props, children};</code>
-			<code>}</code>
-			<code> </code>
-			<code>function setProps($target, props) {</code>
-			<code>    Object.keys(props).forEach(name => {</code>
-			<code>        $target.setAttribute(name, props[name]);</code>
-			<code>    });</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Функция <code>createElement</code></h2>
-	<pre class="hljs js">
-			<code>function createElement(node) {</code>
-			<code>    if (typeof node === 'string') {</code>
-			<code>        return document.createTextNode(node);</code>
-			<code>    }</code>
-			<code>    const $el = document.createElement(node.type);</code>
-			<code>    setProps($el, node.props);</code>
-			<code>    node.children</code>
-			<code>        .map(VDOM.createElement)</code>
-			<code>        .forEach($el.appendChild.bind($el));</code>
-			<code>    return $el;</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Функция <code>updateProp</code></h2>
-	<pre class="hljs js">
-			<code>function updateProp($target, name, newVal, oldVal) {</code>
-			<code>    if (typeof newVal === 'undefined') {</code>
-			<code>        $target.removeAttribute(name);</code>
-			<code>    } else if (!oldVal || newVal !== oldVal) {</code>
-			<code>        $target.setAttribute(name, value);</code>
-			<code>    }</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Функция <code>updateProps</code></h2>
-	<pre class="hljs js">
-			<code>function updateProps($target, newProps, oldProps = {}) {</code>
-			<code>    const props = Object.assign({}, newProps, oldProps);</code>
-			<code>    Object.keys(props).forEach(name => {</code>
-			<code>        updateProp($target, name, newProps[name]</code>
-			<code>                                , oldProps[name]);</code>
-			<code>    });</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Функция <code>changed</code></h2>
-	<pre class="hljs js">
-			<code>function changed(node1, node2) {</code>
-			<code>    return typeof node1 !== typeof node2 ||</code>
-			<code>        typeof node1 === 'string' && node1 !== node2 ||</code>
-			<code>        node1.type !== node2.type</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Функция <code>updateElement</code></h2>
-	<pre class="hljs js">
-			<code>function updateElement($parent, newNode, oldNode, index = 0) {</code>
-			<code>    if (!oldNode) {</code>
-			<code>        return $parent.appendChild(</code>
-			<code>            createElement(newNode)</code>
-			<code>        );</code>
-			<code>    }</code>
-			<code>    if (!newNode) {</code>
-			<code>        return $parent.removeChild(</code>
-			<code>            $parent.childNodes[index]</code>
-			<code>        );</code>
-			<code>    }</code>
-			<code>...</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Функция <code>updateElement</code></h2>
-	<pre class="hljs js">
-			<code>...</code>
-			<code>    if (VDOM.changed(newNode, oldNode)) {</code>
-			<code>        return $parent.replaceChild(</code>
-			<code>            createElement(newNode),</code>
-			<code>            $parent.childNodes[index]</code>
-			<code>        );</code>
-			<code>    }</code>
-			<code> </code>
-			<code>...</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide">
-	<h2>Функция <code>updateElement</code></h2>
-	<pre class="hljs js">
-			<code>...</code>
-			<code>    if (newNode.type) {</code>
-			<code>        updateProps($parent.childNodes[index],</code>
-			<code>            newNode.props, oldNode.props);</code>
-			<code>    const newLength = newNode.children.length;</code>
-			<code>    const oldLength = oldNode.children.length;</code>
-			<code>    for (let i = 0; i < newLength || i < oldLength; i++) {</code>
-			<code>        VDOM.updateElement($parent.childNodes[index],</code>
-			<code>            newNode.children[i], newNode.children[i], i);</code>
-			<code>    }</code>
-			<code>}</code>
-			<code> </code>
-		</pre>
-</section>
-
-<section class="slide question">
-	<h2><a style="color: royalblue" href="/examples/vdom/" target="_blank">Пример</a></h2>
-</section>
-
 
 <!--THE END-->
 
@@ -1038,7 +1015,6 @@
 		<li><a href="https://github.com/Matt-Esch/virtual-dom" target="_blank">Описание принципа работы VDOM</a> и <a
 				href="https://medium.com/@deathmood/how-to-write-your-own-virtual-dom-ee74acc13060" target="_blank">статья
 			на медиуме</a></li>
-		<li><a href="" target="_blank">ССЫЛКА</a></li>
 	</ul>
 </section>
 
