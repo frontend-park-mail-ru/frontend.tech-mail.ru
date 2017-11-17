@@ -528,15 +528,12 @@
 
 <section class="slide">
 	<h2>Virtual DOM</h2>
+	<p class="medium-content">Главная проблема DOM &mdash; он никогда не был рассчитан для создания <mark>динамического пользовательского интерфейса</mark>.</p>
 	<blockquote>
-		<p class="small-content">
-			<b>Virtual DOM</b> &mdash; это
-			<mark>техника и набор библиотек / алгоритмов</mark>
-			, которые
+		<p>
+			<b>Virtual DOM</b> &mdash; это <mark>техника и набор библиотек / алгоритмов</mark>, которые
 			позволяют нам улучшить производительность на клиентской стороне, избегая прямой работы с DOM путем
-			создания и работы c
-			<mark>абстракцией</mark>
-			, имитирующей DOM-дерево
+			создания и работы c <mark>абстракцией</mark>, имитирующей DOM-дерево
 		</p>
 	</blockquote>
 </section>
@@ -550,6 +547,23 @@
 
 <section class="slide">
 	<h2>Virtual DOM</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li>Вместо того, чтобы взаимодействовать с DOM напрямую, мы работаем с его <mark>легковесной копией</mark></li>
+		<li>Мы можем вносить изменения в копию, исходя из наших потребностей, а после этого применять изменения к реальному DOM</li>
+		<li>При этом происходит сравнение DOM-дерева с его виртуальной копией, <mark>определяется разница и запускается перерисовка того, что было изменено</mark></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Virtual DOM</h2>
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="dom-vdom.png" style="transform-origin: center;transform: translate(-48.5%,-50%) scale(0.7);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Virtual DOM</h2>
 	<div style="display: flex; justify-content: center; width: 100%" id="kek">
 		<style>
 			.slide #kek pre code {
@@ -557,37 +571,68 @@
 			}
 		</style>
 		<div style="width: 50%">
-				<pre class="hljs js">
-					<code>// before</code>
-					<code>{</code>
-					<code>    tagName: 'div',</code>
-					<code>    classes: ['header'],</code>
-					<code>    attributes: {</code>
-					<code>        hidden: false</code>
-					<code>    }</code>
-					<code>}</code>
-					<code> </code>
-				</pre>
+			<pre class="hljs js">
+				<code>// before</code>
+				<code>{</code>
+				<code>    tagName: 'div',</code>
+				<code>    classes: ['header'],</code>
+				<code>    attributes: {</code>
+				<code>        hidden: false</code>
+				<code>    }</code>
+				<code>}</code>
+				<code> </code>
+			</pre>
 		</div>
 		<div style="width: 50%">
-				<pre class="hljs js">
-					<code>// after</code>
-					<code>{</code>
-					<code>    tagName: 'div',</code>
-					<code>    classes: ['header'],</code>
-					<code>    attributes: {</code>
-					<code>        <mark>hidden: true</mark></code>
-					<code>    }</code>
-					<code>}</code>
-					<code> </code>
-				</pre>
+			<pre class="hljs js">
+				<code>// after</code>
+				<code>{</code>
+				<code>    tagName: 'div',</code>
+				<code>    classes: ['header'],</code>
+				<code>    attributes: {</code>
+				<code>        <mark>hidden: true</mark></code>
+				<code>    }</code>
+				<code>}</code>
+				<code> </code>
+			</pre>
 		</div>
 	</div>
 	<pre class="hljs js">
-			<code>// Real DOM change</code>
-			<code>div.setAttribute('hidden', 'true')</code>
-			<code> </code>
-		</pre>
+		<code>// Real DOM change</code>
+		<code>div.setAttribute('hidden', 'true')</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Virtual DOM</h2>
+	<p class="medium-content"></p>
+	<p>Такой подход работает быстрее, потому как не включает в себя все тяжеловесные части реального DOM. Но только если мы делаем это правильно. Есть две проблемы:</p>
+	<ul>
+		<li>когда именно делать повторную перерисовку DOM?</li>
+		<li>как это сделать эффективно?</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Когда?</h2>
+	<p class="medium-content"></p>
+	<p>Когда данные изменяются и нуждается в обновлении. Есть два варианта узнать, что данные изменились:</p>
+	<ul>
+		<li>Первый из них &mdash; «dirty checking» (грязная проверка) заключается в том, чтобы опрашивать данные <mark>через регулярные промежутки времени</mark> и <mark>рекурсивно проверять все значения</mark> в структуре данных</li>
+		<li>Второй вариант &mdash; «observable» (наблюдаемый) заключается в наблюдении за изменением состояния. Если ничего не изменилось, мы ничего не делаем. Если изменилось, <mark>мы точно знаем, что нужно обновить</mark></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Как?</h2>
+	<p class="medium-content"></p>
+	<p>Что делает этот подход действительно быстрым:</p>
+	<ul>
+		<li>Эффективные алгоритмы сравнения</li>
+		<li>Группировка операций чтения/записи при работе с DOM</li>
+		<li>Эффективное обновление под-деревьев</li>
+	</ul>
 </section>
 
 <section class="slide">
@@ -595,6 +640,18 @@
 	<div style="position:relative;width: 100%; height: 75%;">
 		<img class="place" src="vdom.png" style="transform-origin: center;transform: translate(-50%,-50%) scale(1.5);">
 	</div>
+</section>
+
+<section class="slide question">
+	<h2><a style="color: royalblue" href="https://medium.com/@abraztsov/how-virtual-dom-work-567128ed77e9" target="_blank">Как работает Virtual DOM?</a></h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<div style="font-size: 70%;">
+			Посмотрим, как это выглядит на практике
+		</div>
+	</h2>
 </section>
 
 <section class="slide">
