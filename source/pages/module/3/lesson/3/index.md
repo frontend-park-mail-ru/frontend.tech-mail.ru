@@ -5,6 +5,6 @@
 ## Продвинутые подходы разработки SPA
 __Лекция №2__
 
-Веб-компоненты с использованием Custom Elements, Shadow DOM и CSS Scoping. Virtual DOM.
+Компонентный подход. Data-binding и разработка реактивных компонентов. Использование Virtual DOM. Веб-компоненты с использованием Custom Elements, Shadow DOM и CSS Scoping.
 
 __[Презентация лекции](/slides/s10)__
