@@ -114,6 +114,170 @@
 	</div>
 </section>
 
+<section class="slide">
+	<h2>Когда может кончиться память?</h2>
+	<p class="small-content"></p>
+	<ul>
+		<li><strong>При создании очень большого количества объектов</strong> &mdash; например, при слишком агрессивном кешировании чего-нибудь, или вследствие плохого написания кода приложения</li>
+		<li><strong>При создании и работе с большими объектами</strong> &mdash; например, работа с медиафайлами (изображениями, видео)</li>
+		<li>Вследствие <strong>утечек памяти</strong></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Утечки памяти</h2>
+	<blockquote>
+		<p class="medium-content">
+			<b>Утечка памяти</b> &mdash; ситуация, когда память занимается объектами, которые больше не нужны приложению, но которые <strong>не могут быть освобождены автоматически</strong> из-за несовершенства алгоритмов сборки мусора
+		</p>
+	</blockquote>
+	<p>Чаще всего причиной утечек памяти являются т.н. <strong>нежелательные ссылки</strong> &mdash; ссылки, достижимые из корня, но ссылающиеся на фрагменты памяти, которые точно никогда больше не понадобятся</p>
+	<p class="note">Например, потерявшие актуальность переменные, забытые в коде и удерживающие в памяти ненужные более объекты</p>
+</section>
+
+<section class="slide">
+	<h2>Случайные глобальные <br> переменные</h2>
+	<p class="medium-content"></p>
+	<pre class="hljs js">
+		<code>// неявное объявление переменных</code>
+		<code>function foo(arg) {</code>
+		<code>    bar = 42; // будет создана глобальная переменная</code>
+		<code>}</code>
+		<code> </code>
+		<code>foo();</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Случайные глобальные <br> переменные</h2>
+	<p class="medium-content"></p>
+	<pre class="hljs js">
+		<code>// потеря контекста</code>
+		<code>const counter = {</code>
+		<code>    num: 0,</code>
+		<code>    inc() {</code>
+		<code>        this.num ++;</code>
+		<code>    },</code>
+		<code>}</code>
+		<code> </code>
+		<code>setInterval(counter.inc, 1000); // ooops!</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Ссылки на удалённые DOM-узлы</h2>
+	<pre class="hljs js">
+		<code>// закэшировали ссылки</code>
+		<code>window.elements = {</code>
+		<code>    button: document.querySelector('button#inc'),</code>
+		<code>    cell: document.querySelector('.js-super-table td.js-super-cell'),</code>
+		<code>};</code>
+		<code> </code>
+		<code>// do stuff</code>
+		<code> </code>
+		<code>// элементы будут удалены из DOM, <strong>но останутся в памяти</strong></code>
+		<code>document.removeChild(window.elements.button);</code>
+		<code>document.removeChild(document.querySelector('.js-super-table'));</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Утечки памяти, связанные с <br> замыканиями, колбеками</h2>
+	<pre class="hljs js">
+		<code>const trigger = document.getElementById('trigger');</code>
+		<code>const elementToRemove = document.getElementById('remove');</code>
+		<code> </code>
+		<code>trigger.addEventListener('click', function () {</code>
+		<code>    document.removeChild(elementToRemove);</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Утечки памяти, связанные с <br> замыканиями, колбеками</h2>
+	<pre class="hljs js">
+		<code>// починить можно, например, так</code>
+		<code>const trigger = document.getElementById('trigger');</code>
+		<code>trigger.addEventListener('click', function () {</code>
+		<code>    const elementToRemove = document.getElementById('remove');</code>
+		<code>    document.removeChild(elementToRemove);</code>
+		<code>});</code>
+		<code> </code>
+	</pre>
+	<div style="position: relative; width: 100%; height: 20%;">
+		<img class="place" src="simple-leak.png" style="transform-origin: center; transform: translate(-50%,-55%) scale(1.3);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Пример посложнее. Где здесь <br> утечка?</h2>
+	<pre class="hljs js">
+		<code>let state = { gen: 0 };</code>
+		<code>const updateState = function () {</code>
+		<code>    const oldState = state;</code>
+		<code>    state = {</code>
+		<code>        data: new Array(1024 * 1024).join('*'), // 2 MB of data</code>
+		<code>        gen: oldState.gen++,</code>
+		<code>    };</code>
+		<code>};</code>
+		<code> </code>
+		<code>updateButton.onclick = updateState;</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Утечки памяти</h2>
+	<pre class="hljs js">
+		<code>let state = { gen: 0 };</code>
+		<code>const updateState = function () {</code>
+		<code>    const oldState = state;</code>
+		<code>    state = {</code>
+		<code>        data: new Array(1024 * 1024).join('*'), // 1 MB of data</code>
+		<code>        gen: oldState.gen++,</code>
+		<code>        log() { console.log(this.gen) }, // here!</code>
+		<code>    };</code>
+		<code>};</code>
+		<code> </code>
+		<code>updateButton.onclick = updateState;</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Утечки памяти &mdash; <a style="color: royalblue" href="/examples/memory-leak/" target="_blank">пример</a></h2>
+	<pre class="hljs js">
+		<code>let state = { gen: 0 };</code>
+		<code>const updateState = function () {</code>
+		<code>    const oldState = state;</code>
+		<code>    const unused = function () {</code>
+		<code>        if (oldState) { console.log('hello here') }</code>
+		<code>    };</code>
+		<code>    state = {</code>
+		<code>        data: new Array(1024 * 1024).join('*'), // 2 MB of data</code>
+		<code>        gen: oldState.gen++,</code>
+		<code>        log() { console.log(this.gen) },</code>
+		<code>    };</code>
+		<code>};</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Инструменты разработчика для <br>поиска и отладки утечек памяти</h2>
+	<p class="small-content"></p>
+	<ul>
+		<li>Вкладка <strong>Performance</strong></li>
+		<li>Вкладка <strong>Memory Profiler</strong></li>
+		<li>Вкладка <strong>Performance monitor</strong></li>
+	</ul>
+	<p class="note">Разберём, как ими пользоваться на <a style="color: royalblue" href="/examples/memory-leak/" target="_blank">примере</a></p>
+</section>
+
 <!--THE END-->
 
 <section class="slide">
@@ -127,6 +291,7 @@
 			<a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156"
 			   target="_blank">И ещё немного про утечки памяти</a>
 		</li>
+
 
 
 	</ul>
