@@ -62,25 +62,14 @@
 	<h2>Новые WEB API, на которые стоит <br>обратить внимание</h2>
 	<p class="medium-content"></p>
 	<ul>
-		<li><strong>MediaRecorder API</strong> &mdash; MediaStream Recording</li>
 		<li><strong>Payment Request API</strong> &mdash; cross-browser standard for Payment transaction process</li>
 		<li><strong>Web Bluetooth API</strong> &mdash; communications over GATT with nearby user-selected Bluetooth
 			devices
 		</li>
-		<li><strong>WebRTC</strong> &mdash; Real-time Peer-to-peer Communications Between Browsers</li>
 		<li><strong>WebAssembly</strong> &mdash; new safe, portable, low-level code format for browsers</li>
+		<li><strong>WebRTC</strong> &mdash; Real-time Peer-to-peer Communications Between Browsers</li>
+		<li><strong>MediaRecorder API</strong> &mdash; MediaStream Recording</li>
 	</ul>
-</section>
-
-<section class="slide question">
-	<h2>MediaRecorder API</h2>
-</section>
-
-<section class="slide">
-	<h2>MediaRecorder API &mdash; <a href="https://caniuse.com/#feat=mediarecorder" target="_blank">caniuse</a></h2>
-	<div style="position: relative; width: 100%; height: 100%;">
-		<img class="place" src="mediarecorder-caniuse.png" style="transform-origin: center; transform: translate(-50.15%,-60%) scale(0.49);">
-	</div>
 </section>
 
 <section class="slide question">
@@ -94,6 +83,60 @@
 	</div>
 </section>
 
+<section class="slide">
+	<h2>Payment Request API</h2>
+	<blockquote>
+		<p>
+			<strong>Payment Request API</strong> &mdash; позволяет организовать оплату на сайте, используя нативный UI устройства, с указанием деталей карты, вариантами доставки, адресами и контактными данными &mdash;
+			<a href="https://developers.google.com/web/fundamentals/payments/" target="_blank">developers.google.com</a>
+		</p>
+	</blockquote>
+	<div style="position: relative; width: 100%; height: 100%;">
+		<img class="place z-depth-2" src="payment-demo.gif" style="transform-origin: center; transform: translate(-100%,-63%) scale(0.42);">
+		<img class="place" src="payment-screenehots.png" style="transform-origin: center;     transform: translate(-31%,-73%) scale(0.74);">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Payment Request API</h2>
+	<pre class="hljs js">
+		<code>// Поддерживаемые способы оплаты</code>
+		<code>const methodData = [{</code>
+		<code>    supportedMethods: ['visa', 'mastercard'],</code>
+		<code>}];</code>
+		<code>// Детали платежа</code>
+		<code>const details = {</code>
+		<code>    total: {</code>
+		<code>        label: 'Покупка слона',</code>
+		<code>        amount: { currency: 'RUB', value: '99.99' },</code>
+		<code>    },</code>
+		<code>};</code>
+		<code>// Настройки</code>
+		<code>const options = { requestShipping: false, requestPayerEmail: true };</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Payment Request API</h2>
+	<pre class="hljs js">
+		<code>// Начинаем процесс</code>
+		<code>const paymentRequest = new PaymentRequest(methodData, details, options);</code>
+		<code>paymentRequest.show() // возвращает промис</code>
+		<code>    .then(function(paymentResponse) {</code>
+		<code>        console.log(paymentResponse);</code>
+		<code>        // { methodName: 'mastercard',</code>
+		<code>        //   payerEmail: 'a.ostapenko@mail.ru',</code>
+		<code>        //   details: {</code>
+		<code>        //      cardNumber: '1234567890000000',</code>
+		<code>        //      cardholderName: 'OSTAPENKO ANATOLIY',</code>
+		<code>        //      cardSecurityCode: '000'</code>
+		<code>        //   }}</code>
+		<code>    })</code>
+		<code> </code>
+	</pre>
+</section>
+
 <section class="slide question">
 	<h2>Web Bluetooth API</h2>
 </section>
@@ -102,6 +145,17 @@
 	<h2>Web Bluetooth API &mdash; <a href="https://caniuse.com/#feat=web-bluetooth" target="_blank">caniuse</a></h2>
 	<div style="position: relative; width: 100%; height: 100%;">
 		<img class="place" src="webbluetooth-caniuse.png" style="transform-origin: center; transform: translate(-50.15%,-60%) scale(0.49);">
+	</div>
+</section>
+
+<section class="slide question">
+	<h2>WebAssembly</h2>
+</section>
+
+<section class="slide">
+	<h2>WebAssembly &mdash; <a href="https://caniuse.com/#feat=wasm" target="_blank">caniuse</a></h2>
+	<div style="position: relative; width: 100%; height: 100%;">
+		<img class="place" src="wasm-caniuse.png" style="transform-origin: center; transform: translate(-50.15%,-60%) scale(0.49);">
 	</div>
 </section>
 
@@ -117,14 +171,23 @@
 </section>
 
 <section class="slide question">
-	<h2>WebAssembly</h2>
+	<h2>MediaRecorder API</h2>
 </section>
 
 <section class="slide">
-	<h2>WebAssembly &mdash; <a href="https://caniuse.com/#feat=wasm" target="_blank">caniuse</a></h2>
+	<h2>MediaRecorder API &mdash; <a href="https://caniuse.com/#feat=mediarecorder" target="_blank">caniuse</a></h2>
 	<div style="position: relative; width: 100%; height: 100%;">
-		<img class="place" src="wasm-caniuse.png" style="transform-origin: center; transform: translate(-50.15%,-60%) scale(0.49);">
+		<img class="place" src="mediarecorder-caniuse.png" style="transform-origin: center; transform: translate(-50.15%,-60%) scale(0.49);">
 	</div>
+</section>
+
+<section class="slide">
+	<h2>MediaRecorder API</h2>
+	<blockquote>
+		<p>
+			<strong>MediaRecorder API</strong> &mdash;
+		</p>
+	</blockquote>
 </section>
 
 <!--Новые навыки и знания-->
