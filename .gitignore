@@ -6,3 +6,4 @@ dist/
 *.out
 *.idea
 /source/examples/babel/lib/
+package-lock.json
