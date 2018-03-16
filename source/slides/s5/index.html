@@ -224,7 +224,12 @@
 
 <section class="slide question">
 	<h2>
-		<span style="font-size: 80%; color: #000055;"><a href="https://www.youtube.com/watch?v=wi3wPzReKZQ" target="_blank">Антон Немцев &mdash; Паттерны JavaScript&nbsp;<i class="material-icons noitalic">open_in_new</i></a></span>
+<span style="font-size: 80%; color: #000055;">
+	<a href="https://www.youtube.com/watch?v=wi3wPzReKZQ" target="_blank">Алексей Охрименко &mdash; «S.O.L.I.D-ый JavaScript» &nbsp;
+		<i class="material-icons noitalic">open_in_new</i>
+	</a>
+</span>
+
 	</h2>
 </section>
 
@@ -1027,6 +1032,48 @@
 
 <section class="slide question">
 	<h2><span style="font-size: 75%">С JS'ом разобрались, а с CSS что?</span></h2>
+</section>
+
+<!-- Дизайн языка -->
+<section class="slide">
+	<h2>Дизайн языка</h2>
+	<p class="medium-content"></p>
+	<ul lang="en">
+		<li>Совместимость в обе стороны</li>
+		<li>Удобство в поддержке и изменении</li>
+		<li><code>Простота.</code> В написании, чтении, реализации идей</li>
+		<li>Разнообразие возможностей ради выразительности Интернета</li>
+		<li>CSS <code>слабо связан с HTML</code> и лишь дополняет его</li>
+		<li><code>Гибкость</code> => каскадирование и наследование</li>
+		<li>Возможность работать в связке с другими языками. Javascript :)</li>
+	</ul>
+
+	<span class="note">Подробнее о принципах в
+<a href="https://www.w3.org/TR/CSS2/intro.html#design-principles" target="_blank">документации W3C</a>
+	</span>
+</section>
+
+<section class="slide">
+	<h2>Как стили попадают на страницу</h2>
+	<p class="medium-content"></p>
+	<ul lang="en">
+		<li>Браузерные стили: default (user agent) style sheet</li>
+		<span class="note">
+			Браузерные стили можно переопределять самостоятельно или с помощью
+			<a href="https://github.com/necolas/normalize.css/" target="_blank">normalizecss</a>
+		</span>
+		<li>Пользовательские стили (!important)</li>
+		<span class="note">
+			Необходимо помнить, что они существуют в природе и не препятствовать их применению
+		</span>
+
+		<li>link rel="stylesheet" href=""</li>
+		<li>тег style</li>
+		<li>аттрибут style</li>
+		<span class="note">
+			Подходит для использования вместе с JS
+		</span>
+	</ul>
 </section>
 
 <!-- Каскадирование CSS, разные типы селекторов, импортант -->
