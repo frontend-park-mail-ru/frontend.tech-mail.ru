@@ -45,6 +45,8 @@
 			это HTML5 элемент, предназначенный для создания <em>растрового двухмерного</em> изображения на web-страницах
 			с помощью программирования на JavaScript</p>
 	</blockquote>
+	<p class="note">Подробный туториал по canvas &mdash; <a
+			href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">на MDN</a></p>
 	<code>&lt;canvas id="canvas" width="300" height="150">&lt;/canvas></code>
 	<br/>
 	<canvas id="canvas" width="300" height="150" style="border: solid;"></canvas>
@@ -686,6 +688,10 @@
 	</ul>
 </section>
 
+<section class="slide question">
+	<h2><span style="font-size: 100%">Практика!</span></h2>
+</section>
+
 
 <section class="slide question">
 	<h2><span style="font-size: 65%">Анимации</span></h2>
@@ -729,6 +735,7 @@
 <section class="slide">
 	<h2>Как ждать?</h2>
 	<ul lang="ru">
+		<li><s><code>window.sleep(...)</code></s></li>
 		<br>
 		<li><code>window.setInterval(function, delay)</code></li>
 		<li><code>window.setTimeout(function, delay)</code></li>
@@ -739,15 +746,78 @@
 </section>
 
 <section class="slide">
+	<h2><code>setInterval</code></h2>
+	<pre class="hljs js">
+		<code>function animation() {</code>
+		<code>    redraw(); // перерисовываем кадр</code>
+		<code>}</code>
+		<code> </code>
+		<code>const id = window.setInterval(animation, 1000 / 60); // 60 fps</code>
+		<code> </code>
+		<code>// хотим прервать анимацию</code>
+		<code>window.clearInterval(id);</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2><code>setTimeout</code></h2>
+	<pre class="hljs js">
+		<code>let id = null;</code>
+		<code> </code>
+		<code>function animation() {</code>
+		<code>    redraw(); // перерисовываем кадр</code>
+		<code>    id = window.setTimeout(animation, 1000 / 60); // 60 fps</code>
+		<code>}</code>
+		<code> </code>
+		<code>animation();</code>
+		<code> </code>
+		<code>// хотим прервать анимацию</code>
+		<code>window.clearTimeout(id);</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
 	<h2><code>requestAnimationFrame</code></h2>
 	<pre class="hljs js">
-		<code>let start = perfomance.now();</code>
-		<code>let current = start;</code>
+		<code>let animationFrameId = null;</code>
+		<code> </code>
+		<code>function animation() {</code>
+		<code>    redraw(); // перерисовываем кадр</code>
+		<code>    animationFrameId = <mark>window.requestAnimationFrame</mark>(animation);</code>
+		<code>}</code>
+		<code> </code>
+		<code>animation();</code>
+		<code> </code>
+		<code>// хотим прервать анимацию</code>
+		<code><mark>window.cancelAnimationFrame</mark>(animationFrameId)</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>PRO TIPs хорошей анимации</h2>
+	<p class="medium-content"></p>
+	<ul lang="ru">
+		<li>Не используйте <code>setInterval</code> и <code>setTimeout</code></li>
+		<li>Используйте <code>requestAnimationFrame</code></li>
+		<li>Замеряйте время, проходящее между двумя последовательными кадрами&nbsp;(<code>dt</code>)</li>
+		<li>Используйте полученное значение для рассчёта изменений между двумя кадрами&nbsp;(<code>dx = Vx * dt</code>)</li>
+		<li>...</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2><code>requestAnimationFrame</code></h2>
+	<pre class="hljs js">
+		<code>let last = perfomance.now(); // точное время в <strong>наносекундах</strong></code>
+		<code> </code>
 		<code>function animation(now) { // передаётся текущее <mark>perfomance.now()</mark></code>
-		<code>    const <mark>delay</mark> = now - current;</code>
-		<code>    current = now;</code>
-		<code>    redraw(start, delay); // перерисовываем кадр</code>
-		<code>    <mark>requestAnimationFrame</mark>(animation);</code>
+		<code>    const <mark>delay</mark> = now - last;</code>
+		<code>    redraw(delay); // перерисовываем кадр</code>
+		<code> </code>
+		<code>    window.requestAnimationFrame(animation);</code>
 		<code>}</code>
 		<code> </code>
 		<code>animation(perfomance.now());</code>
@@ -759,16 +829,32 @@
 	<h2>Оптимизации производительности</h2>
 	<ul lang="ru">
 		<li>Оптимизация анимации с помощью <code>requestAnimationFrame</code></li>
-		<li>Используйте многослойные элементы <code>canvas</code> для сложных сцен</li>
 		<li>Рендеринг только разницы, а не нового состояния целиком</li>
-		<li>Группировка вызовов <code>canvas</code></li>
 		<li>Предварительный рендеринг во внеэкранный элемент <code>canvas</code></li>
-		<li>Используйте CSS для фонового изображения и трансформаций</li>
+		<li>Группировка вызовов <code>canvas</code></li>
+		<li>Используйте многослойные элементы <code>canvas</code> для сложных сцен</li>
+		<li>Используйте CSS для фонового изображения и анимаций, HTML для элементов интерфейса</li>
 		<li>Отказ от координат с плавающей запятой</li>
-		<li>Отказ от рендеринга текста с <code>canvas</code> и свойства <code>shadowBlur</code></li>
+		<li>Отказ от рендеринга текста, больших изображений с <code>canvas</code></li>
+		<li>Отказ от использования "тяжёлых" свойств: например, <code>shadowBlur</code></li>
 		<li>...</li>
 	</ul>
 </section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://www.youtube.com/watch?v=UH3tKb7B5xA&feature=youtu.be&t=1m30s" target="_blank">"Пишем физику на JavaScript"&nbsp;<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 70%; color: darkgrey">доклад с конференции</em></span>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2><span style="font-size: 100%">Практика!</span></h2>
+</section>
+
+<section class="slide">
+	<h2 class="shout">Перерыв</h2>
+</section>
+
 
 
 <section class="slide">
