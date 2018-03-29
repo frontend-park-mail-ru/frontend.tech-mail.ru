@@ -30,8 +30,9 @@
 	<h2>Графика в браузере</h2>
 	<p class="medium-content"></p>
 	<ul>
-		<li>Картинки (.png/.jpg)</li>
-		<li>SVG-графика</li>
+		<li>Картинки (<code>&lt;img src="image.png"></code>)</li>
+		<li>Медиа объекты (<code>&lt;video src="video.mp4">&lt;/video></code>)</li>
+		<li>SVG-графика &mdash; можно встраивать как часть документа</li>
 		<li>HTML + CSS</li>
 		<li>canvas</li>
 	</ul>
@@ -40,18 +41,13 @@
 <section class="slide">
 	<h2>Элемент <code>&lt;canvas></code></h2>
 	<blockquote>
-		<p class="small-content">Элемент <code>&lt;canvas></code> (англ. canvas &mdash; «холст», рус. канва́с) &mdash;
+		<p class="small-content"><strong>Элемент <code>&lt;canvas></code></strong> (англ. canvas &mdash; «холст», рус. канва́с) &mdash;
 			это HTML5 элемент, предназначенный для создания <em>растрового двухмерного</em> изображения на web-страницах
 			с помощью программирования на JavaScript</p>
 	</blockquote>
-</section>
-
-<section class="slide">
-	<h2>Элемент <code>&lt;canvas></code></h2>
-	<p class="medium-content"></p>
 	<code>&lt;canvas id="canvas" width="300" height="150">&lt;/canvas></code>
 	<br/>
-	<canvas id="canvas" width="300" height="150" style="border:solid"></canvas>
+	<canvas id="canvas" width="300" height="150" style="border: solid;"></canvas>
 </section>
 
 <section class="slide">
@@ -247,24 +243,15 @@
 		<code>ctx.quadraticCurveTo(cp1x, cp1y, x, y);</code>
 		<code>// кубическая кривая</code>
 		<code>ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);</code>
-		<code> </code>
 		<code>// <b>cpx, cpy</b> - опорные точки</code>
 		<code>// <b>x, y</b> - куда вести</code>
 		<code> </code>
 	</pre>
-</section>
-
-<section class="slide">
-	<h2><code>quadraticCurveTo</code></h2>
-	<div style="position:relative;width: 100%; height: 85%; overflow: hidden">
-		<img class="place" src="Bezier_2_big.gif" style="transform-origin: center;transform: translate(-50%,-70%) scale(1.25);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2><code>bezierCurveTo</code></h2>
-	<div style="position:relative;width: 100%; height: 85%; overflow: hidden">
-		<img class="place" src="Bezier_3_big.gif" style="transform-origin: center;transform: translate(-50%,-70%) scale(1.25);">
+	<div style="position: relative; width: 100%; height: 35%; overflow: hidden;">
+		<img class="place" src="Bezier_2_big.gif"
+			 style="transform-origin: center; transform: translate(-110%,-70%) scale(1.25);">
+		<img class="place" src="Bezier_3_big.gif"
+			 style="transform-origin: center; transform: translate(+15%,-70%) scale(1.25);">
 	</div>
 </section>
 
@@ -690,10 +677,11 @@
 
 <section class="slide">
 	<h2>А так же</h2>
+	<p class="medium-content"></p>
 	<ul>
-		<li>Работа с изображениями: ctx.drawImage для img, svg, video, canvas</li>
+		<li>Работа с изображениями: <code>ctx.drawImage</code> для img, svg, video, canvas</li>
 		<li>Режимы наложения и обрезка</li>
-		<li>Работа с пикселями: ctx.getImageData</li>
+		<li>Работа с пикселями: <code>ctx.getImageData</code></li>
 		<li>...</li>
 	</ul>
 </section>
