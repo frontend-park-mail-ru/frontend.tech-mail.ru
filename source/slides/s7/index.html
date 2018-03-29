@@ -857,43 +857,95 @@
 
 
 
+
+
 <section class="slide">
 	<h2 class="shout">Как делать игры?</h2>
 </section>
 
 <section class="slide question">
-	<h2><span style="font-size: 65%">SinglePlayer &mdash; это <mark>специальная версия</mark> MultiPlayer</span></h2>
+	<h2><span style="font-size: 60%; display: inline-block;">Секрет написания крутой, масштабируемой игры &mdash; <strong>правильное планирование архитектуры</strong></h2>
 </section>
 
 <section class="slide">
-	<h2>Основные определения</h2>
-	<ul lang="ru">
-		<li>Игровой цикл (gameloop)</li>
-		<li>Игровой мир</li>
-		<li>Состояние игрового мира</li>
-		<li>Сцена</li>
-		<li>Игровая стратегия</li>
-		<li>Контроллер контролов</li>
-		<li>Менеджер сессий</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Типа архитектура ;)</h2>
-	<div style="position:relative;width: 100%; height: 100%;"><img class="place" src="arch.jpg"
-																   style="transform-origin: center;transform: translate(-50%,-50%) scale(0.16);">
+	<h2>Основные абстракции</h2>
+	<p class="medium-content"></p>
+	<div class="double">
+		<ul lang="en">
+			<li><strong>Подсистема бизнес-логики</strong>
+				<ul lang="ru">
+					<li>Игровой мир</li>
+					<li>Состояние игрового мира</li>
+					<li>Игровой цикл (<em>gameloop</em>)</li>
+					<li>Игровая стратегия</li>
+					<li>Менеджер сессий</li>
+				</ul>
+			</li>
+		</ul>
+		<ul lang="en">
+			<li><strong>Подсистема отображения и взаимодействия с пользователем</strong>
+				<ul lang="ru">
+					<li>Игровая сцена</li>
+					<li>Игровой цикл отображения (<em>"game animation loop"</em>)</li>
+					<li>"Контроллер контроллов"</li>
+				</ul>
+			</li>
+		</ul>
 	</div>
+	<br>
+	<ul lang="en">
+		<li><strong>Игровой транспорт</strong></li>
+	</ul>
 </section>
 
 <section class="slide">
-	<h2>Основные подходы</h2>
-	<ul lang="ru">
-		<li>Раздерение всего</li>
-		<li>Использование модели акторов (event-based программирование)</li>
-		<li>Перерисовка игрового мира отдельно от обновления состояния</li>
-		<li>Использование паттернов: стратегия, медиатор</li>
-		<li>Что-то ещё...</li>
+	<h2>"Категории" игровых механик</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li>Пошаговые игры</li>
+		<li>Игры реального времени</li>
 	</ul>
+</section>
+
+<section class="slide">
+	<h2>Игровые режимы</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li><mark><strong>Многопользовательский режим по сети</strong></mark> &mdash; бизнес-логика выполняется на сервере, несколько клиентов, общение по сети</li>
+		<li><strong>Однопользовательский режим по сети</strong> &mdash; бизнес-логика выполняется на сервере, но клиент всего один, общение по сети</li>
+		<li><mark><strong>Однопользовательский "оффлайн"-режим</strong></mark> &mdash; как бизнес-логика, так и логика отображения выполняется на клиенте, возможна работа <em>оффлайн</em>, т.е. без подключения по сети</li>
+		<li><strong>Многопользовательский "оффлайн"-режим</strong> &mdash; например, <em>пошаговая игра на одном устройстве, либо split-screen</em></li>
+	</ul>
+	<p class="note"><mark style="color: #aaa;">Режимы, обязательные к реализации</mark></p>
+</section>
+
+<section class="slide">
+	<h2>Распространённый, но <br/> <strong>неправильный подход</strong></h2>
+	<blockquote>
+		<p class="small-content">Сначала реализуем singleplayer, а потом доработаем и добавим туда многопользовательность...</p>
+	</blockquote>
+</section>
+
+<section class="slide question">
+	<h2><span style="font-size: 65%">SinglePlayer &mdash; это <mark><strong>специальная версия</strong></mark> MultiPlayer</span></h2>
+</section>
+
+<section class="slide">
+	<h2>Итак, делаем хорошо</h2>
+	<ul>
+		<li>Максимально изолируем друг от друга части игры, используем правильную декомпозицию</li>
+		<li>Минимизируем прямое взаимодействие модулей друг с другом. Например, заменяя прямое взаимодействие подпиской на события</li>
+		<li>Два игровых цикла в системе &mdash; бизнес-логика отдельно от логики отображения</li>
+		<li>Глобальный источник правды о системе &mdash; объект состояния игрового мира</li>
+		<li>Передача информации об изменениях в системе &mdash; только через игровой транспорт</li>
+		<li>Поддержку разных режимов игры реализуем через возможности ООП</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://habrahabr.ru/post/302394/" target="_blank">Мультиплеер в быстрых играх&nbsp;<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 60%; color: darkgrey; display: inline-block;">цикл статей об особенностях реализации многопользовательских online-игр</em></span>
+	</h2>
 </section>
 
 <section class="slide">
@@ -901,9 +953,17 @@
 </section>
 
 
+
+
 <section class="slide">
 	<h2 class="shout">Дополнительные возможности<br/>
-		<small style="font-size:32px;">WebGL, FullScreen API, PointerLock API</small>
+		<small style="font-size: 32px;">WebGL, FullScreen API, PointerLock API</small>
+	</h2>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://youtu.be/Z4E2drxNjMk?t=1h12m55s" target="_blank">"Играем в браузере"<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 60%; color: darkgrey; display: inline-block;">доклад с конференции</em></span>
 	</h2>
 </section>
 
@@ -1070,28 +1130,6 @@
 </section>
 
 <section class="slide">
-	<h2>Используйте библиотеки!</h2>
-	<ul lang="ru">
-		<li><a target="_blank" href="https://threejs.org">three.js</a></li>
-		<li><a target="_blank" href="http://www.babylonjs.com">babylonjs</a></li>
-		<li><a target="_blank" href="http://lo-th.github.io/Oimo.js/">Oimo.js</a> (Надстройка над three.js)</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Средства 3D моделирования</h2>
-	<ul lang="ru">
-		<li><a target="_blank" href="https://www.blender.org">blender</a></li>
-		<li><a target="_blank" href="https://threejs.org/editor/">three.js editor</a></li>
-		<li><a target="_blank" href="https://www.maxon.net/ru/produkty/cinema-4d/obzor/">Cinema-4D</a> (Платный)</li>
-	</ul>
-	<p>Модельки</p>
-	<ul lang="ru">
-		<li><a target="_blank" href="https://clara.io">clara.io</a></li>
-	</ul>
-</section>
-
-<section class="slide">
 	<h2>Примеры 3D</h2>
 	<ul lang="ru">
 		<li><a target="_blank" href="http://gorescript.com">Shooter</a></li>
@@ -1102,18 +1140,12 @@
 	</ul>
 </section>
 
-<section class="slide question">
-	<h2><a style="color:blue" href="https://youtu.be/Z4E2drxNjMk?t=1h12m55s" target="_blank">"Играем в браузере"</a>
-	</h2>
-</section>
-
-
 <section class="slide">
 	<h2>Полезные ссылки</h2>
 	<ul lang="en">
 		<li>Про <a href="http://frontender.info/using-svg/" target="_blank">SVG-графику</a></li>
 		<li><a href="https://developer.mozilla.org/en-US/docs/Web/Demos_of_open_web_technologies" target="_blank">Описание
-			и ДЕМО</a> различных web-технологий, которые могут быть полезны при разработке
+			и ДЕМО</a> различных web-технологий, которые могут быть полезны при разработке игры
 		</li>
 		<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">Туториал
 			по</a> Canvas API
