@@ -52,31 +52,29 @@
 	</div>
 </section>
 
-<section class="slide question" style="background-color: #f7df1e;">
-	<div style="position: absolute; right: 5%; bottom: 5%; font-size: 320px; font-weight: 600; line-height: 1; letter-spacing: -20px; color: black;">ЖиЕс</div>
-</section>
-
 <section class="slide">
 	<h2>Что есть JavaScript?</h2>
 	<p class="medium-content"></p>
 	<ul lang="ru">
-		<li>ECMAScript &mdash; язык программирования</li>
-		<li>JavaScript &mdash; язык программирования (коммерческое название)</li>
-		<li>ECMA-262 &mdash; спецификация ECMAScript (<a
-				href="https://www.ecma-international.org/ecma-262/7.0/index.html" target="_blank">последняя версия</a>:
-			7th издание в июле 2016 года, <a href="https://tc39.github.io/ecma262/" target="_blank">последний
-				черновик</a>: ECMAScript® 2017 Language Specification)
+		<li><strong>ECMAScript</strong> &mdash; <mark>спецификация</mark> скриптового языка программирования</li>
+		<li><strong>JavaScript</strong> &mdash; <mark>язык программирования</mark>, одна из реализаций спецификации&nbsp;ECMAScript (наряду с JScript и ActionScript), их ещё называют диалектами ECMAScript</li>
+		<li><strong>ECMA-262</strong> &mdash; <mark>стандарт компании Ecma International</mark>, по которому разрабатывается спецификация ECMAScript
+			<ul lang="en">
+				<li><a href="https://www.ecma-international.org/ecma-262/8.0/index.html" target="_blank">последняя версия</a>: 8-е издание в июне 2017 года</li>
+				<li><a href="https://tc39.github.io/ecma262/" target="_blank">последний черновик</a>: ECMAScript® 2019 Language Specification</li>
+			</ul>
 		</li>
-		<li>ISO/IEC 16262:2011(E) &mdash; international standard</li>
+		<li>ISO/IEC 16262:2011(E) &mdash; <em>другой стандарт</em>, разрабатываемый ISO (в настоящее время активно не развивается)</li>
 	</ul>
+
+	<p class="note"><a href="https://habrahabr.ru/company/nixsolutions/blog/342904/" target="_blank">Подробнее про термины</a></p>
 </section>
 
 <section class="slide">
 	<h2>Как это было</h2>
 	<p class="medium-content"></p>
 	<ul lang="en">
-		<li><strong>Brendan Eich</strong> разработал прототип языка в мае 1995 за 10 дней, тогда он назывался <strong>Mocha</strong>
-		</li>
+		<li><strong>Brendan Eich</strong> разработал прототип языка в мае 1995 за 10 дней под кодовым названием Mocha</li>
 		<li>В <strong>сентябре 1995</strong> в бета-версии браузера Netscape Navigator 2.0 он был выпущен под названием
 			LiveScript
 		</li>
@@ -87,38 +85,23 @@
 		<li>Июнь 1998 &mdash; спецификация <strong>ECMAScript 2</strong> и международный стандарт <strong>ISO/IEC
 			16262</strong></li>
 	</ul>
+
+	<p class="note"><a href="https://ponyfoo.com/articles/standard" target="_blank">Подробнее про историю развития</a></p>
 </section>
 
 <section class="slide">
 	<h2>Как это было</h2>
-	<p class="medium-content"></p>
-	<ul lang="en">
-		<li>2003 &mdash;
-			<mark>ECMAScript 4</mark>
-			(ActionScript)
-		</li>
-		<li>Декабрь 2009 &mdash;
-			<mark>ECMAScript 5</mark>
-		</li>
-		<li>Июнь 2011 &mdash;
-			<mark>ECMAScript 5.1</mark>
-			, ISO/IEC 16262:2011
-		</li>
-		<li>Июнь 2015 &mdash;
-			<mark>ECMAScript 2015</mark>
-			(ES6 Harmony) === ES6
-		</li>
-		<li>...</li>
-		<li>Июнь 2016 &mdash;
-			<mark>ECMAScript 2016</mark>
-		</li>
-		<li>Июнь 2017 &mdash;
-			<mark>ECMAScript 2017</mark>
-		</li>
-		<li>Лето 2018 года &mdash;
-			<mark>ECMAScript 2018</mark>
-		</li>
-		<li>...</li>
+	<ul lang="ru">
+		<li>Декабрь 1999 &mdash; <mark>ECMAScript 3</mark></li>
+		<li><mark>ECMAScript 4 (abandoned)</mark> &mdash; заброшенная версия</li>
+		<li>Декабрь 2009 &mdash; <mark>ECMAScript 5</mark></li>
+		<ul>
+			<li>Июнь 2011 &mdash; <mark>ECMAScript 5.1</mark> (ISO/IEC 16262:2011)</li>
+		</ul>
+		<li>Июль 2015 &mdash; <mark>ECMAScript 2015</mark> (ECMAScript 6th edition) &mdash; ES6 Harmony</li>
+		<li>Июль 2016 &mdash; <mark>ECMAScript 2016</mark> (ECMAScript 7th edition)</li>
+		<li>Июнь 2017 &mdash; <mark>ECMAScript 2017</mark> (ECMAScript 8th edition)</li>
+		<li><em>Лето 2018</em> &mdash; <mark>ECMAScript 2018</mark> (и так далее)</li>
 	</ul>
 </section>
 
@@ -132,8 +115,8 @@
 		<li>Спреды</li>
 		<li>Итераторы <em>и</em> генераторы</li>
 		<li>Aсинхронные функции</li>
-		<li>Proxy</li>
-		<li><code>SharedArrayBuffer</code> и <code>Atomics</code></li>
+		<li>Reflect <em>и</em> Proxy</li>
+		<li><code>SharedArrayBuffer</code> <em>и</em> <code>Atomics</code></li>
 		<li><em>and more...</em></li>
 	</ul>
 </section>
@@ -497,11 +480,12 @@
 		<code>const User = {login, age}; // {login: 'Jon Snow', age: 42}</code>
 		<code> </code>
 		<code>const Obj = {</code>
+		<code>    <s>func: function () { ... },        // old way</s></code>
 		<code>    <mark>func()</mark> { ... },                   // inline methods</code>
-		<code>    array: [1, 2, 3, 4, 5,],          // trailing commas</code>
 		<code>    <mark>get Arr()</mark> { return this.array; }, // object getters & setters</code>
-		<code>    prop: value,                      // trailing commas</code>
 		<code>    ['foo' + 'bar']: value,           // computed property names</code>
+		<code>    array: [1, 2, 3, 4, 5,],          // trailing commas</code>
+		<code>    prop: value,                      // trailing commas</code>
 		<code>}</code>
 		<code> </code>
 	</pre>
@@ -547,7 +531,7 @@
 	<h2>Дополнительные методы</h2>
 	<pre class="hljs js">
 		<code> // копирование свойств</code>
-		<code>Object.assign(target, ...sources);</code>
+		<code>Object.assign(target, source, source, source, ...);</code>
 		<code> </code>
 		<code>const s1 = {a: 'Jon'}, s2 = {b: 42};</code>
 		<code>const result = Object.assign({}, s1, s2);</code>
@@ -715,6 +699,23 @@
 	</pre>
 </section>
 
+<section class="slide">
+	<h2>Новые возможности регулярок</h2>
+	<p class="note">Приедет в ECMAScript 2018</p>
+	<pre class="hljs js">
+		<code>// новый флаг s (dotAll)</code>
+		<code>/foo.bar/.test('foo\nbar');      // false</code>
+		<code>/foo.bar/s.test('foo\nbar');     // true</code>
+		<code> </code>
+		<code>// именованные группы в RegExp</code>
+		<code>let re = /(?&lt;year>\d{4})-(?&lt;month>\d{2})-(?&lt;day>\d{2})/u;</code>
+		<code>let result = re.exec('2018-04-06');</code>
+		<code>// result.groups.year === '2018';</code>
+		<code>// result.groups.month === '04';</code>
+		<code>// result.groups.day === '06';</code>
+		<code> </code>
+	</pre>
+</section>
 
 <section class="slide question">
 	<h2 style="text-align: center; padding: 0">
@@ -761,29 +762,10 @@
 </section>
 
 
-<!--оно самое-->
-
-<!--<section class="slide">-->
-<!--<h2>Variable hoisting</h2>-->
-<!--<pre class="hljs js">-->
-<!--<code>// before</code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code> </code>-->
-<!--<code>// ReferenceError</code>-->
-<!--<code> </code>-->
-<!--</pre>-->
-<!--</section>-->
 
 
 <section class="slide">
-	<h2 class="shout">Высший пилотаж</h2>
+	<h2 class="shout"><span style="font-size: 95%;">Высший пилотаж</span></h2>
 </section>
 
 <section class="slide question">
@@ -1011,7 +993,7 @@
 	<h2>Оператор расширения</h2>
 	<p class="small-content"></p>
 	<pre class="hljs js">
-		<code>// пока что так нельзя</code>
+		<code>// будет добавлено в ECMAScript 2018</code>
 		<code>const {login, password, <mark>...profile</mark>} = {</code>
 		<code>     login: 'Jon',</code>
 		<code>     password: 'qwerty123',</code>
