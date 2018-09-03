@@ -23,16 +23,16 @@
   "homepage": "https://github.com/frontend-park-mail-ru/frontend.tech-mail.ru#readme",
   "devDependencies": {
     "co": "^4.6.0",
-    "grunt": "^1.0.1",
+    "grunt": "^1.0.3",
     "grunt-concurrent": "^2.3.1",
-    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-express": "^1.4.1",
     "grunt-notify": "^0.4.5",
     "load-grunt-config": "^0.19.2",
-    "promisify-node": "^0.4.0",
-    "showdown": "^1.7.3",
+    "promisify-node": "^0.5.0",
+    "showdown": "^1.8.6",
     "time-grunt": "^1.4.0"
   }
 }
