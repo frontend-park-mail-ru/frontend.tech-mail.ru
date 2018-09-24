@@ -8,3 +8,4 @@ dist/
 /source/examples/babel/lib/
 package-lock.json
 yarn.lock
+*.cache
