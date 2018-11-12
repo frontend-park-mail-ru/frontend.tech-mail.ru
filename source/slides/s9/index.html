@@ -705,33 +705,22 @@
 </section>
 
 <section class="slide">
-	<h2>StatCounter, Oct 2016</h2>
+	<h2>StatCounter, Oct 2018</h2>
 	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="stats.png"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(0.8);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Native vs. Web</h2>
-	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="mobapps1.png"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1);">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Native vs. Web</h2>
-	<div style="position:relative;width: 100%;height: 80%;">
-		<img class="place" src="mobapps2.png"
-			 style="transform-origin: center;transform: translate(-50%, -50%) scale(1.1);">
+		<img class="place" src="stats2018.png"
+			 style="transform-origin: center;transform: translate(-50%, -50%) scale(0.7);">
 	</div>
 </section>
 
 <section class="slide">
 	<h2>Подходы к разработке под<br/>мобильные устройства</h2>
 	<ul>
-		<li>Отдельная мобильная версия</li>
+		<li>Отдельная мобильная версия
+			<ul>
+				<li>отдельный домен</li>
+				<li>серверный рендеринг</li>
+			</ul>
+		</li>
 		<li>Резиновый (
 			<mark>liquid</mark>
 			) дизайн
@@ -881,6 +870,8 @@
 		<li><code>vh</code> &mdash; 1% of viewport’s height</li>
 		<li><code>vmin</code> &mdash; 1% of viewport’s smaller dimension</li>
 		<li><code>vmax</code> &mdash; 1% of viewport’s larger dimension</li>
+		<li><code>%</code> &mdash; size as relative to an element's parent object</li>
+		<li><code>fr</code> &mdash; represents a fraction of the leftover space in the grid container</li>
 	</ul>
 </section>
 
@@ -920,6 +911,117 @@
 	<div style="position:relative;width: 100%;height: 80%;">
 		<img class="place" src="css2.gif" style="transform-origin: center;transform: translate(-50%, -50%) scale(0.8);">
 	</div>
+</section>
+
+<section class="slide">
+	<h2>CSS-тег
+		<mark>&lt;picture></mark>
+	</h2>
+	<pre class="hljs css">
+		<code>&lt;picture> </code>
+		<code>		&lt;source</code>
+		<code>			srcset="<список URL c дескрипторами>" </code>
+		<code>			[sizes="<ваши размеры в зависимости от раскладки>"]</code>
+		<code>			[media="<медиавыражение>"] </code>
+		<code>			[type="&lt;mime/type>"] </code>
+		<code>		> </code>
+		<code>		&lt;source ...></code>
+		<code>		&lt;img src="image.jpg" alt="My image" </code>
+		<code>&lt;/picture></code>
+		<code> </code>
+
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>CSS-тег
+		<mark>&lt;picture></mark>
+	</h2>
+	<pre class="hljs css">
+		<code>&lt;img </code>
+		<code>		src="images/400.jpg" </code>
+		<code>		srcset=" 400w, images/800.jpg 800w, images/1200.jpg 1200w" </code>
+		<code>		sizes="(min-width: 700px) 75vw, 100vw"</code>
+		<code>> </code>
+	</pre>
+
+	<b>Retina</b>
+	<pre class="hljs css">
+		<code>&lt;img </code>
+		<code>		src="images/400.jpg" </code>
+		<code>		srcset="images/800.jpg 2x, images/1200.jpg 3x" </code>
+		<code>		width="400" height="300"</code>
+		<code>> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>CSS-тег
+		<mark>&lt;picture></mark>
+	</h2>
+	<pre class="hljs css">
+		<code>&lt;picture> </code>
+		<code>		&lt;source</code>
+		<code>			media="(min-width: 900px)" </code>
+		<code>			srcset="images/original.jpg 1200w"</code>
+		<code>			sizes="100vw" </code>
+		<code>		> </code>
+		<code>		&lt;source</code>
+		<code>			media="(min-width: 700px) </code>
+		<code>			srcset="images/800crop.jpg 800w"</code>
+		<code>			sizes="100vw" </code>
+		<code>		> </code>
+		<code>		&lt;source ...></code>
+		<code>		&lt;img srcset="images/400crop.jpg 400w" sizes="100vw"> </code>
+		<code>&lt;/picture></code>
+		<code> </code>
+
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>Адаптивность?
+	</h2>
+	<b>Увеличивается в зависимости от media query</b>
+	<pre class="hljs css">
+		<code>h1 { font-size: 14px; }</code>
+		<code>@media (min-width: 320px) {</code>
+		<code>	h1 { font-size: 20px } </code>
+		<code>}</code>
+		<code>@media (min-width: 960px) {</code>
+		<code>  h1 { font-size: 40px; } </code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+	<b>Увеличивается в зависимости от размера экрана</b>
+
+	<pre class="hljs css">
+		<code>h1 { font-size: 14px + 5vw; }</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>CSS шлюзы
+	</h2>
+	<pre class="hljs css">
+		<code>h1 { font-size: 20px; }</code>
+		<code>@media (min-width: 320px) {</code>
+		<code>	h1 { font-size: calc( 3.125vw + 10px ); } </code>
+		<code>}</code>
+		<code>@media (min-width: 960px) {</code>
+		<code>  h1 { font-size: 40px; } </code>
+		<code>}</code>
+
+		<code> </code>
+
+	</pre>
+</section>
+
+<section class="slide question">
+	<h2>
+		<a style="color: royalblue" href="https://habr.com/company/mailru/blog/315196/" target="_blank">CSS шлюзы</a>
+	</h2>
 </section>
 
 <section class="slide question">
@@ -1088,6 +1190,8 @@
 	</pre>
 </section>
 
+
+
 <section class="slide question">
 	<h2>Accessibility &mdash; <a style="color: royalblue" href="https://habrahabr.ru/hub/accessibility/" target="_blank">тред на Habranabr</a></h2>
 </section>
@@ -1119,6 +1223,7 @@
 		<a style="color: royalblue" href="https://web.archive.org/web/20151103001838/http://www.luster.io/blog/9-29-14-mobile-web-checklist.html" target="_blank">Mobile Web App Checklist</a>
 	</h2>
 </section>
+
 
 
 <!--нативные штуки всё-->
@@ -1212,6 +1317,8 @@
 		<code>    "orientation": "landscape", // portrait, any</code>
 		<code>    "background_color": "#0F0848",</code>
 		<code>    "theme_color": "#0F0848",</code>
+		<code>    "related_applications": [ ... ]</code>
+		<code>    "prefer_related_applications": false</code>
 		<code>    "icons": [ ... ]</code>
 		<code>}</code>
 		<code> </code>
@@ -1267,6 +1374,8 @@
 <section class="slide">
 	<h2>Полезные ссылки</h2>
 	<ul lang="en">
+
+		<li><a href="https://youtu.be/hSyO6y4B4BE?t=15918" target="_blank">Семантика для циников, Вадим Макеев</a></li>
 		<li><a href="https://frontender.info/a-guide-to-flexbox/" target="_blank">Полное руководство по Flexbox</a></li>
 		<li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank">Гриды</a> и <a
 				href="https://www.youtube.com/watch?v=JoRVUILXLxU" target="_blank">доклад</a> Вадима Макеева по гридам
@@ -1277,6 +1386,14 @@
 		<li><a href="https://youtu.be/CaDnbOjXjRg" target="_blank">Доклад Вадима Макеева про CSS</a></li>
 		<li><a href="https://m.alphasights.com/css-evolution-from-css-sass-bem-css-modules-to-styled-components-d4c1da3a659b" target="_blank">CSS Evolution</a></li>
 	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		Го тусить на
+		<a style="color: royalblue; font-size: 75%" href="http://localhost:9000/"
+		   target="_blank">http://localhost:9000/</a>
+	</h2>
 </section>
 
 <section class="slide">
