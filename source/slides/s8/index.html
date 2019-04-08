@@ -2526,11 +2526,14 @@
 		<li><strong>Загружается в браузер и исполняется в браузере</strong> &mdash; формально, WebAssembly исполняется JavaScript-движком, а не самим браузером, поэтому есть и другие варианты исполнения, например, под Node.js</li>
 		<li>Исполняется виртуальной машиной</li>
 		<li>НЕ имеет ничего общего с WEB, кроме того что общается с внешним миром через JavaScript</li>
+		<li>Компиляторы работают только со статически типизированным кодом</li>
+		<li>Можно закинуть в воркер и сделать приложение еще быстрее</li>
 	</ul>
 </section>
 
 <section class="slide">
 	<h2>WebAssembly</h2>
+	<h2>Необходим статически типизированный код</h2>
 	<pre class="hljs c">
 		<code>// исходник на C</code>
 		<code>int fib(int n) {</code>
@@ -2565,6 +2568,14 @@
 	</pre>
 </section>
 
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;">
+			<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format" target="_blank">Как читать WAST</a>
+		</span>
+	</h2>
+</section>
+
 <section class="slide">
 	<h2>WebAssembly</h2>
 	<pre class="hljs c">
@@ -2587,8 +2598,11 @@
 	<h2>WebAssembly</h2>
 	<pre class="hljs c">
 		<code>// запускаем wasm-модуль</code>
+		<code>// создаем типизированный массив</code>
 		<code>const wasmCode = new Uint8Array([...]);</code>
+		<code>// компилируем WASM</code>
 		<code>const wasmModule = new WebAssembly.Module(wasmCode);</code>
+		<code>// получаем инстанс готовый к работе</code>
 		<code>const wasmInstance = new WebAssembly.Instance(wasmModule, []);</code>
 		<code> </code>
 		<code>console.log(wasmInstance.exports.fib(10));</code>
@@ -2607,7 +2621,40 @@
 	</h2>
 </section>
 
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;">
+			<a href="https://habr.com/post/417563/" target="_blank" style="text-decoration: line-through">Благодаря WebAssembly можно писать Frontend на Go</a>
+		</span>
+	</h2>
+</section>
 
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;">
+			<a href="https://github.com/AssemblyScript/assemblyscript" target="_blank">Благодаря WebAssembly можно писать Frontend на TypeScript!!!</a>
+		</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>AssemblyScript</h2>
+	<p class="medium-content"></p>
+	<blockquote>
+		<p>
+			<strong>AssemblyScript</strong> &mdash; компилятор TypesScript в WebAssembly. Т.к. TypesScript статически типезированный, то мы можем его скомпилить в WebAssembly. Можно использовать специальные <a href="https://github.com/AssemblyScript/assemblyscript/wiki/Types">типы</a>
+		</p>
+	</blockquote>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;">
+			Го тусить на
+			<a href="http://localhost:3000" target="_blank">локалхост</a>
+		</span>
+	</h2>
+</section>
 
 
 
@@ -2655,6 +2702,8 @@
 		<li><a href="https://github.com/getify/You-Dont-Know-JS" target="_blank">Крутая серия книг</a> о JavaScript</li>
 		<li><a href="https://developer.mozilla.org/ru/docs/DOM/Using_web_workers" target="_blank">Использование Web Workers</a> &mdash; MDN</li>
 		<li><a href="https://www.html5rocks.com/ru/tutorials/workers/basics/" target="_blank">Туториал Web Workers</a> &mdash; MDN</li>
+		<li><a href="https://developer.mozilla.org/ru/docs/WebAssembly" target="_blank">WebAssembly</a> &mdash; MDN</li>
+		<li><a href="https://codepen.io/duketeam/pen/ALEByA/" target="_blank">Конвертация в оттенки серого</a> &mdash; codeopen.io</li>
 	</ul>
 </section>
 
