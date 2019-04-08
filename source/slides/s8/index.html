@@ -1720,129 +1720,6 @@
 
 
 <section class="slide">
-	<h2 class="shout"><span style="font-size: 95%;">Высший пилотаж</span></h2>
-</section>
-
-<section class="slide question">
-	<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">WebAssembly</span></h2>
-</section>
-
-<section class="slide">
-	<h2>WebAssembly</h2>
-	<p class="medium-content">Во время создания WebAssembly решалась следующая задача: <strong>быстро исполнять код в браузере</strong></p>
-	<blockquote>
-		<p>
-			<strong>WebAssembly (wasm)</strong> &mdash; эффективный низкоуровневый байт-код, предназначенный для исполнения в браузере. WebAssemblу представляет собой переносимое абстрактное синтаксическое дерево, обеспечивающее как более быстрый парсинг, так и более быстрое выполнение кода, чем JavaScript &mdash;
-			<a href="https://codelabs.developers.google.com/codelabs/web-assembly-intro/" target="_blank">developers.google.com</a>
-		</p>
-	</blockquote>
-</section>
-
-<section class="slide">
-	<h2>WebAssembly</h2>
-	<p class="medium-content"></p>
-	<blockquote>
-		<p>
-			<strong>WebAssembly</strong> &mdash; это не полная замена JS, а лишь технология, позволяющая писать критичные к ресурсам модули и компилировать их в переносимый байт-код с линейной моделью памяти и статической типизацией
-		</p>
-	</blockquote>
-	<p class="note"><strong>Применения:</strong> редактирование изображений/видео/музыки, криптография, математические вычисления, игры...</p>
-</section>
-
-<section class="slide">
-	<h2>Что же такое WebAssembly?</h2>
-	<p class="medium-content"></p>
-	<ul>
-		<li>Бинарный формат</li>
-		<li>НЕ язык программирования, а байт-код</li>
-		<li><strong>Загружается в браузер и исполняется в браузере</strong> &mdash; формально, WebAssembly исполняется JavaScript-движком, а не самим браузером, поэтому есть и другие варианты исполнения, например, под Node.js</li>
-		<li>Исполняется виртуальной машиной</li>
-		<li>НЕ имеет ничего общего с WEB, кроме того что общается с внешним миром через JavaScript</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>WebAssembly</h2>
-	<pre class="hljs c">
-		<code>// исходник на C</code>
-		<code>int fib(int n) {</code>
-		<code>    if (n == 0) { return 0; } else {</code>
-		<code>        if ((n == -1) || (n == 1)) { return 1; } else  {</code>
-		<code>            if (n > 0) { return fib(n - 1) + fib(n - 2); }</code>
-		<code>            else { return fib(n + 2) - fib(n + 1); }</code>
-		<code>        }</code>
-		<code>    }</code>
-		<code>}</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2>WebAssembly</h2>
-	<pre class="hljs c">
-		<code>// текстовое представление WAST</code>
-		<code>(module</code>
-		<code>    (table 0 anyfunc)</code>
-		<code>    (memory $0 1)</code>
-		<code>    (data (i32.const 12) "\01\00\00\00\00\00\00\00\01\00\00\00")</code>
-		<code>    (export "memory" (memory $0))</code>
-		<code>    (export "fib" (func $fib))</code>
-		<code>    (func $fib (param $0 i32) (result i32)</code>
-		<code>        (local $1 i32)</code>
-		<code>        (block $label$0</code>
-		<code>            (br_if $label$0</code>
-		<code>                (i32.ge_u</code>
-		<code>                // ...</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2>WebAssembly</h2>
-	<pre class="hljs c">
-		<code>// скомпилированный байт-код wasm</code>
-		<code>const wasmCode = new Uint8Array(</code>
-		<code><mark>[0,97,115,109,1,0,0,0,1,134,128,128,128,0,1,96,1,127,1,127,3,130,128,</mark></code>
-		<code><mark>128,128,0,1,0,4,132,128,128,128,0,1,112,0,0,5,131,128,128,128,0,1,0,</mark></code>
-		<code><mark>1,6,129,128,128,128,0,0,7,144,128,128,128,0,2,6,109,101,109,111,114,</mark></code>
-		<code><mark>121,2,0,3,102,105,98,0,0,10,203,128,128,128,0,1,197,128,128,128,0,1,</mark></code>
-		<code><mark>1,127,2,64,32,0,65,1,106,34,1,65,3,79,13,0,32,1,65,2,116,65,12,106,</mark></code>
-		<code><mark>40,2,0,15,11,2,64,32,0,65,1,72,13,0,32,0,65,127,106,16,0,32,0,65,</mark></code>
-		<code><mark>126,106,16,0,106,15,11,32,0,65,2,106,16,0,32,1,16,0,107,11,11,146,</mark></code>
-		<code><mark>128,128,128,0,1,0,65,12,11,12,1,0,0,0,0,0,0,0,1,0,0,0]</mark></code>
-		<code>);</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2>WebAssembly</h2>
-	<pre class="hljs c">
-		<code>// запускаем wasm-модуль</code>
-		<code>const wasmCode = new Uint8Array([...]);</code>
-		<code>const wasmModule = new WebAssembly.Module(wasmCode);</code>
-		<code>const wasmInstance = new WebAssembly.Instance(wasmModule, []);</code>
-		<code> </code>
-		<code>console.log(wasmInstance.exports.fib(10));</code>
-		<code> </code>
-	</pre>
-	<p>
-		Демо: &mdash; <a href="http://webassembly.org/demo/" target="_blank">Танки</a>, <a href="http://www.quakejs.com/" target="_blank">Quake</a>.
-	</p>
-</section>
-
-<section class="slide question">
-	<h2>
-		<span style="font-size: 75%; color: #000055; display: inline-block;">
-			<a href="https://habr.com/post/417563/" target="_blank">Благодаря WebAssembly можно писать Frontend на Go</a>
-		</span>
-	</h2>
-</section>
-
-
-
-
-<section class="slide">
 	<h2 class="shout">Перерыв</h2>
 </section>
 
@@ -1864,7 +1741,7 @@
 <section class="slide nopage">
 	<h2>Возможности браузера<br/><a href="https://caniuse.com/" target="_blank">http://caniuse.com/</a></h2>
 	<div style="position:relative;width: 100%; height: 75%;">
-		<img class="place" src="caniuse.png" style="transform-origin: center;transform: translate(-50%,-50%) scale(0.76);">
+		<img class="place" src="caniuse.png" style="transform-origin: center;transform: translate(-50%,-50%) scale(0.38);">
 	</div>
 </section>
 
@@ -2609,6 +2486,130 @@
         <code> </code>
 	</pre>
 </section>
+
+<section class="slide">
+	<h2 class="shout"><span style="font-size: 95%;">Высший пилотаж</span></h2>
+</section>
+
+<section class="slide question">
+	<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">WebAssembly</span></h2>
+</section>
+
+<section class="slide">
+	<h2>WebAssembly</h2>
+	<p class="medium-content">Во время создания WebAssembly решалась следующая задача: <strong>быстро исполнять код в браузере</strong></p>
+	<blockquote>
+		<p>
+			<strong>WebAssembly (wasm)</strong> &mdash; эффективный низкоуровневый байт-код, предназначенный для исполнения в браузере. WebAssemblу представляет собой переносимое абстрактное синтаксическое дерево, обеспечивающее как более быстрый парсинг, так и более быстрое выполнение кода, чем JavaScript &mdash;
+			<a href="https://codelabs.developers.google.com/codelabs/web-assembly-intro/" target="_blank">developers.google.com</a>
+		</p>
+	</blockquote>
+</section>
+
+<section class="slide">
+	<h2>WebAssembly</h2>
+	<p class="medium-content"></p>
+	<blockquote>
+		<p>
+			<strong>WebAssembly</strong> &mdash; это не полная замена JS, а лишь технология, позволяющая писать критичные к ресурсам модули и компилировать их в переносимый байт-код с линейной моделью памяти и статической типизацией
+		</p>
+	</blockquote>
+	<p class="note"><strong>Применения:</strong> редактирование изображений/видео/музыки, криптография, математические вычисления, игры...</p>
+</section>
+
+<section class="slide">
+	<h2>Что же такое WebAssembly?</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li>Бинарный формат</li>
+		<li>НЕ язык программирования, а байт-код</li>
+		<li><strong>Загружается в браузер и исполняется в браузере</strong> &mdash; формально, WebAssembly исполняется JavaScript-движком, а не самим браузером, поэтому есть и другие варианты исполнения, например, под Node.js</li>
+		<li>Исполняется виртуальной машиной</li>
+		<li>НЕ имеет ничего общего с WEB, кроме того что общается с внешним миром через JavaScript</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>WebAssembly</h2>
+	<pre class="hljs c">
+		<code>// исходник на C</code>
+		<code>int fib(int n) {</code>
+		<code>    if (n == 0) { return 0; } else {</code>
+		<code>        if ((n == -1) || (n == 1)) { return 1; } else  {</code>
+		<code>            if (n > 0) { return fib(n - 1) + fib(n - 2); }</code>
+		<code>            else { return fib(n + 2) - fib(n + 1); }</code>
+		<code>        }</code>
+		<code>    }</code>
+		<code>}</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>WebAssembly</h2>
+	<pre class="hljs c">
+		<code>// текстовое представление WAST</code>
+		<code>(module</code>
+		<code>    (table 0 anyfunc)</code>
+		<code>    (memory $0 1)</code>
+		<code>    (data (i32.const 12) "\01\00\00\00\00\00\00\00\01\00\00\00")</code>
+		<code>    (export "memory" (memory $0))</code>
+		<code>    (export "fib" (func $fib))</code>
+		<code>    (func $fib (param $0 i32) (result i32)</code>
+		<code>        (local $1 i32)</code>
+		<code>        (block $label$0</code>
+		<code>            (br_if $label$0</code>
+		<code>                (i32.ge_u</code>
+		<code>                // ...</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>WebAssembly</h2>
+	<pre class="hljs c">
+		<code>// скомпилированный байт-код wasm</code>
+		<code>const wasmCode = new Uint8Array(</code>
+		<code><mark>[0,97,115,109,1,0,0,0,1,134,128,128,128,0,1,96,1,127,1,127,3,130,128,</mark></code>
+		<code><mark>128,128,0,1,0,4,132,128,128,128,0,1,112,0,0,5,131,128,128,128,0,1,0,</mark></code>
+		<code><mark>1,6,129,128,128,128,0,0,7,144,128,128,128,0,2,6,109,101,109,111,114,</mark></code>
+		<code><mark>121,2,0,3,102,105,98,0,0,10,203,128,128,128,0,1,197,128,128,128,0,1,</mark></code>
+		<code><mark>1,127,2,64,32,0,65,1,106,34,1,65,3,79,13,0,32,1,65,2,116,65,12,106,</mark></code>
+		<code><mark>40,2,0,15,11,2,64,32,0,65,1,72,13,0,32,0,65,127,106,16,0,32,0,65,</mark></code>
+		<code><mark>126,106,16,0,106,15,11,32,0,65,2,106,16,0,32,1,16,0,107,11,11,146,</mark></code>
+		<code><mark>128,128,128,0,1,0,65,12,11,12,1,0,0,0,0,0,0,0,1,0,0,0]</mark></code>
+		<code>);</code>
+		<code> </code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h2>WebAssembly</h2>
+	<pre class="hljs c">
+		<code>// запускаем wasm-модуль</code>
+		<code>const wasmCode = new Uint8Array([...]);</code>
+		<code>const wasmModule = new WebAssembly.Module(wasmCode);</code>
+		<code>const wasmInstance = new WebAssembly.Instance(wasmModule, []);</code>
+		<code> </code>
+		<code>console.log(wasmInstance.exports.fib(10));</code>
+		<code> </code>
+	</pre>
+	<p>
+		Демо: &mdash; <a href="http://webassembly.org/demo/" target="_blank">Танки</a>, <a href="http://www.quakejs.com/" target="_blank">Quake</a>.
+	</p>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;">
+			<a href="https://habr.com/post/417563/" target="_blank">Благодаря WebAssembly можно писать Frontend на Go</a>
+		</span>
+	</h2>
+</section>
+
+
+
+
 
 <section class="slide question">
 	<h2 style="text-align: center; padding: 0"><span style="font-size: 100%">Ваши вопросы?</span></h2>
