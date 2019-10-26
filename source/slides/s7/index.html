@@ -30,12 +30,14 @@
 	<h2>Графика в браузере</h2>
 	<p class="medium-content"></p>
 	<ul>
+		<li>HTML + CSS</li>
+		<li>SVG (Scalable Vector Graphics) графика &mdash; можно встраивать как часть документа</li>
 		<li>Картинки (<code>&lt;img src="image.png"></code>)</li>
 		<li>Медиа объекты (<code>&lt;video src="video.mp4">&lt;/video></code>)</li>
-		<li>SVG-графика &mdash; можно встраивать как часть документа</li>
-		<li>HTML + CSS</li>
 		<li>canvas</li>
+		<li>JS Worklet?</li>
 	</ul>
+	<img style="position: absolute; right: 60px; bottom: 16px; height: 45%;" src="./img/svgsprite.png"/>
 </section>
 
 <section class="slide">
@@ -72,6 +74,19 @@
 </section>
 
 <section class="slide">
+	<h2>Система координат</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li><code>По умолчанию:</code></li>
+		<li>Начало координат — точка <code>(0;0)</code> в <b>верхнем левом углу</b></li>
+		<li>Ось Х — вправо</li>
+		<li>Ось Y — вниз</li>
+		<li>Систему координат <b>можно и нужно менять</b> для удобства</li>
+	</ul>
+	<img style="position: absolute; right: 60px; bottom: 16px; height: 45%;" src="./img/canvasgrid.png"/>
+</section>
+
+<section class="slide">
 	<h2>Рисование примитивов:<br/>прямоугольник</h2>
 	<pre class="hljs js">
 		<code>// обводит прямоугольную область</code>
@@ -82,14 +97,26 @@
 		<code>ctx.clearRect(x, y, width, height);</code>
 		<code> </code>
 	</pre>
+	<canvas id="rect-1" width="900" height="200"></canvas>
+	<script>
+        (function () {
+            const canvas = document.getElementById('rect-1');
+            const ctx = canvas.getContext('2d');
+
+            ctx.strokeRect(10, 10, 280, 180);
+            ctx.fillRect(320, 10, 280, 180);
+            ctx.fillRect(630, 10, 280, 180);
+            ctx.clearRect(660, 60, 30, 30);
+        })();
+	</script>
 </section>
 
 <section class="slide">
 	<h2>Рисование примитивов:<br/>прямоугольник</h2>
-	<canvas id="rect" width="300" height="300" style="position:fixed;right:30px;border:solid whitesmoke"></canvas>
+	<canvas id="rect-2" width="300" height="300" style="position:fixed;right:30px;border:solid whitesmoke"></canvas>
 	<script>
 		(function () {
-			const canvas = document.getElementById('rect');
+			const canvas = document.getElementById('rect-2');
 			const ctx = canvas.getContext('2d');
 
 			ctx.fillRect(25, 25, 250, 250);
@@ -116,25 +143,37 @@
 	</pre>
 </section>
 
+<section class="slide">
+	<h2>Рисование примитивов: контуры</h2>
+	<p class="medium-content"></p>
+	<p><code>Контур</code> — точки, соединенные линиями разной формы</p>
+	<span>Алгоритм создания фигур с помощью контуров:</span>
+	<ol>
+		<li>Создать контур</li>
+		<li>Использовать методы для рисования в созданном контуре</li>
+		<li>Отрендерить нарисованный контур</li>
+	</ol>
+</section>
 
 <section class="slide">
-	<h2>Рисование примитивов: линии</h2>
+	<h2>Рисование примитивов: контуры</h2>
 	<pre class="hljs js">
-		<code>ctx.beginPath();     // создаёт новую линию (новый путь)</code>
+		<code>ctx.beginPath();     // создаёт новый контур</code>
 		<code> </code>
 		<code>ctx.moveTo(x1, y1);  // передвигает перо в нужную точку</code>
 		<code>ctx.lineTo(x2, y2);  // проводит линию до другой точки</code>
-		<code>ctx.stroke();        // обводит созданный путь</code>
-		<code>ctx.fill();          // заливает область, обведённую путём</code>
+		<code> </code>
+		<code>ctx.stroke();        // обводит созданный контур</code>
+		<code>ctx.fill();          // заливает область, обведённую контуром</code>
 		<code>                     // "nonzero" or "evenodd"</code>
 		<code> </code>
-		<code>ctx.closePath();     // завершает редактирование пути</code>
+		<code>ctx.closePath();     // закрывает контур</code>
 		<code> </code>
 	</pre>
 </section>
 
 <section class="slide">
-	<h2>Рисование примитивов: линии</h2>
+	<h2>Рисование примитивов: контуры</h2>
 	<canvas id="lines" width="300" height="300"
 			style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
 	<script>
@@ -157,7 +196,6 @@
 			ctx.lineTo(250, 250);
 			ctx.closePath();
 			ctx.stroke();
-
 		})();
 	</script>
 	<pre class="hljs js short">
@@ -190,6 +228,10 @@
 		<code>// <b>endAngle</b> - конечный угол</code>
 		<code>// <b>anticlockwise</b> - проводить против часовой стрелки</code>
 		<code> </code>
+	</pre>
+	<p></p>
+	<pre class="hljs js">
+		<code>radians = (Math.PI/180) * degrees</code>
 	</pre>
 </section>
 
