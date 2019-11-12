@@ -27,15 +27,22 @@
 </section>
 
 <section class="slide">
+	<img style="position: absolute; width:275px;" src="./aviasales.gif"/>
+	<img style="position: absolute; right:290px; bottom:95px; width:300px;" src="./utochka.gif"/>
+	<img style="position: absolute; right: 335px; width:215px;" src="./octopus.svg"/>
+</section>
+
+<section class="slide">
 	<h2>Графика в браузере</h2>
 	<p class="medium-content"></p>
 	<ul>
+		<li>HTML + CSS</li>
+		<li>SVG (Scalable Vector Graphics) графика &mdash; можно встраивать как часть документа</li>
 		<li>Картинки (<code>&lt;img src="image.png"></code>)</li>
 		<li>Медиа объекты (<code>&lt;video src="video.mp4">&lt;/video></code>)</li>
-		<li>SVG-графика &mdash; можно встраивать как часть документа</li>
-		<li>HTML + CSS</li>
 		<li>canvas</li>
 	</ul>
+	<img style="position: absolute; right: 60px; bottom: 40px; width: 290px;" src="./img/svgsprite.png"/>
 </section>
 
 <section class="slide">
@@ -72,6 +79,19 @@
 </section>
 
 <section class="slide">
+	<h2>Система координат</h2>
+	<p class="medium-content"></p>
+	<ul>
+		<li><code>По умолчанию:</code></li>
+		<li>Начало координат — точка <code>(0;0)</code> в <b>верхнем левом углу</b></li>
+		<li>Ось Х — вправо</li>
+		<li>Ось Y — вниз</li>
+		<li>Систему координат <b>можно и нужно менять</b> для удобства</li>
+	</ul>
+	<img style="position: absolute; right: 60px; bottom: 16px; height: 45%;" src="./img/canvasgrid.png"/>
+</section>
+
+<section class="slide">
 	<h2>Рисование примитивов:<br/>прямоугольник</h2>
 	<pre class="hljs js">
 		<code>// обводит прямоугольную область</code>
@@ -82,14 +102,26 @@
 		<code>ctx.clearRect(x, y, width, height);</code>
 		<code> </code>
 	</pre>
+	<canvas id="rect-1" width="900" height="200"></canvas>
+	<script>
+        (function () {
+            const canvas = document.getElementById('rect-1');
+            const ctx = canvas.getContext('2d');
+
+            ctx.strokeRect(10, 10, 280, 180);
+            ctx.fillRect(320, 10, 280, 180);
+            ctx.fillRect(630, 10, 280, 180);
+            ctx.clearRect(660, 60, 30, 30);
+        })();
+	</script>
 </section>
 
 <section class="slide">
 	<h2>Рисование примитивов:<br/>прямоугольник</h2>
-	<canvas id="rect" width="300" height="300" style="position:fixed;right:30px;border:solid whitesmoke"></canvas>
+	<canvas id="rect-2" width="300" height="300" style="position:fixed;right:30px;border:solid whitesmoke"></canvas>
 	<script>
 		(function () {
-			const canvas = document.getElementById('rect');
+			const canvas = document.getElementById('rect-2');
 			const ctx = canvas.getContext('2d');
 
 			ctx.fillRect(25, 25, 250, 250);
@@ -116,25 +148,37 @@
 	</pre>
 </section>
 
+<section class="slide">
+	<h2>Рисование примитивов: контуры</h2>
+	<p class="medium-content"></p>
+	<p><code>Контур</code> — точки, соединенные линиями разной формы</p>
+	<span>Алгоритм создания фигур с помощью контуров:</span>
+	<ol>
+		<li>Создать контур</li>
+		<li>Использовать методы для рисования в созданном контуре</li>
+		<li>Отрендерить нарисованный контур</li>
+	</ol>
+</section>
 
 <section class="slide">
-	<h2>Рисование примитивов: линии</h2>
+	<h2>Рисование примитивов: контуры</h2>
 	<pre class="hljs js">
-		<code>ctx.beginPath();     // создаёт новую линию (новый путь)</code>
+		<code>ctx.beginPath();     // создаёт новый контур</code>
 		<code> </code>
 		<code>ctx.moveTo(x1, y1);  // передвигает перо в нужную точку</code>
 		<code>ctx.lineTo(x2, y2);  // проводит линию до другой точки</code>
-		<code>ctx.stroke();        // обводит созданный путь</code>
-		<code>ctx.fill();          // заливает область, обведённую путём</code>
+		<code> </code>
+		<code>ctx.stroke();        // обводит созданный контур</code>
+		<code>ctx.fill();          // заливает область, обведённую контуром</code>
 		<code>                     // "nonzero" or "evenodd"</code>
 		<code> </code>
-		<code>ctx.closePath();     // завершает редактирование пути</code>
+		<code>ctx.closePath();     // закрывает контур</code>
 		<code> </code>
 	</pre>
 </section>
 
 <section class="slide">
-	<h2>Рисование примитивов: линии</h2>
+	<h2>Рисование примитивов: контуры</h2>
 	<canvas id="lines" width="300" height="300"
 			style="position:fixed;right:30px;margin-top:10px;border:solid whitesmoke"></canvas>
 	<script>
@@ -157,7 +201,6 @@
 			ctx.lineTo(250, 250);
 			ctx.closePath();
 			ctx.stroke();
-
 		})();
 	</script>
 	<pre class="hljs js short">
@@ -190,6 +233,10 @@
 		<code>// <b>endAngle</b> - конечный угол</code>
 		<code>// <b>anticlockwise</b> - проводить против часовой стрелки</code>
 		<code> </code>
+	</pre>
+	<p></p>
+	<pre class="hljs js">
+		<code>radians = (Math.PI/180) * degrees</code>
 	</pre>
 </section>
 
@@ -548,9 +595,9 @@
 	<h2>Использование градиентов</h2>
 	<pre class="hljs js">
 		<code>// создание линейного градиента</code>
-		<code>let gradient = ctx.createLinearGradient(x1, y1, x2, y2);</code>
+		<code>let gradient = ctx.<mark>createLinearGradient</mark>(x1, y1, x2, y2);</code>
 		<code>// создание радиального градиента</code>
-		<code>gradient = ctx.createRadialGradient(x1, y1, r1, x2, y2, r2);</code>
+		<code>gradient = ctx.<mark>createRadialGradient</mark>(x1, y1, r1, x2, y2, r2);</code>
 		<code>// добавление контрольной точки</code>
 		<code>gradient.addColorStop(position, color);</code>
 		<code> </code>
@@ -558,6 +605,8 @@
 		<code>ctx.strokeStyle = gradient;</code>
 		<code> </code>
 	</pre>
+	<img class="place" src="./img/lineargrad.jpg" style="position: relative; top: 60px; left: 240px; width: 200px">
+	<img class="place" src="./img/radialgradient.jpg" style="position: relative; top: 60px; left: 450px; width: 200px">
 </section>
 
 <section class="slide">
@@ -624,6 +673,17 @@
 </section>
 
 <section class="slide">
+	<h2>Сохранение данных</h2>
+	<pre class="hljs js">
+		<code>// сохранить все настройки, в том числе трансформации!</code>
+		<code>ctx.save();</code>
+		<code></code>
+		<code>// вернуть предыдущие из стека</code>
+		<code>ctx.restore();</code>
+	</pre>
+</section>
+
+<section class="slide">
 	<h2>Простые трансформации</h2>
 	<pre class="hljs js">
 		<code>// перенос точки отсчёта</code>
@@ -637,6 +697,8 @@
 		<code> </code>
 		<code> </code>
 	</pre>
+	<img class="place" src="./img/translating.png" style="left: 70%;top: 38%;width: 260px;">
+	<img class="place" src="./img/rotating.png" style="left: 70%;top: 74%;width: 260px;">
 </section>
 
 <section class="slide">
@@ -667,17 +729,6 @@
 </section>
 
 <section class="slide">
-	<h2>Сохранение данных</h2>
-	<pre class="hljs js">
-		<code>// сохранить все настройки, в том числе трансформации!</code>
-		<code>ctx.save();</code>
-		<code></code>
-		<code>// вернуть предыдущие из стека</code>
-		<code>ctx.restore();</code>
-	</pre>
-</section>
-
-<section class="slide">
 	<h2>А так же</h2>
 	<p class="medium-content"></p>
 	<ul>
@@ -691,7 +742,6 @@
 <section class="slide question">
 	<h2>
 		<span style="font-size: 100%; display: block;">Практика!</span>
-		<small style="font-size: 40%; display: block;"><a href="https://github.com/frontend-park-mail-ru/sample/tree/lesson-7-canvas" target="_blank">Ветка <strong	>lesson-7-canvas</strong></a></small>
 	</h2>
 </section>
 
@@ -803,8 +853,6 @@
 	<h2>PRO TIPs хорошей анимации</h2>
 	<p class="medium-content"></p>
 	<ul lang="ru">
-		<li>Не используйте <code>setInterval</code> и <code>setTimeout</code></li>
-		<li>Используйте <code>requestAnimationFrame</code></li>
 		<li>Замеряйте время, проходящее между двумя последовательными кадрами&nbsp;(<code>dt</code>)</li>
 		<li>Используйте полученное значение для рассчёта изменений между двумя кадрами&nbsp;(<code>dx = Vx * dt</code>)</li>
 		<li>...</li>
@@ -814,10 +862,11 @@
 <section class="slide">
 	<h2><code>requestAnimationFrame</code></h2>
 	<pre class="hljs js">
-		<code>let last = perfomance.now(); // точное время в <strong>наносекундах</strong></code>
+		<code>let last = perfomance.now(); // точное время типа <strong>DOMHighResTimeStamp</strong></code>
 		<code> </code>
 		<code>function animation(now) { // передаётся текущее <mark>perfomance.now()</mark></code>
 		<code>    const <mark>delay</mark> = now - last;</code>
+		<code>    last = now;</code>
 		<code>    redraw(delay); // перерисовываем кадр</code>
 		<code> </code>
 		<code>    window.requestAnimationFrame(animation);</code>
@@ -853,198 +902,34 @@
 <section class="slide question">
 	<h2>
 		<span style="font-size: 100%; display: block;">Практика!</span>
-		<small style="font-size: 40%; display: block;"><a href="https://github.com/frontend-park-mail-ru/sample/tree/lesson-7-canvas" target="_blank">Ветка <strong	>lesson-7-canvas</strong></a></small>
 	</h2>
 </section>
 
-<section class="slide">
-	<h2 class="shout">Перерыв</h2>
-</section>
-
-
-
-
-
-<section class="slide">
-	<h2 class="shout">Как делать игры?</h2>
-</section>
-
 <section class="slide question">
-	<h2><span style="font-size: 60%; display: inline-block;">Секрет написания крутой, масштабируемой игры &mdash; <strong>правильное планирование архитектуры</strong></h2>
+	<h2><span style="font-size: 65%">WAAPI, JS Worklets</span></h2>
 </section>
 
 <section class="slide">
-	<h2>Основные абстракции</h2>
-	<p class="medium-content"></p>
-	<div class="double">
-		<ul lang="en">
-			<li><strong>Подсистема бизнес-логики</strong>
-				<ul lang="ru">
-					<li>Игровой мир</li>
-					<li>Состояние игрового мира</li>
-					<li>Игровой цикл (<em>gameloop</em>)</li>
-					<li>Игровая стратегия</li>
-					<li>Менеджер сессий</li>
-				</ul>
-			</li>
-		</ul>
-		<ul lang="en">
-			<li><strong>Подсистема отображения и взаимодействия с пользователем</strong>
-				<ul lang="ru">
-					<li>Игровая сцена</li>
-					<li>Игровой цикл отображения (<em>"game animation loop"</em>)</li>
-					<li>"Контроллер контроллов"</li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-	<br>
-	<ul lang="en">
-		<li><strong>Игровой транспорт</strong></li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>"Категории" игровых механик</h2>
-	<p class="medium-content"></p>
-	<ul>
-		<li>Пошаговые игры</li>
-		<li>Игры реального времени</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Игровые режимы</h2>
-	<p class="medium-content"></p>
-	<ul>
-		<li><mark><strong>Многопользовательский режим по сети</strong></mark> &mdash; бизнес-логика выполняется на сервере, несколько клиентов, общение по сети</li>
-		<li><strong>Однопользовательский режим по сети</strong> &mdash; бизнес-логика выполняется на сервере, но клиент всего один, общение по сети</li>
-		<li><mark><strong>Однопользовательский "оффлайн"-режим</strong></mark> &mdash; как бизнес-логика, так и логика отображения выполняется на клиенте, возможна работа <em>оффлайн</em>, т.е. без подключения по сети</li>
-		<li><strong>Многопользовательский "оффлайн"-режим</strong> &mdash; например, <em>пошаговая игра на одном устройстве, либо split-screen</em></li>
-	</ul>
-	<p class="note"><mark style="color: #aaa;">Режимы, обязательные к реализации</mark></p>
-</section>
-
-<section class="slide">
-	<h2>Распространённый, но <br/> <strong>неправильный подход</strong></h2>
+	<h2>Web Animations API (WAAPI)</h2>
 	<blockquote>
-		<p class="small-content">Сначала реализуем singleplayer на js, а потом доработаем и добавим туда многопользовательность...</p>
+		<p class="small-content"><strong>WAAPI</strong> — браузерное API, позволяющее разработчикам управлять
+			движком анимаций с помощью JavaScript.</p>
 	</blockquote>
-</section>
-
-<section class="slide question">
-	<h2><span style="font-size: 65%">SinglePlayer &mdash; это <mark><strong>специальная версия</strong></mark> MultiPlayer</span></h2>
-</section>
-
-<section class="slide">
-	<h2>Правильный подход</h2>
-	<ul>
-		<li>Обрабатываем пользовательский ввод</li>
-		<li>В зависимости от режима, либо отправляем сообщение о пользовательском действии на сервер, либо отправляем событие в клиентскую функцию</li>
-		<li>При изменении состояния игрового мира отправляем на клиент соответствующее событие и перерисовываем игровую сцену</li>
-	</ul>
+	<p class="note">Подробно про WAAPI &mdash; <a
+		href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API" target="_blank">на MDN</a></p>
 </section>
 
 <section class="slide">
-	<h2>Итак, делаем хорошо</h2>
-	<ul>
-		<li>Максимально изолируем друг от друга части игры, используем правильную декомпозицию</li>
-		<li>Минимизируем прямое взаимодействие модулей друг с другом. Например, заменяя прямое взаимодействие подпиской на события</li>
-		<li>Два игровых цикла в системе &mdash; бизнес-логика отдельно от логики отображения</li>
-		<li>Глобальный источник правды о системе &mdash; объект состояния игрового мира</li>
-		<li>Передача информации об изменениях в системе &mdash; только через игровой транспорт</li>
-		<li>Поддержку разных режимов игры реализуем через возможности ООП</li>
-	</ul>
-</section>
-
-<section class="slide question">
-	<h2>
-		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://habrahabr.ru/post/302394/" target="_blank">Мультиплеер в быстрых играх&nbsp;<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 60%; color: darkgrey; display: inline-block;">цикл статей об особенностях реализации многопользовательских online-игр</em></span>
-	</h2>
-</section>
-
-<section class="slide question">
-	<h2>Практика <br>
-		<small style="font-size: 40%; display: block;"><a href="https://github.com/frontend-park-mail-ru/sample/tree/lesson-7-game" target="_blank">Ветка <strong	>lesson-7-game</strong></a></small>
-	</h2>
-</section>
-
-
-<section class="slide">
-	<h2 class="shout">Дополнительные возможности<br/>
-		<small style="font-size: 32px; display: block;">WebGL, FullScreen API, PointerLock API, WebVR</small>
-	</h2>
-</section>
-
-<section class="slide question">
-	<h2>
-		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://youtu.be/Z4E2drxNjMk?t=1h12m55s" target="_blank">"Играем в браузере"<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 60%; color: darkgrey; display: inline-block;">доклад с конференции</em></span>
-	</h2>
-</section>
-
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a></h2>
+	<h2>Animation Worklets</h2>
 	<blockquote>
-		<p class="small-content"><b>Pointer Lock API</b> &mdash; это браузерный API, позволяющий создавать интерфейсы
-			для работы с мышкой на основе ее
-			<mark>относительных перемещений</mark>
-			, а не только абсолютной позиции курсора. Это дает нам доступ к необработанным движениям мыши, прикрепляет
-			курсор мыши к любому элементу в окне браузера, предоставляет возможность вычислять координаты мыши не
-			ограниченной областью окна проекции, и скрывает курсор из поля зрения
-		</p>
+		<p class="small-content"><strong>Worklet</strong> интерфейс — это легковесная версия Web Worker-ов, которая
+		дает разработчикам доступ к управлению процессом рендеринга на низком уровне. С его помощью можно исполнять
+		JavaScript и WebAssembly код для высокопроизводительного рендеринга графики.</p>
 	</blockquote>
-</section>
-
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a></h2>
-	<pre class="hljs js">
-		<code>document.addEventListener('pointerlockchange', lockStatusChange);</code>
-		<code>canv.onclick = canv.<mark>requestPointerLock</mark>;</code>
-		<code>function lockStatusChange() {</code>
-		<code>    if (document.pointerLockElement === canv){</code>
-		<code>        document.addEventListener('mousemove', update);</code>
-		<code>    } else {</code>
-		<code>        document.removeEventListener('mousemove', update);</code>
-		<code>    }</code>
-		<code>}</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a></h2>
-	<pre class="hljs js">
-		<code>// обработчик события</code>
-		<code>function update(event) {</code>
-		<code>    // событие содержит смещение</code>
-		<code>    const dx = event.movementX;</code>
-		<code>    const dy = event.movementY;</code>
-		<code>    animate(dx, dy);</code>
-		<code>}</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/DOM/Using_fullscreen_mode" target="_blank">Request Full Screen API</a></h2>
-	<blockquote>
-		<p><b>Request Full Screen API</b> &mdash; позволяет отображать элемент в полноэкранном режиме. Метод может
-			применяться к любому элементу, даже, например, к простому блоку</p>
-	</blockquote>
-	<pre class="hljs js">
-			<code>element.requestFullscreen();</code>
-			<code>document.exitFullscreen();</code>
-			<code> </code>
-		</pre>
-	<a target="_blank" href="/examples/Fullscreen/">Пример</a>
-</section>
-
-<section class="slide question">
-	<h2>
-		<span style="font-size: 75%; color: #000055; display: inline-block;">
-			<a href="http://media.tojicode.com/q3bsp/" target="_blank">Quake</a>
-		</span>
-	</h2>
+	<p class="note">Подробно про интерфейс Worklet &mdash; <a
+		href="https://developer.mozilla.org/en-US/docs/Web/API/Worklet" target="_blank">на MDN</a></p>
+	<p class="note">Статья про <a
+		href="https://blog.logrocket.com/using-animation-worklet-4a3914c19112/" target="_blank">использование Animation Worklet-ов</a></p>
 </section>
 
 <section class="slide">
@@ -1083,52 +968,6 @@
 </section>
 
 <section class="slide">
-	<h2>Виды шейдеров</h2>
-	<ul lang="ru">
-		<li>Вершинные шейдеры</li>
-		<li>Фрагментные шейдеры</li>
-	</ul>
-	<img class="place" src="img/shader.png" style="margin-top: 80px;" width="800" height="230">
-</section>
-
-<section class="slide">
-	<h2>Растеризация</h2>
-	<div>
-		<img class="place" src="img/raster.png" style="margin-top: -80px;" width="472" height="183">
-		<img class="place" src="img/raster2.png" style="margin-top: 150px;" width="219" height="220">
-	</div>
-</section>
-
-<section class="slide">
-	<h2>Вершинный шейдер</h2>
-	<pre class="hljs html">
-		<code>&lt;script type="x-shader/x-<mark>vertex</mark>" id="vshader"&gt;</code>
-		<code>  varying vec2 vUv;</code>
-		<code>  void main() {</code>
-		<code>    vUv = uv;</code>
-		<code>    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);</code>
-		<code>    <mark>gl_Position</mark> = projectionMatrix * mvPosition;</code>
-		<code>  }</code>
-		<code>&lt;/script&gt;</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2>Фрагментный шейдер</h2>
-	<pre class="hljs html">
-		<code>&lt;script type="x-shader/x-<mark>fragment</mark>" id="fshader"&gt;</code>
-		<code>  uniform sampler2D u_Sampler;</code>
-		<code>  varying vec2 vUv;</code>
-		<code>  void main() {</code>
-		<code>    <mark>gl_FragColor</mark> = texture2D(u_Sampler, vUv);</code>
-		<code>  }</code>
-		<code>&lt;/script&gt;</code>
-		<code> </code>
-	</pre>
-</section>
-
-<section class="slide">
 	<h2>Практическое применение WebGL</h2>
 	<ul lang="ru">
 		<li>Визуализации растровой графики</li>
@@ -1147,158 +986,382 @@
 		<li><a target="_blank" href="https://threejs.org/examples/webgl_shaders_ocean">webgl_shaders_ocean</a></li>
 		<li><a target="_blank" href="https://threejs.org/examples/webgl_shaders_ocean2">webgl_shaders_ocean2</a></li>
 		<li><a target="_blank" href="https://threejs.org/examples/webgl_shaders_sky">webgl_shaders_sky</a></li>
-		<li><a target="_blank" href="http://nucleal.com">nucleal.com</a></li>
 		<li><a target="_blank" href="http://www.bongiovi.tw/experiments/webgl/blossom/">bongiovi.tw</a></li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Примеры 3D</h2>
-	<ul lang="ru">
 		<li><a target="_blank" href="https://www.cubeslam.com/givvln">cubeslam</a></li>
 		<li><a target="_blank" href="http://kiddisco.asmallgame.com">asmallgame</a></li>
 		<li><a target="_blank" href="http://www.babylonjs.com/Demos/TheCar/">TheCar</a></li>
 	</ul>
 </section>
 
-<section class="slide question">
-	<h2>
-		<span style="font-size: 60%; color: #000055; display: inline-block;">
-			<a href="https://experiments.withgoogle.com/chrome" target="_blank">experiments.withgoogle.com <i class="material-icons noitalic">open_in_new</i></a>
-		</span>
-	</h2>
-</section>
-
 <section class="slide">
-	<h2>Device orientation</h2>
-	<p class="medium-content"></p>
-	<pre class="hljs js">
-		<code>if (window.innerHeight > window.innerWidth) {</code>
-		<code>  // do smth</code>
-		<code>}</code>
-		<code></code>
-	</pre>
-</section>
-
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation" target="_blank">Device orientation and motion</a></h2>
-	<blockquote>
-		<a href="https://mdn.mozillademos.org/en-US/docs/Web/API/Detecting_device_orientation$samples/Orientation_example?revision=1350174" target="_blank">Пример</a>
-	</blockquote>
-</section>
-
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/WebVR_API" target="_blank">WebVR</a></h2>
-	<blockquote>
-		<p class="small-content">
-			<b>WebVR</b> обеспечивает поддержку для использования устройств виртуальной реальности — например, шлемы виртуальной реальности, таких как Oculus Rift или HTC Vive &mdash; для веб-приложений, позволяя разработчикам передавать информацию о местоположении и движения с дисплея в движение вокруг 3D-сцены.
-		</p>
-	</blockquote>
-</section>
-
-<section class="slide">
-	<h2>Примеры Web VR</h2>
+	<h2>Где брать вдохновение</h2>
 	<ul lang="ru">
-		<li><a target="_blank" href="https://experiments.withgoogle.com/webvr/">experiments.withgoogle.com/webvr</a></li>
-		<li><a target="_blank" href="https://tonite.dance/">tonite.dance</a></li>
-		<li><a target="_blank" href="https://experiments.withgoogle.com/webvr/inside-music/view/">inside-music</a></li>
-		<li><a target="_blank" href="https://accessmars.withgoogle.com/">accessmars</a></li>
+		<li><a target="_blank" href="https://www.awwwards.com/websites/animation/">awwwards.com</a></li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2><a href="https://developers.google.com/ar/develop/web/quickstart" target="_blank">AR</a></h2>
-	<p class="medium-content"></p>
-	<blockquote>
-		<p class="small-content">
-			Stay tuned...
-		</p>
-	</blockquote>
+	<h2 class="shout">Перерыв</h2>
 </section>
 
-<section class="slide">
-	<h2 class="shout">Звук<br/>
-		<small style="font-size: 32px; display: block;">Web Audio & Web Speech</small>
-	</h2>
-</section>
+<!--<section class="slide">-->
+<!--	<h2>Основные абстракции</h2>-->
+<!--	<p class="medium-content"></p>-->
+<!--	<div class="double">-->
+<!--		<ul lang="en">-->
+<!--			<li><strong>Подсистема бизнес-логики</strong>-->
+<!--				<ul lang="ru">-->
+<!--					<li>Игровой мир</li>-->
+<!--					<li>Состояние игрового мира</li>-->
+<!--					<li>Игровой цикл (<em>gameloop</em>)</li>-->
+<!--					<li>Игровая стратегия</li>-->
+<!--					<li>Менеджер сессий</li>-->
+<!--				</ul>-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--		<ul lang="en">-->
+<!--			<li><strong>Подсистема отображения и взаимодействия с пользователем</strong>-->
+<!--				<ul lang="ru">-->
+<!--					<li>Игровая сцена</li>-->
+<!--					<li>Игровой цикл отображения (<em>"game animation loop"</em>)</li>-->
+<!--					<li>"Контроллер контроллов"</li>-->
+<!--				</ul>-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--	</div>-->
+<!--	<br>-->
+<!--	<ul lang="en">-->
+<!--		<li><strong>Игровой транспорт</strong></li>-->
+<!--	</ul>-->
+<!--</section>-->
 
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/Web/HTML/Element/audio" target="_blank">HTML5 audio</a></h2>
-	<pre class="hljs js">
-		<code>&lt;audio</code>
-		<code>	src="/music.ogg"</code>
-		<code>	autoplay</code>
-		<code>></code>
-		<code>	Ваш браузер не поддерживает audio элемент.</code>
-		<code>&lt;/audio></code>
-	</pre>
-</section>
+<!--<section class="slide">-->
+<!--	<h2>"Категории" игровых механик</h2>-->
+<!--	<p class="medium-content"></p>-->
+<!--	<ul>-->
+<!--		<li>Пошаговые игры</li>-->
+<!--		<li>Игры реального времени</li>-->
+<!--	</ul>-->
+<!--</section>-->
 
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API" target="_blank">Web Audio</a></h2>
-	<blockquote>
-		<p class="small-content">
-			<b>Web audio API</b> &mdash; мощный и многогранный инструмент для манипуляции звуковой составляющей на веб-странице, что дает возможность разработчикам выбрать источники, добавить к ним специальные звуковые эффекты (такие как panning), визуализировать их и многое другое.
-		</p>
-	</blockquote>
-</section>
+<!--<section class="slide">-->
+<!--	<h2>Игровые режимы</h2>-->
+<!--	<p class="medium-content"></p>-->
+<!--	<ul>-->
+<!--		<li><mark><strong>Многопользовательский режим по сети</strong></mark> &mdash; бизнес-логика выполняется на сервере, несколько клиентов, общение по сети</li>-->
+<!--		<li><strong>Однопользовательский режим по сети</strong> &mdash; бизнес-логика выполняется на сервере, но клиент всего один, общение по сети</li>-->
+<!--		<li><mark><strong>Однопользовательский "оффлайн"-режим</strong></mark> &mdash; как бизнес-логика, так и логика отображения выполняется на клиенте, возможна работа <em>оффлайн</em>, т.е. без подключения по сети</li>-->
+<!--		<li><strong>Многопользовательский "оффлайн"-режим</strong> &mdash; например, <em>пошаговая игра на одном устройстве, либо split-screen</em></li>-->
+<!--	</ul>-->
+<!--	<p class="note"><mark style="color: #aaa;">Режимы, обязательные к реализации</mark></p>-->
+<!--</section>-->
 
-<section class="slide">
-	<h2>Примеры Web Audio API</h2>
-	<ul lang="ru">
-		<li><a target="_blank" href="http://webaudioapi.com/samples/oscillator/">oscillator</a></li>
-	</ul>
-</section>
+<!--<section class="slide">-->
+<!--	<h2>Распространённый, но <br/> <strong>неправильный подход</strong></h2>-->
+<!--	<blockquote>-->
+<!--		<p class="small-content">Сначала реализуем singleplayer на js, а потом доработаем и добавим туда многопользовательность...</p>-->
+<!--	</blockquote>-->
+<!--</section>-->
 
-<section class="slide">
-	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Speech_API" target="_blank">Web Speech</a></h2>
-	<blockquote>
-		<p class="small-content">
-			<b>Web Speech API</b> позволяет взаимодействовать с голосовыми интерфейсами в ваших веб приложениях.
-			<b>Web Speech API</b> состоит из двух частей: SpeechSynthesis (Текст-в-Речь), и SpeechRecognition (Асинхронное распознавание речи)
-		</p>
-	</blockquote>
-</section>
+<!--<section class="slide question">-->
+<!--	<h2><span style="font-size: 65%">SinglePlayer &mdash; это <mark><strong>специальная версия</strong></mark> MultiPlayer</span></h2>-->
+<!--</section>-->
 
-<section class="slide">
-	<h2>Примеры Speech API</h2>
-	<ul lang="ru">
-		<li><a target="_blank" href="https://www.google.com/intl/en/chrome/demos/speech.html">speech.html</a></li>
-		<li><a target="_blank" href="https://experiments.withgoogle.com/webvr/speak-to-go">speak-to-go</a></li>
-	</ul>
-</section>
+<!--<section class="slide">-->
+<!--	<h2>Правильный подход</h2>-->
+<!--	<ul>-->
+<!--		<li>Обрабатываем пользовательский ввод</li>-->
+<!--		<li>В зависимости от режима, либо отправляем сообщение о пользовательском действии на сервер, либо отправляем событие в клиентскую функцию</li>-->
+<!--		<li>При изменении состояния игрового мира отправляем на клиент соответствующее событие и перерисовываем игровую сцену</li>-->
+<!--	</ul>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Итак, делаем хорошо</h2>-->
+<!--	<ul>-->
+<!--		<li>Максимально изолируем друг от друга части игры, используем правильную декомпозицию</li>-->
+<!--		<li>Минимизируем прямое взаимодействие модулей друг с другом. Например, заменяя прямое взаимодействие подпиской на события</li>-->
+<!--		<li>Два игровых цикла в системе &mdash; бизнес-логика отдельно от логики отображения</li>-->
+<!--		<li>Глобальный источник правды о системе &mdash; объект состояния игрового мира</li>-->
+<!--		<li>Передача информации об изменениях в системе &mdash; только через игровой транспорт</li>-->
+<!--		<li>Поддержку разных режимов игры реализуем через возможности ООП</li>-->
+<!--	</ul>-->
+<!--</section>-->
+
+<!--<section class="slide question">-->
+<!--	<h2>-->
+<!--		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://habrahabr.ru/post/302394/" target="_blank">Мультиплеер в быстрых играх&nbsp;<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 60%; color: darkgrey; display: inline-block;">цикл статей об особенностях реализации многопользовательских online-игр</em></span>-->
+<!--	</h2>-->
+<!--</section>-->
+
+<!--<section class="slide question">-->
+<!--	<h2>Практика <br>-->
+<!--		<small style="font-size: 40%; display: block;"><a href="https://github.com/frontend-park-mail-ru/sample/tree/lesson-7-game" target="_blank">Ветка <strong	>lesson-7-game</strong></a></small>-->
+<!--	</h2>-->
+<!--</section>-->
 
 
-<section class="slide">
-	<h2>Полезные ссылки</h2>
-	<ul lang="en">
-		<li>Про <a href="http://frontender.info/using-svg/" target="_blank">SVG-графику</a></li>
-		<li><a href="https://developer.mozilla.org/en-US/docs/Web/Demos_of_open_web_technologies" target="_blank">Описание
-			и ДЕМО</a> различных web-технологий, которые могут быть полезны при разработке игры
-		</li>
-		<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">Туториал
-			по</a> Canvas API
-		</li>
-		<li>Доклад <a href="https://youtu.be/Z4E2drxNjMk?t=1h12m55s" target="_blank">"Играем в браузере"</a> на WSD в
-			Москве и <a href="https://wsd.events/2017/01/28/pres/browser-games/" target="_blank">слайды</a> доклада
-		</li>
-		<li>
-			<a href="http://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing" target="_blank">
-				A Detailed Explanation of JavaScript Game Loops and Timing
-			</a>
-		</li>
-		<li>
-			<a href="https://youtu.be/1_lX28QWCdg" target="_blank">
-				Web Workers, GPU computing and Web
-			</a>
-			и
-			<a href="https://youtu.be/39MiUkGSEks" target="_blank">
-				WebVR
-			</a>
-			by Martin Splitt
-		</li>
-	</ul>
-</section>
+<!--<section class="slide">-->
+<!--	<h2 class="shout">Дополнительные возможности<br/>-->
+<!--		<small style="font-size: 32px; display: block;">WebGL, FullScreen API, PointerLock API, WebVR</small>-->
+<!--	</h2>-->
+<!--</section>-->
+
+<!--<section class="slide question">-->
+<!--	<h2>-->
+<!--		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://youtu.be/Z4E2drxNjMk?t=1h12m55s" target="_blank">"Играем в браузере"<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 60%; color: darkgrey; display: inline-block;">доклад с конференции</em></span>-->
+<!--	</h2>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a></h2>-->
+<!--	<blockquote>-->
+<!--		<p class="small-content"><b>Pointer Lock API</b> &mdash; это браузерный API, позволяющий создавать интерфейсы-->
+<!--			для работы с мышкой на основе ее-->
+<!--			<mark>относительных перемещений</mark>-->
+<!--			, а не только абсолютной позиции курсора. Это дает нам доступ к необработанным движениям мыши, прикрепляет-->
+<!--			курсор мыши к любому элементу в окне браузера, предоставляет возможность вычислять координаты мыши не-->
+<!--			ограниченной областью окна проекции, и скрывает курсор из поля зрения-->
+<!--		</p>-->
+<!--	</blockquote>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a></h2>-->
+<!--	<pre class="hljs js">-->
+<!--		<code>document.addEventListener('pointerlockchange', lockStatusChange);</code>-->
+<!--		<code>canv.onclick = canv.<mark>requestPointerLock</mark>;</code>-->
+<!--		<code>function lockStatusChange() {</code>-->
+<!--		<code>    if (document.pointerLockElement === canv){</code>-->
+<!--		<code>        document.addEventListener('mousemove', update);</code>-->
+<!--		<code>    } else {</code>-->
+<!--		<code>        document.removeEventListener('mousemove', update);</code>-->
+<!--		<code>    }</code>-->
+<!--		<code>}</code>-->
+<!--		<code> </code>-->
+<!--	</pre>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a></h2>-->
+<!--	<pre class="hljs js">-->
+<!--		<code>// обработчик события</code>-->
+<!--		<code>function update(event) {</code>-->
+<!--		<code>    // событие содержит смещение</code>-->
+<!--		<code>    const dx = event.movementX;</code>-->
+<!--		<code>    const dy = event.movementY;</code>-->
+<!--		<code>    animate(dx, dy);</code>-->
+<!--		<code>}</code>-->
+<!--		<code> </code>-->
+<!--	</pre>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/DOM/Using_fullscreen_mode" target="_blank">Request Full Screen API</a></h2>-->
+<!--	<blockquote>-->
+<!--		<p><b>Request Full Screen API</b> &mdash; позволяет отображать элемент в полноэкранном режиме. Метод может-->
+<!--			применяться к любому элементу, даже, например, к простому блоку</p>-->
+<!--	</blockquote>-->
+<!--	<pre class="hljs js">-->
+<!--			<code>element.requestFullscreen();</code>-->
+<!--			<code>document.exitFullscreen();</code>-->
+<!--			<code> </code>-->
+<!--		</pre>-->
+<!--	<a target="_blank" href="/examples/Fullscreen/">Пример</a>-->
+<!--</section>-->
+
+<!--<section class="slide question">-->
+<!--	<h2>-->
+<!--		<span style="font-size: 75%; color: #000055; display: inline-block;">-->
+<!--			<a href="http://media.tojicode.com/q3bsp/" target="_blank">Quake</a>-->
+<!--		</span>-->
+<!--	</h2>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Виды шейдеров</h2>-->
+<!--	<ul lang="ru">-->
+<!--		<li>Вершинные шейдеры</li>-->
+<!--		<li>Фрагментные шейдеры</li>-->
+<!--	</ul>-->
+<!--	<img class="place" src="img/shader.png" style="margin-top: 80px;" width="800" height="230">-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Растеризация</h2>-->
+<!--	<div>-->
+<!--		<img class="place" src="img/raster.png" style="margin-top: -80px;" width="472" height="183">-->
+<!--		<img class="place" src="img/raster2.png" style="margin-top: 150px;" width="219" height="220">-->
+<!--	</div>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Вершинный шейдер</h2>-->
+<!--	<pre class="hljs html">-->
+<!--		<code>&lt;script type="x-shader/x-<mark>vertex</mark>" id="vshader"&gt;</code>-->
+<!--		<code>  varying vec2 vUv;</code>-->
+<!--		<code>  void main() {</code>-->
+<!--		<code>    vUv = uv;</code>-->
+<!--		<code>    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);</code>-->
+<!--		<code>    <mark>gl_Position</mark> = projectionMatrix * mvPosition;</code>-->
+<!--		<code>  }</code>-->
+<!--		<code>&lt;/script&gt;</code>-->
+<!--		<code> </code>-->
+<!--	</pre>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Фрагментный шейдер</h2>-->
+<!--	<pre class="hljs html">-->
+<!--		<code>&lt;script type="x-shader/x-<mark>fragment</mark>" id="fshader"&gt;</code>-->
+<!--		<code>  uniform sampler2D u_Sampler;</code>-->
+<!--		<code>  varying vec2 vUv;</code>-->
+<!--		<code>  void main() {</code>-->
+<!--		<code>    <mark>gl_FragColor</mark> = texture2D(u_Sampler, vUv);</code>-->
+<!--		<code>  }</code>-->
+<!--		<code>&lt;/script&gt;</code>-->
+<!--		<code> </code>-->
+<!--	</pre>-->
+<!--</section>-->
+
+<!--<section class="slide question">-->
+<!--	<h2>-->
+<!--		<span style="font-size: 60%; color: #000055; display: inline-block;">-->
+<!--			<a href="https://experiments.withgoogle.com/chrome" target="_blank">experiments.withgoogle.com <i class="material-icons noitalic">open_in_new</i></a>-->
+<!--		</span>-->
+<!--	</h2>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Device orientation</h2>-->
+<!--	<p class="medium-content"></p>-->
+<!--	<pre class="hljs js">-->
+<!--		<code>if (window.innerHeight > window.innerWidth) {</code>-->
+<!--		<code>  // do smth</code>-->
+<!--		<code>}</code>-->
+<!--		<code></code>-->
+<!--	</pre>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation" target="_blank">Device orientation and motion</a></h2>-->
+<!--	<blockquote>-->
+<!--		<a href="https://mdn.mozillademos.org/en-US/docs/Web/API/Detecting_device_orientation$samples/Orientation_example?revision=1350174" target="_blank">Пример</a>-->
+<!--	</blockquote>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/WebVR_API" target="_blank">WebVR</a></h2>-->
+<!--	<blockquote>-->
+<!--		<p class="small-content">-->
+<!--			<b>WebVR</b> обеспечивает поддержку для использования устройств виртуальной реальности — например, шлемы виртуальной реальности, таких как Oculus Rift или HTC Vive &mdash; для веб-приложений, позволяя разработчикам передавать информацию о местоположении и движения с дисплея в движение вокруг 3D-сцены.-->
+<!--		</p>-->
+<!--	</blockquote>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Примеры Web VR</h2>-->
+<!--	<ul lang="ru">-->
+<!--		<li><a target="_blank" href="https://experiments.withgoogle.com/webvr/">experiments.withgoogle.com/webvr</a></li>-->
+<!--		<li><a target="_blank" href="https://tonite.dance/">tonite.dance</a></li>-->
+<!--		<li><a target="_blank" href="https://experiments.withgoogle.com/webvr/inside-music/view/">inside-music</a></li>-->
+<!--		<li><a target="_blank" href="https://accessmars.withgoogle.com/">accessmars</a></li>-->
+<!--	</ul>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developers.google.com/ar/develop/web/quickstart" target="_blank">AR</a></h2>-->
+<!--	<p class="medium-content"></p>-->
+<!--	<blockquote>-->
+<!--		<p class="small-content">-->
+<!--			Stay tuned...-->
+<!--		</p>-->
+<!--	</blockquote>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2 class="shout">Звук<br/>-->
+<!--		<small style="font-size: 32px; display: block;">Web Audio & Web Speech</small>-->
+<!--	</h2>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/Web/HTML/Element/audio" target="_blank">HTML5 audio</a></h2>-->
+<!--	<pre class="hljs js">-->
+<!--		<code>&lt;audio</code>-->
+<!--		<code>	src="/music.ogg"</code>-->
+<!--		<code>	autoplay</code>-->
+<!--		<code>></code>-->
+<!--		<code>	Ваш браузер не поддерживает audio элемент.</code>-->
+<!--		<code>&lt;/audio></code>-->
+<!--	</pre>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API" target="_blank">Web Audio</a></h2>-->
+<!--	<blockquote>-->
+<!--		<p class="small-content">-->
+<!--			<b>Web audio API</b> &mdash; мощный и многогранный инструмент для манипуляции звуковой составляющей на веб-странице, что дает возможность разработчикам выбрать источники, добавить к ним специальные звуковые эффекты (такие как panning), визуализировать их и многое другое.-->
+<!--		</p>-->
+<!--	</blockquote>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Примеры Web Audio API</h2>-->
+<!--	<ul lang="ru">-->
+<!--		<li><a target="_blank" href="http://webaudioapi.com/samples/oscillator/">oscillator</a></li>-->
+<!--	</ul>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Speech_API" target="_blank">Web Speech</a></h2>-->
+<!--	<blockquote>-->
+<!--		<p class="small-content">-->
+<!--			<b>Web Speech API</b> позволяет взаимодействовать с голосовыми интерфейсами в ваших веб приложениях.-->
+<!--			<b>Web Speech API</b> состоит из двух частей: SpeechSynthesis (Текст-в-Речь), и SpeechRecognition (Асинхронное распознавание речи)-->
+<!--		</p>-->
+<!--	</blockquote>-->
+<!--</section>-->
+
+<!--<section class="slide">-->
+<!--	<h2>Примеры Speech API</h2>-->
+<!--	<ul lang="ru">-->
+<!--		<li><a target="_blank" href="https://www.google.com/intl/en/chrome/demos/speech.html">speech.html</a></li>-->
+<!--		<li><a target="_blank" href="https://experiments.withgoogle.com/webvr/speak-to-go">speak-to-go</a></li>-->
+<!--	</ul>-->
+<!--</section>-->
+
+
+<!--<section class="slide">-->
+<!--	<h2>Полезные ссылки</h2>-->
+<!--	<ul lang="en">-->
+<!--		<li>Про <a href="http://frontender.info/using-svg/" target="_blank">SVG-графику</a></li>-->
+<!--		<li><a href="https://developer.mozilla.org/en-US/docs/Web/Demos_of_open_web_technologies" target="_blank">Описание-->
+<!--			и ДЕМО</a> различных web-технологий, которые могут быть полезны при разработке игры-->
+<!--		</li>-->
+<!--		<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank">Туториал-->
+<!--			по</a> Canvas API-->
+<!--		</li>-->
+<!--		<li>Доклад <a href="https://youtu.be/Z4E2drxNjMk?t=1h12m55s" target="_blank">"Играем в браузере"</a> на WSD в-->
+<!--			Москве и <a href="https://wsd.events/2017/01/28/pres/browser-games/" target="_blank">слайды</a> доклада-->
+<!--		</li>-->
+<!--		<li>-->
+<!--			<a href="http://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing" target="_blank">-->
+<!--				A Detailed Explanation of JavaScript Game Loops and Timing-->
+<!--			</a>-->
+<!--		</li>-->
+<!--		<li>-->
+<!--			<a href="https://youtu.be/1_lX28QWCdg" target="_blank">-->
+<!--				Web Workers, GPU computing and Web-->
+<!--			</a>-->
+<!--			и-->
+<!--			<a href="https://youtu.be/39MiUkGSEks" target="_blank">-->
+<!--				WebVR-->
+<!--			</a>-->
+<!--			by Martin Splitt-->
+<!--		</li>-->
+<!--	</ul>-->
+<!--</section>-->
 
 <section class="slide">
 	<h2 class="shout">Всем спасибо!</h2>
