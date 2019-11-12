@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<title>Графика и разработка браузерных игр</title>
+	<title>Графика и FrontendOops (Инфраструктура разработки)</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,7 +14,7 @@
 <body class="shower list">
 
 <header class="caption">
-	<h1>Графика и разработка браузерных игр</h1>
+	<h1>Графика и FrontendOops (Инфраструктура разработки)</h1>
 	<p>Технопарк, осень, 2019 г.</p>
 </header>
 
@@ -1004,6 +1004,227 @@
 	<h2 class="shout">Перерыв</h2>
 </section>
 
+<section class="slide">
+	<h2 class="shout">Frontend Oops<br/>
+		<small style="font-size: 32px; display: block;">Сборка проекта, разработка и dev-инфраструктура</small>
+	</h2>
+</section>
+
+<section class="slide question">
+	<div style="position:relative;width: 100%; height: 75%;">
+		<img class="place" src="dino.png" height="100%">
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Commonjs module</h2>
+	<img src="commonJs0].png" width="100%">
+</section>
+
+<section class="slide question">
+	<h2 style="text-align: center; padding: 0">
+		<span style="font-size: 100%">Bundlers: webpack, browserify, rollup</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>webpack module</h2>
+	<img src="commonjs1.png">
+</section>
+
+<section class="slide">
+	<h2>webpack module</h2>
+	<img src="commonjs2.png" width="100%">
+</section>
+
+<section class="slide">
+	<h2>Работа webpack</h2>
+	<img src="webpack_work.png" width="100%">
+</section>
+
+<section class="slide">
+	<h2>Множество <strong>систем определения<br>модулей</strong></h2>
+	<p class="note"><s>Почти</s> все из них <a href="https://habrahabr.ru/company/yandex/blog/192874/" target="_blank">здесь</a></p>
+	<ul lang="ru">
+		<li>Простейшая через <mark>IIFE</mark></li>
+		<li><mark>CommonJS Modules</mark> &mdash; используется в Node.js</li>
+		<li><mark>AMD <em>Asynchronous Module Definition</em></mark> &mdash; используется в очень популярной библиотеке RequireJS, и встречается в большом количестве "взрослых" проектов</li>
+		<li><mark>UMD <em>Universal Module Definition</em></mark> &mdash; обёртка-хамелеон, используется для определения модулей как в CommonJS-, так и для AMD-форматов</li>
+		<li><mark>ES2015 Modules</mark> &mdash; часть стандарта языка JavaScript</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2 style="text-align: center; padding: 0">
+		<span style="font-size: 100%">Three shaking</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Three shaking</h2>
+	<img src="threeshaking.png" width="100%">
+</section>
+
+<section class="slide question">
+	<h2>Окей, новый Frontend супер, Js вообще &mdash; 🔥</h2>
+</section>
+
+<section class="slide question">
+	<div style="position:relative;width: 100%;height: 80%;">
+		<img class="place" src="internet_explorer_logo_6.png"
+		     style="transform-origin: center;transform: translate(-50%, -35%) scale(1.4);">
+	</div>
+</section>
+
+<section class="slide question">
+	<h2 style="text-align: center; padding: 0">
+		<span style="font-size: 100%">Что делать?</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Полифиллы</h2>
+	<blockquote>
+		<p><b>Полифилл</b> &mdash; это библиотека, которая добавляет в старые браузеры поддержку возможностей, которые в
+			современных браузерах являются встроенными</p>
+	</blockquote>
+	<pre class="hljs js">
+			<code>if (!Object.is) {</code>
+			<code>    Object.is = function(x, y) {</code>
+			<code>        if (x === y) { return x !== 0 || 1 / x === 1 / y; }</code>
+			<code>        else { return x !== x && y !== y; }</code>
+			<code>    }</code>
+			<code>}</code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>Транспайлинг</h2>
+	<blockquote>
+		<p><b>Транспайлинг</b> &mdash; это конвертация кода программы, написанной на одном языке программирования в
+			другой язык программирования</p>
+	</blockquote>
+	<pre class="hljs js">
+			<code>// before</code>
+			<code>const f = num => `${num} в квадрате это ${num ** 2}`;</code>
+			<code> </code>
+			<code>// after</code>
+			<code>var f = function (num) {</code>
+			<code>    return num + ' в квадрате это ' + Math.pow(num, 2);</code>
+			<code>};</code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>Babel (<a href="http://babeljs.io/" target="_blank">babeljs.io</a>)</h2>
+	<blockquote>
+		<p class="small-content"><b>Babel</b> &mdash; многофункциональный транспайлер, позволяет транспиллировать ES5,
+			ES6, ES2016, ES2017, ES2018, ES.Next, JSX и Flow</p>
+	</blockquote>
+	<p class="note"><a href="http://babeljs.io/repl/" target="_blank">Babel REPL</a> &mdash; бабель-онлайн</p>
+</section>
+
+<section class="slide">
+	<h2>Babel &mdash; использование</h2>
+	<pre class="hljs bash">
+			<code># устанавливаем модуль</code>
+			<code>$ npm install -D @babel/core @babel/cli @babel/preset-env</code>
+			<code> </code>
+			<code># файл с конфигурацией</code>
+			<code>$ nano .babelrc</code>
+			<code>{</code>
+			<code>    "presets": [[</code>
+			<code>        "@babel/env",</code>
+			<code>        { targets: {edge: "15"}}</code>
+			<code>    ]]</code>
+			<code>}</code>
+			<code> </code>
+			<code># запускаем</code>
+			<code>$ babel modern.js --watch --out-file compatible.js</code>
+			<code> </code>
+		</pre>
+</section>
+
+<section class="slide">
+	<h2>Как работает Babel?</h2>
+	<ul lang="en">
+		<li>Парсит исходный код и
+			<mark>строит AST</mark>
+		</li>
+		<li>Последовательно вызывает набор функций, которые каким-то образом
+			<mark>трансформируют AST</mark>
+			программы
+		</li>
+		<li>В процессе трансформации части AST, относящиеся к современному синтексису,
+			<mark>заменяются на эквивалентные</mark>
+			,
+			но более общеупотребительные фрагменты
+		</li>
+		<li>Преобразует модифицированное AST в
+			<mark>новый транспилированный</mark>
+			код
+		</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Текущие версии JavaScript’а</h2>
+	<ul lang="ru">
+		<li>Декабрь 1999 &mdash; <em>ECMAScript 3</em></li>
+		<li><em>ECMAScript 4 (abandoned)</em> &mdash; заброшенная версия</li>
+		<li>Декабрь 2009 &mdash; <em>ECMAScript 5</em></li>
+		<ul>
+			<li>Июнь 2011 &mdash; <em>ECMAScript 5.1</em> (ISO/IEC 16262:2011)</li>
+		</ul>
+		<li>Июль 2015 &mdash; <em>ECMAScript 2015</em> (ECMAScript 6th edition) &mdash; ES6 Harmony</li>
+		<li>Июль 2016 &mdash; <em>ECMAScript 2016</em> (ECMAScript 7th edition)</li>
+		<li>Июнь 2017 &mdash; <em>ECMAScript 2017</em> (ECMAScript 8th edition)</li>
+		<li>Июнь 2018 &mdash; <mark>ECMAScript 2018</mark> (ECMAScript 9th edition)</li>
+		<li><em>Лето 2019</em> &mdash; <mark>ECMAScript 2019</mark> (и так далее)</li>
+		<li><mark>ES.Next</mark></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>ES.Next</h2>
+	<blockquote>
+		<p class="small-content"><b>ES.Next</b> &mdash; так временно называют совокупность новых возможностей языка,
+			которые могут войти в следующую версию спецификации. Фичи из ES.Next правильнее называть
+			<mark>“предложения” (proposals)</mark>
+			, потому что они всё ещё находятся на стадии обсуждения
+		</p>
+	</blockquote>
+</section>
+
+<section class="slide question">
+	<h2 style="text-align: center; padding: 0">
+		<span style="font-size: 100%">Task runners</span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2>Зачем</h2>
+	<p class="medium-content"></p>
+	<ul lang="ru">
+		<li>Хуки</li>
+		<li>Сложный CI (сборка проекта)</li>
+		<li>...</li>
+	</ul>
+</section>
+
+<section class="slide question">
+	<h2>
+		<span style="font-size: 75%; color: #000055; display: inline-block;"><a href="https://youtu.be/Sog6I9sDnX4?t=8637" target="_blank">"Трудности перевода или i18n в крупных проектах"&nbsp;<i class="material-icons noitalic">open_in_new</i></a><br/><em style="font-size: 70%; color: darkgrey">доклад с митапа <br/> SmartMail Meetup: Frontend</em></span>
+	</h2>
+</section>
+
+<section class="slide">
+	<h2 class="shout">Всем спасибо!</h2>
+</section>
+
+
 <!--<section class="slide">-->
 <!--	<h2>Основные абстракции</h2>-->
 <!--	<p class="medium-content"></p>-->
@@ -1362,10 +1583,6 @@
 <!--		</li>-->
 <!--	</ul>-->
 <!--</section>-->
-
-<section class="slide">
-	<h2 class="shout">Всем спасибо!</h2>
-</section>
 
 <div class="progress"></div>
 <script src="/lib/shower/shower.min.js"></script>
