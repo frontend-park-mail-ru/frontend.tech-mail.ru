@@ -1,7 +1,7 @@
 # [frontend.tech-mail.ru](http://frontend.tech-mail.ru/)
 > Source of frontend.tech-mail.ru site
 
-Технопарк, осень, 2019 г.
+Технопарк, весна, 2020 г.
 
 ### Команды
 
