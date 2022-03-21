@@ -404,23 +404,6 @@
 	</pre>
 </section>
 
-<section class="slide">
-	<h2>Реализация паттерна <mark>Observable</mark></h2>
-	<pre class="hljs js">
-		<code>const service = new SomeService();</code>
-		<code>// функция-обработчик события</code>
-		<code>const onload = function (data) { console.log(data); }</code>
-		<code> </code>
-		<code>// подписываемся на событие</code>
-		<code>service.on('loaded', onload);</code>
-		<code>service.emit('loaded', {data: 42});    // событие 1</code>
-		<code>service.emit('loaded', {foo: 'bar'});  // событие 2</code>
-		<code>// отписываемся от события</code>
-		<code>service.off('loaded', onload);</code>
-		<code> </code>
-	</pre>
-</section>
-
 <section class="slide question">
 	<h2>
 		<span style="font-size: 70%; display: inline-block;">Итак, как это помогает уменьшить <em>связность</em> приложения?</span>
