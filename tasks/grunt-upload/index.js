@@ -20,7 +20,7 @@ const promiseExec = function (cmd, opts) {
 	});
 };
 
-const repository = 'https://github.com/frontend-park-mail-ru/frontend-park-mail-ru.github.io.git';
+const repository = 'git@github.com:frontend-park-mail-ru/frontend-park-mail-ru.github.io.git';
 const branch = 'master';
 const tempDirName = '.deploy.git';
 const distDirName = 'dist';
